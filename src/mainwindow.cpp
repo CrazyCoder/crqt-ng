@@ -25,7 +25,8 @@
 #include "wolexportdlg.h"
 #include "exportprogressdlg.h"
 #include "searchdlg.h"
-#include "../crengine/include/lvtinydom.h"
+
+#include <lvtinydom.h>
 
 #define DOC_CACHE_SIZE 128 * 0x100000
 
@@ -98,7 +99,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->view->setHyphDir(hyphDir);
     ui->view->setHyphDir(homeDir + "hyph" + QDir::separator(), false);
 
-    ldomDocCache::init( qt2cr( cacheDir ), DOC_CACHE_SIZE );
+	lString32 cacheDir32 = qt2cr( cacheDir );
+    ldomDocCache::init( cacheDir32, (lvsize_t)DOC_CACHE_SIZE );
     ui->view->setPropsChangeCallback( this );
     if (!ui->view->loadSettings( iniFile )) {
         // If config not found in homeDir, trying to load from exeDir...

@@ -1,16 +1,18 @@
 #include "aboutdlg.h"
 #include "ui_aboutdlg.h"
-#include <cr3version.h>
 #include <QDesktopServices>
 #include <QTextBrowser>
+
+#include <crengine-ng-config.h>
+#include "config.h"
 
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent),
     m_ui(new Ui::AboutDialog)
 {
     m_ui->setupUi(this);
-	m_ui->lblVersion->setText(QString("CoolReader v") + QString(CR_ENGINE_VERSION));
-	m_ui->lblDate->setText(QString(CR_ENGINE_BUILD_DATE));
+	m_ui->lblVersion->setText(QString("CoolReader v") + QString(VERSION));
+	m_ui->lblDate->setText(QString(CRE_NG_VERSION));
 	QString aboutText = m_ui->textBrowser->toHtml().replace("%QT_VER%", QString("%1").arg(qVersion()));
 	m_ui->textBrowser->setHtml(aboutText);
 }

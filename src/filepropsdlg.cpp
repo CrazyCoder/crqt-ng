@@ -1,8 +1,9 @@
 #include "filepropsdlg.h"
 #include "ui_filepropsdlg.h"
 #include "cr3widget.h"
-#include "../crengine/include/lvdocview.h"
-#include <cr3version.h>
+
+#include <lvdocview.h>
+#include <crengine-ng-config.h>
 
 #if QT_VERSION >= 0x050000
 #define setResizeModeMethod setSectionResizeMode
@@ -161,7 +162,7 @@ void FilePropsDialog::fillItems()
 
     lString32 title("Cool Reader ");
 #ifndef PACKAGE_VERSION
-#define PACKAGE_VERSION CR_ENGINE_VERSION
+#define PACKAGE_VERSION CRE_NG_VERSION
 #endif
     title << Utf8ToUnicode(lString8(PACKAGE_VERSION));
 

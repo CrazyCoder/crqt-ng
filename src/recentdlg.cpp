@@ -2,9 +2,10 @@
 #include "ui_recentdlg.h"
 #include "cr3widget.h"
 #include "crqtutil.h"
-#include "../crengine/include/lvdocview.h"
 #include <QMenu>
 #include <QMessageBox>
+
+#include <lvdocview.h>
 
 #if QT_VERSION >= 0x050000
 #define setResizeModeMethod setSectionResizeMode

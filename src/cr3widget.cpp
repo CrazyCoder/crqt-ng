@@ -1,6 +1,3 @@
-#include "../crengine/include/lvdocview.h"
-#include "../crengine/include/crtrace.h"
-#include "../crengine/include/props.h"
 #include "cr3widget.h"
 #include "crqtutil.h"
 #include "qpainter.h"
@@ -30,6 +27,10 @@
 #include <QFileInfo>
 #include <QDesktopServices>
 #include <QLocale>
+
+#include <lvdocview.h>
+#include <crtrace.h>
+#include <props.h>
 
 /// to hide non-qt implementation, place all crengine-related fields here
 class CR3View::DocViewData

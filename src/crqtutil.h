@@ -3,7 +3,8 @@
 
 #include <QString>
 #include <QSharedPointer>
-#include "../crengine/include/crengine.h"
+
+#include "crengine.h"
 
 lString32 qt2cr( QString str );
 QString cr2qt( lString32 str );

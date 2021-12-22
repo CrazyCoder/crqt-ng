@@ -9,7 +9,7 @@ set(PRODUCTVERSION_V	"1, 0, 0, 0")
 set(VERSION		"1.0.0")
 set(PACKAGE_DATADIR	${CMAKE_INSTALL_PREFIX}/share)
 
-option(USE_DEBUG_EXTRA_OPTS "Add extra debug flags and technique" OFF)
+option(ADD_DEBUG_EXTRA_OPTS "Add extra debug flags and technique" OFF)
 
 configure_file(config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 
@@ -23,6 +23,8 @@ include(Qt5TranslationToolsMacros)
 # crengine-ng
 find_package(crengine-ng REQUIRED)
 
+include_directories(${CRENGINE_NG_INCLUDE_DIR})
+
 # Add include path for config.h
 include_directories(${CMAKE_BINARY_DIR})
 
@@ -33,7 +35,7 @@ set(CMAKE_C_FLAGS_DEBUG     "${CMAKE_C_FLAGS_DEBUG}     -D_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG}   -D_DEBUG")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
 
-if(USE_DEBUG_EXTRA_OPTS)
+if(ADD_DEBUG_EXTRA_OPTS)
 	add_definitions(-D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC)
 	set(DEBUG_EXTRA_FLAGS "-fstack-check -fstack-protector -fno-omit-frame-pointer -Wshift-overflow=2")
 	if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")

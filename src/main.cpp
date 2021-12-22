@@ -7,8 +7,7 @@
 #else
 #include <QtGui/QApplication>
 #endif
-#include "../crengine/include/crengine.h"
-#include "../crengine/include/cr3version.h"
+#include "config.h"
 #include "mainwindow.h"
 #if QT_VERSION >= 0x050000
 #include <QtCore/QTranslator>
@@ -23,6 +22,9 @@
 #if (USE_FONTCONFIG==1)
     #include <fontconfig/fontconfig.h>
 #endif
+
+#include <crengine.h>
+#include <crtxtenc.h>
 
 #if defined(QT_STATIC)
 #if QT_VERSION >= 0x050000
@@ -59,7 +61,7 @@ static void printHelp() {
 }
 
 static void printVersion() {
-    printf("Cool Reader " CR_ENGINE_VERSION " " CR_ENGINE_BUILD_DATE "\n");
+    printf("cruiqt " VERSION "; crengine-ng-" CRE_NG_VERSION "\n");
 }
 
 int main(int argc, char *argv[])

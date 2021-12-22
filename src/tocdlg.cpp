@@ -1,9 +1,10 @@
 #include "tocdlg.h"
 #include "ui_tocdlg.h"
 #include "cr3widget.h"
-#include "../crengine/include/lvdocview.h"
 #include <QStandardItemModel>
 #include "crqtutil.h"
+
+#include <lvdocview.h>
 
 class TocItem : public QTreeWidgetItem
 {

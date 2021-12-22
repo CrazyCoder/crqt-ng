@@ -1,9 +1,10 @@
 #include "crqtutil.h"
-#include "../crengine/include/props.h"
-#include "../crengine/include/crlocaledata.h"
 #include <QStringList>
 #include <QWidget>
 #include <QPoint>
+
+#include "props.h"
+#include "crlocaledata.h"
 
 lString32 qt2cr(QString str)
 {

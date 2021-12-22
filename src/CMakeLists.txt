@@ -55,8 +55,8 @@ set(LANGUAGE_TS_FILES)
 foreach(LANGUAGE ${LANGUAGES})
   set(TS_FILE "${CMAKE_CURRENT_SOURCE_DIR}/i18n/cr3_${LANGUAGE}.ts")
   list(APPEND LANGUAGE_TS_FILES ${TS_FILE})
-  set_source_files_properties(${TS_FILE} PROPERTIES OUTPUT_LOCATION
-        "${CMAKE_CURRENT_SOURCE_DIR}/i18n")
+  #set_source_files_properties(${TS_FILE} PROPERTIES OUTPUT_LOCATION
+  #      "${CMAKE_CURRENT_SOURCE_DIR}/i18n")
 endforeach(LANGUAGE ${LANGUAGES})
 
 qt5_add_resources(CR3_RCS cr3res.qrc)
@@ -118,7 +118,7 @@ endif(CMAKE_GENERATOR MATCHES "Visual Studio.*")
 endif(WIN32)
 
 
-target_link_libraries(cr3 crengine-ng Qt5::Core Qt5::Gui Qt5::Widgets)
+target_link_libraries(cr3 crengine-ng::crengine-ng Qt5::Core Qt5::Gui Qt5::Widgets)
 
 if (MAC)
   install( TARGETS cr3 RUNTIME DESTINATION Contents/MacOS )
