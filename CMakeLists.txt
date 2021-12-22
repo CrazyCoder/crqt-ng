@@ -1,232 +1,58 @@
+project(cruiqt)
 
-SET(CR3_UIS
-  src/aboutdlg.ui        src/bookmarklistdlg.ui  src/mainwindow.ui  src/settings.ui
-  src/addbookmarkdlg.ui  src/filepropsdlg.ui     src/recentdlg.ui   src/tocdlg.ui
-  src/wolexportdlg.ui    src/exportprogressdlg.ui src/searchdlg.ui  src/fallbackfontsdialog.ui
-)
+cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
 
-SET(CR3_MOC_HDRS
-  src/aboutdlg.h        
-  src/bookmarklistdlg.h  
-  src/mainwindow.h      
-  src/settings.h
-  src/addbookmarkdlg.h  
-  src/cr3widget.h        
-  src/filepropsdlg.h    
-  src/recentdlg.h   
-  src/wolexportdlg.h
-  src/exportprogressdlg.h
-  src/tocdlg.h
-  src/searchdlg.h
-  src/fallbackfontsdialog.h
-)
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/")
 
-SET (CR3_SOURCES 
-  src/aboutdlg.cpp        
-  src/bookmarklistdlg.cpp  
-  src/crqtutil.cpp      
-  src/main.cpp        
-  src/recentdlg.cpp  
-  src/tocdlg.cpp
-  src/addbookmarkdlg.cpp  
-  src/cr3widget.cpp        
-  src/filepropsdlg.cpp  
-  src/mainwindow.cpp  
-  src/settings.cpp
-  src/wolexportdlg.cpp
-  src/exportprogressdlg.cpp
-  src/searchdlg.cpp
-  src/fallbackfontsdialog.cpp
-)
+set(FILEVERSION_V	"1, 0, 0, 0")
+set(PRODUCTVERSION_V	"1, 0, 0, 0")
+set(VERSION		"1.0.0")
+set(PACKAGE_DATADIR	${CMAKE_INSTALL_PREFIX}/share)
 
-if(MAC)
-    ADD_DEFINITIONS(-DCR3_DATA_DIR=""
-          -DUSE_FONTCONFIG=0
-    ${CARBON_CFLAGS}
-    )
-ELSEIF (UNIX)
-    ADD_DEFINITIONS(-DCR3_DATA_DIR="${CMAKE_INSTALL_PREFIX}/share/cr3/")
-ELSE()
-    ADD_DEFINITIONS(-DCR3_DATA_DIR="")
-ENDIF(MAC)
+option(USE_DEBUG_EXTRA_OPTS "Add extra debug flags and technique" OFF)
 
-ADD_DEFINITIONS("${Qt5Core_EXECUTABLE_COMPILE_FLAGS}")
+configure_file(config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 
-#IF (WIN32)
-#IF(NOT ${CMAKE_BUILD_TYPE} STREQUALS Debug)
-#SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS )
-#ENDIF(NOT ${CMAKE_BUILD_TYPE} STREQUALS Debug)
-#ENDIF (WIN32)
-set(RES_FILES "")
-IF (WIN32)
-  # This sets up the exe icon for windows under mingw.
-  set(RES_FILES "src/cr3.rc")
-  if(MINGW)
-    set(CMAKE_RC_COMPILER_INIT windres)
-    ENABLE_LANGUAGE(RC)
-    SET(CMAKE_RC_COMPILE_OBJECT
-      "<CMAKE_RC_COMPILER> <FLAGS> -O coff <DEFINES> -i <SOURCE> -o <OBJECT>")
-  endif(MINGW)
-ENDIF (WIN32)
+# Find the Qt5 libraries
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Gui REQUIRED)
+find_package(Qt5Widgets REQUIRED)
 
+include(Qt5TranslationToolsMacros)
 
-SET(LANGUAGES ru uk cs de es pl bg hu)
-message( "Languages: ${LANGUAGES}" )
-SET(LANGUAGE_TS_FILES)
-FOREACH(LANGUAGE ${LANGUAGES})
-    SET(TS_FILE "${CMAKE_CURRENT_SOURCE_DIR}/src/i18n/cr3_${LANGUAGE}.ts")
-    SET(LANGUAGE_TS_FILES ${LANGUAGE_TS_FILES} ${TS_FILE})
-    SET_SOURCE_FILES_PROPERTIES(${TS_FILE} PROPERTIES OUTPUT_LOCATION
-        "${CMAKE_BINARY_DIR}${CMAKE_DATA_DIR}/i18n")
-ENDFOREACH(LANGUAGE ${LANGUAGES})
+# crengine-ng
+find_package(crengine-ng REQUIRED)
 
-if( ${GUI} STREQUAL QT5 )
-QT5_ADD_RESOURCES(CR3_RCS src/cr3res.qrc)
-QT5_WRAP_UI(CR3_UI_HDRS ${CR3_UIS})
-QT5_WRAP_CPP(CR3_MOC_SRCS ${CR3_MOC_HDRS})
-IF(LANGUAGE_TS_FILES)
-    QT5_CREATE_TRANSLATION(QM_FILES ${CR3_SOURCES} ${CR3_UI_HDRS} ${LANGUAGE_TS_FILES})
-ENDIF(LANGUAGE_TS_FILES)
-ELSE()
-QT4_ADD_RESOURCES(CR3_RCS src/cr3res.qrc)
-QT4_WRAP_UI(CR3_UI_HDRS ${CR3_UIS})
-QT4_WRAP_CPP(CR3_MOC_SRCS ${CR3_MOC_HDRS})
-IF(LANGUAGE_TS_FILES)
-    QT4_CREATE_TRANSLATION(QM_FILES ${CR3_SOURCES} ${CR3_UI_HDRS} ${LANGUAGE_TS_FILES})
-ENDIF(LANGUAGE_TS_FILES)
-ENDIF()
+# Add include path for config.h
+include_directories(${CMAKE_BINARY_DIR})
 
+# force use exceptions
+set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} -fexceptions")
+# add debug defines
+set(CMAKE_C_FLAGS_DEBUG     "${CMAKE_C_FLAGS_DEBUG}     -D_DEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG}   -D_DEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
 
-INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR}/src ${CMAKE_BINARY_DIR}/cr3qt )
-INCLUDE_DIRECTORIES( ${CMAKE_SOURCE_DIR}/crengine/fc-lang )
-
-IF (UNIX)
-FIND_PROGRAM(GZIP_TOOL
-  NAMES gzip
-  PATHS /bin
-    /usr/bin
-    /usr/local/bin
-)
-
-IF(NOT GZIP_TOOL)
-  MESSAGE(FATAL_ERROR "Unable to find 'gzip' program")
-ENDIF(NOT GZIP_TOOL)
-
-SET (man ${CMAKE_CURRENT_SOURCE_DIR}/data/docs/cr3.1)
-SET (man_gz ${CMAKE_BINARY_DIR}/cr3.1.gz)
-
-ADD_CUSTOM_COMMAND(OUTPUT ${man_gz}
-   COMMAND ${GZIP_TOOL} -9 -c ${man} > ${man_gz}
-   DEPENDS ${man}
-   COMMENT "Building ${man_gz}")
-
-SET (changelog ${CMAKE_CURRENT_SOURCE_DIR}/../changelog)
-SET (changelog_gz ${CMAKE_BINARY_DIR}/changelog.gz)
-ADD_CUSTOM_COMMAND(OUTPUT ${changelog_gz}
-   COMMAND ${GZIP_TOOL} -9 -c ${changelog} > ${changelog_gz}
-   DEPENDS ${changelog}
-   COMMENT "Building ${changelog_gz}")
-
-SET (CR3_MAN_PAGES ${man_gz})
-SET (CR3_CHANGELOG ${changelog_gz})
-
-ELSE()
-SET (CR3_MAN_PAGES)
-SET (CR3_CHANGELOG)
-
-ENDIF(UNIX)
-
+if(USE_DEBUG_EXTRA_OPTS)
+	add_definitions(-D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC)
+	set(DEBUG_EXTRA_FLAGS "-fstack-check -fstack-protector -fno-omit-frame-pointer -Wshift-overflow=2")
+	if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
+		set (DEBUG_EXTRA_FLAGS "${DEBUG_EXTRA_FLAGS} -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fno-sanitize=alignment")
+		set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-check -fstack-protector")
+		set(CMAKE_SHARED_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -fsanitize=address -fsanitize=undefined -fno-sanitize-recover -fstack-check -fstack-protector")
+	endif ("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${DEBUG_EXTRA_FLAGS}")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${DEBUG_EXTRA_FLAGS}")
+endif(USE_DEBUG_EXTRA_OPTS)
 
 if (WIN32)
-ADD_EXECUTABLE(cr3 WIN32 ${CR3_MAN_PAGES} ${CR3_CHANGELOG} ${CR3_SOURCES} ${CR3_RCS} ${CR3_UI_HDRS} ${CR3_MOC_SRCS} ${QM_FILES} ${RES_FILES})
-else()
-ADD_EXECUTABLE(cr3 ${CR3_MAN_PAGES} ${CR3_CHANGELOG} ${CR3_SOURCES} ${CR3_RCS} ${CR3_UI_HDRS} ${CR3_MOC_SRCS} ${QM_FILES} ${RES_FILES})
-endif (WIN32)
-
-if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
-  if (CMAKE_HOST_UNIX)
-    configure_file(valgrind_check.sh.cmake ${CMAKE_CURRENT_BINARY_DIR}/valgrind_check.sh)
-  endif(CMAKE_HOST_UNIX)
-endif(${CMAKE_BUILD_TYPE} STREQUAL Debug)
-
-if(WIN32)
-if(CMAKE_GENERATOR MATCHES "Visual Studio.*")
-  message("Visual Studio generator detected")
-  set_target_properties(cr3 PROPERTIES
-      LINK_FLAGS_DEBUG "/SUBSYSTEM:CONSOLE")
-  set_target_properties(cr3 PROPERTIES
-      LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:CONSOLE")
-  set_target_properties(cr3 PROPERTIES
-      LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
-  set_target_properties(cr3 PROPERTIES
-      LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
-endif(CMAKE_GENERATOR MATCHES "Visual Studio.*")
+	set(CMAKE_RC_COMPILER windres)
+	# set rc syntax
+	set(CMAKE_RC_COMPILE_OBJECT "<CMAKE_RC_COMPILER> <FLAGS> <DEFINES> -O coff -o <OBJECT> -i <SOURCE>")
+	set(CMAKE_RC_SOURCE_FILE_EXTENSIONS rc)
+	set(CMAKE_RC_FLAGS "-I${CMAKE_BINARY_DIR}")
+	# enable resource language for this project
+	enable_language(RC)
 endif(WIN32)
 
-
-
-IF(MAC)
-    message("Qt libs = ${QT_LIBRARIES}")
-#    SET(FRAMEWORKS "-framework ApplicationServices -framework Carbon -framework AppKit")
-#/Developer/Qt/lib/libQtCore.a /Developer/Qt/lib/libQtGui.a ${FRAMEWORKS} 
-    SET (EXTRA_LIBS ${QT_LIBRARIES} ${STD_LIBS} )
-#${QT_LIBRARIES} 
-ELSE()
-    SET (EXTRA_LIBS ${STD_LIBS} ${QT_LIBRARIES} ${Qt5Core_LIBRARIES} ${Qt5Widgets_LIBRARIES} )
-ENDIF(MAC)
-TARGET_LINK_LIBRARIES(cr3 crengine tinydict ${UNRAR_LIBRARIES} ${EXTRA_LIBS})
-
-IF (MAC)
-
-INSTALL( TARGETS cr3 RUNTIME DESTINATION Contents/MacOS )
-INSTALL( DIRECTORY data/ DESTINATION Contents/Resources 
-   FILES_MATCHING PATTERN "*.css" PATTERN "skins" EXCLUDE PATTERN "docs" EXCLUDE)
-INSTALL( DIRECTORY ../cr3gui/data/hyph DESTINATION Contents/Resources 
-   FILES_MATCHING PATTERN "*.pattern" )
-#INSTALL( DIRECTORY data/skins DESTINATION share/cr3/skins )
-INSTALL( DIRECTORY data/textures DESTINATION Contents/Resources )
-INSTALL( DIRECTORY data/backgrounds DESTINATION Contents/Resources )
-#INSTALL( FILES ${CR3_MAN_PAGES} DESTINATION share/doc/cr3 )
-INSTALL( FILES ${QM_FILES} DESTINATION Contents/Resources/i18n )
-INSTALL( DIRECTORY ${QT_INCLUDE_DIR}/../src/gui/mac/qt_menu.nib DESTINATION Contents/Resources )
-INSTALL( FILES src/desktop/Info.plist DESTINATION Contents )
-INSTALL( FILES src/desktop/PkgInfo DESTINATION Contents )
-#INSTALL( FILES src/desktop/cr3.png DESTINATION share/pixmaps )
-#INSTALL( FILES src/desktop/cr3.xpm DESTINATION share/pixmaps )
-
-ELSEIF (UNIX)
-
-
-INSTALL(FILES ${man_gz}
-   DESTINATION "share/man/man1"
-   PERMISSIONS OWNER_READ GROUP_READ WORLD_READ)
-
-INSTALL( TARGETS cr3 RUNTIME DESTINATION bin )
-INSTALL( DIRECTORY data/ DESTINATION share/cr3 
-   FILES_MATCHING PATTERN "*.css" PATTERN "skins" EXCLUDE PATTERN "docs" EXCLUDE)
-INSTALL( DIRECTORY ../cr3gui/data/hyph DESTINATION share/cr3 
-   FILES_MATCHING PATTERN "*.pattern" )
-#INSTALL( DIRECTORY data/skins DESTINATION share/cr3/skins )
-INSTALL( DIRECTORY data/textures DESTINATION share/cr3 )
-INSTALL( DIRECTORY data/backgrounds DESTINATION share/cr3 )
-#INSTALL( FILES ${CR3_MAN_PAGES} DESTINATION share/doc/cr3 )
-INSTALL( FILES ${CR3_CHANGELOG} DESTINATION share/doc/cr3 )
-INSTALL( FILES ${QM_FILES} DESTINATION share/cr3/i18n )
-INSTALL( FILES src/desktop/cr3.desktop DESTINATION share/applications )
-INSTALL( FILES src/desktop/cr3.appdata.xml DESTINATION share/metainfo )
-INSTALL( FILES src/desktop/cr3.png DESTINATION share/pixmaps )
-INSTALL( FILES src/desktop/cr3.xpm DESTINATION share/pixmaps )
-
-ELSE()
-
-INSTALL( TARGETS cr3 RUNTIME DESTINATION . )
-INSTALL( DIRECTORY data/ DESTINATION . 
-   FILES_MATCHING PATTERN "*.css" )
-INSTALL( DIRECTORY ../cr3gui/data/hyph DESTINATION . 
-   FILES_MATCHING PATTERN "*.pattern" )
-#INSTALL( DIRECTORY data/skins DESTINATION . )
-INSTALL( FILES ${QM_FILES} DESTINATION i18n )
-INSTALL( DIRECTORY data/textures DESTINATION . )
-INSTALL( DIRECTORY data/backgrounds DESTINATION . )
-
-ENDIF(MAC)
+add_subdirectory(src)
