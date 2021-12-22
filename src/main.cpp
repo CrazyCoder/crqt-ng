@@ -1,4 +1,4 @@
-// CoolReader3 / Qt
+// coolreader-ng UI / Qt
 // main.cpp - entry point
 
 #include <qglobal.h>
@@ -17,10 +17,6 @@
 #include <QTranslator>
 #include <QLibraryInfo>
 #include <QDir>
-#endif
-
-#if (USE_FONTCONFIG==1)
-    #include <fontconfig/fontconfig.h>
 #endif
 
 #include <crengine.h>
@@ -44,14 +40,13 @@ Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
 void InitCREngineLog( const char * cfgfile );
 bool InitCREngine( const char * exename, lString32Collection & fontDirs );
 void ShutdownCREngine();
-lString8 readFileToString( const char * fname );
 #if (USE_FREETYPE==1)
 bool getDirectoryFonts( lString32Collection & pathList, lString32Collection & ext, lString32Collection & fonts, bool absPath );
 #endif
 
 
 static void printHelp() {
-    printf("usage: cr3 [options] [filename]\n"
+	printf("usage: cruiqt [options] [filename]\n"
            "Options:\n"
            "  -h or --help: this message\n"
            "  -v or --version: print program version\n"
@@ -86,7 +81,7 @@ int main(int argc, char *argv[])
             }
             if ( !strcmp("--stats", argv[i]) && i<argc-4 ) {
                 if ( i!=argc-5 ) {
-                    printf("To calculate character encoding statistics, use cr3 <infile.txt> <outfile.cpp> <codepagename> <langname>\n");
+					printf("To calculate character encoding statistics, use cruiqt <infile.txt> <outfile.cpp> <codepagename> <langname>\n");
                     return 1;
                 }
                 lString8 list;
@@ -127,44 +122,22 @@ int main(int argc, char *argv[])
         else
             CRLog::setLogLevel(CRLog::LL_FATAL);
 
-        lString32 exename = LocalToUnicode( lString8(argv[0]) );
-        lString32 exedir = LVExtractPath(exename);
-        lString32 datadir = lString32(CR3_DATA_DIR);
-        LVAppendPathDelimiter(exedir);
-        LVAppendPathDelimiter(datadir);
-        lString32 exefontpath = exedir + "fonts";
         CRLog::info("main()");
+
+        lString32 configDir32 = getHomeConfigDir();
+        if (!LVDirectoryExists(configDir32))
+            LVCreateDirectory(configDir32);
+
         lString32Collection fontDirs;
-
-        lString32 home = Utf8ToUnicode(lString8(( getenv("HOME") ) ));
-        lString32 homecr3 = home;
-        LVAppendPathDelimiter(homecr3);
-        homecr3 << ".cr3";
-        LVAppendPathDelimiter(homecr3);
-        //~/.cr3/
-        lString32 homefonts = homecr3;
-        homefonts << "fonts";
-
-        //fontDirs.add( cs32("/usr/local/share/crengine/fonts") );
-        //fontDirs.add( cs32("/usr/local/share/fonts/truetype/freefont") );
-        //fontDirs.add( cs32("/mnt/fonts") );
-        fontDirs.add(homefonts);
+        lString32 homefonts32 = configDir32 + cs32("fonts");
+        fontDirs.add(homefonts32);
 #if MAC==1
         fontDirs.add( cs32("/Library/Fonts") );
 #endif
-#if 0
-        fontDirs.add( exefontpath );
-        fontDirs.add( cs32("/usr/share/fonts/truetype") );
-        fontDirs.add( cs32("/usr/share/fonts/truetype/liberation") );
-        fontDirs.add( cs32("/usr/share/fonts/truetype/freefont") );
-#endif
-        // TODO: use fontconfig instead
-        //fontDirs.add( cs32("/root/fonts/truetype") );
         if ( !InitCREngine( argv[0], fontDirs ) ) {
             printf("Cannot init CREngine - exiting\n");
             return 2;
         }
-
 		if ( argc>=2 && !strcmp(argv[1], "unittest") ) {
 #if 0 && defined(_DEBUG)
 			runTinyDomUnitTests();
@@ -172,116 +145,35 @@ int main(int argc, char *argv[])
 			CRLog::info("UnitTests finished: exiting");
 			return 0;
 		}
-        //if ( argc!=2 ) {
-        //    printf("Usage: cr3 <filename_to_open>\n");
-        //    return 3;
-        //}
-        {
-            if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)) {
-                // Not allowed to scale widgets for HiDPI.
-                // crengine renders text to image using anti-aliasing,
-                // so scaling is prohibited after this rendering!
-                QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, false);
-                QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling, true);
-            }
-            QApplication a(argc, argv);
-#if MAC == 1
-            QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/Contents/Resources/"); //QDir::separator();
-            QString translations = exeDir + "i18n";
-#else
-#if defined(_WIN32)
-            QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/"); //QDir::separator();
-            QString translations = exeDir + "i18n";
-#else
-            QString exeDir = cr2qt(datadir);
-            QString translations = exeDir + "i18n/";
-#endif
-#endif
-             QTranslator qtTranslator;
-             if (qtTranslator.load("qt_" + QLocale::system().name(),
-                     QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-                QApplication::installTranslator(&qtTranslator);
-
-             QTranslator myappTranslator;
-             QString trname = "cr3_" + QLocale::system().name();
-             CRLog::info("Using translation file %s from dir %s", UnicodeToUtf8(qt2cr(trname)).c_str(), UnicodeToUtf8(qt2cr(translations)).c_str() );
-             if ( myappTranslator.load(trname, translations) )
-                 QApplication::installTranslator(&myappTranslator);
-             else
-                CRLog::error("Canot load translation file %s from dir %s", UnicodeToUtf8(qt2cr(trname)).c_str(), UnicodeToUtf8(qt2cr(translations)).c_str() );
-            MainWindow w;
-            w.show();
-            res = a.exec();
+        if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)) {
+            // Not allowed to scale widgets for HiDPI.
+            // crengine renders text to image using anti-aliasing,
+            // so scaling is prohibited after this rendering!
+            QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, false);
+            QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling, true);
         }
+        QApplication app(argc, argv);
+        QString datadir = cr2qt(getMainDataDir());
+        QString translations = datadir + "i18n/";
+        QTranslator qtTranslator;
+        if (qtTranslator.load("qt_" + QLocale::system().name(),
+                 QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+            QApplication::installTranslator(&qtTranslator);
+
+        QTranslator myappTranslator;
+        QString trname = "cr3_" + QLocale::system().name();
+        CRLog::info("Using translation file %s from dir %s", UnicodeToUtf8(qt2cr(trname)).c_str(), UnicodeToUtf8(qt2cr(translations)).c_str() );
+        if ( myappTranslator.load(trname, translations) )
+            QApplication::installTranslator(&myappTranslator);
+        else
+            CRLog::error("Canot load translation file %s from dir %s", UnicodeToUtf8(qt2cr(trname)).c_str(), UnicodeToUtf8(qt2cr(translations)).c_str() );
+        // TODO: pass file to open (program argument) to MainWindow constructor
+        MainWindow w;
+        w.show();
+        res = app.exec();
     }
     ShutdownCREngine();
     return res;
-}
-
-#ifdef _WIN32
-int WINAPI WinMain( HINSTANCE hInstance,
-    HINSTANCE hPrevInstance,
-    LPSTR lpCmdLine,
-    int nCmdShow
-	)
-{
-	wchar_t buf0[MAX_PATH];
-	GetModuleFileNameW(NULL, buf0, MAX_PATH-1);
-	lString32 str032 = Utf16ToUnicode(buf0);
-#ifdef _UNICODE
-	lString32 str132 = Utf16ToUnicode(lpCmdLine);
-#else
-	lString8 str18(lpCmdLine);
-	lString32 str132 = LocalToUnicode(str18);
-#endif
-	lString8 str0 = UnicodeToUtf8(str032);
-	lString8 str1 = UnicodeToUtf8(str132);
-	if ( !str1.empty() && str1[0]=='\"' ) {
-		// quoted filename support
-		str1.erase(0, 1);
-        int pos = str1.pos(cs8("\""));
-		if ( pos>=0 )
-			str1 = str1.substr(0, pos);
-	}
-	char * argv[2];
-	argv[0] = str0.modify();
-	argv[1] = str1.modify();
-	int argc = str1.empty() ? 1 : 2;
-	return main(argc, argv);
-}
-#endif  // _WIN32
-
-
-/*
-bool initHyph(const char * fname)
-{
-    //HyphMan hyphman;
-    //return;
-
-    LVStreamRef stream = LVOpenFileStream( fname, LVOM_READ);
-    if (!stream)
-    {
-        printf("Cannot load hyphenation file %s\n", fname);
-        return false;
-    }
-    return HyphMan::Open( stream.get() );
-}
-*/
-
-
-lString8 readFileToString( const char * fname )
-{
-    lString8 buf;
-    LVStreamRef stream = LVOpenFileStream(fname, LVOM_READ);
-    if (!stream)
-        return buf;
-    int sz = stream->GetSize();
-    if (sz>0)
-    {
-        buf.insert( 0, sz, ' ' );
-        stream->Read( buf.modify(), sz, NULL );
-    }
-    return buf;
 }
 
 void ShutdownCREngine()
@@ -289,9 +181,6 @@ void ShutdownCREngine()
     HyphMan::uninit();
     ShutdownFontManager();
     CRLog::setLogger( NULL );
-#if LDOM_USE_OWN_MEM_MAN == 1
-//    ldomFreeStorage();
-#endif
 }
 
 #if (USE_FREETYPE==1)
@@ -307,8 +196,8 @@ bool getDirectoryFonts( lString32Collection & pathList, lString32Collection & ex
             for ( int i=0; i < dir->GetObjectCount(); i++ ) {
                 const LVContainerItemInfo * item = dir->GetObjectInfo(i);
                 lString32 fileName = item->GetName();
-                lString8 fn = UnicodeToLocal(fileName);
-                    //printf(" test(%s) ", fn.c_str() );
+                //lString8 fn = UnicodeToLocal(fileName);
+                //printf(" test(%s) ", fn.c_str() );
                 if ( !item->IsContainer() ) {
                     bool found = false;
                     lString32 lc = fileName;
@@ -341,40 +230,12 @@ bool getDirectoryFonts( lString32Collection & pathList, lString32Collection & ex
 bool InitCREngine( const char * exename, lString32Collection & fontDirs )
 {
 	CRLog::trace("InitCREngine(%s)", exename);
-#ifdef _WIN32
-    lString32 appname( exename );
-    int lastSlash=-1;
-    lChar32 slashChar = '/';
-    for ( int p=0; p<(int)appname.length(); p++ ) {
-        if ( appname[p]=='\\' ) {
-            slashChar = '\\';
-            lastSlash = p;
-        } else if ( appname[p]=='/' ) {
-            slashChar = '/';
-            lastSlash=p;
-        }
-    }
-
-    lString32 appPath;
-    if ( lastSlash>=0 )
-        appPath = appname.substr( 0, lastSlash+1 );
-	InitCREngineLog(UnicodeToUtf8(appPath).c_str());
-    lString32 datadir = appPath;
-#else
-    lString32 datadir = lString32(CR3_DATA_DIR);
+#if defined(_WIN32)
+    lString32 appPath32 = getExeDir();
+    lString32 cfgfile32 = appPath32 + "crui.ini";
+    InitCREngineLog(UnicodeToUtf8(cfgfile32).c_str());
 #endif
-    lString32 fontDir = datadir + "fonts";
-	lString8 fontDir8_ = UnicodeToUtf8(fontDir);
-
-    fontDirs.add( fontDir );
-
-    LVAppendPathDelimiter( fontDir );
-
-    lString8 fontDir8 = UnicodeToLocal(fontDir);
-    //const char * fontDir8s = fontDir8.c_str();
-    //InitFontManager( fontDir8 );
     InitFontManager(lString8::empty_str);
-
 #if defined(_WIN32) && USE_FONTCONFIG!=1
     wchar_t sysdir_w[MAX_PATH+1];
     GetWindowsDirectoryW(sysdir_w, MAX_PATH);
@@ -436,8 +297,13 @@ bool InitCREngine( const char * exename, lString32Collection & fontDirs )
     fontExt.add(cs32(".otf"));
     fontExt.add(cs32(".pfa"));
     fontExt.add(cs32(".pfb"));
-    lString32Collection fonts;
 
+    lString32 datadir32 = getMainDataDir();
+    lString32 fontDir32 = datadir32 + "fonts";
+    fontDirs.add( fontDir32 );
+    LVAppendPathDelimiter( fontDir32 );
+
+    lString32Collection fonts;
     getDirectoryFonts( fontDirs, fontExt, fonts, true );
 
     // load fonts from file
@@ -452,15 +318,6 @@ bool InitCREngine( const char * exename, lString32Collection & fontDirs )
 	}
     //}
 #endif  // USE_FREETYPE==1
-
-    // init hyphenation manager
-    //char hyphfn[1024];
-    //sprintf(hyphfn, "Russian_EnUS_hyphen_(Alan).pdb" );
-    //if ( !initHyph( (UnicodeToLocal(appPath) + hyphfn).c_str() ) ) {
-#ifdef _LINUX
-    //    initHyph( "/usr/share/crengine/hyph/Russian_EnUS_hyphen_(Alan).pdb" );
-#endif
-    //}
 
     if (!fontMan->GetFontCount())
     {
@@ -532,4 +389,3 @@ void InitCREngineLog( const char * cfgfile )
     CRLog::setLogLevel( level );
     CRLog::trace("Log initialization done.");
 }
-

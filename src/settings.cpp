@@ -142,25 +142,9 @@ SettingsDlg::SettingsDlg(QWidget *parent, CR3View * docView ) :
 
     m_oldHyph = cr2qt(HyphMan::getSelectedDictionary()->getId());
 
-#ifdef _LINUX
-    QString homeDir = QDir::toNativeSeparators(QDir::homePath() + "/.cr3/");
-#else
-    QString homeDir = QDir::toNativeSeparators(QDir::homePath() + "/cr3/");
-#endif
-#if MAC==1
-    QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/../Resources/"); //QDir::separator();
-#elif _LINUX
-    QString exeDir = QString(CR3_DATA_DIR);
-#else
-    QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/"); //QDir::separator();
-#endif
-
     lString32Collection baseDirs;
-    baseDirs.add(qt2cr(homeDir));
-    baseDirs.add(qt2cr(exeDir));
-#ifdef _LINUX
-    baseDirs.add(cs32("/usr/local/share/cr3/"));
-#endif
+    baseDirs.add(getHomeConfigDir());
+    baseDirs.add(getMainDataDir());
     lString32Collection bgFiles;
     QStringList bgFileLabels;
     findBackgrounds( baseDirs, bgFiles );

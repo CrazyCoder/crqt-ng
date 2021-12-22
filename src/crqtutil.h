@@ -66,4 +66,9 @@ void saveWindowPosition( QWidget * window, CRPropRef props, const char * prefix 
 /// restore window position from properties
 void restoreWindowPosition( QWidget * window, CRPropRef props, const char * prefix, bool allowFullscreen = false );
 
+lString32& getMainDataDir();
+lString32& getEngineDataDir();
+lString32& getExeDir();
+lString32& getHomeConfigDir();
+
 #endif // CRQTUTIL_H

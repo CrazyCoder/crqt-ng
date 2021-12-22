@@ -75,49 +75,44 @@ MainWindow::MainWindow(QWidget *parent)
     addAction(ui->actionNextSentence);
     addAction(ui->actionPrevSentence);
 
-#ifdef _LINUX
-    QString homeDir = QDir::toNativeSeparators(QDir::homePath() + "/.cr3/");
-#else
-    QString homeDir = QDir::toNativeSeparators(QDir::homePath() + "/cr3/");
-#endif
-#ifdef _LINUX
-    QString exeDir = QString(CR3_DATA_DIR);
-#else
-    QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/"); //QDir::separator();
-#endif
-    QString cacheDir = homeDir + "cache";
-    QString bookmarksDir = homeDir + "bookmarks";
-    QString histFile2 = exeDir + "cr3hist.bmk";
-    QString histFile = homeDir + "cr3hist.bmk";
-    QString iniFile2 = exeDir + "cr3.ini";
-    QString iniFile = homeDir + "cr3.ini";
-    QString cssFile = homeDir + "fb2.css";
-    QString cssFile2 = exeDir + "fb2.css";
-    //QString translations = exeDir + "i18n";
-    //CRLog::info("Translations directory: %s", LCSTR(qt2cr(translations)) );
-    QString hyphDir = exeDir + "hyph" + QDir::separator();
-    ui->view->setHyphDir(hyphDir);
-    ui->view->setHyphDir(homeDir + "hyph" + QDir::separator(), false);
+    lString32 configDir32 = getHomeConfigDir();
+    lString32 exeDir32 = getExeDir();
+    lString32 engineDataDir32 = getEngineDataDir();
+    QString iniFile = cr2qt(configDir32) + "crui.ini";
+    QString iniFileInExeDir = cr2qt(exeDir32) + "crui.ini";
+    QString histFile = cr2qt(configDir32) + "cruihist.bmk";
+    QString histFileInExeDir = cr2qt(exeDir32) + "cruihist.bmk";
+    QString cssFile = cr2qt(configDir32) + "fb2.css";
+    QString cssFileInEngineDir = cr2qt(engineDataDir32) + "fb2.css";
+    QString cssFileInExeDir = cr2qt(exeDir32) + "fb2.css";
+    lString32 cacheDir32 = configDir32 + "cache";
+    QString mainHyphDir = cr2qt(engineDataDir32) + "hyph" + QDir::separator();
+    QString userHyphDir = cr2qt(configDir32) + "hyph" + QDir::separator();
+    QString bookmarksDir = cr2qt(configDir32) + "bookmarks" + QDir::separator();
 
-	lString32 cacheDir32 = qt2cr( cacheDir );
+    ui->view->setHyphDir(mainHyphDir);
+    ui->view->setHyphDir(userHyphDir + "hyph" + QDir::separator(), false);
     ldomDocCache::init( cacheDir32, (lvsize_t)DOC_CACHE_SIZE );
     ui->view->setPropsChangeCallback( this );
     if (!ui->view->loadSettings( iniFile )) {
         // If config not found in homeDir, trying to load from exeDir...
-        ui->view->loadSettings( iniFile2 );
+        ui->view->loadSettings( iniFileInExeDir );
         // ... and save to homeDir
         ui->view->saveSettings( iniFile );
     }
-
-    if ( !ui->view->loadHistory( histFile ) )
-        if ( !ui->view->loadHistory( histFile2 ) )
-          ui->view->saveHistory( histFile );
-
-    if ( !ui->view->loadCSS( cssFile ) )
-        ui->view->loadCSS( cssFile2 );
+    if ( !ui->view->loadHistory( histFile ) ) {
+        ui->view->loadHistory( histFileInExeDir );
+        ui->view->saveHistory( histFile );
+    }
+    if ( !ui->view->loadCSS( cssFile ) ) {
+        if ( !ui->view->loadCSS( cssFileInEngineDir ) )
+            ui->view->loadCSS( cssFileInExeDir );
+    }
 #if ENABLE_BOOKMARKS_DIR==1
     ui->view->setBookmarksDir( bookmarksDir );
 #endif
+
+    // TODO: Move program arguments processing to main()
     QStringList args( qApp->arguments() );
     for ( int i=1; i<args.length(); i++ ) {
         if ( args[i].startsWith("--") ) {
@@ -128,17 +123,6 @@ MainWindow::MainWindow(QWidget *parent)
                 _filenameToOpen = args[i];
         }
     }
-
-//     QTranslator qtTranslator;
-//     if (qtTranslator.load("qt_" + QLocale::system().name(),
-//             QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-//        QApplication::installTranslator(&qtTranslator);
-//
-//     QTranslator myappTranslator;
-//     QString trname = "cr3_" + QLocale::system().name();
-//     CRLog::info("Using translation file %s from dir %s", UnicodeToUtf8(qt2cr(trname)).c_str(), UnicodeToUtf8(qt2cr(translations)).c_str() );
-//     if ( myappTranslator.load(trname, translations) )
-//         QApplication::installTranslator(&myappTranslator);
     ui->view->restoreWindowPos( this, "main.", true );
 }
 

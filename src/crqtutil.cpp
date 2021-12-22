@@ -2,6 +2,9 @@
 #include <QStringList>
 #include <QWidget>
 #include <QPoint>
+#include <QDir>
+#include <QFileInfo>
+#include <QApplication>
 
 #include "props.h"
 #include "crlocaledata.h"
@@ -216,4 +219,66 @@ void restoreWindowPosition( QWidget * window, CRPropRef props, const char * pref
             window->showMinimized();
         }
     }
+}
+
+static lString32 s_mainDataDir;
+static lString32 s_engineDataDir;
+static lString32 s_exeDir;
+static lString32 s_homeConfigDir;
+
+lString32& getMainDataDir() {
+    if (s_mainDataDir.empty()) {
+#if MAC == 1
+        QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/../Resources/");
+        exeDir = QFileInfo(exeDir).absoluteFilePath();
+        s_mainDataDir = qt2cr(exeDir);
+#elif defined(WIN32)
+        QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/");
+        s_mainDataDir = qt2cr(exeDir);
+#else
+        s_mainDataDir = lString32(CRUI_DATA_DIR);
+#endif
+    }
+    return s_mainDataDir;
+}
+
+lString32& getEngineDataDir() {
+    if (s_engineDataDir.empty()) {
+#if MAC == 1
+        QString resDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/../Resources/");
+        resDir = QFileInfo(resDir).absoluteFilePath();
+        s_mainDataDir = qt2cr(resDir);
+#elif defined(WIN32)
+        QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/");
+        s_mainDataDir = qt2cr(exeDir);
+#else
+        s_engineDataDir = lString32(CRE_NG_DATADIR);
+#endif
+    }
+    return s_engineDataDir;
+}
+
+lString32& getExeDir() {
+    if (s_exeDir.empty()) {
+        QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/");
+        s_exeDir = qt2cr(exeDir);
+    }
+    return s_exeDir;
+}
+
+lString32& getHomeConfigDir() {
+    if (s_homeConfigDir.empty()) {
+#if MAC==1
+        // TODO: Use standard path...
+        // ~/crui/
+        s_homeConfigDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/crui/"));
+#elif defined(WIN32)
+        // ~/crui/
+        s_homeConfigDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/crui/"));
+#else
+        // ~/.config/crui/
+        s_homeConfigDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/.config/crui/"));
+#endif
+    }
+    return s_homeConfigDir;
 }
