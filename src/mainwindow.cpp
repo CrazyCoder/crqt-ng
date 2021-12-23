@@ -34,8 +34,8 @@
 #define ENABLE_BOOKMARKS_DIR 1
 #endif
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindowClass)
+MainWindow::MainWindow(const QString& fileToOpen, QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::MainWindowClass), _filenameToOpen(fileToOpen)
 {
     ui->setupUi(this);
     ui->view->setScrollBar( ui->scroll );
@@ -112,17 +112,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->view->setBookmarksDir( bookmarksDir );
 #endif
 
-    // TODO: Move program arguments processing to main()
-    QStringList args( qApp->arguments() );
-    for ( int i=1; i<args.length(); i++ ) {
-        if ( args[i].startsWith("--") ) {
-            // option
-        } else {
-            // filename to open
-            if ( _filenameToOpen.length()==0 )
-                _filenameToOpen = args[i];
-        }
-    }
     ui->view->restoreWindowPos( this, "main.", true );
 }
 

@@ -21,7 +21,7 @@ class MainWindow : public QMainWindow, public PropsChangeCallback
 
 public:
     virtual void onPropsChange( PropsRef props );
-    MainWindow(QWidget *parent = 0);
+    MainWindow(const QString& fileToOpen, QWidget *parent = 0);
     ~MainWindow();
 
 private:

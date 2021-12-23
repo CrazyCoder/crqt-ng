@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
         lString8 loglevel("ERROR");
         lString8 logfile("stderr");
 #endif
+        int optpos = 1;
         for ( int i=1; i<argc; i++ ) {
             if ( !strcmp("-h", argv[i]) || !strcmp("-?", argv[i]) || !strcmp("/?", argv[i]) || !strcmp("--help", argv[i]) ) {
                 printHelp();
@@ -97,8 +98,10 @@ int main(int argc, char *argv[])
             lString8 s(argv[i]);
             if ( s.startsWith(cs8("--loglevel=")) ) {
                 loglevel = s.substr(11, s.length()-11);
+                optpos++;
             } else if ( s.startsWith(cs8("--logfile=")) ) {
                 logfile = s.substr(10, s.length()-10);
+                optpos++;
             }
         }
 
@@ -167,8 +170,15 @@ int main(int argc, char *argv[])
             QApplication::installTranslator(&myappTranslator);
         else
             CRLog::error("Canot load translation file %s from dir %s", UnicodeToUtf8(qt2cr(trname)).c_str(), UnicodeToUtf8(qt2cr(translations)).c_str() );
-        // TODO: pass file to open (program argument) to MainWindow constructor
-        MainWindow w;
+        QString fileToOpen;
+        for (int i = optpos; i < argc; i++) {
+            lString8 opt(argv[i]);
+            if (!opt.startsWith("--")) {
+                if (fileToOpen.isEmpty())
+                    fileToOpen = cr2qt(LocalToUnicode(opt));
+            }
+        }
+        MainWindow w(fileToOpen);
         w.show();
         res = app.exec();
     }
