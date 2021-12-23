@@ -450,7 +450,7 @@
   </action>
   <action name="actionAboutCoolReader">
    <property name="text">
-    <string>About CoolReader</string>
+    <string>About CoolReaderNG/Qt</string>
    </property>
    <property name="toolTip">
     <string>About CoolReader</string>
