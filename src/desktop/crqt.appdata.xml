@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>cr3.desktop</id>
-  <name>CoolReader</name>
+  <id>crqt.desktop</id>
+  <name>CoolReaderNG/Qt</name>
   <project_license>GPL-2.0</project_license>
   <metadata_license>CC0-1.0</metadata_license>
   <summary>

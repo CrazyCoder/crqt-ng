@@ -1,4 +1,4 @@
-project(cruiqt)
+project(crqt-ng)
 
 cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
 
@@ -46,6 +46,12 @@ if(ADD_DEBUG_EXTRA_OPTS)
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${DEBUG_EXTRA_FLAGS}")
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${DEBUG_EXTRA_FLAGS}")
 endif(ADD_DEBUG_EXTRA_OPTS)
+
+if(UNIX)
+  add_definitions(-DCRUI_DATA_DIR="${CMAKE_INSTALL_PREFIX}/share/crqt/")
+else()
+  add_definitions(-DCRUI_DATA_DIR="")
+endif()
 
 if (WIN32)
 	set(CMAKE_RC_COMPILER windres)

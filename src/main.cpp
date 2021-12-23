@@ -46,7 +46,7 @@ bool getDirectoryFonts( lString32Collection & pathList, lString32Collection & ex
 
 
 static void printHelp() {
-	printf("usage: cruiqt [options] [filename]\n"
+	printf("usage: crqt [options] [filename]\n"
            "Options:\n"
            "  -h or --help: this message\n"
            "  -v or --version: print program version\n"
@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
             QApplication::installTranslator(&qtTranslator);
 
         QTranslator myappTranslator;
-        QString trname = "cr3_" + QLocale::system().name();
+        QString trname = "crqt_" + QLocale::system().name();
         CRLog::info("Using translation file %s from dir %s", UnicodeToUtf8(qt2cr(trname)).c_str(), UnicodeToUtf8(qt2cr(translations)).c_str() );
         if ( myappTranslator.load(trname, translations) )
             QApplication::installTranslator(&myappTranslator);

@@ -3,15 +3,15 @@
 <plist version="0.1">
 <dict>
 	<key>CFBundleName</key>
-	<string>CoolReader3</string>
+	<string>CoolReaderNG/Qt</string>
 	<key>CFBundleDisplayName</key>
-	<string>Cool Reader 3</string>
+	<string>CoolReader NG</string>
 	<key>CFBundleVersion</key>
-	<string>3.0.54</string>
+	<string>1.0.0</string>
 	<key>CFBundleIconFile</key>
-	<string>cr3.icns</string>
+	<string>crqt.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.coolreader.cr3</string>
+	<string>org.coolreader.crqt</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
         <key>CFBundleGetInfoString</key>
@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>crdr</string>
 	<key>CFBundleExecutable</key>
-	<string>cr3</string>
+	<string>crqt</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>(c)2011 Vadim Lopatin</string>
 </dict>

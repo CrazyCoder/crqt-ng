@@ -1,6 +1,6 @@
 <RCC>
   <qresource prefix="/icons" >
-        <file>icons/cr3.png</file>
+        <file>icons/crqt.png</file>
   </qresource>
   <qresource prefix="/icons/action" >
         <file>icons/back.png</file>
@@ -28,6 +28,5 @@
         <file>icons/editcopy.png</file>
         <file>icons/bookmark.png</file>
         <file>icons/bookmark_folder.png</file>
-        <file>icons/coolreader.png</file>
     </qresource>
 </RCC>

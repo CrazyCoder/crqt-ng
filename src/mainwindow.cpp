@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->view->setScrollBar( ui->scroll );
 
-	QIcon icon = QIcon(":/icons/icons/cr3.png");
+	QIcon icon = QIcon(":/icons/icons/crqt.png");
 	CRLog::warn("\n\n\n*** ######### application icon %s\n\n\n", icon.isNull() ? "null" : "found");
 	qApp->setWindowIcon(icon);
 
@@ -235,15 +235,6 @@ void MainWindow::on_actionOpen_triggered()
     if ( !ui->view->loadDocument( fileName ) ) {
         // error
     } else {
-#ifdef _DEBUG
-        LVStreamRef in = ui->view->getDocView()->getCoverPageImageStream();
-        if ( !in.isNull() ) {
-            LVStreamRef out = LVOpenFileStream("/tmp/cover.png", LVOM_WRITE);
-            if ( !out.isNull() ) {
-                LVPumpStream( out.get(), in.get() );
-            }
-        }
-#endif
         update();
     }
 }
