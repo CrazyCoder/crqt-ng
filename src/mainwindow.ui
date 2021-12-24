@@ -453,7 +453,7 @@
     <string>About CoolReaderNG/Qt</string>
    </property>
    <property name="toolTip">
-    <string>About CoolReader</string>
+    <string>About CoolReaderNG/Qt</string>
    </property>
    <property name="shortcut">
     <string>F1</string>
@@ -599,10 +599,10 @@
   </action>
   <action name="actionPrevSentence">
    <property name="text">
-    <string>actionPrevSentence</string>
+    <string>Prev Sentence</string>
    </property>
    <property name="toolTip">
-    <string>Select orevious sentence</string>
+    <string>Select previous sentence</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Left</string>

@@ -23,7 +23,7 @@
    <string>Settings</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="cr3res.qrc">
+   <iconset resource="crqtres.qrc">
     <normaloff>:/icons/action/icons/configure.png</normaloff>:/icons/action/icons/configure.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -1670,7 +1670,7 @@
          <item row="20" column="0">
           <widget class="QLabel" name="label_49">
            <property name="text">
-            <string>Internal</string>
+            <string>Margins redefine</string>
            </property>
           </widget>
          </item>
@@ -2115,7 +2115,7 @@
   <tabstop>cbDefMarginRight</tabstop>
  </tabstops>
  <resources>
-  <include location="cr3res.qrc"/>
+  <include location="crqtres.qrc"/>
  </resources>
  <connections>
   <connection>
