@@ -43,6 +43,7 @@ function(QT5_UPDATE_TRANSLATIONS _qm_files)
 	cmake_parse_arguments(_LUPDATE "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 	set(_lupdate_files ${_LUPDATE_UNPARSED_ARGUMENTS})
 	set(_lupdate_options ${_LUPDATE_OPTIONS})
+	set(_lupdate_options ${_lupdate_options} -locations absolute)
 
 	set(_my_sources)
 	set(_my_tsfiles)
