@@ -182,6 +182,7 @@ class CR3View : public QWidget, public LVDocViewCallback
         DocViewData * _data; // to hide non-qt implementation
         LVDocView * _docview;
         QScrollBar * _scroll;
+        qreal _dpr;  // screen display pixel ratio (for HiDPI screens)
         PropsChangeCallback * _propsCallback;
         DocumentLoadingCallback * _docLoadingCallback;
         QStringList _hyphDicts;

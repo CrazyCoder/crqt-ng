@@ -148,13 +148,6 @@ int main(int argc, char *argv[])
 			CRLog::info("UnitTests finished: exiting");
 			return 0;
 		}
-        if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)) {
-            // Not allowed to scale widgets for HiDPI.
-            // crengine renders text to image using anti-aliasing,
-            // so scaling is prohibited after this rendering!
-            QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, false);
-            QCoreApplication::setAttribute(Qt::AA_DisableHighDpiScaling, true);
-        }
         QApplication app(argc, argv);
         QString datadir = cr2qt(getMainDataDir());
         QString translations = datadir + "i18n/";

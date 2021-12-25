@@ -32,6 +32,8 @@
 #include <crtrace.h>
 #include <props.h>
 
+#include <math.h>
+
 /// to hide non-qt implementation, place all crengine-related fields here
 class CR3View::DocViewData
 {
@@ -307,7 +309,8 @@ static LVRefVec<LVImageSource>& getBatteryIcons( lUInt32 color )
 
 
 CR3View::CR3View( QWidget *parent)
-        : QWidget( parent, Qt::WindowFlags() ), _scroll(NULL), _propsCallback(NULL), _docLoadingCallback(NULL)
+        : QWidget( parent, Qt::WindowFlags() ), _scroll(NULL)
+        , _propsCallback(NULL), _docLoadingCallback(NULL)
         , _normalCursor(Qt::ArrowCursor), _linkCursor(Qt::PointingHandCursor)
         , _selCursor(Qt::IBeamCursor), _waitCursor(Qt::WaitCursor)
         , _selecting(false), _selected(false), _editMode(false)
@@ -315,6 +318,12 @@ CR3View::CR3View( QWidget *parent)
         , _lastBatteryChargingConn(CR_BATTERY_CHARGER_NO)
         , _lastBatteryChargeLevel(0)
 {
+    if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+        _dpr = screen()->devicePixelRatio();
+    else if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0))
+        _dpr = QGuiApplication::primaryScreen()->devicePixelRatio();
+    else
+        _dpr = 1.0;
 #if WORD_SELECTOR_ENABLED==1
     _wordSelector = NULL;
 #endif
@@ -526,8 +535,12 @@ void CR3View::wheelEvent( QWheelEvent * event )
 
 void CR3View::resizeEvent ( QResizeEvent * event )
 {
-
     QSize sz = event->size();
+    if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)) {
+        if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+            _dpr = screen()->devicePixelRatio();
+        sz *= _dpr;
+    }
     _docview->Resize( sz.width(), sz.height() );
 }
 
@@ -562,6 +575,9 @@ static bool getBatteryState(int& state, int& chargingConn, int& level)
 void CR3View::paintEvent ( QPaintEvent * event )
 {
     QPainter painter(this);
+    qreal dpr = painter.device()->devicePixelRatioF();
+    if (fabs(dpr - _dpr) >= 0.01)
+        CRLog::error("Device pixel ratio is changed! (prev=%.1f, now=%.1f)", _dpr, dpr);
     QRect rc = rect();
     int newBatteryState;
     int newChargingConn;
@@ -586,6 +602,7 @@ void CR3View::paintEvent ( QPaintEvent * event )
     int bpp = buf->GetBitsPerPixel();
     if (bpp == 4 || bpp == 3) {
         QImage img(dx, dy, QImage::Format_RGB16 );
+        img.setDevicePixelRatio(_dpr);
         for ( int i=0; i<dy; i++ ) {
             unsigned char * dst = img.scanLine( i );
             unsigned char * src = buf->GetScanLine(i);
@@ -603,6 +620,7 @@ void CR3View::paintEvent ( QPaintEvent * event )
         painter.drawImage( rc, img );
     } else if (bpp == 2) {
         QImage img(dx, dy, QImage::Format_RGB16 );
+        img.setDevicePixelRatio(_dpr);
         for ( int i=0; i<dy; i++ ) {
             unsigned char * dst = img.scanLine( i );
             unsigned char * src = buf->GetScanLine(i);
@@ -629,6 +647,7 @@ void CR3View::paintEvent ( QPaintEvent * event )
 
     } else if (bpp == 1) {
         QImage img(dx, dy, QImage::Format_RGB16 );
+        img.setDevicePixelRatio(_dpr);
         for ( int i=0; i<dy; i++ ) {
             unsigned char * dst = img.scanLine( i );
             unsigned char * src = buf->GetScanLine(i);
@@ -654,6 +673,7 @@ void CR3View::paintEvent ( QPaintEvent * event )
 
     } else if (bpp == 16) {
         QImage img(dx, dy, QImage::Format_RGB16 );
+        img.setDevicePixelRatio(_dpr);
         for ( int i=0; i<dy; i++ ) {
             unsigned char * dst = img.scanLine( i );
             unsigned char * src = buf->GetScanLine(i);
@@ -668,6 +688,7 @@ void CR3View::paintEvent ( QPaintEvent * event )
         painter.drawImage( rc, img );
     } else if (bpp == 32) {
         QImage img(dx, dy, QImage::Format_RGB32 );
+        img.setDevicePixelRatio(_dpr);
         for ( int i=0; i<dy; i++ ) {
             unsigned char * dst = img.scanLine( i );
             unsigned char * src = buf->GetScanLine(i);
@@ -681,6 +702,7 @@ void CR3View::paintEvent ( QPaintEvent * event )
         }
         painter.drawImage( rc, img );
     }
+    _dpr = dpr;
     if ( _editMode ) {
         // draw caret
         lvRect cursorRc;

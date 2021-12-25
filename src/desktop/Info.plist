@@ -20,6 +20,10 @@
 	<string>crdr</string>
 	<key>CFBundleExecutable</key>
 	<string>crqt</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>NSHighResolutionCapable</key>
+	<string>True</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>(c)2011 Vadim Lopatin</string>
 </dict>
