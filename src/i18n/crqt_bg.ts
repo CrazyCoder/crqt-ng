@@ -281,7 +281,7 @@
         <translation>Възникна грешка при отваряне на документа</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1523"/>
+        <location filename="../cr3widget.cpp" line="1527"/>
         <source>Loading: please wait...</source>
         <translation type="unfinished"></translation>
     </message>

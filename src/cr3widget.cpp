@@ -1179,7 +1179,11 @@ void CR3View::mousePressEvent ( QMouseEvent * event )
 {
     bool left = event->button() == Qt::LeftButton;
     //bool right = event->button() == Qt::RightButton;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+    bool mid = event->button() == Qt::MiddleButton;
+#else
     bool mid = event->button() == Qt::MidButton;
+#endif
     lvPoint pt (event->x(), event->y());
     ldomXPointer p = _docview->getNodeByPoint( pt );
     // test imageByPoint
