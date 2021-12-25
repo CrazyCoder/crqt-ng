@@ -276,22 +276,22 @@
 <context>
     <name>CR3View</name>
     <message>
-        <location filename="../cr3widget.cpp" line="493"/>
+        <location filename="../cr3widget.cpp" line="502"/>
         <source>Error while opening document </source>
         <translation>Ошибка открытия документа </translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1484"/>
+        <location filename="../cr3widget.cpp" line="1523"/>
         <source>Loading: please wait...</source>
         <translation>Загрузка: подождите...</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1141"/>
+        <location filename="../cr3widget.cpp" line="1163"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1142"/>
+        <location filename="../cr3widget.cpp" line="1164"/>
         <source>Font &quot;%1&quot; isn&apos;t compatible with language &quot;%2&quot;. Instead will be used fallback font.</source>
         <translation>Шрифт &quot;%1&quot; не совместим с языком &quot;%2&quot;. Вместо него будет задействован дополнительный шрифт.</translation>
     </message>
@@ -533,87 +533,87 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="207"/>
+        <location filename="../mainwindow.cpp" line="208"/>
         <source>Open book file</source>
         <translation>Открыть книгу</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="165"/>
+        <location filename="../mainwindow.cpp" line="166"/>
         <source>Export document to</source>
         <translation>Экспортировать документ в</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="167"/>
+        <location filename="../mainwindow.cpp" line="168"/>
         <source>WOL book (*.wol)</source>
         <translation>Книга WOL (.wol)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="172"/>
+        <location filename="../mainwindow.cpp" line="173"/>
         <source>Export to WOL format</source>
         <translation>Экспортировать в WOL формат</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="209"/>
+        <location filename="../mainwindow.cpp" line="210"/>
         <source>All supported formats</source>
         <translation>Все форматы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="210"/>
+        <location filename="../mainwindow.cpp" line="211"/>
         <source>FB2 books</source>
         <translation>Книги FB2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="212"/>
+        <location filename="../mainwindow.cpp" line="213"/>
         <source>Text files</source>
         <translation>Текстовые файлы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="213"/>
+        <location filename="../mainwindow.cpp" line="214"/>
         <source>Rich text</source>
         <translation>Текст RTF</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="214"/>
+        <location filename="../mainwindow.cpp" line="215"/>
         <source>MS Word document</source>
         <translation>Документы MS Word</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="216"/>
+        <location filename="../mainwindow.cpp" line="217"/>
         <source>HTML files</source>
         <translation>Файлы HTML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="217"/>
+        <location filename="../mainwindow.cpp" line="218"/>
         <source>EPUB files</source>
         <translation>Книги EPUB</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="218"/>
+        <location filename="../mainwindow.cpp" line="219"/>
         <source>CHM files</source>
         <translation>Файлы CHM</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="219"/>
+        <location filename="../mainwindow.cpp" line="220"/>
         <source>MOBI files</source>
         <translation>Файлы MOBI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="220"/>
+        <location filename="../mainwindow.cpp" line="221"/>
         <source>PalmDOC files</source>
         <translation>Файлы PDB/PalmDoc</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="221"/>
+        <location filename="../mainwindow.cpp" line="222"/>
         <source>ZIP archives</source>
         <translation>Архивы ZIP</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="211"/>
+        <location filename="../mainwindow.cpp" line="212"/>
         <source>FB3 books</source>
         <translation>Книги FB3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="215"/>
+        <location filename="../mainwindow.cpp" line="216"/>
         <source>Open Document files</source>
         <translation>Файлы Open Document</translation>
     </message>
