@@ -16,6 +16,12 @@ public:
     virtual ~PropsChangeCallback() { }
 };
 
+class DocumentLoadingCallback {
+public:
+    virtual void onDocumentLoaded( const lString32& atitle, const lString32& error ) = 0;
+    virtual ~DocumentLoadingCallback() { }
+};
+
 #define WORD_SELECTOR_ENABLED 1
 
 class CR3View : public QWidget, public LVDocViewCallback
@@ -87,6 +93,9 @@ class CR3View : public QWidget, public LVDocViewCallback
         void setPropsChangeCallback ( PropsChangeCallback * propsCallback )
         {
             _propsCallback = propsCallback;
+        }
+        void setDocumentLoadingCallback( DocumentLoadingCallback * docCallback ) {
+            _docLoadingCallback = docCallback;
         }
         /// toggle boolean property
         void toggleProperty( const char * name );
@@ -174,6 +183,7 @@ class CR3View : public QWidget, public LVDocViewCallback
         LVDocView * _docview;
         QScrollBar * _scroll;
         PropsChangeCallback * _propsCallback;
+        DocumentLoadingCallback * _docLoadingCallback;
         QStringList _hyphDicts;
         QCursor _normalCursor;
         QCursor _linkCursor;
@@ -187,6 +197,7 @@ class CR3View : public QWidget, public LVDocViewCallback
         ldomXRange _selRange;
         QString _cssDir;
         QString _bookmarkDir;
+        lString32 _filename;
         bool _editMode;
         int _lastBatteryState;
         int _lastBatteryChargingConn;

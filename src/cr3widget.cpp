@@ -307,7 +307,7 @@ static LVRefVec<LVImageSource>& getBatteryIcons( lUInt32 color )
 
 
 CR3View::CR3View( QWidget *parent)
-        : QWidget( parent, Qt::WindowFlags() ), _scroll(NULL), _propsCallback(NULL)
+        : QWidget( parent, Qt::WindowFlags() ), _scroll(NULL), _propsCallback(NULL), _docLoadingCallback(NULL)
         , _normalCursor(Qt::ArrowCursor), _linkCursor(Qt::PointingHandCursor)
         , _selCursor(Qt::IBeamCursor), _waitCursor(Qt::WaitCursor)
         , _selecting(false), _selected(false), _editMode(false)
@@ -1331,6 +1331,7 @@ void CR3View::OnLoadFileFormatDetected( doc_format_t fileFormat )
 /// on starting file loading
 void CR3View::OnLoadFileStart( lString32 filename )
 {
+    _filename = filename;
     setCursor( _waitCursor );
 }
 
@@ -1338,12 +1339,28 @@ void CR3View::OnLoadFileStart( lString32 filename )
 void CR3View::OnLoadFileError( lString32 message )
 {
     setCursor( _normalCursor );
+	if (NULL != _docLoadingCallback)
+        _docLoadingCallback->onDocumentLoaded( _filename, message );
 }
 
 /// file loading is finished successfully - drawCoveTo() may be called there
 void CR3View::OnLoadFileEnd()
 {
     setCursor( _normalCursor );
+    if (NULL != _docLoadingCallback && NULL != _docview) {
+        lString32 atitle;
+        lString32 author = _docview->getAuthors();
+        lString32 title = _docview->getTitle();
+        if (!title.empty()) {
+            if (!author.empty())
+                atitle = author + cs32(". ") + title;
+            else
+                atitle = title;
+        }
+        else
+            atitle = _filename;
+        _docLoadingCallback->onDocumentLoaded( atitle, lString32::empty_str );
+    }
 }
 
 /// document formatting started

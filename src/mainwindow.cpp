@@ -94,6 +94,7 @@ MainWindow::MainWindow(const QString& fileToOpen, QWidget *parent)
     ui->view->setHyphDir(userHyphDir + "hyph" + QDir::separator(), false);
     ldomDocCache::init( cacheDir32, (lvsize_t)DOC_CACHE_SIZE );
     ui->view->setPropsChangeCallback( this );
+    ui->view->setDocumentLoadingCallback( this );
     if (!ui->view->loadSettings( iniFile )) {
         // If config not found in homeDir, trying to load from exeDir...
         ui->view->loadSettings( iniFileInExeDir );
@@ -381,6 +382,14 @@ void MainWindow::onPropsChange( PropsRef props )
             QApplication::setStyle( value );
         }
     }
+}
+
+void MainWindow::onDocumentLoaded( const lString32& atitle, const lString32& error ) {
+    CRLog::debug("MainWindow::onDocumentLoaded '%s', error=%s ", UnicodeToLocal(atitle).c_str(), UnicodeToLocal(error).c_str() );
+    if (error.empty())   // no error
+        setWindowTitle("CoolReaderNG/Qt - " + cr2qt(atitle));
+    else
+        setWindowTitle("CoolReaderNG/Qt");
 }
 
 void MainWindow::contextMenu( QPoint pos )
