@@ -126,6 +126,7 @@ int main(int argc, char *argv[])
             CRLog::setLogLevel(CRLog::LL_FATAL);
 
         CRLog::info("main()");
+        QApplication app(argc, argv);
 
         lString32 configDir32 = getHomeConfigDir();
         if (!LVDirectoryExists(configDir32))
@@ -134,8 +135,12 @@ int main(int argc, char *argv[])
         lString32Collection fontDirs;
         lString32 homefonts32 = configDir32 + cs32("fonts");
         fontDirs.add(homefonts32);
-#if MAC==1
+#if MACOS==1 && USE_FONTCONFIG!=1
         fontDirs.add( cs32("/Library/Fonts") );
+        fontDirs.add( cs32("/System/Library/Fonts") );
+        fontDirs.add( cs32("/System/Library/Fonts/Supplemental") );
+        lString32 home = qt2cr(QDir::toNativeSeparators(QDir::homePath()));
+        fontDirs.add( home + cs32("/Library/Fonts") );
 #endif
         if ( !InitCREngine( argv[0], fontDirs ) ) {
             printf("Cannot init CREngine - exiting\n");
@@ -146,9 +151,9 @@ int main(int argc, char *argv[])
 			runTinyDomUnitTests();
 #endif
 			CRLog::info("UnitTests finished: exiting");
+            ShutdownCREngine();
 			return 0;
 		}
-        QApplication app(argc, argv);
         QString datadir = cr2qt(getMainDataDir());
         QString translations = datadir + "i18n/";
         QTranslator qtTranslator;
@@ -297,6 +302,7 @@ bool InitCREngine( const char * exename, lString32Collection & fontDirs )
 #if USE_FREETYPE==1
     lString32Collection fontExt;
     fontExt.add(cs32(".ttf"));
+    fontExt.add(cs32(".ttc"));
     fontExt.add(cs32(".otf"));
     fontExt.add(cs32(".pfa"));
     fontExt.add(cs32(".pfb"));

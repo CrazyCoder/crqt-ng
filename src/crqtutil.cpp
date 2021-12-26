@@ -228,7 +228,7 @@ static lString32 s_homeConfigDir;
 
 lString32& getMainDataDir() {
     if (s_mainDataDir.empty()) {
-#if MAC == 1
+#if MACOS == 1
         QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/../Resources/");
         exeDir = QFileInfo(exeDir).absoluteFilePath();
         s_mainDataDir = qt2cr(exeDir);
@@ -244,10 +244,10 @@ lString32& getMainDataDir() {
 
 lString32& getEngineDataDir() {
     if (s_engineDataDir.empty()) {
-#if MAC == 1
+#if MACOS == 1
         QString resDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/../Resources/");
         resDir = QFileInfo(resDir).absoluteFilePath();
-        s_mainDataDir = qt2cr(resDir);
+        s_engineDataDir = qt2cr(resDir);
 #elif defined(WIN32)
         QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/");
         s_mainDataDir = qt2cr(exeDir);
@@ -268,10 +268,8 @@ lString32& getExeDir() {
 
 lString32& getHomeConfigDir() {
     if (s_homeConfigDir.empty()) {
-#if MAC==1
-        // TODO: Use standard path...
-        // ~/crui/
-        s_homeConfigDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/crui/"));
+#if MACOS==1
+        s_homeConfigDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/Library/crui/"));
 #elif defined(WIN32)
         // ~/crui/
         s_homeConfigDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/crui/"));

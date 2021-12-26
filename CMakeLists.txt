@@ -11,6 +11,12 @@ set(PACKAGE_DATADIR	${CMAKE_INSTALL_PREFIX}/share)
 
 option(ADD_DEBUG_EXTRA_OPTS "Add extra debug flags and technique" OFF)
 
+if (APPLE)
+  if( ${CMAKE_SYSTEM} MATCHES "Darwin" )
+    set(MACOS 1)
+  endif()
+endif()
+
 configure_file(config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 
 # Find the Qt5 libraries

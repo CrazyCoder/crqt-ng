@@ -7,7 +7,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>CoolReader NG</string>
 	<key>CFBundleVersion</key>
-	<string>1.0.0</string>
+	<string>@VERSION@</string>
 	<key>CFBundleIconFile</key>
 	<string>crqt.icns</string>
 	<key>CFBundleIdentifier</key>
@@ -25,6 +25,6 @@
 	<key>NSHighResolutionCapable</key>
 	<string>True</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>(c)2011 Vadim Lopatin</string>
+	<string>(c)2021 coolreader-ng</string>
 </dict>
 </plist>
