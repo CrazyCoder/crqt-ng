@@ -4,24 +4,24 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../aboutdlg.ui" line="14"/>
+        <location filename="../aboutdlg.ui" line="20"/>
         <source>About CoolReaderNG/Qt</source>
         <translation>О программе CoolReaderNG/Qt</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.ui" line="70"/>
+        <location filename="../aboutdlg.ui" line="76"/>
         <source>License</source>
         <translation>Лицензия</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.ui" line="52"/>
+        <location filename="../aboutdlg.ui" line="58"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
         <location filename="../aboutdlg.cpp" line="24"/>
         <source>CoolReaderNG is free open source e-book viewer based on crengine-ng library.</source>
-        <translation>CoolReaderNG это свободная программа с открытым исходным кодом для просмотра электронных книг основаная на движке crengine-ng.</translation>
+        <translation>CoolReaderNG - это свободная программа с открытым исходным кодом для просмотра электронных книг основанная на движке crengine-ng.</translation>
     </message>
     <message>
         <location filename="../aboutdlg.cpp" line="25"/>
@@ -34,87 +34,92 @@
         <translation>под лицензией GNU GPL2.</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="27"/>
+        <location filename="../aboutdlg.cpp" line="26"/>
+        <source>It is a fork of the &apos;CoolReader&apos; program.</source>
+        <translation>Является форком программы &apos;CoolReader&apos;.</translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="28"/>
         <source>Third party components used in crengine-ng:</source>
         <translation>В crengine-ng использованы следующие сторонние компоненты:</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="29"/>
+        <location filename="../aboutdlg.cpp" line="30"/>
         <source>FreeType - font rendering</source>
         <translation>FreeType - рендеринг шрифтов</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="32"/>
+        <location filename="../aboutdlg.cpp" line="33"/>
         <source>HarfBuzz - text shaping, font kerning, ligatures</source>
         <translation>HarfBuzz - формировщик текста, кернинг, лигатуры</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="35"/>
+        <location filename="../aboutdlg.cpp" line="36"/>
         <source>ZLib - compressing library</source>
         <translation>ZLib - библиотека сжатия</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="38"/>
+        <location filename="../aboutdlg.cpp" line="39"/>
         <source>ZSTD - compressing library</source>
         <translation>ZSTD - библиотека сжатия</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="41"/>
+        <location filename="../aboutdlg.cpp" line="42"/>
         <source>libpng - PNG image format support</source>
         <translation>libpng - библиотека поддержки изображений формата PNG</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="44"/>
+        <location filename="../aboutdlg.cpp" line="45"/>
         <source>libjpeg - JPEG image format support</source>
         <translation>libjpeg - библиотека поддержки изображений формата JPEG</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="47"/>
+        <location filename="../aboutdlg.cpp" line="48"/>
         <source>FriBiDi - RTL writing support</source>
         <translation>FriBiDi - поддержка RTL письменности</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="50"/>
+        <location filename="../aboutdlg.cpp" line="51"/>
         <source>libunibreak - line breaking and word breaking algorithms</source>
         <translation>libunibreak - алгоритмы разбиения строк и слов</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="53"/>
+        <location filename="../aboutdlg.cpp" line="54"/>
         <source>utf8proc - for unicode string comparision</source>
         <translation>utf8proc - для сравнения строк юникода</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="56"/>
+        <location filename="../aboutdlg.cpp" line="57"/>
         <source>unrar - RAR archive extracting support</source>
         <translation>unrar - библиотека поддержки архивов формата RAR</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="59"/>
+        <location filename="../aboutdlg.cpp" line="60"/>
         <source>NanoSVG - SVG image format support</source>
         <translation>NanoSVG - библиотека поддержки изображений формата SVG</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="62"/>
+        <location filename="../aboutdlg.cpp" line="63"/>
         <source>chmlib - chm format support</source>
         <translation>chmlib - библиотека поддержки формата CHM</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="65"/>
+        <location filename="../aboutdlg.cpp" line="66"/>
         <source>antiword - Microsoft Word format support</source>
         <translation>antiword - библиотека поддержки документов Microsoft Word</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="67"/>
+        <location filename="../aboutdlg.cpp" line="68"/>
         <source>hyphman - AlReader hyphenation manager</source>
         <translation>hyphman - система переносов из AlReader</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="68"/>
+        <location filename="../aboutdlg.cpp" line="69"/>
         <source>Hyphenation dictionaries - from KOReader</source>
         <translation>Словари переносов - из проекта KOReader</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="70"/>
+        <location filename="../aboutdlg.cpp" line="71"/>
         <source>Languages character set database by Fontconfig</source>
         <translation>Набор символов различных письменностей от Fontconfig</translation>
     </message>

@@ -20,9 +20,10 @@ AboutDialog::AboutDialog(QWidget *parent) :
 	QString aboutText = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">"
 						"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">"
 						"p, li { white-space: pre-wrap; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; }"
-						"</style></head><body style=\" font-family:'Noto Sans'; font-size:9pt; font-weight:400; font-style:normal;\">";
+						"</style></head><body style=\" font-family:'Noto Sans'; font-size:10pt; font-weight:400; font-style:normal;\">";
 	aboutText += "<p>" + tr("CoolReaderNG is free open source e-book viewer based on crengine-ng library.") + "</p>";
 	aboutText += "<p>" + tr("Source code is available at") + QString(" <a href=\"%1\">%1</a> ").arg(project_src_url) + tr("under the terms of GNU GPLv2 license.") + "</p>";
+	aboutText += "<p>" + tr("It is a fork of the 'CoolReader' program.") + "</p>";
 	aboutText += "<p style=\"-qt-paragraph-type:empty;\"><br/></p>";
 	aboutText += "<p><span style=\"text-decoration: underline;\">" + tr("Third party components used in crengine-ng:") + "</span></p>";
 #if USE_FREETYPE==1
