@@ -899,7 +899,7 @@
     <message>
         <location filename="../mainwindow.ui" line="244"/>
         <source>Down</source>
-        <translation>Вниз</translation>
+        <translation>Down</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="252"/>
@@ -909,7 +909,7 @@
     <message>
         <location filename="../mainwindow.ui" line="255"/>
         <source>Up</source>
-        <translation>Вверх</translation>
+        <translation>Up</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="266"/>
@@ -949,7 +949,7 @@
     <message>
         <location filename="../mainwindow.ui" line="310"/>
         <source>Alt+Down</source>
-        <translation>Alt+Вниз</translation>
+        <translation>Alt+Down</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="318"/>
@@ -959,7 +959,7 @@
     <message>
         <location filename="../mainwindow.ui" line="321"/>
         <source>Alt+Up</source>
-        <translation>Alt+Вверх</translation>
+        <translation>Alt+Up</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="339"/>
@@ -1072,7 +1072,7 @@
     <message>
         <location filename="../mainwindow.ui" line="564"/>
         <source>Right</source>
-        <translation>Вправо</translation>
+        <translation>Right</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="569"/>
@@ -1083,12 +1083,12 @@
     <message>
         <location filename="../mainwindow.ui" line="575"/>
         <source>Left</source>
-        <translation>Влево</translation>
+        <translation>Left</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="586"/>
         <source>Space</source>
-        <translation>Пробел</translation>
+        <translation>Space</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="536"/>
@@ -1113,12 +1113,12 @@
     <message>
         <location filename="../mainwindow.ui" line="597"/>
         <source>Ctrl+Right</source>
-        <translation>Ctrl+Вправо</translation>
+        <translation>Ctrl+Right</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="608"/>
         <source>Ctrl+Left</source>
-        <translation>Ctrl+Влево</translation>
+        <translation>Ctrl+Left</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="14"/>
