@@ -281,22 +281,22 @@
 <context>
     <name>CR3View</name>
     <message>
-        <location filename="../cr3widget.cpp" line="507"/>
+        <location filename="../cr3widget.cpp" line="511"/>
         <source>Error while opening document </source>
         <translation>Ошибка открытия документа </translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1533"/>
+        <location filename="../cr3widget.cpp" line="1537"/>
         <source>Loading: please wait...</source>
         <translation>Загрузка: подождите...</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1169"/>
+        <location filename="../cr3widget.cpp" line="1173"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1170"/>
+        <location filename="../cr3widget.cpp" line="1174"/>
         <source>Font &quot;%1&quot; isn&apos;t compatible with language &quot;%2&quot;. Instead will be used fallback font.</source>
         <translation>Шрифт &quot;%1&quot; не совместим с языком &quot;%2&quot;. Вместо него будет задействован дополнительный шрифт.</translation>
     </message>

@@ -380,7 +380,11 @@ void CR3View::updateDefProps()
     QScreen* screen = QGuiApplication::primaryScreen();
 #endif
     lString32 str;
-    str.appendDecimal((int)screen->logicalDotsPerInch());
+    int d = (int)screen->logicalDotsPerInch();
+    // special workaround for MacOS
+    if (72 == d)
+        d = 96;
+    str.appendDecimal(d);
     _data->_props->setString( PROP_RENDER_DPI, str );
     // But we don't apply PROP_RENDER_SCALE_FONT_WITH_DPI property,
     // since for now we are setting the font size in pixels.
