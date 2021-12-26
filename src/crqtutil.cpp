@@ -6,8 +6,8 @@
 #include <QFileInfo>
 #include <QApplication>
 
-#include "props.h"
-#include "crlocaledata.h"
+#include <props.h>
+#include <crlocaledata.h>
 
 lString32 qt2cr(QString str)
 {

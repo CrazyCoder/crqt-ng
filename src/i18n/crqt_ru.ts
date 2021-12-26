@@ -281,22 +281,22 @@
 <context>
     <name>CR3View</name>
     <message>
-        <location filename="../cr3widget.cpp" line="502"/>
+        <location filename="../cr3widget.cpp" line="507"/>
         <source>Error while opening document </source>
         <translation>Ошибка открытия документа </translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1527"/>
+        <location filename="../cr3widget.cpp" line="1533"/>
         <source>Loading: please wait...</source>
         <translation>Загрузка: подождите...</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1163"/>
+        <location filename="../cr3widget.cpp" line="1169"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1164"/>
+        <location filename="../cr3widget.cpp" line="1170"/>
         <source>Font &quot;%1&quot; isn&apos;t compatible with language &quot;%2&quot;. Instead will be used fallback font.</source>
         <translation>Шрифт &quot;%1&quot; не совместим с языком &quot;%2&quot;. Вместо него будет задействован дополнительный шрифт.</translation>
     </message>
@@ -538,87 +538,87 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="208"/>
+        <location filename="../mainwindow.cpp" line="206"/>
         <source>Open book file</source>
         <translation>Открыть книгу</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="166"/>
+        <location filename="../mainwindow.cpp" line="164"/>
         <source>Export document to</source>
         <translation>Экспортировать документ в</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="168"/>
+        <location filename="../mainwindow.cpp" line="166"/>
         <source>WOL book (*.wol)</source>
         <translation>Книга WOL (.wol)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="173"/>
+        <location filename="../mainwindow.cpp" line="171"/>
         <source>Export to WOL format</source>
         <translation>Экспортировать в WOL формат</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="210"/>
+        <location filename="../mainwindow.cpp" line="208"/>
         <source>All supported formats</source>
         <translation>Все форматы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="211"/>
+        <location filename="../mainwindow.cpp" line="209"/>
         <source>FB2 books</source>
         <translation>Книги FB2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="213"/>
+        <location filename="../mainwindow.cpp" line="211"/>
         <source>Text files</source>
         <translation>Текстовые файлы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="214"/>
+        <location filename="../mainwindow.cpp" line="212"/>
         <source>Rich text</source>
         <translation>Текст RTF</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="215"/>
+        <location filename="../mainwindow.cpp" line="213"/>
         <source>MS Word document</source>
         <translation>Документы MS Word</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="217"/>
+        <location filename="../mainwindow.cpp" line="215"/>
         <source>HTML files</source>
         <translation>Файлы HTML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="218"/>
+        <location filename="../mainwindow.cpp" line="216"/>
         <source>EPUB files</source>
         <translation>Книги EPUB</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="219"/>
+        <location filename="../mainwindow.cpp" line="217"/>
         <source>CHM files</source>
         <translation>Файлы CHM</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="220"/>
+        <location filename="../mainwindow.cpp" line="218"/>
         <source>MOBI files</source>
         <translation>Файлы MOBI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="221"/>
+        <location filename="../mainwindow.cpp" line="219"/>
         <source>PalmDOC files</source>
         <translation>Файлы PDB/PalmDoc</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="222"/>
+        <location filename="../mainwindow.cpp" line="220"/>
         <source>ZIP archives</source>
         <translation>Архивы ZIP</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="212"/>
+        <location filename="../mainwindow.cpp" line="210"/>
         <source>FB3 books</source>
         <translation>Книги FB3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="216"/>
+        <location filename="../mainwindow.cpp" line="214"/>
         <source>Open Document files</source>
         <translation>Файлы Open Document</translation>
     </message>
@@ -1470,8 +1470,8 @@
         <location filename="../settings.ui" line="849"/>
         <location filename="../settings.ui" line="903"/>
         <location filename="../settings.ui" line="957"/>
-        <location filename="../settings.cpp" line="505"/>
-        <location filename="../settings.cpp" line="546"/>
+        <location filename="../settings.cpp" line="499"/>
+        <location filename="../settings.cpp" line="540"/>
         <source>0</source>
         <translation>0</translation>
     </message>
@@ -1577,321 +1577,321 @@
         <translation>Аннотация</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="452"/>
-        <location filename="../settings.cpp" line="471"/>
-        <location filename="../settings.cpp" line="504"/>
-        <location filename="../settings.cpp" line="545"/>
-        <location filename="../settings.cpp" line="574"/>
-        <location filename="../settings.cpp" line="594"/>
-        <location filename="../settings.cpp" line="612"/>
-        <location filename="../settings.cpp" line="656"/>
-        <location filename="../settings.cpp" line="716"/>
-        <location filename="../settings.cpp" line="732"/>
+        <location filename="../settings.cpp" line="446"/>
+        <location filename="../settings.cpp" line="465"/>
+        <location filename="../settings.cpp" line="498"/>
+        <location filename="../settings.cpp" line="539"/>
+        <location filename="../settings.cpp" line="568"/>
+        <location filename="../settings.cpp" line="588"/>
+        <location filename="../settings.cpp" line="606"/>
+        <location filename="../settings.cpp" line="650"/>
+        <location filename="../settings.cpp" line="710"/>
+        <location filename="../settings.cpp" line="726"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="453"/>
+        <location filename="../settings.cpp" line="447"/>
         <source>Justify</source>
         <translation>Выравнивание</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1962"/>
-        <location filename="../settings.cpp" line="454"/>
+        <location filename="../settings.cpp" line="448"/>
         <source>Left</source>
         <translation>Слева</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="455"/>
+        <location filename="../settings.cpp" line="449"/>
         <source>Center</source>
         <translation>По центру</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1972"/>
-        <location filename="../settings.cpp" line="456"/>
+        <location filename="../settings.cpp" line="450"/>
         <source>Right</source>
         <translation>Справа</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="472"/>
+        <location filename="../settings.cpp" line="466"/>
         <source>No indent</source>
         <translation>Без отступа</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="473"/>
+        <location filename="../settings.cpp" line="467"/>
         <source>Small Indent</source>
         <translation>Маленький отступ</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="474"/>
+        <location filename="../settings.cpp" line="468"/>
         <source>Big Indent</source>
         <translation>Большой отступ</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="475"/>
+        <location filename="../settings.cpp" line="469"/>
         <source>Small Outdent</source>
         <translation>Маленький выступ</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="476"/>
+        <location filename="../settings.cpp" line="470"/>
         <source>Big Outdent</source>
         <translation>Большой выступ</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="506"/>
+        <location filename="../settings.cpp" line="500"/>
         <source>20% of line height</source>
         <translation>20% от высоты строки</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="507"/>
+        <location filename="../settings.cpp" line="501"/>
         <source>30% of line height</source>
         <translation>30% от высоты строки</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="508"/>
-        <location filename="../settings.cpp" line="547"/>
+        <location filename="../settings.cpp" line="502"/>
+        <location filename="../settings.cpp" line="541"/>
         <source>50% of line height</source>
         <translation>50% от высоты строки</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="509"/>
-        <location filename="../settings.cpp" line="548"/>
+        <location filename="../settings.cpp" line="503"/>
+        <location filename="../settings.cpp" line="542"/>
         <source>100% of line height</source>
         <translation>100% от высоты строки</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="510"/>
-        <location filename="../settings.cpp" line="549"/>
+        <location filename="../settings.cpp" line="504"/>
+        <location filename="../settings.cpp" line="543"/>
         <source>150% of line height</source>
         <translation>150% от высоты строки</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="550"/>
+        <location filename="../settings.cpp" line="544"/>
         <source>200% of line height</source>
         <translation>200% от высоты строки</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="551"/>
+        <location filename="../settings.cpp" line="545"/>
         <source>400% of line height</source>
         <translation>400% от высоты строки</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="552"/>
+        <location filename="../settings.cpp" line="546"/>
         <source>5% of line width</source>
         <translation>5% от ширины строки</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="553"/>
+        <location filename="../settings.cpp" line="547"/>
         <source>10% of line width</source>
         <translation>10% от ширины строки</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="554"/>
+        <location filename="../settings.cpp" line="548"/>
         <source>15% of line width</source>
         <translation>15% от ширины строки</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="555"/>
+        <location filename="../settings.cpp" line="549"/>
         <source>20% of line width</source>
         <translation>20% от ширины строки</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="556"/>
+        <location filename="../settings.cpp" line="550"/>
         <source>30% of line width</source>
         <translation>30% от ширины строки</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="575"/>
-        <location filename="../settings.cpp" line="613"/>
+        <location filename="../settings.cpp" line="569"/>
+        <location filename="../settings.cpp" line="607"/>
         <source>Normal</source>
         <translation>Обычный</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="576"/>
+        <location filename="../settings.cpp" line="570"/>
         <source>Bold</source>
         <translation>Полужирный</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="577"/>
+        <location filename="../settings.cpp" line="571"/>
         <source>Bolder</source>
         <translation>Жирный</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="578"/>
+        <location filename="../settings.cpp" line="572"/>
         <source>Lighter</source>
         <translation>Тонкий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="595"/>
+        <location filename="../settings.cpp" line="589"/>
         <source>Increase: 110%</source>
         <translation>Увеличить: 110%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="596"/>
+        <location filename="../settings.cpp" line="590"/>
         <source>Increase: 120%</source>
         <translation>Увеличить: 120%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="597"/>
+        <location filename="../settings.cpp" line="591"/>
         <source>Increase: 150%</source>
         <translation>Увеличить: 150%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="598"/>
+        <location filename="../settings.cpp" line="592"/>
         <source>Decrease: 90%</source>
         <translation>Уменьшить: 90%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="599"/>
+        <location filename="../settings.cpp" line="593"/>
         <source>Decrease: 80%</source>
         <translation>Уменьшить: 80%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="600"/>
+        <location filename="../settings.cpp" line="594"/>
         <source>Decrease: 70%</source>
         <translation>Уменьшить: 70%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="601"/>
+        <location filename="../settings.cpp" line="595"/>
         <source>Decrease: 60%</source>
         <translation>Уменьшить: 60%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="614"/>
+        <location filename="../settings.cpp" line="608"/>
         <source>Italic</source>
         <translation>Курсив</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="622"/>
+        <location filename="../settings.cpp" line="616"/>
         <source>[Default Sans Serif]</source>
         <translation>[рубленый шрифт без засечек]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="624"/>
+        <location filename="../settings.cpp" line="618"/>
         <source>[Default Serif]</source>
         <translation>[рубленый шрифт с засечками]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="626"/>
+        <location filename="../settings.cpp" line="620"/>
         <source>[Default Monospace]</source>
         <translation>[моноширинный шрифт]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="657"/>
+        <location filename="../settings.cpp" line="651"/>
         <source>Black</source>
         <translation>Чёрный</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="658"/>
+        <location filename="../settings.cpp" line="652"/>
         <source>Green</source>
         <translation>Зелёный</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="659"/>
+        <location filename="../settings.cpp" line="653"/>
         <source>Silver</source>
         <translation>Серебристый</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="660"/>
+        <location filename="../settings.cpp" line="654"/>
         <source>Lime</source>
         <translation>Лимоновый</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1791"/>
-        <location filename="../settings.cpp" line="661"/>
+        <location filename="../settings.cpp" line="655"/>
         <source>Gray</source>
         <translation>Серый</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="662"/>
+        <location filename="../settings.cpp" line="656"/>
         <source>Olive</source>
         <translation>Оливковый</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="663"/>
+        <location filename="../settings.cpp" line="657"/>
         <source>White</source>
         <translation>Белый</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="664"/>
+        <location filename="../settings.cpp" line="658"/>
         <source>Yellow</source>
         <translation>Жёлтый</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="665"/>
+        <location filename="../settings.cpp" line="659"/>
         <source>Maroon</source>
         <translation>Каштановый</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="666"/>
+        <location filename="../settings.cpp" line="660"/>
         <source>Navy</source>
         <translation>Темно-синий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="667"/>
+        <location filename="../settings.cpp" line="661"/>
         <source>Red</source>
         <translation>Красный</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="668"/>
+        <location filename="../settings.cpp" line="662"/>
         <source>Blue</source>
         <translation>Синий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="669"/>
+        <location filename="../settings.cpp" line="663"/>
         <source>Purple</source>
         <translation>Пурпурный</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="670"/>
+        <location filename="../settings.cpp" line="664"/>
         <source>Teal</source>
         <translation>Сине-зелёный</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="671"/>
+        <location filename="../settings.cpp" line="665"/>
         <source>Fuchsia</source>
         <translation>Фуксия</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="672"/>
+        <location filename="../settings.cpp" line="666"/>
         <source>Aqua</source>
         <translation>Зеленовато-голубой</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="327"/>
         <location filename="../settings.ui" line="1786"/>
-        <location filename="../settings.cpp" line="717"/>
+        <location filename="../settings.cpp" line="711"/>
         <source>None</source>
         <translation>Нет</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="745"/>
-        <location filename="../settings.cpp" line="718"/>
+        <location filename="../settings.cpp" line="712"/>
         <source>Underline</source>
         <translation>Подчеркнутый</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="719"/>
+        <location filename="../settings.cpp" line="713"/>
         <source>Line through</source>
         <translation>Перечеркнутый</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="720"/>
+        <location filename="../settings.cpp" line="714"/>
         <source>Overline</source>
         <translation>Надчеркнутый</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="733"/>
+        <location filename="../settings.cpp" line="727"/>
         <source>Baseline</source>
         <translation>По снованию</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="734"/>
+        <location filename="../settings.cpp" line="728"/>
         <source>Subscript</source>
         <translation>Нижний индекс</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="735"/>
+        <location filename="../settings.cpp" line="729"/>
         <source>Superscript</source>
         <translation>Верхний индекс</translation>
     </message>

@@ -13,7 +13,7 @@
 #endif
 #include <QDir>
 
-#include "lvrend.h"         // for BLOCK_RENDERING_FLAGS_XXX presets
+#include <lvrend.h>         // for BLOCK_RENDERING_FLAGS_XXX presets
 
 static int def_margins[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20, 25, 30, 40, 50, 60 };
 #define MAX_MARGIN_INDEX (sizeof(def_margins)/sizeof(int))
@@ -410,22 +410,16 @@ void SettingsDlg::changeEvent(QEvent *e)
     }
 }
 
-void SettingsDlg::on_buttonBox_rejected()
-{
-	close();
-}
-
-void SettingsDlg::on_cbFontKerning_stateChanged(int s)
-{
-    setCheck( PROP_FONT_KERNING_ENABLED, s );
-    updateStyleSample();
-}
-
 void SettingsDlg::on_buttonBox_accepted()
 {
     m_docview->setOptions( m_props );
     m_docview->getDocView()->requestRender();
     close();
+}
+
+void SettingsDlg::on_buttonBox_rejected()
+{
+	close();
 }
 
 void SettingsDlg::optionToUi( const char * optionName, QCheckBox * cb )
@@ -785,6 +779,12 @@ void SettingsDlg::setCheckInversed( const char * optionName, int checkState )
     m_props->setInt( optionName, value );
 }
 
+void SettingsDlg::on_cbFontKerning_stateChanged(int s)
+{
+    setCheck( PROP_FONT_KERNING_ENABLED, s );
+    updateStyleSample();
+}
+
 void SettingsDlg::on_cbWindowFullscreen_stateChanged(int s)
 {
     setCheck( PROP_WINDOW_FULLSCREEN, s );
@@ -936,7 +936,7 @@ void SettingsDlg::on_btnHeaderTextColor_clicked()
     colorDialog( PROP_STATUS_FONT_COLOR, tr("Page header text color") );
 }
 
-void SettingsDlg::on_cbLookAndFeel_currentIndexChanged( QString styleName )
+void SettingsDlg::on_cbLookAndFeel_currentTextChanged( QString styleName )
 {
     if ( !initDone )
         return;
@@ -944,21 +944,21 @@ void SettingsDlg::on_cbLookAndFeel_currentIndexChanged( QString styleName )
     m_props->setString( PROP_WINDOW_STYLE, styleName );
 }
 
-void SettingsDlg::on_cbTitleFontFace_currentIndexChanged(QString s)
+void SettingsDlg::on_cbTitleFontFace_currentTextChanged(QString s)
 {
     if ( !initDone )
         return;
     m_props->setString( PROP_STATUS_FONT_FACE, s );
 }
 
-void SettingsDlg::on_cbTitleFontSize_currentIndexChanged(QString s)
+void SettingsDlg::on_cbTitleFontSize_currentTextChanged(QString s)
 {
     if ( !initDone )
         return;
     m_props->setString( PROP_STATUS_FONT_SIZE, s );
 }
 
-void SettingsDlg::on_cbTextFontFace_currentIndexChanged(QString s)
+void SettingsDlg::on_cbTextFontFace_currentTextChanged(QString s)
 {
     if ( !initDone )
         return;
@@ -967,7 +967,7 @@ void SettingsDlg::on_cbTextFontFace_currentIndexChanged(QString s)
     updateStyleSample();
 }
 
-void SettingsDlg::on_cbTextFontSize_currentIndexChanged(QString s)
+void SettingsDlg::on_cbTextFontSize_currentTextChanged(QString s)
 {
     if ( !initDone )
         return;
@@ -1105,7 +1105,7 @@ void SettingsDlg::on_cbFloatingPunctuation_stateChanged(int s)
     updateStyleSample();
 }
 
-void SettingsDlg::on_cbFontGamma_currentIndexChanged(QString s)
+void SettingsDlg::on_cbFontGamma_currentTextChanged(QString s)
 {
     m_props->setString( PROP_FONT_GAMMA, s );
     updateStyleSample();

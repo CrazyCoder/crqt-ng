@@ -173,11 +173,11 @@ private slots:
     void on_cbStartupAction_currentIndexChanged(int index);
     void on_cbHyphenation_currentIndexChanged(int index);
     void on_cbInterlineSpace_currentIndexChanged(int index);
-    void on_cbTextFontSize_currentIndexChanged(QString );
-    void on_cbTextFontFace_currentIndexChanged(QString );
-    void on_cbTitleFontSize_currentIndexChanged(QString );
-    void on_cbTitleFontFace_currentIndexChanged(QString );
-    void on_cbLookAndFeel_currentIndexChanged(QString );
+    void on_cbTextFontSize_currentTextChanged(QString );
+    void on_cbTextFontFace_currentTextChanged(QString );
+    void on_cbTitleFontSize_currentTextChanged(QString );
+    void on_cbTitleFontFace_currentTextChanged(QString );
+    void on_cbLookAndFeel_currentTextChanged(QString );
     void on_btnHeaderTextColor_clicked();
     void on_btnBgColor_clicked();
     void on_btnTextColor_clicked();
@@ -198,7 +198,7 @@ private slots:
     void on_buttonBox_rejected();
     void on_cbFontKerning_stateChanged(int );
     void on_cbFloatingPunctuation_stateChanged(int );
-    void on_cbFontGamma_currentIndexChanged(QString );
+    void on_cbFontGamma_currentTextChanged(QString );
     void on_cbStyleName_currentIndexChanged(int index);
     void on_cbDefAlignment_currentIndexChanged(int index);
     void on_cbDefFirstLine_currentIndexChanged(int index);

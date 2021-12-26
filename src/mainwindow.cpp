@@ -26,8 +26,6 @@
 #include "exportprogressdlg.h"
 #include "searchdlg.h"
 
-#include <lvtinydom.h>
-
 #define DOC_CACHE_SIZE 128 * 0x100000
 
 #ifndef ENABLE_BOOKMARKS_DIR

@@ -10,6 +10,8 @@ set(VERSION		"1.0.0")
 set(PACKAGE_DATADIR	${CMAKE_INSTALL_PREFIX}/share)
 
 option(ADD_DEBUG_EXTRA_OPTS "Add extra debug flags and technique" OFF)
+set(USE_QT QT5 CACHE STRING "Qt version to use")
+set_property(CACHE USE_QT PROPERTY STRINGS QT5 QT6)
 
 if (APPLE)
   if( ${CMAKE_SYSTEM} MATCHES "Darwin" )
@@ -19,12 +21,19 @@ endif()
 
 configure_file(config.h.cmake ${CMAKE_BINARY_DIR}/config.h)
 
-# Find the Qt5 libraries
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Gui REQUIRED)
-find_package(Qt5Widgets REQUIRED)
-
-include(Qt5TranslationToolsMacros)
+if( ${USE_QT} STREQUAL QT6 )
+  # Find the Qt6 libraries
+  find_package(Qt6Core REQUIRED)
+  find_package(Qt6Gui REQUIRED)
+  find_package(Qt6Widgets REQUIRED)
+  include(Qt6TranslationToolsMacros)
+elseif( ${USE_QT} STREQUAL QT5 )
+  # Find the Qt5 libraries
+  find_package(Qt5Core REQUIRED)
+  find_package(Qt5Gui REQUIRED)
+  find_package(Qt5Widgets REQUIRED)
+  include(Qt5TranslationToolsMacros)
+endif()
 
 # crengine-ng
 find_package(crengine-ng REQUIRED)

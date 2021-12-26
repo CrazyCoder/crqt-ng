@@ -158,7 +158,11 @@ int main(int argc, char *argv[])
         QString translations = datadir + "i18n/";
         QTranslator qtTranslator;
         if (qtTranslator.load("qt_" + QLocale::system().name(),
-                 QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+                QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
+#else
+                QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+#endif
             QApplication::installTranslator(&qtTranslator);
 
         QTranslator myappTranslator;

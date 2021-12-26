@@ -318,12 +318,13 @@ CR3View::CR3View( QWidget *parent)
         , _lastBatteryChargingConn(CR_BATTERY_CHARGER_NO)
         , _lastBatteryChargeLevel(0)
 {
-    if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-        _dpr = screen()->devicePixelRatio();
-    else if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0))
-        _dpr = QGuiApplication::primaryScreen()->devicePixelRatio();
-    else
-        _dpr = 1.0;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    _dpr = screen()->devicePixelRatio();
+#elif QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+    _dpr = QGuiApplication::primaryScreen()->devicePixelRatio();
+#else
+    _dpr = 1.0;
+#endif
 #if WORD_SELECTOR_ENABLED==1
     _wordSelector = NULL;
 #endif
@@ -372,14 +373,18 @@ void CR3View::updateDefProps()
     _data->_props->setStringDef( PROP_WINDOW_SHOW_STATUSBAR, "0" );
     _data->_props->setStringDef( PROP_APP_START_ACTION, "0" );
 
-    if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)) {
-        QScreen* screen = QGuiApplication::primaryScreen();
-        lString32 str;
-        str.appendDecimal((int)screen->logicalDotsPerInch());
-        _data->_props->setString( PROP_RENDER_DPI, str );
-        // But we don't apply PROP_RENDER_SCALE_FONT_WITH_DPI property,
-        // since for now we are setting the font size in pixels.
-    }
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    QScreen* screen = this->screen();
+#else
+    QScreen* screen = QGuiApplication::primaryScreen();
+#endif
+    lString32 str;
+    str.appendDecimal((int)screen->logicalDotsPerInch());
+    _data->_props->setString( PROP_RENDER_DPI, str );
+    // But we don't apply PROP_RENDER_SCALE_FONT_WITH_DPI property,
+    // since for now we are setting the font size in pixels.
+#endif
 
     QStringList styles = QStyleFactory::keys();
     QStyle * s = QApplication::style();
@@ -536,11 +541,12 @@ void CR3View::wheelEvent( QWheelEvent * event )
 void CR3View::resizeEvent ( QResizeEvent * event )
 {
     QSize sz = event->size();
-    if (QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)) {
-        if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-            _dpr = screen()->devicePixelRatio();
-        sz *= _dpr;
-    }
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    _dpr = screen()->devicePixelRatio();
+#endif
+    sz *= _dpr;
+#endif
     _docview->Resize( sz.width(), sz.height() );
 }
 
@@ -1038,7 +1044,7 @@ void CR3View::mouseMoveEvent ( QMouseEvent * event )
     //bool left = (event->buttons() & Qt::LeftButton);
     //bool right = (event->buttons() & Qt::RightButton);
     //bool mid = (event->buttons() & Qt::MidButton);
-    lvPoint pt ( event->x(), event->y() );
+    lvPoint pt ( event->pos().x(), event->pos().y() );
     ldomXPointer p = _docview->getNodeByPoint( pt );
     lString32 path;
     lString32 href;
@@ -1184,7 +1190,7 @@ void CR3View::mousePressEvent ( QMouseEvent * event )
 #else
     bool mid = event->button() == Qt::MidButton;
 #endif
-    lvPoint pt (event->x(), event->y());
+    lvPoint pt (event->pos().x(), event->pos().y());
     ldomXPointer p = _docview->getNodeByPoint( pt );
     // test imageByPoint
     LVImageSourceRef img = _docview->getImageByPoint(pt);
@@ -1228,7 +1234,7 @@ void CR3View::mouseReleaseEvent ( QMouseEvent * event )
     bool left = event->button() == Qt::LeftButton;
     //bool right = event->button() == Qt::RightButton;
     //bool mid = event->button() == Qt::MidButton;
-    lvPoint pt (event->x(), event->y());
+    lvPoint pt (event->pos().x(), event->pos().y());
     ldomXPointer p = _docview->getNodeByPoint( pt );
     lString32 path;
     lString32 href;
