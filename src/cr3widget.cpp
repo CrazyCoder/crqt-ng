@@ -30,7 +30,7 @@
 
 #include <lvdocview.h>
 #include <crtrace.h>
-#include <props.h>
+#include <crprops.h>
 
 #include <math.h>
 
