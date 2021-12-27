@@ -8,23 +8,28 @@
 #include <QtGui/QDialog>
 #endif
 
-namespace Ui {
+namespace Ui
+{
     class WolExportDlg;
 }
 
-class WolExportDlg : public QDialog {
+class WolExportDlg: public QDialog
+{
     Q_OBJECT
 public:
-    WolExportDlg(QWidget *parent = 0);
+    WolExportDlg(QWidget* parent = 0);
     ~WolExportDlg();
 
-    int getBitsPerPixel() { return m_bpp; }
-    int getTocLevels() { return m_tocLevels; }
+    int getBitsPerPixel() {
+        return m_bpp;
+    }
+    int getTocLevels() {
+        return m_tocLevels;
+    }
 protected:
-    void changeEvent(QEvent *e);
-
+    void changeEvent(QEvent* e);
 private:
-    Ui::WolExportDlg *m_ui;
+    Ui::WolExportDlg* m_ui;
     int m_tocLevels;
     int m_bpp;
 

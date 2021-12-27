@@ -37,30 +37,28 @@ Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
 #endif
 
 // prototypes
-void InitCREngineLog( const char * cfgfile );
-bool InitCREngine( const char * exename, lString32Collection & fontDirs );
+void InitCREngineLog(const char* cfgfile);
+bool InitCREngine(const char* exename, lString32Collection& fontDirs);
 void ShutdownCREngine();
-#if (USE_FREETYPE==1)
-bool getDirectoryFonts( lString32Collection & pathList, lString32Collection & ext, lString32Collection & fonts, bool absPath );
+#if (USE_FREETYPE == 1)
+bool getDirectoryFonts(lString32Collection& pathList, lString32Collection& ext, lString32Collection& fonts,
+                       bool absPath);
 #endif
 
-
 static void printHelp() {
-	printf("usage: crqt [options] [filename]\n"
+    printf("usage: crqt [options] [filename]\n"
            "Options:\n"
            "  -h or --help: this message\n"
            "  -v or --version: print program version\n"
            "  --loglevel=ERROR|WARN|INFO|DEBUG|TRACE: set logging level\n"
-           "  --logfile=<filename>|stdout|stderr: set log file\n"
-           );
+           "  --logfile=<filename>|stdout|stderr: set log file\n");
 }
 
 static void printVersion() {
     printf("cruiqt " VERSION "; crengine-ng-" CRE_NG_VERSION "\n");
 }
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char* argv[]) {
     int res = 0;
     {
 #ifdef DEBUG
@@ -71,56 +69,57 @@ int main(int argc, char *argv[])
         lString8 logfile("stderr");
 #endif
         int optpos = 1;
-        for ( int i=1; i<argc; i++ ) {
-            if ( !strcmp("-h", argv[i]) || !strcmp("-?", argv[i]) || !strcmp("/?", argv[i]) || !strcmp("--help", argv[i]) ) {
+        for (int i = 1; i < argc; i++) {
+            if (!strcmp("-h", argv[i]) || !strcmp("-?", argv[i]) || !strcmp("/?", argv[i]) ||
+                !strcmp("--help", argv[i])) {
                 printHelp();
                 return 0;
             }
-            if ( !strcmp("-v", argv[i]) || !strcmp("/v", argv[i]) || !strcmp("--version", argv[i]) ) {
+            if (!strcmp("-v", argv[i]) || !strcmp("/v", argv[i]) || !strcmp("--version", argv[i])) {
                 printVersion();
                 return 0;
             }
-            if ( !strcmp("--stats", argv[i]) && i<argc-4 ) {
-                if ( i!=argc-5 ) {
-					printf("To calculate character encoding statistics, use cruiqt <infile.txt> <outfile.cpp> <codepagename> <langname>\n");
+            if (!strcmp("--stats", argv[i]) && i < argc - 4) {
+                if (i != argc - 5) {
+                    printf("To calculate character encoding statistics, use cruiqt <infile.txt> <outfile.cpp> <codepagename> <langname>\n");
                     return 1;
                 }
                 lString8 list;
-                FILE * out = fopen(argv[i+2], "wb");
-                if ( !out ) {
-                    printf("Cannot create file %s", argv[i+2]);
+                FILE* out = fopen(argv[i + 2], "wb");
+                if (!out) {
+                    printf("Cannot create file %s", argv[i + 2]);
                     return 1;
                 }
-                MakeStatsForFile( argv[i+1], argv[i+3], argv[i+4], 0, out, list );
+                MakeStatsForFile(argv[i + 1], argv[i + 3], argv[i + 4], 0, out, list);
                 fclose(out);
                 return 0;
             }
             lString8 s(argv[i]);
-            if ( s.startsWith(cs8("--loglevel=")) ) {
-                loglevel = s.substr(11, s.length()-11);
+            if (s.startsWith(cs8("--loglevel="))) {
+                loglevel = s.substr(11, s.length() - 11);
                 optpos++;
-            } else if ( s.startsWith(cs8("--logfile=")) ) {
-                logfile = s.substr(10, s.length()-10);
+            } else if (s.startsWith(cs8("--logfile="))) {
+                logfile = s.substr(10, s.length() - 10);
                 optpos++;
             }
         }
 
         // set logger
-        if ( logfile=="stdout" )
+        if (logfile == "stdout")
             CRLog::setStdoutLogger();
-        else if ( logfile=="stderr" )
-                CRLog::setStderrLogger();
-        else if ( !logfile.empty() )
-                CRLog::setFileLogger(logfile.c_str());
-        if ( loglevel=="TRACE" )
+        else if (logfile == "stderr")
+            CRLog::setStderrLogger();
+        else if (!logfile.empty())
+            CRLog::setFileLogger(logfile.c_str());
+        if (loglevel == "TRACE")
             CRLog::setLogLevel(CRLog::LL_TRACE);
-        else if ( loglevel=="DEBUG" )
+        else if (loglevel == "DEBUG")
             CRLog::setLogLevel(CRLog::LL_DEBUG);
-        else if ( loglevel=="INFO" )
+        else if (loglevel == "INFO")
             CRLog::setLogLevel(CRLog::LL_INFO);
-        else if ( loglevel=="WARN" )
+        else if (loglevel == "WARN")
             CRLog::setLogLevel(CRLog::LL_WARN);
-        else if ( loglevel=="ERROR" )
+        else if (loglevel == "ERROR")
             CRLog::setLogLevel(CRLog::LL_ERROR);
         else
             CRLog::setLogLevel(CRLog::LL_FATAL);
@@ -135,43 +134,45 @@ int main(int argc, char *argv[])
         lString32Collection fontDirs;
         lString32 homefonts32 = configDir32 + cs32("fonts");
         fontDirs.add(homefonts32);
-#if MACOS==1 && USE_FONTCONFIG!=1
-        fontDirs.add( cs32("/Library/Fonts") );
-        fontDirs.add( cs32("/System/Library/Fonts") );
-        fontDirs.add( cs32("/System/Library/Fonts/Supplemental") );
+#if MACOS == 1 && USE_FONTCONFIG != 1
+        fontDirs.add(cs32("/Library/Fonts"));
+        fontDirs.add(cs32("/System/Library/Fonts"));
+        fontDirs.add(cs32("/System/Library/Fonts/Supplemental"));
         lString32 home = qt2cr(QDir::toNativeSeparators(QDir::homePath()));
-        fontDirs.add( home + cs32("/Library/Fonts") );
+        fontDirs.add(home + cs32("/Library/Fonts"));
 #endif
-        if ( !InitCREngine( argv[0], fontDirs ) ) {
+        if (!InitCREngine(argv[0], fontDirs)) {
             printf("Cannot init CREngine - exiting\n");
             return 2;
         }
-		if ( argc>=2 && !strcmp(argv[1], "unittest") ) {
+        if (argc >= 2 && !strcmp(argv[1], "unittest")) {
 #if 0 && defined(_DEBUG)
 			runTinyDomUnitTests();
 #endif
-			CRLog::info("UnitTests finished: exiting");
+            CRLog::info("UnitTests finished: exiting");
             ShutdownCREngine();
-			return 0;
-		}
+            return 0;
+        }
         QString datadir = cr2qt(getMainDataDir());
         QString translations = datadir + "i18n/";
         QTranslator qtTranslator;
         if (qtTranslator.load("qt_" + QLocale::system().name(),
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
+                              QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
 #else
-                QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+                              QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
 #endif
             QApplication::installTranslator(&qtTranslator);
 
         QTranslator myappTranslator;
         QString trname = "crqt_" + QLocale::system().name();
-        CRLog::info("Using translation file %s from dir %s", UnicodeToUtf8(qt2cr(trname)).c_str(), UnicodeToUtf8(qt2cr(translations)).c_str() );
-        if ( myappTranslator.load(trname, translations) )
+        CRLog::info("Using translation file %s from dir %s", UnicodeToUtf8(qt2cr(trname)).c_str(),
+                    UnicodeToUtf8(qt2cr(translations)).c_str());
+        if (myappTranslator.load(trname, translations))
             QApplication::installTranslator(&myappTranslator);
         else
-            CRLog::error("Canot load translation file %s from dir %s", UnicodeToUtf8(qt2cr(trname)).c_str(), UnicodeToUtf8(qt2cr(translations)).c_str() );
+            CRLog::error("Canot load translation file %s from dir %s", UnicodeToUtf8(qt2cr(trname)).c_str(),
+                         UnicodeToUtf8(qt2cr(translations)).c_str());
         QString fileToOpen;
         for (int i = optpos; i < argc; i++) {
             lString8 opt(argv[i]);
@@ -188,49 +189,48 @@ int main(int argc, char *argv[])
     return res;
 }
 
-void ShutdownCREngine()
-{
+void ShutdownCREngine() {
     HyphMan::uninit();
     ShutdownFontManager();
-    CRLog::setLogger( NULL );
+    CRLog::setLogger(NULL);
 }
 
-#if (USE_FREETYPE==1)
-bool getDirectoryFonts( lString32Collection & pathList, lString32Collection & ext, lString32Collection & fonts, bool absPath )
-{
+#if (USE_FREETYPE == 1)
+bool getDirectoryFonts(lString32Collection& pathList, lString32Collection& ext, lString32Collection& fonts,
+                       bool absPath) {
     int foundCount = 0;
     lString32 path;
-    for ( int di=0; di<pathList.length();di++ ) {
+    for (int di = 0; di < pathList.length(); di++) {
         path = pathList[di];
         LVContainerRef dir = LVOpenDirectory(path.c_str());
-        if ( !dir.isNull() ) {
-            CRLog::trace("Checking directory %s", UnicodeToUtf8(path).c_str() );
-            for ( int i=0; i < dir->GetObjectCount(); i++ ) {
-                const LVContainerItemInfo * item = dir->GetObjectInfo(i);
+        if (!dir.isNull()) {
+            CRLog::trace("Checking directory %s", UnicodeToUtf8(path).c_str());
+            for (int i = 0; i < dir->GetObjectCount(); i++) {
+                const LVContainerItemInfo* item = dir->GetObjectInfo(i);
                 lString32 fileName = item->GetName();
                 //lString8 fn = UnicodeToLocal(fileName);
                 //printf(" test(%s) ", fn.c_str() );
-                if ( !item->IsContainer() ) {
+                if (!item->IsContainer()) {
                     bool found = false;
                     lString32 lc = fileName;
                     lc.lowercase();
-                    for ( int j=0; j<ext.length(); j++ ) {
-                        if ( lc.endsWith(ext[j]) ) {
+                    for (int j = 0; j < ext.length(); j++) {
+                        if (lc.endsWith(ext[j])) {
                             found = true;
                             break;
                         }
                     }
-                    if ( !found )
+                    if (!found)
                         continue;
                     lString32 fn;
-                    if ( absPath ) {
+                    if (absPath) {
                         fn = path;
-                        if ( !fn.empty() && fn[fn.length()-1]!=PATH_SEPARATOR_CHAR)
+                        if (!fn.empty() && fn[fn.length() - 1] != PATH_SEPARATOR_CHAR)
                             fn << PATH_SEPARATOR_CHAR;
                     }
                     fn << fileName;
                     foundCount++;
-                    fonts.add( fn );
+                    fonts.add(fn);
                 }
             }
         }
@@ -239,22 +239,22 @@ bool getDirectoryFonts( lString32Collection & pathList, lString32Collection & ex
 }
 #endif
 
-bool InitCREngine( const char * exename, lString32Collection & fontDirs )
-{
-	CRLog::trace("InitCREngine(%s)", exename);
+bool InitCREngine(const char* exename, lString32Collection& fontDirs) {
+    CRLog::trace("InitCREngine(%s)", exename);
 #if defined(_WIN32)
     lString32 appPath32 = getExeDir();
     lString32 cfgfile32 = appPath32 + "crui.ini";
     InitCREngineLog(UnicodeToUtf8(cfgfile32).c_str());
 #endif
     InitFontManager(lString8::empty_str);
-#if defined(_WIN32) && USE_FONTCONFIG!=1
-    wchar_t sysdir_w[MAX_PATH+1];
+#if defined(_WIN32) && USE_FONTCONFIG != 1
+    wchar_t sysdir_w[MAX_PATH + 1];
     GetWindowsDirectoryW(sysdir_w, MAX_PATH);
-    lString32 fontdir = Utf16ToUnicode( sysdir_w );
+    lString32 fontdir = Utf16ToUnicode(sysdir_w);
     fontdir << "\\Fonts\\";
-    lString8 fontdir8( UnicodeToUtf8(fontdir) );
-    const char * fontnames[] = {
+    lString8 fontdir8(UnicodeToUtf8(fontdir));
+    // clang-format off
+    const char* fontnames[] = {
         "arial.ttf",
         "ariali.ttf",
         "arialb.ttf",
@@ -281,7 +281,7 @@ bool InitCREngine( const char * exename, lString32Collection & fontDirs )
         "bookosi.ttf",
         "bookosb.ttf",
         "bookosbi.ttf",
-       "calibri.ttf",
+        "calibri.ttf",
         "calibrii.ttf",
         "calibrib.ttf",
         "calibriz.ttf",
@@ -295,15 +295,16 @@ bool InitCREngine( const char * exename, lString32Collection & fontDirs )
         "georgiaz.ttf",
         NULL
     };
-    for ( int fi = 0; fontnames[fi]; fi++ ) {
-        fontMan->RegisterFont( fontdir8 + fontnames[fi] );
+    // clang-format on
+    for (int fi = 0; fontnames[fi]; fi++) {
+        fontMan->RegisterFont(fontdir8 + fontnames[fi]);
     }
-#endif  // defined(_WIN32) && USE_FONTCONFIG!=1
+#endif // defined(_WIN32) && USE_FONTCONFIG!=1
     // Load font definitions into font manager
     // fonts are in files font1.lbf, font2.lbf, ... font32.lbf
     // use fontconfig
 
-#if USE_FREETYPE==1
+#if USE_FREETYPE == 1
     lString32Collection fontExt;
     fontExt.add(cs32(".ttf"));
     fontExt.add(cs32(".ttc"));
@@ -313,32 +314,31 @@ bool InitCREngine( const char * exename, lString32Collection & fontDirs )
 
     lString32 datadir32 = getMainDataDir();
     lString32 fontDir32 = datadir32 + "fonts";
-    fontDirs.add( fontDir32 );
-    LVAppendPathDelimiter( fontDir32 );
+    fontDirs.add(fontDir32);
+    LVAppendPathDelimiter(fontDir32);
 
     lString32Collection fonts;
-    getDirectoryFonts( fontDirs, fontExt, fonts, true );
+    getDirectoryFonts(fontDirs, fontExt, fonts, true);
 
     // load fonts from file
     CRLog::debug("%d font files found", fonts.length());
     //if (!fontMan->GetFontCount()) {
-    for ( int fi=0; fi<fonts.length(); fi++ ) {
-	    lString8 fn = UnicodeToLocal(fonts[fi]);
-	    CRLog::trace("loading font: %s", fn.c_str());
-	    if ( !fontMan->RegisterFont(fn) ) {
-		CRLog::trace("    failed\n");
-	    }
-	}
+    for (int fi = 0; fi < fonts.length(); fi++) {
+        lString8 fn = UnicodeToLocal(fonts[fi]);
+        CRLog::trace("loading font: %s", fn.c_str());
+        if (!fontMan->RegisterFont(fn)) {
+            CRLog::trace("    failed\n");
+        }
+    }
     //}
-#endif  // USE_FREETYPE==1
+#endif // USE_FREETYPE==1
 
-    if (!fontMan->GetFontCount())
-    {
+    if (!fontMan->GetFontCount()) {
         //error
-#if (USE_FREETYPE==1)
-        printf("Fatal Error: Cannot open font file(s) .ttf \nCannot work without font\n" );
+#if (USE_FREETYPE == 1)
+        printf("Fatal Error: Cannot open font file(s) .ttf \nCannot work without font\n");
 #else
-        printf("Fatal Error: Cannot open font file(s) font#.lbf \nCannot work without font\nUse FontConv utility to generate .lbf fonts from TTF\n" );
+        printf("Fatal Error: Cannot open font file(s) font#.lbf \nCannot work without font\nUse FontConv utility to generate .lbf fonts from TTF\n");
 #endif
         return false;
     }
@@ -346,32 +346,30 @@ bool InitCREngine( const char * exename, lString32Collection & fontDirs )
     printf("%d fonts loaded.\n", fontMan->GetFontCount());
 
     return true;
-
 }
 
-void InitCREngineLog( const char * cfgfile )
-{
-    if ( !cfgfile ) {
+void InitCREngineLog(const char* cfgfile) {
+    if (!cfgfile) {
         CRLog::setStdoutLogger();
-        CRLog::setLogLevel( CRLog::LL_TRACE );
+        CRLog::setLogLevel(CRLog::LL_TRACE);
         return;
     }
     lString32 logfname;
-    lString32 loglevelstr = 
+    lString32 loglevelstr =
 #ifdef _DEBUG
-		U"TRACE";
+            U"TRACE";
 #else
-		U"INFO";
+            U"INFO";
 #endif
     bool autoFlush = false;
     CRPropRef logprops = LVCreatePropsContainer();
     {
-        LVStreamRef cfg = LVOpenFileStream( cfgfile, LVOM_READ );
-        if ( !cfg.isNull() ) {
-            logprops->loadFromStream( cfg.get() );
-            logfname = logprops->getStringDef( PROP_LOG_FILENAME, "stdout" );
-            loglevelstr = logprops->getStringDef( PROP_LOG_LEVEL, "TRACE" );
-                        autoFlush = logprops->getBoolDef( PROP_LOG_AUTOFLUSH, false );
+        LVStreamRef cfg = LVOpenFileStream(cfgfile, LVOM_READ);
+        if (!cfg.isNull()) {
+            logprops->loadFromStream(cfg.get());
+            logfname = logprops->getStringDef(PROP_LOG_FILENAME, "stdout");
+            loglevelstr = logprops->getStringDef(PROP_LOG_LEVEL, "TRACE");
+            autoFlush = logprops->getBoolDef(PROP_LOG_AUTOFLUSH, false);
         }
     }
     CRLog::log_level level = CRLog::LL_INFO;
@@ -391,14 +389,14 @@ void InitCREngineLog( const char * cfgfile )
     } else if (loglevelstr == "TRACE") {
         level = CRLog::LL_TRACE;
     }
-    if ( !logfname.empty() ) {
+    if (!logfname.empty()) {
         if (logfname == "stdout")
             CRLog::setStdoutLogger();
         else if (logfname == "stderr")
             CRLog::setStderrLogger();
         else
-            CRLog::setFileLogger( UnicodeToUtf8( logfname ).c_str(), autoFlush );
+            CRLog::setFileLogger(UnicodeToUtf8(logfname).c_str(), autoFlush);
     }
-    CRLog::setLogLevel( level );
+    CRLog::setLogLevel(level);
     CRLog::trace("Log initialization done.");
 }

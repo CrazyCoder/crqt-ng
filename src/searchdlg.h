@@ -4,26 +4,27 @@
 #include <lvstring.h>
 #include <QDialog>
 
-namespace Ui {
+namespace Ui
+{
     class SearchDialog;
 }
 
 class CR3View;
 
-class SearchDialog : public QDialog {
+class SearchDialog: public QDialog
+{
     Q_OBJECT
 public:
-    static bool showDlg( QWidget * parent, CR3View * docView );
-    bool findText( lString32 pattern, int origin, bool reverse, bool caseInsensitive );
+    static bool showDlg(QWidget* parent, CR3View* docView);
+    bool findText(lString32 pattern, int origin, bool reverse, bool caseInsensitive);
 protected:
-    SearchDialog(QWidget *parent, CR3View * docView);
+    SearchDialog(QWidget* parent, CR3View* docView);
     ~SearchDialog();
-    void changeEvent(QEvent *e);
+    void changeEvent(QEvent* e);
     void closeEvent(QCloseEvent* e);
-
 private:
-    Ui::SearchDialog *ui;
-    CR3View * _docview;
+    Ui::SearchDialog* ui;
+    CR3View* _docview;
     lString32 _lastPattern;
     static SearchDialog* _instance;
 private slots:

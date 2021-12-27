@@ -9,30 +9,30 @@
 #endif
 #include <QModelIndex>
 
-namespace Ui {
+namespace Ui
+{
     class BookmarkListDialog;
 }
 
 class CR3View;
 class CRBookmark;
 
-class BookmarkListDialog : public QDialog {
+class BookmarkListDialog: public QDialog
+{
     Q_OBJECT
 public:
     ~BookmarkListDialog();
 
-    static bool showDlg( QWidget * parent, CR3View * docView );
-
+    static bool showDlg(QWidget* parent, CR3View* docView);
 protected:
-    explicit BookmarkListDialog(QWidget *parent, CR3View * docView);
-    void changeEvent(QEvent *e);
-    virtual void closeEvent ( QCloseEvent * event );
-
+    explicit BookmarkListDialog(QWidget* parent, CR3View* docView);
+    void changeEvent(QEvent* e);
+    virtual void closeEvent(QCloseEvent* event);
 private:
-    Ui::BookmarkListDialog *m_ui;
-    CR3View * _docview;
+    Ui::BookmarkListDialog* m_ui;
+    CR3View* _docview;
     QList<CRBookmark*> _list;
-    CRBookmark * selectedBookmark();
+    CRBookmark* selectedBookmark();
 
 private slots:
     void on_tableWidget_doubleClicked(QModelIndex index);

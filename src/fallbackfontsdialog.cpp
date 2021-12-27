@@ -8,10 +8,7 @@
 #include <QToolButton>
 #include <QSpacerItem>
 
-FallbackFontsDialog::FallbackFontsDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::FallbackFontsDialog)
-{
+FallbackFontsDialog::FallbackFontsDialog(QWidget* parent) : QDialog(parent), ui(new Ui::FallbackFontsDialog) {
     ui->setupUi(this);
     m_layout = new QVBoxLayout;
     m_spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -19,10 +16,9 @@ FallbackFontsDialog::FallbackFontsDialog(QWidget *parent) :
     ui->frame->setLayout(m_layout);
 }
 
-FallbackFontsDialog::FallbackFontsDialog(QWidget* parent, const QStringList& availFaces) :
-    QDialog(parent),
-    ui(new Ui::FallbackFontsDialog)
-{
+FallbackFontsDialog::FallbackFontsDialog(QWidget* parent, const QStringList& availFaces)
+        : QDialog(parent)
+        , ui(new Ui::FallbackFontsDialog) {
     ui->setupUi(this);
     m_layout = new QVBoxLayout;
     m_spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
@@ -31,19 +27,16 @@ FallbackFontsDialog::FallbackFontsDialog(QWidget* parent, const QStringList& ava
     setAvailableFaces(availFaces);
 }
 
-FallbackFontsDialog::~FallbackFontsDialog()
-{
+FallbackFontsDialog::~FallbackFontsDialog() {
     cleanupFontItems();
     delete ui;
 }
 
-void FallbackFontsDialog::setAvailableFaces(const QStringList& availFaces)
-{
+void FallbackFontsDialog::setAvailableFaces(const QStringList& availFaces) {
     m_availableFaces = availFaces;
 }
 
-void FallbackFontsDialog::setFallbackFaces(const QString& faces)
-{
+void FallbackFontsDialog::setFallbackFaces(const QString& faces) {
     m_fallbackFaces = faces;
     QStringList list;
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
@@ -71,8 +64,7 @@ void FallbackFontsDialog::setFallbackFaces(const QString& faces)
     m_layout->addItem(m_spacer);
 }
 
-void FallbackFontsDialog::slot_delete_clicked()
-{
+void FallbackFontsDialog::slot_delete_clicked() {
     int item_idx = -1;
     QVariant itemIdxProp;
     QObject* signalSender = sender();
@@ -97,8 +89,7 @@ void FallbackFontsDialog::slot_delete_clicked()
     }
 }
 
-void FallbackFontsDialog::slot_currectIndexChanged(int index)
-{
+void FallbackFontsDialog::slot_currectIndexChanged(int index) {
     int item_idx = -1;
     QVariant itemIdxProp;
     QObject* signalSender = sender();
@@ -135,8 +126,7 @@ void FallbackFontsDialog::slot_currectIndexChanged(int index)
     }
 }
 
-FallbackFontsDialog::FontControlItem *FallbackFontsDialog::addFontItem(int pos, int face_idx)
-{
+FallbackFontsDialog::FontControlItem* FallbackFontsDialog::addFontItem(int pos, int face_idx) {
     FontControlItem* item = new FontControlItem;
     item->pos = pos;
     item->layout = new QHBoxLayout;
@@ -159,8 +149,7 @@ FallbackFontsDialog::FontControlItem *FallbackFontsDialog::addFontItem(int pos, 
     return item;
 }
 
-bool FallbackFontsDialog::removeFontItem(int pos)
-{
+bool FallbackFontsDialog::removeFontItem(int pos) {
     if (pos >= 0 && pos < m_items.size()) {
         FontControlItem* item = m_items[pos];
         if (item) {
@@ -193,8 +182,7 @@ bool FallbackFontsDialog::removeFontItem(int pos)
     return false;
 }
 
-void FallbackFontsDialog::cleanupFontItems()
-{
+void FallbackFontsDialog::cleanupFontItems() {
     QVector<FontControlItem*>::const_iterator it;
     for (it = m_items.begin(); it != m_items.end(); ++it) {
         const FontControlItem* item = *it;
@@ -219,8 +207,7 @@ void FallbackFontsDialog::cleanupFontItems()
     m_items.clear();
 }
 
-void FallbackFontsDialog::updateFallbackFaces()
-{
+void FallbackFontsDialog::updateFallbackFaces() {
     m_fallbackFaces = QString();
     for (int i = 0; i < m_items.size() - 1; i++) {
         FontControlItem* item = m_items[i];

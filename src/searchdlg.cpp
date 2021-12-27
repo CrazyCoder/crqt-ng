@@ -13,10 +13,9 @@
 
 SearchDialog* SearchDialog::_instance = NULL;
 
-bool SearchDialog::showDlg( QWidget * parent, CR3View * docView )
-{
+bool SearchDialog::showDlg(QWidget* parent, CR3View* docView) {
     if (NULL == _instance) {
-        _instance = new SearchDialog( parent, docView );
+        _instance = new SearchDialog(parent, docView);
     }
     _instance->show();
     _instance->raise();
@@ -24,31 +23,28 @@ bool SearchDialog::showDlg( QWidget * parent, CR3View * docView )
     return true;
 }
 
-SearchDialog::SearchDialog(QWidget *parent, CR3View * docView) :
-    QDialog(parent),
-    ui(new Ui::SearchDialog),
-    _docview( docView )
-{
+SearchDialog::SearchDialog(QWidget* parent, CR3View* docView)
+        : QDialog(parent)
+        , ui(new Ui::SearchDialog)
+        , _docview(docView) {
     setAttribute(Qt::WA_DeleteOnClose, true);
     ui->setupUi(this);
     ui->cbCaseSensitive->setCheckState(Qt::Unchecked);
     ui->rbForward->toggle();
 }
 
-SearchDialog::~SearchDialog()
-{
+SearchDialog::~SearchDialog() {
     delete ui;
 }
 
-void SearchDialog::changeEvent(QEvent *e)
-{
+void SearchDialog::changeEvent(QEvent* e) {
     QDialog::changeEvent(e);
     switch (e->type()) {
-    case QEvent::LanguageChange:
-        ui->retranslateUi(this);
-        break;
-    default:
-        break;
+        case QEvent::LanguageChange:
+            ui->retranslateUi(this);
+            break;
+        default:
+            break;
     }
 }
 
@@ -59,25 +55,24 @@ void SearchDialog::closeEvent(QCloseEvent* e) {
     SearchDialog::_instance = NULL;
 }
 
-bool SearchDialog::findText( lString32 pattern, int origin, bool reverse, bool caseInsensitive )
-{
-    if ( pattern.empty() )
+bool SearchDialog::findText(lString32 pattern, int origin, bool reverse, bool caseInsensitive) {
+    if (pattern.empty())
         return false;
-    if ( pattern!=_lastPattern && origin==1 )
+    if (pattern != _lastPattern && origin == 1)
         origin = 0;
     _lastPattern = pattern;
     LVArray<ldomWord> words;
     lvRect rc;
-    _docview->getDocView()->GetPos( rc );
+    _docview->getDocView()->GetPos(rc);
     int pageHeight = rc.height();
     int start = -1;
     int end = -1;
-    if ( reverse ) {
+    if (reverse) {
         // reverse
-        if ( origin == 0 ) {
+        if (origin == 0) {
             // from end current page to first page
             end = rc.bottom;
-        } else if ( origin == -1 ) {
+        } else if (origin == -1) {
             // from last page to end of current page
             start = rc.bottom;
         } else { // origin == 1
@@ -86,10 +81,10 @@ bool SearchDialog::findText( lString32 pattern, int origin, bool reverse, bool c
         }
     } else {
         // forward
-        if ( origin == 0 ) {
+        if (origin == 0) {
             // from current page to last page
             start = rc.top;
-        } else if ( origin == -1 ) {
+        } else if (origin == -1) {
             // from first page to current page
             end = rc.top;
         } else { // origin == 1
@@ -98,14 +93,16 @@ bool SearchDialog::findText( lString32 pattern, int origin, bool reverse, bool c
         }
     }
     CRLog::debug("CRViewDialog::findText: Current page: %d .. %d", rc.top, rc.bottom);
-    CRLog::debug("CRViewDialog::findText: searching for text '%s' from %d to %d origin %d", LCSTR(pattern), start, end, origin );
-    if ( _docview->getDocView()->getDocument()->findText( pattern, caseInsensitive, reverse, start, end, words, 200, pageHeight ) ) {
+    CRLog::debug("CRViewDialog::findText: searching for text '%s' from %d to %d origin %d", LCSTR(pattern), start, end,
+                 origin);
+    if (_docview->getDocView()->getDocument()->findText(pattern, caseInsensitive, reverse, start, end, words, 200,
+                                                        pageHeight)) {
         CRLog::debug("CRViewDialog::findText: pattern found");
         _docview->getDocView()->clearSelection();
-        _docview->getDocView()->selectWords( words );
-        ldomMarkedRangeList * ranges = _docview->getDocView()->getMarkedRanges();
-        if ( ranges ) {
-            if ( ranges->length()>0 ) {
+        _docview->getDocView()->selectWords(words);
+        ldomMarkedRangeList* ranges = _docview->getDocView()->getMarkedRanges();
+        if (ranges) {
+            if (ranges->length() > 0) {
                 int pos = ranges->get(0)->start.y;
                 _docview->getDocView()->SetPos(pos);
             }
@@ -116,25 +113,24 @@ bool SearchDialog::findText( lString32 pattern, int origin, bool reverse, bool c
     return false;
 }
 
-void SearchDialog::on_btnFindNext_clicked()
-{
+void SearchDialog::on_btnFindNext_clicked() {
     bool found = false;
     QString pattern = ui->edPattern->text();
     lString32 p16 = qt2cr(pattern);
     bool reverse = ui->rbBackward->isChecked();
-    bool caseInsensitive = ui->cbCaseSensitive->checkState()!=Qt::Checked;
-    found = findText(p16, 1, reverse , caseInsensitive);
-    if ( !found )
+    bool caseInsensitive = ui->cbCaseSensitive->checkState() != Qt::Checked;
+    found = findText(p16, 1, reverse, caseInsensitive);
+    if (!found)
         found = findText(p16, -1, reverse, caseInsensitive);
-    if ( !found ) {
-        QMessageBox * mb = new QMessageBox( QMessageBox::Information, tr("Not found"), tr("Search pattern is not found in document"), QMessageBox::Close, this );
+    if (!found) {
+        QMessageBox* mb = new QMessageBox(QMessageBox::Information, tr("Not found"),
+                                          tr("Search pattern is not found in document"), QMessageBox::Close, this);
         mb->exec();
     } else {
         _docview->update();
     }
 }
 
-void SearchDialog::on_btnClose_clicked()
-{
+void SearchDialog::on_btnClose_clicked() {
     this->close();
 }

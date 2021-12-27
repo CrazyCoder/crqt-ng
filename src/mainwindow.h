@@ -15,26 +15,24 @@ namespace Ui
     class MainWindowClass;
 }
 
-class MainWindow : public QMainWindow, public PropsChangeCallback, DocumentLoadingCallback
+class MainWindow: public QMainWindow, public PropsChangeCallback, DocumentLoadingCallback
 {
     Q_OBJECT
-
 public:
-    virtual void onPropsChange( PropsRef props );
-    virtual void onDocumentLoaded( const lString32& atitle, const lString32& error );
-    MainWindow(const QString& fileToOpen, QWidget *parent = 0);
+    virtual void onPropsChange(PropsRef props);
+    virtual void onDocumentLoaded(const lString32& atitle, const lString32& error);
+    MainWindow(const QString& fileToOpen, QWidget* parent = 0);
     ~MainWindow();
-
 private:
-    Ui::MainWindowClass *ui;
+    Ui::MainWindowClass* ui;
     QString _filenameToOpen;
-    void toggleProperty( const char * name );
+    void toggleProperty(const char* name);
 protected:
-    virtual void showEvent ( QShowEvent * event );
-    virtual void focusInEvent ( QFocusEvent * event );
-    virtual void closeEvent ( QCloseEvent * event );
+    virtual void showEvent(QShowEvent* event);
+    virtual void focusInEvent(QFocusEvent* event);
+    virtual void closeEvent(QCloseEvent* event);
 public slots:
-    void contextMenu( QPoint pos );
+    void contextMenu(QPoint pos);
     void on_actionFindText_triggered();
 private slots:
     void on_actionNextPage3_triggered();

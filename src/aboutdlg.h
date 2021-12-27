@@ -8,27 +8,27 @@
 #include <QtGui/QDialog>
 #endif
 
-namespace Ui {
+namespace Ui
+{
     class AboutDialog;
 }
 
-class AboutDialog : public QDialog {
+class AboutDialog: public QDialog
+{
     Q_OBJECT
     Q_DISABLE_COPY(AboutDialog)
 public:
-    explicit AboutDialog(QWidget *parent = 0);
+    explicit AboutDialog(QWidget* parent = 0);
     virtual ~AboutDialog();
 
-    static bool showDlg( QWidget * parent );
-
+    static bool showDlg(QWidget* parent);
 protected:
-    virtual void changeEvent(QEvent *e);
-
+    virtual void changeEvent(QEvent* e);
 private:
-    Ui::AboutDialog *m_ui;
+    Ui::AboutDialog* m_ui;
 
 private slots:
-//    void on_btnSite_clicked();
+    //    void on_btnSite_clicked();
     void on_buttonBox_accepted();
 };
 

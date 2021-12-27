@@ -14,36 +14,38 @@
 
 #include "crqtutil.h"
 
-namespace Ui {
+namespace Ui
+{
     class SettingsDlg;
 }
 
-
-#define PROP_WINDOW_RECT            "window.rect"
-#define PROP_WINDOW_FULLSCREEN      "window.fullscreen"
-#define PROP_WINDOW_MINIMIZED       "window.minimized"
-#define PROP_WINDOW_MAXIMIZED       "window.maximized"
-#define PROP_WINDOW_SHOW_MENU       "window.menu.show"
+#define PROP_WINDOW_RECT       "window.rect"
+#define PROP_WINDOW_FULLSCREEN "window.fullscreen"
+#define PROP_WINDOW_MINIMIZED  "window.minimized"
+#define PROP_WINDOW_MAXIMIZED  "window.maximized"
+#define PROP_WINDOW_SHOW_MENU  "window.menu.show"
 //#define PROP_WINDOW_ROTATE_ANGLE  "window.rotate.angle"
-#define PROP_WINDOW_TOOLBAR_SIZE    "window.toolbar.size"
+#define PROP_WINDOW_TOOLBAR_SIZE     "window.toolbar.size"
 #define PROP_WINDOW_TOOLBAR_POSITION "window.toolbar.position"
-#define PROP_WINDOW_SHOW_STATUSBAR  "window.statusbar.show"
-#define PROP_WINDOW_SHOW_SCROLLBAR  "window.scrollbar.show"
-#define PROP_WINDOW_STYLE           "window.style"
-#define PROP_APP_START_ACTION       "cr3.app.start.action"
+#define PROP_WINDOW_SHOW_STATUSBAR   "window.statusbar.show"
+#define PROP_WINDOW_SHOW_SCROLLBAR   "window.scrollbar.show"
+#define PROP_WINDOW_STYLE            "window.style"
+#define PROP_APP_START_ACTION        "cr3.app.start.action"
 
-#define DECL_DEF_CR_FONT_SIZES static int cr_font_sizes[] = { 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 32, 38, 42, 48, 56, 64, 72 }
+#define DECL_DEF_CR_FONT_SIZES \
+    static int cr_font_sizes[] = { 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 32, 38, 42, 48, 56, 64, 72 }
 
-
-struct StyleItem {
+struct StyleItem
+{
     QString paramName;
     bool updating;
     QStringList values;
     QStringList titles;
     int currentIndex;
-    QComboBox * cb;
+    QComboBox* cb;
     PropsRef props;
-    void init(QString param, const char * defValue, const char * styleValues[], QString styleTitles[], bool hideFirstItem, PropsRef props, QComboBox * cb) {
+    void init(QString param, const char* defValue, const char* styleValues[], QString styleTitles[], bool hideFirstItem,
+              PropsRef props, QComboBox* cb) {
         updating = true;
         paramName = param;
         this->cb = cb;
@@ -55,10 +57,10 @@ struct StyleItem {
 
         QString currentValue = props->getStringDef(paramName.toUtf8().constData(), defValue);
 
-        for (int i=!hideFirstItem ? 0 : 1; styleValues[i]; i++) {
+        for (int i = !hideFirstItem ? 0 : 1; styleValues[i]; i++) {
             QString value = styleValues[i];
             if (currentValue == value)
-                currentIndex = !hideFirstItem ? i : i-1;
+                currentIndex = !hideFirstItem ? i : i - 1;
             values.append(value);
             titles.append(styleTitles[i]);
         }
@@ -73,7 +75,7 @@ struct StyleItem {
         updating = false;
     }
 
-    void init(QString param, QStringList & styleValues, QStringList & styleTitles, PropsRef props, QComboBox * cb) {
+    void init(QString param, QStringList& styleValues, QStringList& styleTitles, PropsRef props, QComboBox* cb) {
         updating = true;
         paramName = param;
         this->cb = cb;
@@ -86,7 +88,7 @@ struct StyleItem {
 
         QString currentValue = props->getStringDef(paramName.toUtf8().constData(), "");
 
-        for (int i=0; i < styleValues.length(); i++) {
+        for (int i = 0; i < styleValues.length(); i++) {
             if (currentValue == styleValues.at(i))
                 currentIndex = i;
         }
@@ -112,38 +114,39 @@ struct StyleItem {
 };
 
 class CR3View;
-class SettingsDlg : public QDialog {
+class SettingsDlg: public QDialog
+{
     Q_OBJECT
     Q_DISABLE_COPY(SettingsDlg)
 public:
     virtual ~SettingsDlg();
 
-    static bool showDlg(  QWidget * parent, CR3View * docView );
+    static bool showDlg(QWidget* parent, CR3View* docView);
 protected:
-    explicit SettingsDlg(QWidget *parent, CR3View * docView );
-    virtual void changeEvent(QEvent *e);
+    explicit SettingsDlg(QWidget* parent, CR3View* docView);
+    virtual void changeEvent(QEvent* e);
 
-    void setCheck( const char * optionName, int checkState );
-    void optionToUi( const char * optionName, QCheckBox * cb );
-    void optionToUiString( const char * optionName, QComboBox * cb );
-    void optionToUiIndex( const char * optionName, QComboBox * cb );
-    void setCheckInversed( const char * optionName, int checkState );
-    void optionToUiInversed( const char * optionName, QCheckBox * cb );
-    void fontToUi( const char * faceOptionName, const char * sizeOptionName, QComboBox * faceCombo, QComboBox * sizeCombo, const char * defFontFace );
+    void setCheck(const char* optionName, int checkState);
+    void optionToUi(const char* optionName, QCheckBox* cb);
+    void optionToUiString(const char* optionName, QComboBox* cb);
+    void optionToUiIndex(const char* optionName, QComboBox* cb);
+    void setCheckInversed(const char* optionName, int checkState);
+    void optionToUiInversed(const char* optionName, QCheckBox* cb);
+    void fontToUi(const char* faceOptionName, const char* sizeOptionName, QComboBox* faceCombo, QComboBox* sizeCombo,
+                  const char* defFontFace);
     void updateFontWeights();
 
-    void initStyleControls(const char * styleName);
+    void initStyleControls(const char* styleName);
 
-    QColor getColor( const char * optionName, unsigned def );
-    void setColor( const char * optionName, QColor cl );
-    void colorDialog( const char * optionName, QString title );
+    QColor getColor(const char* optionName, unsigned def);
+    void setColor(const char* optionName, QColor cl);
+    void colorDialog(const char* optionName, QString title);
 
-    void setBackground( QWidget * wnd, QColor cl );
+    void setBackground(QWidget* wnd, QColor cl);
     void updateStyleSample();
-
 private:
-    Ui::SettingsDlg *m_ui;
-    CR3View * m_docview;
+    Ui::SettingsDlg* m_ui;
+    CR3View* m_docview;
     PropsRef m_props;
     QString m_oldHyph;
     QStringList m_backgroundFiles;
@@ -168,16 +171,16 @@ private:
 
 private slots:
     void on_cbPageSkin_currentIndexChanged(int index);
-    void on_cbTxtPreFormatted_stateChanged(int );
+    void on_cbTxtPreFormatted_stateChanged(int);
     void on_cbTxtPreFormatted_toggled(bool checked);
     void on_cbStartupAction_currentIndexChanged(int index);
     void on_cbHyphenation_currentIndexChanged(int index);
     void on_cbInterlineSpace_currentIndexChanged(int index);
-    void on_cbTextFontSize_currentTextChanged(QString );
-    void on_cbTextFontFace_currentTextChanged(QString );
-    void on_cbTitleFontSize_currentTextChanged(QString );
-    void on_cbTitleFontFace_currentTextChanged(QString );
-    void on_cbLookAndFeel_currentTextChanged(QString );
+    void on_cbTextFontSize_currentTextChanged(QString);
+    void on_cbTextFontFace_currentTextChanged(QString);
+    void on_cbTitleFontSize_currentTextChanged(QString);
+    void on_cbTitleFontFace_currentTextChanged(QString);
+    void on_cbLookAndFeel_currentTextChanged(QString);
     void on_btnHeaderTextColor_clicked();
     void on_btnBgColor_clicked();
     void on_btnTextColor_clicked();
@@ -189,16 +192,16 @@ private slots:
     void on_cbIgnoreDocumentMargins_stateChanged(int s);
     void on_cbShowPageHeader_currentIndexChanged(int index);
     void on_cbViewMode_currentIndexChanged(int index);
-    void on_cbWindowShowScrollbar_stateChanged(int );
-    void on_cbWindowShowStatusBar_stateChanged(int );
-    void on_cbWindowShowMenu_stateChanged(int );
-    void on_cbWindowShowToolbar_stateChanged(int );
-    void on_cbWindowFullscreen_stateChanged(int );
+    void on_cbWindowShowScrollbar_stateChanged(int);
+    void on_cbWindowShowStatusBar_stateChanged(int);
+    void on_cbWindowShowMenu_stateChanged(int);
+    void on_cbWindowShowToolbar_stateChanged(int);
+    void on_cbWindowFullscreen_stateChanged(int);
     void on_buttonBox_accepted();
     void on_buttonBox_rejected();
-    void on_cbFontKerning_stateChanged(int );
-    void on_cbFloatingPunctuation_stateChanged(int );
-    void on_cbFontGamma_currentTextChanged(QString );
+    void on_cbFontKerning_stateChanged(int);
+    void on_cbFloatingPunctuation_stateChanged(int);
+    void on_cbFontGamma_currentTextChanged(QString);
     void on_cbStyleName_currentIndexChanged(int index);
     void on_cbDefAlignment_currentIndexChanged(int index);
     void on_cbDefFirstLine_currentIndexChanged(int index);
