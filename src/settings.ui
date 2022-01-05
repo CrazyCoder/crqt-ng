@@ -1582,23 +1582,8 @@
          <item row="14" column="1">
           <widget class="QComboBox" name="cbFontShaping">
            <property name="currentText">
-            <string>Simple (FreeType only, fastest)</string>
+            <string/>
            </property>
-           <item>
-            <property name="text">
-             <string>Simple (FreeType only, fastest)</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Light (HarfBuzz without ligatures)</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Full (HarfBuzz with ligatures)</string>
-            </property>
-           </item>
           </widget>
          </item>
          <item row="15" column="0">
@@ -1779,38 +1764,8 @@
          <item row="12" column="1">
           <widget class="QComboBox" name="cbAntialiasingMode">
            <property name="currentIndex">
-            <number>1</number>
+            <number>-1</number>
            </property>
-           <item>
-            <property name="text">
-             <string>None</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Gray</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>LCD (RGB)</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>LCD (BGR)</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>LCD (RGB) vertical</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>LCD (BGR) vertical</string>
-            </property>
-           </item>
           </widget>
          </item>
         </layout>
