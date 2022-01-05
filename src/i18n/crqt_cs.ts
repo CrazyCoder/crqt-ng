@@ -1246,35 +1246,35 @@
 <context>
     <name>SettingsDlg</name>
     <message>
-        <location filename="../settings.cpp" line="331"/>
+        <location filename="../settings.cpp" line="366"/>
         <source>[No hyphenation]</source>
         <translation>[Žádné dělení slov]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="333"/>
+        <location filename="../settings.cpp" line="368"/>
         <source>[Algorythmic hyphenation]</source>
         <translation>[Algoritmické dělení slov]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="356"/>
+        <location filename="../settings.cpp" line="391"/>
         <source>The quick brown fox jumps over the lazy dog. </source>
         <translation>Rychlá bílá liška hbitě skáče přes pomalého ježka. Ó, ú, á, é (zní obdivné výkřiky přihlížejících). </translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1025"/>
-        <location filename="../settings.cpp" line="904"/>
+        <location filename="../settings.cpp" line="939"/>
         <source>Text color</source>
         <translation>Barva textu</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1198"/>
-        <location filename="../settings.cpp" line="908"/>
+        <location filename="../settings.cpp" line="943"/>
         <source>Background color</source>
         <translation>Barva pozadí</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="468"/>
-        <location filename="../settings.cpp" line="912"/>
+        <location filename="../settings.cpp" line="947"/>
         <source>Page header text color</source>
         <translation>Barva textu záhlaví strany</translation>
     </message>
@@ -1384,8 +1384,8 @@
         <location filename="../settings.ui" line="849"/>
         <location filename="../settings.ui" line="903"/>
         <location filename="../settings.ui" line="957"/>
-        <location filename="../settings.cpp" line="484"/>
-        <location filename="../settings.cpp" line="525"/>
+        <location filename="../settings.cpp" line="519"/>
+        <location filename="../settings.cpp" line="560"/>
         <source>0</source>
         <translation>0</translation>
     </message>
@@ -1476,12 +1476,12 @@
     </message>
     <message>
         <location filename="../settings.ui" line="1325"/>
-        <location filename="../settings.ui" line="1724"/>
+        <location filename="../settings.ui" line="1709"/>
         <source>Hyphenation</source>
         <translation>Dělení slov</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1607"/>
+        <location filename="../settings.ui" line="1592"/>
         <source>Interline spacing</source>
         <translation>Odstup řádků</translation>
     </message>
@@ -1491,17 +1491,17 @@
         <translation>Vzhled strany</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1701"/>
+        <location filename="../settings.ui" line="1686"/>
         <source>Sample</source>
         <translation>Vzorek</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1687"/>
+        <location filename="../settings.ui" line="1672"/>
         <source>.TXT files</source>
         <translation>Soubory .TXT</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1694"/>
+        <location filename="../settings.ui" line="1679"/>
         <source>Disable automatic formatting</source>
         <translation>Zakázat automatické formátování</translation>
     </message>
@@ -1512,7 +1512,7 @@
     </message>
     <message>
         <location filename="../settings.ui" line="562"/>
-        <location filename="../settings.cpp" line="1144"/>
+        <location filename="../settings.cpp" line="1183"/>
         <source>Selection color</source>
         <translation>Barva výběru</translation>
     </message>
@@ -1547,7 +1547,7 @@
     </message>
     <message>
         <location filename="../settings.ui" line="745"/>
-        <location filename="../settings.cpp" line="713"/>
+        <location filename="../settings.cpp" line="748"/>
         <source>Underline</source>
         <translation>Podtržení</translation>
     </message>
@@ -1620,12 +1620,12 @@
         <translation>Volby pro změnu velikosti obrázků</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1631"/>
+        <location filename="../settings.ui" line="1616"/>
         <source>Floating punctuation</source>
         <translation>Volná interpunkce</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1638"/>
+        <location filename="../settings.ui" line="1623"/>
         <source>Enable floating punctuation</source>
         <translation>Povolit volnou interpunkci</translation>
     </message>
@@ -1810,487 +1810,489 @@
         <translation>Automatické instruování písma</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1755"/>
+        <location filename="../settings.ui" line="1740"/>
         <source>Fallback fonts</source>
         <translation>Záložní písma</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1652"/>
+        <location filename="../settings.ui" line="1637"/>
         <source>Enable document internal styles</source>
         <translation>Povolit v dokumentu vnitřní styly</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1645"/>
+        <location filename="../settings.ui" line="1630"/>
         <source>Internal CSS</source>
         <translation>Vnitřní CSS</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1666"/>
+        <location filename="../settings.ui" line="1651"/>
         <source>Enable document embedded fonts</source>
         <translation>Povolit písma vložená do dokumentu</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1659"/>
+        <location filename="../settings.ui" line="1644"/>
         <source>.EPUB</source>
         <translation>Soubory .EPUB</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1822"/>
+        <location filename="../settings.ui" line="1777"/>
         <source>Stylesheet</source>
         <translation>Stylový list</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1831"/>
-        <location filename="../settings.cpp" line="363"/>
+        <location filename="../settings.ui" line="1786"/>
+        <location filename="../settings.cpp" line="398"/>
         <source>Default paragraph style</source>
         <translation>Styl výchozího odstavce</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1865"/>
+        <location filename="../settings.ui" line="1820"/>
         <source>Alignment</source>
         <translation>Zarovnání</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1875"/>
+        <location filename="../settings.ui" line="1830"/>
         <source>First line</source>
         <translation>První řádek</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1885"/>
+        <location filename="../settings.ui" line="1840"/>
         <source>Font size</source>
         <translation>Velikost písma</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1895"/>
+        <location filename="../settings.ui" line="1850"/>
         <source>Font face</source>
         <translation>Druh písma</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1738"/>
-        <location filename="../settings.ui" line="1905"/>
+        <location filename="../settings.ui" line="1723"/>
+        <location filename="../settings.ui" line="1860"/>
         <source>Font weight</source>
         <translation>Váha písma</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1915"/>
+        <location filename="../settings.ui" line="1870"/>
         <source>Font style</source>
         <translation>Styl písma</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1925"/>
+        <location filename="../settings.ui" line="1880"/>
         <source>Font color</source>
         <translation>Barva písma</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1935"/>
+        <location filename="../settings.ui" line="1890"/>
         <source>Margins:</source>
         <translation>Okraje:</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1942"/>
+        <location filename="../settings.ui" line="1897"/>
         <source>Before</source>
         <translation>Před</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1952"/>
+        <location filename="../settings.ui" line="1907"/>
         <source>After</source>
         <translation>Po</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1962"/>
-        <location filename="../settings.cpp" line="437"/>
+        <location filename="../settings.ui" line="1917"/>
+        <location filename="../settings.cpp" line="472"/>
         <source>Left</source>
         <translation>Vlevo</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1972"/>
-        <location filename="../settings.cpp" line="437"/>
+        <location filename="../settings.ui" line="1927"/>
+        <location filename="../settings.cpp" line="472"/>
         <source>Right</source>
         <translation>Vpravo</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1985"/>
+        <location filename="../settings.ui" line="1940"/>
         <source>Interline space</source>
         <translation>Mezera mezi řádky</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1995"/>
+        <location filename="../settings.ui" line="1950"/>
         <source>Text decoration</source>
         <translation>Zdobení textu</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="2005"/>
+        <location filename="../settings.ui" line="1960"/>
         <source>Vertical align</source>
         <translation>Svislé zarovnání</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="364"/>
+        <location filename="../settings.cpp" line="399"/>
         <source>Title</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="365"/>
+        <location filename="../settings.cpp" line="400"/>
         <source>Subtitle</source>
         <translation>Podnázev</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="366"/>
+        <location filename="../settings.cpp" line="401"/>
         <source>Preformatted text</source>
         <translation>Předformátovaný text</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="367"/>
+        <location filename="../settings.cpp" line="402"/>
         <source>Link</source>
         <translation>Odkaz</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="368"/>
+        <location filename="../settings.cpp" line="403"/>
         <source>Cite / quotation</source>
         <translation>Citace</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="369"/>
+        <location filename="../settings.cpp" line="404"/>
         <source>Epigraph</source>
         <translation>Heslo</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="370"/>
+        <location filename="../settings.cpp" line="405"/>
         <source>Poem</source>
         <translation>Báseň</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="371"/>
+        <location filename="../settings.cpp" line="406"/>
         <source>Text author</source>
         <translation>Autor textu</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="372"/>
+        <location filename="../settings.cpp" line="407"/>
         <source>Footnote link</source>
         <translation>Odkaz na poznámku pod čarou</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="373"/>
+        <location filename="../settings.cpp" line="408"/>
         <source>Footnote</source>
         <translation>Poznámka pod čarou</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="374"/>
+        <location filename="../settings.cpp" line="409"/>
         <source>Footnote title</source>
         <translation>Název poznámky pod čarou</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="375"/>
+        <location filename="../settings.cpp" line="410"/>
         <source>Annotation</source>
         <translation>Vysvětlivka</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="437"/>
-        <location filename="../settings.cpp" line="453"/>
-        <location filename="../settings.cpp" line="483"/>
-        <location filename="../settings.cpp" line="524"/>
+        <location filename="../settings.cpp" line="472"/>
+        <location filename="../settings.cpp" line="488"/>
+        <location filename="../settings.cpp" line="518"/>
         <location filename="../settings.cpp" line="559"/>
-        <location filename="../settings.cpp" line="581"/>
-        <location filename="../settings.cpp" line="600"/>
-        <location filename="../settings.cpp" line="646"/>
-        <location filename="../settings.cpp" line="711"/>
-        <location filename="../settings.cpp" line="729"/>
+        <location filename="../settings.cpp" line="594"/>
+        <location filename="../settings.cpp" line="616"/>
+        <location filename="../settings.cpp" line="635"/>
+        <location filename="../settings.cpp" line="681"/>
+        <location filename="../settings.cpp" line="746"/>
+        <location filename="../settings.cpp" line="764"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="437"/>
+        <location filename="../settings.cpp" line="472"/>
         <source>Justify</source>
         <translation>Zarovnat do bloku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="437"/>
+        <location filename="../settings.cpp" line="472"/>
         <source>Center</source>
         <translation>Zarovnat na střed</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="453"/>
+        <location filename="../settings.cpp" line="488"/>
         <source>No indent</source>
         <translation>Bez odsazení</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="453"/>
+        <location filename="../settings.cpp" line="488"/>
         <source>Small Indent</source>
         <translation>Malé odsazení</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="454"/>
+        <location filename="../settings.cpp" line="489"/>
         <source>Big Indent</source>
         <translation>Velké odsazení</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="454"/>
+        <location filename="../settings.cpp" line="489"/>
         <source>Small Outdent</source>
         <translation>Malé předsazení</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="454"/>
+        <location filename="../settings.cpp" line="489"/>
         <source>Big Outdent</source>
         <translation>Velké předsazení</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="485"/>
+        <location filename="../settings.cpp" line="520"/>
         <source>20% of line height</source>
         <translation>20 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="486"/>
+        <location filename="../settings.cpp" line="521"/>
         <source>30% of line height</source>
         <translation>30 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="487"/>
-        <location filename="../settings.cpp" line="526"/>
+        <location filename="../settings.cpp" line="522"/>
+        <location filename="../settings.cpp" line="561"/>
         <source>50% of line height</source>
         <translation>50 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="488"/>
-        <location filename="../settings.cpp" line="527"/>
+        <location filename="../settings.cpp" line="523"/>
+        <location filename="../settings.cpp" line="562"/>
         <source>100% of line height</source>
         <translation>100 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="489"/>
-        <location filename="../settings.cpp" line="528"/>
+        <location filename="../settings.cpp" line="524"/>
+        <location filename="../settings.cpp" line="563"/>
         <source>150% of line height</source>
         <translation>150 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="529"/>
+        <location filename="../settings.cpp" line="564"/>
         <source>200% of line height</source>
         <translation>200 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="530"/>
+        <location filename="../settings.cpp" line="565"/>
         <source>400% of line height</source>
         <translation>400 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="531"/>
+        <location filename="../settings.cpp" line="566"/>
         <source>5% of line width</source>
         <translation>5 % šířky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="532"/>
+        <location filename="../settings.cpp" line="567"/>
         <source>10% of line width</source>
         <translation>10 % šířky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="533"/>
+        <location filename="../settings.cpp" line="568"/>
         <source>15% of line width</source>
         <translation>15 % šířky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="534"/>
+        <location filename="../settings.cpp" line="569"/>
         <source>20% of line width</source>
         <translation>20 % šířky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="535"/>
+        <location filename="../settings.cpp" line="570"/>
         <source>30% of line width</source>
         <translation>30 % šířky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="560"/>
-        <location filename="../settings.cpp" line="601"/>
+        <location filename="../settings.cpp" line="595"/>
+        <location filename="../settings.cpp" line="636"/>
         <source>Normal</source>
         <translation>Obvyklé</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="561"/>
+        <location filename="../settings.cpp" line="596"/>
         <source>Bold</source>
         <translation>Tučné</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="562"/>
+        <location filename="../settings.cpp" line="597"/>
         <source>Bolder</source>
         <translation>Tučnější</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="563"/>
+        <location filename="../settings.cpp" line="598"/>
         <source>Lighter</source>
         <translation>Lehčí</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="582"/>
+        <location filename="../settings.cpp" line="617"/>
         <source>Increase: 110%</source>
         <translation>Zvětšit: 110 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="583"/>
+        <location filename="../settings.cpp" line="618"/>
         <source>Increase: 120%</source>
         <translation>Zvětšit: 120 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="584"/>
+        <location filename="../settings.cpp" line="619"/>
         <source>Increase: 150%</source>
         <translation>Zvětšit: 150 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="585"/>
+        <location filename="../settings.cpp" line="620"/>
         <source>Decrease: 90%</source>
         <translation>Zmenšit: 90 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="586"/>
+        <location filename="../settings.cpp" line="621"/>
         <source>Decrease: 80%</source>
         <translation>Zmenšit: 80 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="587"/>
+        <location filename="../settings.cpp" line="622"/>
         <source>Decrease: 70%</source>
         <translation>Zmenšit: 70 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="588"/>
+        <location filename="../settings.cpp" line="623"/>
         <source>Decrease: 60%</source>
         <translation>Zmenšit: 60 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="602"/>
+        <location filename="../settings.cpp" line="637"/>
         <source>Italic</source>
         <translation>Kurzíva</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="611"/>
+        <location filename="../settings.cpp" line="646"/>
         <source>[Default Sans Serif]</source>
         <translation>[Výchozí bezpatkové]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="613"/>
+        <location filename="../settings.cpp" line="648"/>
         <source>[Default Serif]</source>
         <translation>[Výchozí patkové]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="615"/>
+        <location filename="../settings.cpp" line="650"/>
         <source>[Default Monospace]</source>
         <translation>[Výchozí strojové s pevnou šířkou]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="647"/>
+        <location filename="../settings.cpp" line="682"/>
         <source>Black</source>
         <translation>Černá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="648"/>
+        <location filename="../settings.cpp" line="683"/>
         <source>Green</source>
         <translation>Zelená</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="649"/>
+        <location filename="../settings.cpp" line="684"/>
         <source>Silver</source>
         <translation>Stříbrná</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="650"/>
+        <location filename="../settings.cpp" line="685"/>
         <source>Lime</source>
         <translation>Světle zelená</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1791"/>
-        <location filename="../settings.cpp" line="651"/>
+        <location filename="../settings.cpp" line="205"/>
+        <location filename="../settings.cpp" line="212"/>
+        <location filename="../settings.cpp" line="686"/>
         <source>Gray</source>
         <translation>Šedá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="652"/>
+        <location filename="../settings.cpp" line="687"/>
         <source>Olive</source>
         <translation>Olivově zelená</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="653"/>
+        <location filename="../settings.cpp" line="688"/>
         <source>White</source>
         <translation>Bílá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="654"/>
+        <location filename="../settings.cpp" line="689"/>
         <source>Yellow</source>
         <translation>Žlutá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="655"/>
+        <location filename="../settings.cpp" line="690"/>
         <source>Maroon</source>
         <translation>Kaštanově hnědá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="656"/>
+        <location filename="../settings.cpp" line="691"/>
         <source>Navy</source>
         <translation>Tmavomodrá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="657"/>
+        <location filename="../settings.cpp" line="692"/>
         <source>Red</source>
         <translation>Červená</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="658"/>
+        <location filename="../settings.cpp" line="693"/>
         <source>Blue</source>
         <translation>Modrá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="659"/>
+        <location filename="../settings.cpp" line="694"/>
         <source>Purple</source>
         <translation>Purpurová</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="660"/>
+        <location filename="../settings.cpp" line="695"/>
         <source>Teal</source>
         <translation>Tmavě modrozelená</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="661"/>
+        <location filename="../settings.cpp" line="696"/>
         <source>Fuchsia</source>
         <translation>Červenofialová barva</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="662"/>
+        <location filename="../settings.cpp" line="697"/>
         <source>Aqua</source>
         <translation>Modrozelená</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="327"/>
-        <location filename="../settings.ui" line="1786"/>
-        <location filename="../settings.cpp" line="712"/>
+        <location filename="../settings.cpp" line="204"/>
+        <location filename="../settings.cpp" line="211"/>
+        <location filename="../settings.cpp" line="747"/>
         <source>None</source>
         <translation>Žádné</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="714"/>
+        <location filename="../settings.cpp" line="749"/>
         <source>Line through</source>
         <translation>Přeškrtnutí</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="715"/>
+        <location filename="../settings.cpp" line="750"/>
         <source>Overline</source>
         <translation>Nadtržení</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="730"/>
+        <location filename="../settings.cpp" line="765"/>
         <source>Baseline</source>
         <translation>Základní čára</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="731"/>
+        <location filename="../settings.cpp" line="766"/>
         <source>Subscript</source>
         <translation>Dolní index</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="732"/>
+        <location filename="../settings.cpp" line="767"/>
         <source>Superscript</source>
         <translation>Horní index</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1148"/>
+        <location filename="../settings.cpp" line="1187"/>
         <source>Comment bookmark color</source>
         <translation>Barva záložky poznámky</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1152"/>
+        <location filename="../settings.cpp" line="1191"/>
         <source>Correction bookmark color</source>
         <translation>Barva záložky opravy</translation>
     </message>
@@ -2340,12 +2342,12 @@
         <translation type="unfinished">60</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1617"/>
+        <location filename="../settings.ui" line="1602"/>
         <source>Font kerning</source>
         <translation>Kerning písma</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1624"/>
+        <location filename="../settings.ui" line="1609"/>
         <source>Enable font kerning</source>
         <translation type="unfinished">Povolit kerning písma</translation>
     </message>
@@ -2411,73 +2413,72 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1585"/>
-        <location filename="../settings.ui" line="1589"/>
+        <location filename="../settings.cpp" line="176"/>
         <source>Simple (FreeType only, fastest)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1594"/>
+        <location filename="../settings.cpp" line="177"/>
         <source>Light (HarfBuzz without ligatures)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1599"/>
+        <location filename="../settings.cpp" line="178"/>
         <source>Full (HarfBuzz with ligatures)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1680"/>
+        <location filename="../settings.ui" line="1665"/>
         <source>Ignore document margins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1731"/>
+        <location filename="../settings.ui" line="1716"/>
         <source>Enable hyphenation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1768"/>
+        <location filename="../settings.ui" line="1753"/>
         <source>Manage...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1775"/>
+        <location filename="../settings.ui" line="1760"/>
         <source>Antialiasing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1796"/>
+        <location filename="../settings.cpp" line="206"/>
         <source>LCD (RGB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1801"/>
+        <location filename="../settings.cpp" line="207"/>
         <source>LCD (BGR)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1806"/>
+        <location filename="../settings.cpp" line="208"/>
         <source>LCD (RGB) vertical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1811"/>
+        <location filename="../settings.cpp" line="209"/>
         <source>LCD (BGR) vertical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1012"/>
+        <location filename="../settings.cpp" line="1051"/>
         <source>synthetic*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1014"/>
+        <location filename="../settings.cpp" line="1053"/>
         <source>synthetic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1673"/>
+        <location filename="../settings.ui" line="1658"/>
         <source>Margins redefine</source>
         <translation type="unfinished"></translation>
     </message>
