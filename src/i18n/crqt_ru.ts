@@ -90,36 +90,31 @@
     </message>
     <message>
         <location filename="../aboutdlg.cpp" line="61"/>
-        <source>unrar - RAR archive extracting support</source>
-        <translation>unrar - библиотека поддержки архивов формата RAR</translation>
-    </message>
-    <message>
-        <location filename="../aboutdlg.cpp" line="64"/>
         <source>NanoSVG - SVG image format support</source>
         <translation>NanoSVG - библиотека поддержки изображений формата SVG</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="67"/>
+        <location filename="../aboutdlg.cpp" line="64"/>
         <source>chmlib - chm format support</source>
         <translation>chmlib - библиотека поддержки формата CHM</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="70"/>
+        <location filename="../aboutdlg.cpp" line="67"/>
         <source>antiword - Microsoft Word format support</source>
         <translation>antiword - библиотека поддержки документов Microsoft Word</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="72"/>
+        <location filename="../aboutdlg.cpp" line="69"/>
         <source>hyphman - AlReader hyphenation manager</source>
         <translation>hyphman - система переносов из AlReader</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="73"/>
+        <location filename="../aboutdlg.cpp" line="70"/>
         <source>Hyphenation dictionaries - from KOReader</source>
         <translation>Словари переносов - из проекта KOReader</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="75"/>
+        <location filename="../aboutdlg.cpp" line="72"/>
         <source>Languages character set database by Fontconfig</source>
         <translation>Набор символов различных письменностей от Fontconfig</translation>
     </message>

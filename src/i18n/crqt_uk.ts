@@ -90,36 +90,31 @@
     </message>
     <message>
         <location filename="../aboutdlg.cpp" line="61"/>
-        <source>unrar - RAR archive extracting support</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../aboutdlg.cpp" line="64"/>
         <source>NanoSVG - SVG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="67"/>
+        <location filename="../aboutdlg.cpp" line="64"/>
         <source>chmlib - chm format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="70"/>
+        <location filename="../aboutdlg.cpp" line="67"/>
         <source>antiword - Microsoft Word format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="72"/>
+        <location filename="../aboutdlg.cpp" line="69"/>
         <source>hyphman - AlReader hyphenation manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="73"/>
+        <location filename="../aboutdlg.cpp" line="70"/>
         <source>Hyphenation dictionaries - from KOReader</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="75"/>
+        <location filename="../aboutdlg.cpp" line="72"/>
         <source>Languages character set database by Fontconfig</source>
         <translation type="unfinished"></translation>
     </message>

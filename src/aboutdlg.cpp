@@ -53,9 +53,6 @@ AboutDialog::AboutDialog(QWidget* parent) : QDialog(parent), m_ui(new Ui::AboutD
 #if USE_UTF8PROC == 1
     aboutText += "<p>" + tr("utf8proc - for unicode string comparision") + "</p>";
 #endif
-#if USE_UNRAR == 1
-    aboutText += "<p>" + tr("unrar - RAR archive extracting support") + "</p>";
-#endif
 #if USE_NANOSVG == 1
     aboutText += "<p>" + tr("NanoSVG - SVG image format support") + "</p>";
 #endif
