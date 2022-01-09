@@ -12,7 +12,7 @@ AboutDialog::AboutDialog(QWidget* parent) : QDialog(parent), m_ui(new Ui::AboutD
     m_ui->lblVersion->setText(crqt_ver);
     QString crengine_ver = m_ui->lblcrengineVersion->text().replace("%ver%", QString("%1").arg(CRE_NG_VERSION));
     m_ui->lblcrengineVersion->setText(crengine_ver);
-    QString project_src_url = "%not_defined_yet%";
+    QString project_src_url = "https://gitlab.com/coolreader-ng/crqt-ng/";
     // preambule
     QString aboutText =
             "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">"
@@ -97,15 +97,3 @@ bool AboutDialog::showDlg(QWidget* parent) {
 void AboutDialog::on_buttonBox_accepted() {
     close();
 }
-
-/* Commented due to issue: 
-   https://github.com/buggins/coolreader/issues/3
-   Domain name is lost.
-*/
-/*
-void AboutDialog::on_btnSite_clicked()
-{
-    QUrl qturl( "http://coolreader.org/" );
-    QDesktopServices::openUrl( qturl );
-}
-*/

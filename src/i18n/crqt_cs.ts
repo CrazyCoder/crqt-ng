@@ -14,107 +14,107 @@
         <translation>O programu</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.ui" line="76"/>
+        <location filename="../aboutdlg.ui" line="79"/>
         <source>License</source>
         <translation>Povolení</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="24"/>
+        <location filename="../aboutdlg.cpp" line="22"/>
         <source>CoolReaderNG is free open source e-book viewer based on crengine-ng library.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="26"/>
+        <location filename="../aboutdlg.cpp" line="23"/>
         <source>Source code is available at</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="28"/>
+        <location filename="../aboutdlg.cpp" line="24"/>
         <source>under the terms of GNU GPLv2 license.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="29"/>
+        <location filename="../aboutdlg.cpp" line="25"/>
         <source>It is a fork of the &apos;CoolReader&apos; program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="32"/>
+        <location filename="../aboutdlg.cpp" line="27"/>
         <source>Third party components used in crengine-ng:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="34"/>
+        <location filename="../aboutdlg.cpp" line="30"/>
         <source>FreeType - font rendering</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="37"/>
+        <location filename="../aboutdlg.cpp" line="33"/>
         <source>HarfBuzz - text shaping, font kerning, ligatures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="40"/>
+        <location filename="../aboutdlg.cpp" line="36"/>
         <source>ZLib - compressing library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="43"/>
+        <location filename="../aboutdlg.cpp" line="39"/>
         <source>ZSTD - compressing library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="46"/>
+        <location filename="../aboutdlg.cpp" line="42"/>
         <source>libpng - PNG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="49"/>
+        <location filename="../aboutdlg.cpp" line="45"/>
         <source>libjpeg - JPEG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="52"/>
+        <location filename="../aboutdlg.cpp" line="48"/>
         <source>FriBiDi - RTL writing support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="55"/>
+        <location filename="../aboutdlg.cpp" line="51"/>
         <source>libunibreak - line breaking and word breaking algorithms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="58"/>
+        <location filename="../aboutdlg.cpp" line="54"/>
         <source>utf8proc - for unicode string comparision</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="61"/>
+        <location filename="../aboutdlg.cpp" line="57"/>
         <source>NanoSVG - SVG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="64"/>
+        <location filename="../aboutdlg.cpp" line="60"/>
         <source>chmlib - chm format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="67"/>
+        <location filename="../aboutdlg.cpp" line="63"/>
         <source>antiword - Microsoft Word format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="69"/>
+        <location filename="../aboutdlg.cpp" line="65"/>
         <source>hyphman - AlReader hyphenation manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="70"/>
+        <location filename="../aboutdlg.cpp" line="66"/>
         <source>Hyphenation dictionaries - from KOReader</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="72"/>
+        <location filename="../aboutdlg.cpp" line="68"/>
         <source>Languages character set database by Fontconfig</source>
         <translation type="unfinished"></translation>
     </message>
@@ -179,45 +179,45 @@
 <context>
     <name>BookmarkListDialog</name>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="24"/>
+        <location filename="../bookmarklistdlg.cpp" line="26"/>
         <source>Bookmarks</source>
         <translation>Záložky</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="28"/>
+        <location filename="../bookmarklistdlg.cpp" line="30"/>
         <source>Position</source>
         <translation>Poloha</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="29"/>
+        <location filename="../bookmarklistdlg.cpp" line="30"/>
         <source>Type</source>
         <comment>bookmark type</comment>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="29"/>
+        <location filename="../bookmarklistdlg.cpp" line="30"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="30"/>
+        <location filename="../bookmarklistdlg.cpp" line="31"/>
         <source>Comment</source>
         <translation>Poznámka</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="67"/>
+        <location filename="../bookmarklistdlg.cpp" line="68"/>
         <source>P</source>
         <comment>Bookmark type first letter - Position</comment>
         <translation>P</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="69"/>
+        <location filename="../bookmarklistdlg.cpp" line="70"/>
         <source>C</source>
         <comment>Bookmark type first letter - Comment</comment>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="71"/>
+        <location filename="../bookmarklistdlg.cpp" line="72"/>
         <source>E</source>
         <comment>Bookmark type first letter - Correction/Edit</comment>
         <translation>E</translation>
@@ -276,22 +276,22 @@
 <context>
     <name>CR3View</name>
     <message>
-        <location filename="../cr3widget.cpp" line="508"/>
+        <location filename="../cr3widget.cpp" line="506"/>
         <source>Error while opening document </source>
         <translation>Chyba při otevírání dokumentu</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1503"/>
+        <location filename="../cr3widget.cpp" line="1499"/>
         <source>Loading: please wait...</source>
         <translation>Nahrává se: Počkejte, prosím...</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1157"/>
+        <location filename="../cr3widget.cpp" line="1154"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1158"/>
+        <location filename="../cr3widget.cpp" line="1155"/>
         <source>Font &quot;%1&quot; isn&apos;t compatible with language &quot;%2&quot;. Instead will be used fallback font.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -360,162 +360,162 @@
         <translation>Stav baterie</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="169"/>
+        <location filename="../filepropsdlg.cpp" line="168"/>
         <source>Current Time</source>
         <translation>Nynější čas</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="174"/>
+        <location filename="../filepropsdlg.cpp" line="173"/>
         <source>Current chapter</source>
         <translation>Nynější kapitola</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="177"/>
+        <location filename="../filepropsdlg.cpp" line="176"/>
         <source>Status</source>
         <translation>Stav</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="179"/>
+        <location filename="../filepropsdlg.cpp" line="178"/>
         <source>Archive name</source>
         <translation>Název archivu</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="180"/>
+        <location filename="../filepropsdlg.cpp" line="179"/>
         <source>Archive path</source>
         <translation>Cesta k archivu</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="181"/>
+        <location filename="../filepropsdlg.cpp" line="180"/>
         <source>Archive size</source>
         <translation>Velikost archivu</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="182"/>
+        <location filename="../filepropsdlg.cpp" line="181"/>
         <source>File name</source>
         <translation>Název souboru</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="183"/>
+        <location filename="../filepropsdlg.cpp" line="182"/>
         <source>File path</source>
         <translation>Cesta k souboru</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="184"/>
+        <location filename="../filepropsdlg.cpp" line="183"/>
         <source>File size</source>
         <translation>Velikost souboru</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="185"/>
+        <location filename="../filepropsdlg.cpp" line="184"/>
         <source>File format</source>
         <translation>Formát souboru</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="186"/>
+        <location filename="../filepropsdlg.cpp" line="185"/>
         <source>File info</source>
         <translation>Informace o souboru</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="188"/>
+        <location filename="../filepropsdlg.cpp" line="187"/>
         <source>Title</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="189"/>
+        <location filename="../filepropsdlg.cpp" line="188"/>
         <source>Author(s)</source>
         <translation>Autor</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="190"/>
+        <location filename="../filepropsdlg.cpp" line="189"/>
         <source>Series name</source>
         <translation>Název řady</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="191"/>
+        <location filename="../filepropsdlg.cpp" line="190"/>
         <source>Series number</source>
         <translation>Číslo v řadě</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="192"/>
+        <location filename="../filepropsdlg.cpp" line="191"/>
         <source>Date</source>
         <translation>Datum</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="193"/>
+        <location filename="../filepropsdlg.cpp" line="192"/>
         <source>Genres</source>
         <translation>Žánry</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="195"/>
+        <location filename="../filepropsdlg.cpp" line="194"/>
         <source>Translator</source>
         <translation>Překladatel</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="197"/>
+        <location filename="../filepropsdlg.cpp" line="195"/>
         <source>Book info</source>
         <translation>Informace o knize</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="199"/>
+        <location filename="../filepropsdlg.cpp" line="197"/>
         <source>Document author</source>
         <translation>Autor dokumentu</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="201"/>
+        <location filename="../filepropsdlg.cpp" line="198"/>
         <source>Document date</source>
         <translation>Čas vytvoření dokumentu</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="203"/>
+        <location filename="../filepropsdlg.cpp" line="199"/>
         <source>Document source URL</source>
         <translation>Adresa zdroje dokumentu (URL)</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="205"/>
+        <location filename="../filepropsdlg.cpp" line="200"/>
         <source>OCR by</source>
         <translation>Optické rozpoznání znaků</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="206"/>
+        <location filename="../filepropsdlg.cpp" line="201"/>
         <source>Document version</source>
         <translation>Verze dokumentu</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="208"/>
+        <location filename="../filepropsdlg.cpp" line="202"/>
         <source>Document info</source>
         <translation>Informace o dokumentu</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="210"/>
+        <location filename="../filepropsdlg.cpp" line="204"/>
         <source>Publication name</source>
         <translation>Název vydání</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="212"/>
+        <location filename="../filepropsdlg.cpp" line="205"/>
         <source>Publisher</source>
         <translation>Vydavatel</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="214"/>
+        <location filename="../filepropsdlg.cpp" line="206"/>
         <source>Publisher city</source>
         <translation>Město vydavatele</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="216"/>
+        <location filename="../filepropsdlg.cpp" line="207"/>
         <source>Publication year</source>
         <translation>Rok vydání</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="218"/>
+        <location filename="../filepropsdlg.cpp" line="208"/>
         <source>ISBN</source>
         <translation>ISBN</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="219"/>
+        <location filename="../filepropsdlg.cpp" line="209"/>
         <source>Publication info</source>
         <translation>Informace o vydání</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="221"/>
+        <location filename="../filepropsdlg.cpp" line="211"/>
         <source>Custom info</source>
         <translation>Vlastní informace</translation>
     </message>
@@ -525,7 +525,7 @@
         <translation>Dialog</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="194"/>
+        <location filename="../filepropsdlg.cpp" line="193"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
@@ -533,87 +533,87 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="193"/>
+        <location filename="../mainwindow.cpp" line="194"/>
         <source>Open book file</source>
         <translation>Otevřít soubor s knihou</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="152"/>
+        <location filename="../mainwindow.cpp" line="154"/>
         <source>Export document to</source>
         <translation>Vyvést dokument do</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="153"/>
+        <location filename="../mainwindow.cpp" line="154"/>
         <source>WOL book (*.wol)</source>
         <translation>Kniha WOL (*.wol)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="158"/>
+        <location filename="../mainwindow.cpp" line="159"/>
         <source>Export to WOL format</source>
         <translation>Vyvést do formátu WOL</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="195"/>
+        <location filename="../mainwindow.cpp" line="196"/>
         <source>All supported formats</source>
         <translation>Všechny podporované formáty</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="196"/>
+        <location filename="../mainwindow.cpp" line="197"/>
         <source>FB2 books</source>
         <translation>Knihy FB2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="198"/>
+        <location filename="../mainwindow.cpp" line="199"/>
         <source>Text files</source>
         <translation>Textové soubory</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="199"/>
+        <location filename="../mainwindow.cpp" line="200"/>
         <source>Rich text</source>
         <translation>Bohatý text</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="200"/>
+        <location filename="../mainwindow.cpp" line="201"/>
         <source>MS Word document</source>
         <translation>Dokument MS Word</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="202"/>
+        <location filename="../mainwindow.cpp" line="203"/>
         <source>HTML files</source>
         <translation>Soubory HTML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="203"/>
+        <location filename="../mainwindow.cpp" line="204"/>
         <source>EPUB files</source>
         <translation>Soubory EPUB</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="204"/>
+        <location filename="../mainwindow.cpp" line="205"/>
         <source>CHM files</source>
         <translation>Soubory CHM</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="205"/>
+        <location filename="../mainwindow.cpp" line="206"/>
         <source>MOBI files</source>
         <translation>Soubory MOBI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="206"/>
+        <location filename="../mainwindow.cpp" line="207"/>
         <source>PalmDOC files</source>
         <translation>Soubory PalmDOC</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="207"/>
+        <location filename="../mainwindow.cpp" line="208"/>
         <source>ZIP archives</source>
         <translation>Archivy ZIP</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="197"/>
+        <location filename="../mainwindow.cpp" line="198"/>
         <source>FB3 books</source>
         <translation type="unfinished">Knihy FB2 {3 ?}</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="201"/>
+        <location filename="../mainwindow.cpp" line="202"/>
         <source>Open Document files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1140,22 +1140,22 @@
 <context>
     <name>RecentBooksDlg</name>
     <message>
-        <location filename="../recentdlg.cpp" line="20"/>
+        <location filename="../recentdlg.cpp" line="23"/>
         <source>#</source>
         <translation>#</translation>
     </message>
     <message>
-        <location filename="../recentdlg.cpp" line="20"/>
+        <location filename="../recentdlg.cpp" line="23"/>
         <source>Author</source>
         <translation>Autor</translation>
     </message>
     <message>
-        <location filename="../recentdlg.cpp" line="21"/>
+        <location filename="../recentdlg.cpp" line="23"/>
         <source>Title</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../recentdlg.cpp" line="21"/>
+        <location filename="../recentdlg.cpp" line="23"/>
         <source>Filename</source>
         <translation>Název souboru</translation>
     </message>
@@ -1193,12 +1193,12 @@
 <context>
     <name>SearchDialog</name>
     <message>
-        <location filename="../searchdlg.cpp" line="124"/>
+        <location filename="../searchdlg.cpp" line="126"/>
         <source>Not found</source>
         <translation>Nenalezeno</translation>
     </message>
     <message>
-        <location filename="../searchdlg.cpp" line="125"/>
+        <location filename="../searchdlg.cpp" line="127"/>
         <source>Search pattern is not found in document</source>
         <translation>Hledaný vzor nebyl v dokumentu nalezen</translation>
     </message>
@@ -1241,35 +1241,35 @@
 <context>
     <name>SettingsDlg</name>
     <message>
-        <location filename="../settings.cpp" line="366"/>
+        <location filename="../settings.cpp" line="364"/>
         <source>[No hyphenation]</source>
         <translation>[Žádné dělení slov]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="368"/>
+        <location filename="../settings.cpp" line="366"/>
         <source>[Algorythmic hyphenation]</source>
         <translation>[Algoritmické dělení slov]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="391"/>
+        <location filename="../settings.cpp" line="389"/>
         <source>The quick brown fox jumps over the lazy dog. </source>
         <translation>Rychlá bílá liška hbitě skáče přes pomalého ježka. Ó, ú, á, é (zní obdivné výkřiky přihlížejících). </translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1025"/>
-        <location filename="../settings.cpp" line="939"/>
+        <location filename="../settings.cpp" line="933"/>
         <source>Text color</source>
         <translation>Barva textu</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1198"/>
-        <location filename="../settings.cpp" line="943"/>
+        <location filename="../settings.cpp" line="937"/>
         <source>Background color</source>
         <translation>Barva pozadí</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="468"/>
-        <location filename="../settings.cpp" line="947"/>
+        <location filename="../settings.cpp" line="941"/>
         <source>Page header text color</source>
         <translation>Barva textu záhlaví strany</translation>
     </message>
@@ -1379,8 +1379,8 @@
         <location filename="../settings.ui" line="849"/>
         <location filename="../settings.ui" line="903"/>
         <location filename="../settings.ui" line="957"/>
-        <location filename="../settings.cpp" line="519"/>
-        <location filename="../settings.cpp" line="560"/>
+        <location filename="../settings.cpp" line="516"/>
+        <location filename="../settings.cpp" line="557"/>
         <source>0</source>
         <translation>0</translation>
     </message>
@@ -1507,7 +1507,7 @@
     </message>
     <message>
         <location filename="../settings.ui" line="562"/>
-        <location filename="../settings.cpp" line="1183"/>
+        <location filename="../settings.cpp" line="1176"/>
         <source>Selection color</source>
         <translation>Barva výběru</translation>
     </message>
@@ -1542,7 +1542,7 @@
     </message>
     <message>
         <location filename="../settings.ui" line="745"/>
-        <location filename="../settings.cpp" line="748"/>
+        <location filename="../settings.cpp" line="743"/>
         <source>Underline</source>
         <translation>Podtržení</translation>
     </message>
@@ -1836,7 +1836,7 @@
     </message>
     <message>
         <location filename="../settings.ui" line="1786"/>
-        <location filename="../settings.cpp" line="398"/>
+        <location filename="../settings.cpp" line="396"/>
         <source>Default paragraph style</source>
         <translation>Styl výchozího odstavce</translation>
     </message>
@@ -1893,13 +1893,13 @@
     </message>
     <message>
         <location filename="../settings.ui" line="1917"/>
-        <location filename="../settings.cpp" line="472"/>
+        <location filename="../settings.cpp" line="470"/>
         <source>Left</source>
         <translation>Vlevo</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1927"/>
-        <location filename="../settings.cpp" line="472"/>
+        <location filename="../settings.cpp" line="470"/>
         <source>Right</source>
         <translation>Vpravo</translation>
     </message>
@@ -1919,375 +1919,375 @@
         <translation>Svislé zarovnání</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="399"/>
+        <location filename="../settings.cpp" line="397"/>
         <source>Title</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="400"/>
+        <location filename="../settings.cpp" line="398"/>
         <source>Subtitle</source>
         <translation>Podnázev</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="401"/>
+        <location filename="../settings.cpp" line="399"/>
         <source>Preformatted text</source>
         <translation>Předformátovaný text</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="402"/>
+        <location filename="../settings.cpp" line="400"/>
         <source>Link</source>
         <translation>Odkaz</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="403"/>
+        <location filename="../settings.cpp" line="401"/>
         <source>Cite / quotation</source>
         <translation>Citace</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="404"/>
+        <location filename="../settings.cpp" line="402"/>
         <source>Epigraph</source>
         <translation>Heslo</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="405"/>
+        <location filename="../settings.cpp" line="403"/>
         <source>Poem</source>
         <translation>Báseň</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="406"/>
+        <location filename="../settings.cpp" line="404"/>
         <source>Text author</source>
         <translation>Autor textu</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="407"/>
+        <location filename="../settings.cpp" line="405"/>
         <source>Footnote link</source>
         <translation>Odkaz na poznámku pod čarou</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="408"/>
+        <location filename="../settings.cpp" line="406"/>
         <source>Footnote</source>
         <translation>Poznámka pod čarou</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="409"/>
+        <location filename="../settings.cpp" line="407"/>
         <source>Footnote title</source>
         <translation>Název poznámky pod čarou</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="410"/>
+        <location filename="../settings.cpp" line="408"/>
         <source>Annotation</source>
         <translation>Vysvětlivka</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="472"/>
-        <location filename="../settings.cpp" line="488"/>
-        <location filename="../settings.cpp" line="518"/>
-        <location filename="../settings.cpp" line="559"/>
-        <location filename="../settings.cpp" line="594"/>
-        <location filename="../settings.cpp" line="616"/>
-        <location filename="../settings.cpp" line="635"/>
-        <location filename="../settings.cpp" line="681"/>
-        <location filename="../settings.cpp" line="746"/>
-        <location filename="../settings.cpp" line="764"/>
+        <location filename="../settings.cpp" line="470"/>
+        <location filename="../settings.cpp" line="486"/>
+        <location filename="../settings.cpp" line="515"/>
+        <location filename="../settings.cpp" line="556"/>
+        <location filename="../settings.cpp" line="589"/>
+        <location filename="../settings.cpp" line="611"/>
+        <location filename="../settings.cpp" line="630"/>
+        <location filename="../settings.cpp" line="676"/>
+        <location filename="../settings.cpp" line="741"/>
+        <location filename="../settings.cpp" line="759"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="472"/>
+        <location filename="../settings.cpp" line="470"/>
         <source>Justify</source>
         <translation>Zarovnat do bloku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="472"/>
+        <location filename="../settings.cpp" line="470"/>
         <source>Center</source>
         <translation>Zarovnat na střed</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="488"/>
+        <location filename="../settings.cpp" line="486"/>
         <source>No indent</source>
         <translation>Bez odsazení</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="488"/>
+        <location filename="../settings.cpp" line="486"/>
         <source>Small Indent</source>
         <translation>Malé odsazení</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="489"/>
+        <location filename="../settings.cpp" line="486"/>
         <source>Big Indent</source>
         <translation>Velké odsazení</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="489"/>
+        <location filename="../settings.cpp" line="486"/>
         <source>Small Outdent</source>
         <translation>Malé předsazení</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="489"/>
+        <location filename="../settings.cpp" line="486"/>
         <source>Big Outdent</source>
         <translation>Velké předsazení</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="520"/>
+        <location filename="../settings.cpp" line="517"/>
         <source>20% of line height</source>
         <translation>20 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="521"/>
+        <location filename="../settings.cpp" line="518"/>
         <source>30% of line height</source>
         <translation>30 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="522"/>
-        <location filename="../settings.cpp" line="561"/>
+        <location filename="../settings.cpp" line="519"/>
+        <location filename="../settings.cpp" line="558"/>
         <source>50% of line height</source>
         <translation>50 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="523"/>
-        <location filename="../settings.cpp" line="562"/>
+        <location filename="../settings.cpp" line="520"/>
+        <location filename="../settings.cpp" line="559"/>
         <source>100% of line height</source>
         <translation>100 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="524"/>
-        <location filename="../settings.cpp" line="563"/>
+        <location filename="../settings.cpp" line="521"/>
+        <location filename="../settings.cpp" line="560"/>
         <source>150% of line height</source>
         <translation>150 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="564"/>
+        <location filename="../settings.cpp" line="561"/>
         <source>200% of line height</source>
         <translation>200 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="565"/>
+        <location filename="../settings.cpp" line="562"/>
         <source>400% of line height</source>
         <translation>400 % výšky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="566"/>
+        <location filename="../settings.cpp" line="563"/>
         <source>5% of line width</source>
         <translation>5 % šířky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="567"/>
+        <location filename="../settings.cpp" line="564"/>
         <source>10% of line width</source>
         <translation>10 % šířky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="568"/>
+        <location filename="../settings.cpp" line="565"/>
         <source>15% of line width</source>
         <translation>15 % šířky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="569"/>
+        <location filename="../settings.cpp" line="566"/>
         <source>20% of line width</source>
         <translation>20 % šířky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="570"/>
+        <location filename="../settings.cpp" line="567"/>
         <source>30% of line width</source>
         <translation>30 % šířky řádku</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="595"/>
-        <location filename="../settings.cpp" line="636"/>
+        <location filename="../settings.cpp" line="590"/>
+        <location filename="../settings.cpp" line="631"/>
         <source>Normal</source>
         <translation>Obvyklé</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="596"/>
+        <location filename="../settings.cpp" line="591"/>
         <source>Bold</source>
         <translation>Tučné</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="597"/>
+        <location filename="../settings.cpp" line="592"/>
         <source>Bolder</source>
         <translation>Tučnější</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="598"/>
+        <location filename="../settings.cpp" line="593"/>
         <source>Lighter</source>
         <translation>Lehčí</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="617"/>
+        <location filename="../settings.cpp" line="612"/>
         <source>Increase: 110%</source>
         <translation>Zvětšit: 110 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="618"/>
+        <location filename="../settings.cpp" line="613"/>
         <source>Increase: 120%</source>
         <translation>Zvětšit: 120 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="619"/>
+        <location filename="../settings.cpp" line="614"/>
         <source>Increase: 150%</source>
         <translation>Zvětšit: 150 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="620"/>
+        <location filename="../settings.cpp" line="615"/>
         <source>Decrease: 90%</source>
         <translation>Zmenšit: 90 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="621"/>
+        <location filename="../settings.cpp" line="616"/>
         <source>Decrease: 80%</source>
         <translation>Zmenšit: 80 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="622"/>
+        <location filename="../settings.cpp" line="617"/>
         <source>Decrease: 70%</source>
         <translation>Zmenšit: 70 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="623"/>
+        <location filename="../settings.cpp" line="618"/>
         <source>Decrease: 60%</source>
         <translation>Zmenšit: 60 %</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="637"/>
+        <location filename="../settings.cpp" line="632"/>
         <source>Italic</source>
         <translation>Kurzíva</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="646"/>
+        <location filename="../settings.cpp" line="641"/>
         <source>[Default Sans Serif]</source>
         <translation>[Výchozí bezpatkové]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="648"/>
+        <location filename="../settings.cpp" line="643"/>
         <source>[Default Serif]</source>
         <translation>[Výchozí patkové]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="650"/>
+        <location filename="../settings.cpp" line="645"/>
         <source>[Default Monospace]</source>
         <translation>[Výchozí strojové s pevnou šířkou]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="682"/>
+        <location filename="../settings.cpp" line="677"/>
         <source>Black</source>
         <translation>Černá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="683"/>
+        <location filename="../settings.cpp" line="678"/>
         <source>Green</source>
         <translation>Zelená</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="684"/>
+        <location filename="../settings.cpp" line="679"/>
         <source>Silver</source>
         <translation>Stříbrná</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="685"/>
+        <location filename="../settings.cpp" line="680"/>
         <source>Lime</source>
         <translation>Světle zelená</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="205"/>
-        <location filename="../settings.cpp" line="212"/>
-        <location filename="../settings.cpp" line="686"/>
+        <location filename="../settings.cpp" line="206"/>
+        <location filename="../settings.cpp" line="213"/>
+        <location filename="../settings.cpp" line="681"/>
         <source>Gray</source>
         <translation>Šedá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="687"/>
+        <location filename="../settings.cpp" line="682"/>
         <source>Olive</source>
         <translation>Olivově zelená</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="688"/>
+        <location filename="../settings.cpp" line="683"/>
         <source>White</source>
         <translation>Bílá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="689"/>
+        <location filename="../settings.cpp" line="684"/>
         <source>Yellow</source>
         <translation>Žlutá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="690"/>
+        <location filename="../settings.cpp" line="685"/>
         <source>Maroon</source>
         <translation>Kaštanově hnědá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="691"/>
+        <location filename="../settings.cpp" line="686"/>
         <source>Navy</source>
         <translation>Tmavomodrá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="692"/>
+        <location filename="../settings.cpp" line="687"/>
         <source>Red</source>
         <translation>Červená</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="693"/>
+        <location filename="../settings.cpp" line="688"/>
         <source>Blue</source>
         <translation>Modrá</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="694"/>
+        <location filename="../settings.cpp" line="689"/>
         <source>Purple</source>
         <translation>Purpurová</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="695"/>
+        <location filename="../settings.cpp" line="690"/>
         <source>Teal</source>
         <translation>Tmavě modrozelená</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="696"/>
+        <location filename="../settings.cpp" line="691"/>
         <source>Fuchsia</source>
         <translation>Červenofialová barva</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="697"/>
+        <location filename="../settings.cpp" line="692"/>
         <source>Aqua</source>
         <translation>Modrozelená</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="327"/>
-        <location filename="../settings.cpp" line="204"/>
-        <location filename="../settings.cpp" line="211"/>
-        <location filename="../settings.cpp" line="747"/>
+        <location filename="../settings.cpp" line="205"/>
+        <location filename="../settings.cpp" line="212"/>
+        <location filename="../settings.cpp" line="742"/>
         <source>None</source>
         <translation>Žádné</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="749"/>
+        <location filename="../settings.cpp" line="744"/>
         <source>Line through</source>
         <translation>Přeškrtnutí</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="750"/>
+        <location filename="../settings.cpp" line="745"/>
         <source>Overline</source>
         <translation>Nadtržení</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="765"/>
+        <location filename="../settings.cpp" line="760"/>
         <source>Baseline</source>
         <translation>Základní čára</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="766"/>
+        <location filename="../settings.cpp" line="761"/>
         <source>Subscript</source>
         <translation>Dolní index</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="767"/>
+        <location filename="../settings.cpp" line="762"/>
         <source>Superscript</source>
         <translation>Horní index</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1187"/>
+        <location filename="../settings.cpp" line="1180"/>
         <source>Comment bookmark color</source>
         <translation>Barva záložky poznámky</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1191"/>
+        <location filename="../settings.cpp" line="1184"/>
         <source>Correction bookmark color</source>
         <translation>Barva záložky opravy</translation>
     </message>
@@ -2408,17 +2408,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="176"/>
+        <location filename="../settings.cpp" line="177"/>
         <source>Simple (FreeType only, fastest)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="177"/>
+        <location filename="../settings.cpp" line="178"/>
         <source>Light (HarfBuzz without ligatures)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="178"/>
+        <location filename="../settings.cpp" line="179"/>
         <source>Full (HarfBuzz with ligatures)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2443,32 +2443,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="206"/>
+        <location filename="../settings.cpp" line="207"/>
         <source>LCD (RGB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="207"/>
+        <location filename="../settings.cpp" line="208"/>
         <source>LCD (BGR)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="208"/>
+        <location filename="../settings.cpp" line="209"/>
         <source>LCD (RGB) vertical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="209"/>
+        <location filename="../settings.cpp" line="210"/>
         <source>LCD (BGR) vertical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1051"/>
+        <location filename="../settings.cpp" line="1044"/>
         <source>synthetic*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1053"/>
+        <location filename="../settings.cpp" line="1046"/>
         <source>synthetic</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2481,12 +2481,12 @@
 <context>
     <name>TocDlg</name>
     <message>
-        <location filename="../tocdlg.cpp" line="57"/>
+        <location filename="../tocdlg.cpp" line="54"/>
         <source>Title</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../tocdlg.cpp" line="57"/>
+        <location filename="../tocdlg.cpp" line="54"/>
         <source>Page</source>
         <translation>Strana</translation>
     </message>
@@ -2534,7 +2534,7 @@
 <context>
     <name>crqtutils</name>
     <message>
-        <location filename="../crqtutil.cpp" line="156"/>
+        <location filename="../crqtutil.cpp" line="155"/>
         <source>Undetermined</source>
         <translation type="unfinished"></translation>
     </message>
