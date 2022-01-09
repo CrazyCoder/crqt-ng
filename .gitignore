@@ -1,0 +1,10 @@
+*.*~
+.DS_*
+._*
+qtcreator-build
+CMakeLists.txt.user
+CMakeLists.txt.user.*
+*~
+.directory
+*.orig
+*.rej
