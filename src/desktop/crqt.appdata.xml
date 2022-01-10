@@ -21,10 +21,5 @@
       Book formatting is customizable using CSS files.
     </p>
   </description>
-  <url type="homepage">https://github.com/buggins/coolreader</url>
-  <screenshots>
-    <screenshot type="default">
-      <image>https://gist.github.com/avsej/eaea5ae3d5ed045261e9f36d2c9964b5/raw/d251fab97400a8d708c01d51018ca7925e75e971/screenshot-2019-02-24_10-09-26.1550992166.png</image>
-    </screenshot>
-  </screenshots>
+  <url type="homepage">https://gitlab.com/coolreader-ng/crqt-ng</url>
 </component>
