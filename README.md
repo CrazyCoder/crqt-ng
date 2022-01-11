@@ -5,7 +5,7 @@ crqt-ng - cross-platform open source e-book reader using crengine-ng. It is a fo
 crqt-ng is an e-book reader.
 In fact, it is a [Qt](https://www.qt.io/) frontend for the [crengine-ng](https://gitlab.com/coolreader-ng/crengine-ng) library.
 
-Supported plarforms: Windows, Linux, MacOS. Basically all platforms that are supported by crengine-ng, Qt and cmake.
+Supported platforms: Windows, Linux, MacOS. Basically all platforms that are supported by crengine-ng, Qt and cmake.
 
 Supported e-book formats: fb2, fb3 (incomplete), epub (non-DRM), doc, docx, odt, rtf, pdb, mobi (non-DRM), txt, html, chm, tcr.
 
@@ -30,7 +30,7 @@ TODO: add screenshots...
 ## Installation
 1. To install the program, make sure that all dependencies are installed: Qt framework and crengine-ng library.
 
-It is best to use your Linux distribution's package manager to install Qt. Otherwise, download the installation package from https://www.qt.io/. When installing using your package manager, remember to install the "-dev" variant of the package, for example for Ubuntu use the following command:
+   It is best to use your Linux distribution's package manager to install Qt. Otherwise, download the installation package from https://www.qt.io/. When installing using your package manager, remember to install the "-dev" variant of the package, for example for Ubuntu use the following command:
 ```
 $ sudo apt install qtbase5-dev qttools5-dev
 ```
@@ -57,8 +57,9 @@ TODO: write this guide...
 
 ## Authors and acknowledgment
 The list of contributors can be found in the AUTHORS file.
+
 This list of authors is obtained from git history using the script tools/getauthors/getauthos.sh.
-The first significant item in the git log is 'Mon Nov 9 16:47:42 2009 +0300', but the project started around 2000, so this list may not be complete.
+The first significant item in the git log is 'Mon Nov 9 16:47:42 2009 +0300', but the project started around 2000, so this list can be incomplete.
 
 ## License
 This project is released under the [GNU General Public License Version 2](https://opensource.org/licenses/GPL-2.0). See LICENSE file.
