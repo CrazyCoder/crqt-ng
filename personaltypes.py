@@ -65,7 +65,8 @@ def qdump__lString8(d, value):
     length = pchunk['len']
     size = pchunk['size']
     refCount = pchunk['refCount']
-    buf8 = pchunk['buf8']
+    buf = pchunk['buf']
+    buf8 = buf['_8'];
     length_int = length.integer()
     size_int = size.integer()
     d.check(length_int >= 0 and size_int >= 0)
@@ -88,7 +89,8 @@ def qdump__lString16(d, value):
     length = pchunk['len']
     size = pchunk['size']
     refCount = pchunk['refCount']
-    buf16 = pchunk['buf16']
+    buf = pchunk['buf']
+    buf16 = pchunk['_16']
     char16Type = d.createType('char16_t')
     length_int = length.integer()
     size_int = size.integer()
@@ -111,7 +113,8 @@ def qdump__lString32(d, value):
     length = pchunk['len']
     size = pchunk['size']
     refCount = pchunk['refCount']
-    buf32 = pchunk['buf32']
+    buf = pchunk['buf']
+    buf32 = buf['_32']
     char32Type = d.createType('char32_t')
     length_int = length.integer()
     size_int = size.integer()
