@@ -1031,7 +1031,7 @@ void CR3View::mouseMoveEvent(QMouseEvent* event) {
     //bool left = (event->buttons() & Qt::LeftButton);
     //bool right = (event->buttons() & Qt::RightButton);
     //bool mid = (event->buttons() & Qt::MidButton);
-    lvPoint pt(event->pos().x(), event->pos().y());
+    lvPoint pt(event->pos().x() * _dpr, event->pos().y() * _dpr);
     ldomXPointer p = _docview->getNodeByPoint(pt);
     lString32 path;
     lString32 href;
@@ -1176,7 +1176,7 @@ void CR3View::mousePressEvent(QMouseEvent* event) {
 #else
     bool mid = event->button() == Qt::MidButton;
 #endif
-    lvPoint pt(event->pos().x(), event->pos().y());
+    lvPoint pt(event->pos().x() * _dpr, event->pos().y() * _dpr);
     ldomXPointer p = _docview->getNodeByPoint(pt);
     // test imageByPoint
     LVImageSourceRef img = _docview->getImageByPoint(pt);
@@ -1219,7 +1219,7 @@ void CR3View::mouseReleaseEvent(QMouseEvent* event) {
     bool left = event->button() == Qt::LeftButton;
     //bool right = event->button() == Qt::RightButton;
     //bool mid = event->button() == Qt::MidButton;
-    lvPoint pt(event->pos().x(), event->pos().y());
+    lvPoint pt(event->pos().x() * _dpr, event->pos().y() * _dpr);
     ldomXPointer p = _docview->getNodeByPoint(pt);
     lString32 path;
     lString32 href;
