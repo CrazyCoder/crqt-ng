@@ -883,6 +883,7 @@ void SettingsDlg::on_cbMargins_currentIndexChanged(int index) {
 void SettingsDlg::setBackground(QWidget* wnd, QColor cl) {
     QPalette pal(wnd->palette());
     pal.setColor(QPalette::Window, cl);
+    pal.setColor(QPalette::Base, cl);
     wnd->setPalette(pal);
 }
 

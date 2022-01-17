@@ -1257,19 +1257,19 @@
     </message>
     <message>
         <location filename="../settings.ui" line="1025"/>
-        <location filename="../settings.cpp" line="933"/>
+        <location filename="../settings.cpp" line="934"/>
         <source>Text color</source>
         <translation>Колір тексту</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1198"/>
-        <location filename="../settings.cpp" line="937"/>
+        <location filename="../settings.cpp" line="938"/>
         <source>Background color</source>
         <translation>Колір тла</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="468"/>
-        <location filename="../settings.cpp" line="941"/>
+        <location filename="../settings.cpp" line="942"/>
         <source>Page header text color</source>
         <translation>Колір тексту заголовку сторінки</translation>
     </message>
@@ -2180,17 +2180,17 @@
     </message>
     <message>
         <location filename="../settings.ui" line="562"/>
-        <location filename="../settings.cpp" line="1176"/>
+        <location filename="../settings.cpp" line="1177"/>
         <source>Selection color</source>
         <translation>Колір виділення</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1180"/>
+        <location filename="../settings.cpp" line="1181"/>
         <source>Comment bookmark color</source>
         <translation>Колір закладки-коментаря</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1184"/>
+        <location filename="../settings.cpp" line="1185"/>
         <source>Correction bookmark color</source>
         <translation>Колір закладки-поправки</translation>
     </message>
@@ -2463,12 +2463,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1044"/>
+        <location filename="../settings.cpp" line="1045"/>
         <source>synthetic*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1046"/>
+        <location filename="../settings.cpp" line="1047"/>
         <source>synthetic</source>
         <translation type="unfinished"></translation>
     </message>
