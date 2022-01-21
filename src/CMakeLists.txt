@@ -72,11 +72,11 @@ else()
   add_executable(crqt ${SRC_LIST} ${CRQT_RCS} ${QM_FILES})
 endif (WIN32)
 
-if(${CMAKE_BUILD_TYPE} STREQUAL Debug)
+if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
   if (CMAKE_HOST_UNIX)
     configure_file(valgrind_check.sh.cmake ${CMAKE_CURRENT_BINARY_DIR}/valgrind_check.sh)
   endif(CMAKE_HOST_UNIX)
-endif(${CMAKE_BUILD_TYPE} STREQUAL Debug)
+endif("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
 
 if(WIN32)
 if(CMAKE_GENERATOR MATCHES "Visual Studio.*")
