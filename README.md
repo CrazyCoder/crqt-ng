@@ -42,7 +42,7 @@ $ pacman -S mingw-w64-x86_64-qt5
 
 To install crengine-ng follow the instructions https://gitlab.com/coolreader-ng/crengine-ng#installation
 
-2. Compile the program using cmake, for example:
+2. Compile the program using cmake, for example (we are already in the top source directory):
 ```
 $ mkdir ../crqt-ng-build
 $ cd ../crqt-ng-build
