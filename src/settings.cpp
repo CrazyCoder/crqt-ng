@@ -12,6 +12,7 @@
 
 #include "settings.h"
 #include "ui_settings.h"
+#include "sampleview.h"
 #include "cr3widget.h"
 #include "crqtutil.h"
 #include "fallbackfontsdialog.h"
@@ -152,6 +153,7 @@ static int interline_spaces[] = { 75, 80, 85, 90, 95, 100, 110, 120, 140, 150 };
 
 SettingsDlg::SettingsDlg(QWidget* parent, CR3View* docView)
         : QDialog(parent)
+        , m_sample(NULL)
         , m_ui(new Ui::SettingsDlg)
         , m_docview(docView) {
     initDone = false;
@@ -395,13 +397,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, CR3View* docView)
         m_ui->cbEnableHyph->setVisible(embedded_lang);
     }
 
-    m_ui->crSample->setOptions(m_props);
-    m_ui->crSample->getDocView()->setShowCover(false);
-    m_ui->crSample->getDocView()->setViewMode(DVM_SCROLL, 1);
-    QString testPhrase = tr("The quick brown fox jumps over the lazy dog. ");
-    m_ui->crSample->getDocView()->createDefaultDocument(lString32::empty_str,
-                                                        qt2cr(testPhrase + testPhrase + testPhrase));
-
+    initSampleWindow();
     updateStyleSample();
 
     m_styleNames.clear();
@@ -447,6 +443,26 @@ void SettingsDlg::changeEvent(QEvent* e) {
         default:
             break;
     }
+}
+
+void SettingsDlg::showEvent(QShowEvent* event) {
+    QDialog::showEvent(event);
+    if (m_sample) {
+        m_sample->setVisible(true);
+        m_sample->updatePositionForParent();
+    }
+}
+
+void SettingsDlg::hideEvent(QHideEvent* event) {
+    QDialog::hideEvent(event);
+    if (m_sample)
+        m_sample->setVisible(false);
+}
+
+void SettingsDlg::moveEvent(QMoveEvent* event) {
+    QDialog::moveEvent(event);
+    if (m_sample)
+        m_sample->updatePositionForParent();
 }
 
 void SettingsDlg::on_buttonBox_accepted() {
@@ -899,6 +915,20 @@ void SettingsDlg::setBackground(QWidget* wnd, QColor cl) {
     wnd->setPalette(pal);
 }
 
+void SettingsDlg::initSampleWindow() {
+    if (NULL == m_sample) {
+        m_sample = new SampleView(this);
+        connect(m_sample, SIGNAL(destroyed(QObject*)), this, SLOT(sampleview_destroyed(QObject*)));
+    }
+    CR3View* creview = m_sample->creview();
+    creview->setOptions(m_props);
+    LVDocView* sampledocview = creview->getDocView();
+    sampledocview->setShowCover(false);
+    sampledocview->setViewMode(DVM_SCROLL, 1);
+    QString testPhrase = tr("The quick brown fox jumps over the lazy dog. ");
+    sampledocview->createDefaultDocument(lString32::empty_str, qt2cr(testPhrase + testPhrase + testPhrase));
+}
+
 void SettingsDlg::updateStyleSample() {
     QColor txtColor = getColor(PROP_FONT_COLOR, 0x000000);
     QColor bgColor = getColor(PROP_BACKGROUND_COLOR, 0xFFFFFF);
@@ -913,14 +943,24 @@ void SettingsDlg::updateStyleSample() {
     setBackground(m_ui->frmCommentColor, commentColor);
     setBackground(m_ui->frmCorrectionColor, correctionColor);
 
-    m_ui->crSample->setOptions(m_props);
-    m_ui->crSample->getDocView()->setShowCover(false);
-    m_ui->crSample->getDocView()->setViewMode(DVM_SCROLL, 1);
+    if (NULL == m_sample) {
+        initSampleWindow();
+        m_sample->show();
+    }
+    CR3View* sample = m_sample->creview();
+    sample->setOptions(m_props);
+    sample->getDocView()->setShowCover(false);
+    sample->getDocView()->setViewMode(DVM_SCROLL, 1);
 
-    m_ui->crSample->getDocView()->getPageImage(0);
+    sample->getDocView()->getPageImage(0);
 
     if (!m_props->getBoolDef(PROP_TEXTLANG_EMBEDDED_LANGS_ENABLED, true))
         HyphMan::getDictList()->activate(qt2cr(m_oldHyph));
+}
+
+void SettingsDlg::sampleview_destroyed(QObject* obj) {
+    disconnect(m_sample, SIGNAL(destroyed(QObject*)));
+    m_sample = NULL;
 }
 
 QColor SettingsDlg::getColor(const char* optionName, unsigned def) {

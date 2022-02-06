@@ -126,6 +126,8 @@ struct StyleItem
 };
 
 class CR3View;
+class SampleView;
+
 class SettingsDlg: public QDialog
 {
     Q_OBJECT
@@ -137,6 +139,9 @@ public:
 protected:
     explicit SettingsDlg(QWidget* parent, CR3View* docView);
     virtual void changeEvent(QEvent* e);
+    virtual void showEvent(QShowEvent* event);
+    virtual void hideEvent(QHideEvent* event);
+    virtual void moveEvent(QMoveEvent* event);
 
     void setCheck(const char* optionName, int checkState);
     void optionToUi(const char* optionName, QCheckBox* cb);
@@ -155,8 +160,10 @@ protected:
     void colorDialog(const char* optionName, QString title);
 
     void setBackground(QWidget* wnd, QColor cl);
+    void initSampleWindow();
     void updateStyleSample();
 private:
+    SampleView* m_sample;
     Ui::SettingsDlg* m_ui;
     CR3View* m_docview;
     PropsRef m_props;
@@ -182,6 +189,8 @@ private:
     QStringList m_styleNames;
 
 private slots:
+    void sampleview_destroyed(QObject* obj);
+
     void on_cbPageSkin_currentIndexChanged(int index);
     void on_cbTxtPreFormatted_stateChanged(int);
     void on_cbTxtPreFormatted_toggled(bool checked);

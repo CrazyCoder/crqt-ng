@@ -26,6 +26,7 @@ set(SRC_LIST
   mainwindow.cpp
   settings.ui
   settings.cpp
+  sampleview.cpp
   wolexportdlg.ui
   wolexportdlg.cpp
   exportprogressdlg.ui
