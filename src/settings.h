@@ -197,6 +197,7 @@ private slots:
     void on_cbStartupAction_currentIndexChanged(int index);
     void on_cbHyphenation_currentIndexChanged(int index);
     void on_cbInterlineSpace_currentIndexChanged(int index);
+    void on_cbMinSpaceWidth_currentIndexChanged(int index);
     void on_cbTextFontSize_currentTextChanged(QString);
     void on_cbTextFontFace_currentTextChanged(QString);
     void on_cbTitleFontSize_currentTextChanged(QString);
@@ -207,6 +208,9 @@ private slots:
     void on_btnTextColor_clicked();
     void on_cbMargins_currentIndexChanged(int index);
     void on_cbShowFootNotes_stateChanged(int s);
+    void on_cbShowPageNumber_stateChanged(int s);
+    void on_cbShowPageCount_stateChanged(int s);
+    void on_cbShowPositionPercent_stateChanged(int s);
     void on_cbShowBattery_stateChanged(int s);
     void on_cbShowClock_stateChanged(int s);
     void on_cbShowBookName_stateChanged(int s);

@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>433</width>
-    <height>744</height>
+    <height>812</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -363,6 +363,87 @@
             <widget class="QCheckBox" name="cbShowBookName">
              <property name="text">
               <string>Book name</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_15">
+           <item>
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Maximum</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>30</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbShowPageNumber">
+             <property name="text">
+              <string>Page number</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_16">
+           <item>
+            <spacer name="horizontalSpacer_7">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Maximum</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>30</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbShowPageCount">
+             <property name="text">
+              <string>Page count</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_19">
+           <item>
+            <spacer name="horizontalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Maximum</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>30</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbShowPositionPercent">
+             <property name="text">
+              <string>Position percent</string>
              </property>
             </widget>
            </item>
@@ -1622,89 +1703,99 @@
          <item row="15" column="1">
           <widget class="QComboBox" name="cbInterlineSpace"/>
          </item>
-         <item row="16" column="0">
+         <item row="17" column="0">
           <widget class="QLabel" name="label_43">
            <property name="text">
             <string>Font kerning</string>
            </property>
           </widget>
          </item>
-         <item row="16" column="1">
+         <item row="17" column="1">
           <widget class="QCheckBox" name="cbFontKerning">
            <property name="text">
             <string>Enable font kerning</string>
            </property>
           </widget>
          </item>
-         <item row="17" column="0">
+         <item row="18" column="0">
           <widget class="QLabel" name="label_18">
            <property name="text">
             <string>Floating punctuation</string>
            </property>
           </widget>
          </item>
-         <item row="17" column="1">
+         <item row="18" column="1">
           <widget class="QCheckBox" name="cbFloatingPunctuation">
            <property name="text">
             <string>Enable floating punctuation</string>
            </property>
           </widget>
          </item>
-         <item row="18" column="0">
+         <item row="19" column="0">
           <widget class="QLabel" name="label_38">
            <property name="text">
             <string>Internal CSS</string>
            </property>
           </widget>
          </item>
-         <item row="18" column="1">
+         <item row="19" column="1">
           <widget class="QCheckBox" name="cbEnableDocumentStyles">
            <property name="text">
             <string>Enable document internal styles</string>
            </property>
           </widget>
          </item>
-         <item row="19" column="0">
+         <item row="20" column="0">
           <widget class="QLabel" name="label_37">
            <property name="text">
             <string>.EPUB</string>
            </property>
           </widget>
          </item>
-         <item row="19" column="1">
+         <item row="20" column="1">
           <widget class="QCheckBox" name="cbEnableEmbeddedFonts">
            <property name="text">
             <string>Enable document embedded fonts</string>
            </property>
           </widget>
          </item>
-         <item row="20" column="0">
+         <item row="21" column="0">
           <widget class="QLabel" name="label_49">
            <property name="text">
             <string>Margins redefine</string>
            </property>
           </widget>
          </item>
-         <item row="20" column="1">
+         <item row="21" column="1">
           <widget class="QCheckBox" name="cbIgnoreDocumentMargins">
            <property name="text">
             <string>Ignore document margins</string>
            </property>
           </widget>
          </item>
-         <item row="21" column="0">
+         <item row="22" column="0">
           <widget class="QLabel" name="label_17">
            <property name="text">
             <string>.TXT files</string>
            </property>
           </widget>
          </item>
-         <item row="21" column="1">
+         <item row="22" column="1">
           <widget class="QCheckBox" name="cbTxtPreFormatted">
            <property name="text">
             <string>Disable automatic formatting</string>
            </property>
           </widget>
+         </item>
+         <item row="16" column="0">
+          <widget class="QLabel" name="label_15">
+           <property name="text">
+            <string>Min space width</string>
+           </property>
+          </widget>
+         </item>
+         <item row="16" column="1">
+          <widget class="QComboBox" name="cbMinSpaceWidth"/>
          </item>
         </layout>
        </item>
@@ -1736,8 +1827,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>389</width>
-              <height>614</height>
+              <width>381</width>
+              <height>668</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -1936,6 +2027,9 @@
   <tabstop>cbViewMode</tabstop>
   <tabstop>cbShowPageHeader</tabstop>
   <tabstop>cbShowBookName</tabstop>
+  <tabstop>cbShowPageNumber</tabstop>
+  <tabstop>cbShowPageCount</tabstop>
+  <tabstop>cbShowPositionPercent</tabstop>
   <tabstop>cbShowClock</tabstop>
   <tabstop>cbShowBattery</tabstop>
   <tabstop>btnHeaderTextColor</tabstop>
@@ -1971,6 +2065,7 @@
   <tabstop>cbFontHinting</tabstop>
   <tabstop>cbFontShaping</tabstop>
   <tabstop>cbInterlineSpace</tabstop>
+  <tabstop>cbMinSpaceWidth</tabstop>
   <tabstop>cbFontKerning</tabstop>
   <tabstop>cbFloatingPunctuation</tabstop>
   <tabstop>cbEnableDocumentStyles</tabstop>

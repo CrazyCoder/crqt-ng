@@ -54,6 +54,10 @@ static int aa_variants[] = { font_aa_none, font_aa_gray };
 #endif
 #define AA_VARIANTS_SZ (sizeof(aa_variants) / sizeof(int))
 
+static int interline_spaces[] = { 75, 80, 85, 90, 95, 100, 110, 120, 140, 150 };
+
+static int minspace_widths[] = { 50, 60, 70, 80, 90, 100 };
+
 static bool initDone = false;
 static bool suppressOnChange = false;
 
@@ -149,8 +153,6 @@ static const char* styleNames[] = {
 };
 // clang-format on
 
-static int interline_spaces[] = { 75, 80, 85, 90, 95, 100, 110, 120, 140, 150 };
-
 SettingsDlg::SettingsDlg(QWidget* parent, CR3View* docView)
         : QDialog(parent)
         , m_sample(NULL)
@@ -235,6 +237,9 @@ SettingsDlg::SettingsDlg(QWidget* parent, CR3View* docView)
     optionToUi(PROP_WINDOW_SHOW_STATUSBAR, m_ui->cbWindowShowStatusBar);
 
     optionToUi(PROP_FOOTNOTES, m_ui->cbShowFootNotes);
+    optionToUi(PROP_SHOW_PAGE_NUMBER, m_ui->cbShowPageNumber);
+    optionToUi(PROP_SHOW_PAGE_COUNT, m_ui->cbShowPageCount);
+    optionToUi(PROP_SHOW_POS_PERCENT, m_ui->cbShowPositionPercent);
     optionToUi(PROP_SHOW_BATTERY, m_ui->cbShowBattery);
     optionToUi(PROP_SHOW_TIME, m_ui->cbShowClock);
     optionToUi(PROP_SHOW_TITLE, m_ui->cbShowBookName);
@@ -264,6 +269,9 @@ SettingsDlg::SettingsDlg(QWidget* parent, CR3View* docView)
     optionToUiIndex(PROP_STATUS_LINE, m_ui->cbShowPageHeader);
 
     bool b = m_props->getIntDef(PROP_STATUS_LINE, 0) > 0;
+    m_ui->cbShowPageNumber->setEnabled(b);
+    m_ui->cbShowPageCount->setEnabled(b);
+    m_ui->cbShowPositionPercent->setEnabled(b);
     m_ui->cbShowBattery->setEnabled(b);
     m_ui->cbShowClock->setEnabled(b);
     m_ui->cbShowBookName->setEnabled(b);
@@ -364,6 +372,15 @@ SettingsDlg::SettingsDlg(QWidget* parent, CR3View* docView)
     m_ui->cbInterlineSpace->addItems(isitems);
     int isi = m_ui->cbInterlineSpace->findText(v);
     m_ui->cbInterlineSpace->setCurrentIndex(isi >= 0 ? isi : 6);
+
+    // PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT
+    v = QString("%1").arg(m_props->getIntDef(PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT, 70)) + "%";
+    QStringList mswitems;
+    for (int i = 0; i < (int)(sizeof(minspace_widths) / sizeof(int)); i++)
+        mswitems.append(QString("%1").arg(minspace_widths[i]) + "%");
+    m_ui->cbMinSpaceWidth->addItems(mswitems);
+    int mswi = m_ui->cbMinSpaceWidth->findText(v);
+    m_ui->cbMinSpaceWidth->setCurrentIndex(mswi >= 0 ? mswi : 2);
 
     optionToUi(PROP_TEXTLANG_EMBEDDED_LANGS_ENABLED, m_ui->cbMultiLang);
     optionToUi(PROP_TEXTLANG_HYPHENATION_ENABLED, m_ui->cbEnableHyph);
@@ -878,6 +895,9 @@ void SettingsDlg::on_cbViewMode_currentIndexChanged(int index) {
 void SettingsDlg::on_cbShowPageHeader_currentIndexChanged(int index) {
     m_props->setInt(PROP_STATUS_LINE, index);
     bool b = index > 0;
+    m_ui->cbShowPageNumber->setEnabled(b);
+    m_ui->cbShowPageCount->setEnabled(b);
+    m_ui->cbShowPositionPercent->setEnabled(b);
     m_ui->cbShowBattery->setEnabled(b);
     m_ui->cbShowClock->setEnabled(b);
     m_ui->cbShowBookName->setEnabled(b);
@@ -885,6 +905,18 @@ void SettingsDlg::on_cbShowPageHeader_currentIndexChanged(int index) {
 
 void SettingsDlg::on_cbShowBookName_stateChanged(int s) {
     setCheck(PROP_SHOW_TITLE, s);
+}
+
+void SettingsDlg::on_cbShowPageNumber_stateChanged(int s) {
+    setCheck(PROP_SHOW_PAGE_NUMBER, s);
+}
+
+void SettingsDlg::on_cbShowPageCount_stateChanged(int s) {
+    setCheck(PROP_SHOW_PAGE_COUNT, s);
+}
+
+void SettingsDlg::on_cbShowPositionPercent_stateChanged(int s) {
+    setCheck(PROP_SHOW_POS_PERCENT, s);
 }
 
 void SettingsDlg::on_cbShowClock_stateChanged(int s) {
@@ -1119,6 +1151,13 @@ void SettingsDlg::on_cbInterlineSpace_currentIndexChanged(int index) {
     if (!initDone)
         return;
     m_props->setInt(PROP_INTERLINE_SPACE, interline_spaces[index]);
+    updateStyleSample();
+}
+
+void SettingsDlg::on_cbMinSpaceWidth_currentIndexChanged(int index) {
+    if (!initDone)
+        return;
+    m_props->setInt(PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT, minspace_widths[index]);
     updateStyleSample();
 }
 
