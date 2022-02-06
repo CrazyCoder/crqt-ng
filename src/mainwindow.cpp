@@ -1,3 +1,15 @@
+/**
+ * crqt-ng
+ *
+ * (c) Vadim Lopatin, 2000-2014
+ * (c) Other CoolReader authors (See AUTHORS file)
+ * (c) crqt-ng authors (See AUTHORS file)
+ *
+ * This source code is distributed under the terms of
+ * GNU General Public License version 2
+ * See LICENSE file for details
+ */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 

@@ -19,102 +19,102 @@
         <translation>Licensz</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="22"/>
+        <location filename="../aboutdlg.cpp" line="34"/>
         <source>CoolReaderNG is free open source e-book viewer based on crengine-ng library.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="23"/>
+        <location filename="../aboutdlg.cpp" line="35"/>
         <source>Source code is available at</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="24"/>
+        <location filename="../aboutdlg.cpp" line="36"/>
         <source>under the terms of GNU GPLv2 license.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="25"/>
+        <location filename="../aboutdlg.cpp" line="37"/>
         <source>It is a fork of the &apos;CoolReader&apos; program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="27"/>
+        <location filename="../aboutdlg.cpp" line="39"/>
         <source>Third party components used in crengine-ng:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="30"/>
+        <location filename="../aboutdlg.cpp" line="42"/>
         <source>FreeType - font rendering</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="33"/>
+        <location filename="../aboutdlg.cpp" line="45"/>
         <source>HarfBuzz - text shaping, font kerning, ligatures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="36"/>
+        <location filename="../aboutdlg.cpp" line="48"/>
         <source>ZLib - compressing library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="39"/>
+        <location filename="../aboutdlg.cpp" line="51"/>
         <source>ZSTD - compressing library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="42"/>
+        <location filename="../aboutdlg.cpp" line="54"/>
         <source>libpng - PNG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="45"/>
+        <location filename="../aboutdlg.cpp" line="57"/>
         <source>libjpeg - JPEG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="48"/>
+        <location filename="../aboutdlg.cpp" line="60"/>
         <source>FriBiDi - RTL writing support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="51"/>
+        <location filename="../aboutdlg.cpp" line="63"/>
         <source>libunibreak - line breaking and word breaking algorithms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="54"/>
+        <location filename="../aboutdlg.cpp" line="66"/>
         <source>utf8proc - for unicode string comparision</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="57"/>
+        <location filename="../aboutdlg.cpp" line="69"/>
         <source>NanoSVG - SVG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="60"/>
+        <location filename="../aboutdlg.cpp" line="72"/>
         <source>chmlib - chm format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="63"/>
+        <location filename="../aboutdlg.cpp" line="75"/>
         <source>antiword - Microsoft Word format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="65"/>
+        <location filename="../aboutdlg.cpp" line="77"/>
         <source>hyphman - AlReader hyphenation manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="66"/>
+        <location filename="../aboutdlg.cpp" line="78"/>
         <source>Hyphenation dictionaries - from KOReader</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="68"/>
+        <location filename="../aboutdlg.cpp" line="80"/>
         <source>Languages character set database by Fontconfig</source>
         <translation type="unfinished"></translation>
     </message>
@@ -122,26 +122,26 @@
 <context>
     <name>AddBookmarkDialog</name>
     <message>
-        <location filename="../addbookmarkdlg.cpp" line="28"/>
+        <location filename="../addbookmarkdlg.cpp" line="40"/>
         <source>Add bookmark</source>
         <translation>Könyvjelző hozzáadása</translation>
     </message>
     <message>
-        <location filename="../addbookmarkdlg.cpp" line="36"/>
-        <location filename="../addbookmarkdlg.cpp" line="105"/>
+        <location filename="../addbookmarkdlg.cpp" line="48"/>
+        <location filename="../addbookmarkdlg.cpp" line="117"/>
         <source>Correction</source>
         <translation>Korrectúra</translation>
     </message>
     <message>
         <location filename="../addbookmarkdlg.ui" line="32"/>
-        <location filename="../addbookmarkdlg.cpp" line="33"/>
+        <location filename="../addbookmarkdlg.cpp" line="45"/>
         <source>Position</source>
         <translation>Pozíció</translation>
     </message>
     <message>
         <location filename="../addbookmarkdlg.ui" line="53"/>
-        <location filename="../addbookmarkdlg.cpp" line="35"/>
-        <location filename="../addbookmarkdlg.cpp" line="101"/>
+        <location filename="../addbookmarkdlg.cpp" line="47"/>
+        <location filename="../addbookmarkdlg.cpp" line="113"/>
         <source>Comment</source>
         <translation>Megjegyzés</translation>
     </message>
@@ -179,45 +179,45 @@
 <context>
     <name>BookmarkListDialog</name>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="26"/>
+        <location filename="../bookmarklistdlg.cpp" line="38"/>
         <source>Bookmarks</source>
         <translation>Könyvjelzők</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="30"/>
+        <location filename="../bookmarklistdlg.cpp" line="42"/>
         <source>Position</source>
         <translation>Pozíció</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="30"/>
+        <location filename="../bookmarklistdlg.cpp" line="42"/>
         <source>Type</source>
         <comment>bookmark type</comment>
         <translation>Típus</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="30"/>
+        <location filename="../bookmarklistdlg.cpp" line="42"/>
         <source>Text</source>
         <translation>Szöveg</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="31"/>
+        <location filename="../bookmarklistdlg.cpp" line="43"/>
         <source>Comment</source>
         <translation>Megjegyzés</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="68"/>
+        <location filename="../bookmarklistdlg.cpp" line="80"/>
         <source>P</source>
         <comment>Bookmark type first letter - Position</comment>
         <translation>P</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="70"/>
+        <location filename="../bookmarklistdlg.cpp" line="82"/>
         <source>C</source>
         <comment>Bookmark type first letter - Comment</comment>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="72"/>
+        <location filename="../bookmarklistdlg.cpp" line="84"/>
         <source>E</source>
         <comment>Bookmark type first letter - Correction/Edit</comment>
         <translation>K</translation>
@@ -276,22 +276,22 @@
 <context>
     <name>CR3View</name>
     <message>
-        <location filename="../cr3widget.cpp" line="506"/>
+        <location filename="../cr3widget.cpp" line="518"/>
         <source>Error while opening document </source>
         <translation>Hiba a dokumentum megnyitása közben: </translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1499"/>
+        <location filename="../cr3widget.cpp" line="1511"/>
         <source>Loading: please wait...</source>
         <translation>Betöltés. Kérem, várjon...</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1154"/>
+        <location filename="../cr3widget.cpp" line="1166"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1155"/>
+        <location filename="../cr3widget.cpp" line="1167"/>
         <source>Font &quot;%1&quot; isn&apos;t compatible with language &quot;%2&quot;. Instead will be used fallback font.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -322,7 +322,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fallbackfontsdialog.cpp" line="143"/>
+        <location filename="../fallbackfontsdialog.cpp" line="155"/>
         <source>Remove this fallback font</source>
         <translation type="unfinished"></translation>
     </message>
@@ -330,192 +330,192 @@
 <context>
     <name>FilePropsDialog</name>
     <message>
-        <location filename="../filepropsdlg.cpp" line="20"/>
+        <location filename="../filepropsdlg.cpp" line="32"/>
         <source>Document properties</source>
         <translation>Dokumentum tulajdonságai</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="23"/>
+        <location filename="../filepropsdlg.cpp" line="35"/>
         <source>Property</source>
         <translation>Tulajdonság</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="23"/>
+        <location filename="../filepropsdlg.cpp" line="35"/>
         <source>Value</source>
         <translation>Érték</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="165"/>
+        <location filename="../filepropsdlg.cpp" line="177"/>
         <source>Current page</source>
         <translation>Aktuális oldal</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="166"/>
+        <location filename="../filepropsdlg.cpp" line="178"/>
         <source>Total pages</source>
         <translation>Oldalak száma</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="167"/>
+        <location filename="../filepropsdlg.cpp" line="179"/>
         <source>Battery state</source>
         <translation>Akku állapot</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="168"/>
+        <location filename="../filepropsdlg.cpp" line="180"/>
         <source>Current Time</source>
         <translation>Aktuális idő</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="173"/>
+        <location filename="../filepropsdlg.cpp" line="185"/>
         <source>Current chapter</source>
         <translation>Aktuális fejezet</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="176"/>
+        <location filename="../filepropsdlg.cpp" line="188"/>
         <source>Status</source>
         <translation>Állapot</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="178"/>
+        <location filename="../filepropsdlg.cpp" line="190"/>
         <source>Archive name</source>
         <translation>Archívumnév</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="179"/>
+        <location filename="../filepropsdlg.cpp" line="191"/>
         <source>Archive path</source>
         <translation>Archívum útvonal</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="180"/>
+        <location filename="../filepropsdlg.cpp" line="192"/>
         <source>Archive size</source>
         <translation>Archívum méret</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="181"/>
+        <location filename="../filepropsdlg.cpp" line="193"/>
         <source>File name</source>
         <translation>Fájlnév</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="182"/>
+        <location filename="../filepropsdlg.cpp" line="194"/>
         <source>File path</source>
         <translation>Fájl útvonala</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="183"/>
+        <location filename="../filepropsdlg.cpp" line="195"/>
         <source>File size</source>
         <translation>Fájlméret</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="184"/>
+        <location filename="../filepropsdlg.cpp" line="196"/>
         <source>File format</source>
         <translation>Fájlformátum</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="185"/>
+        <location filename="../filepropsdlg.cpp" line="197"/>
         <source>File info</source>
         <translation>Fájl infó</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="187"/>
+        <location filename="../filepropsdlg.cpp" line="199"/>
         <source>Title</source>
         <translation>Cím</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="188"/>
+        <location filename="../filepropsdlg.cpp" line="200"/>
         <source>Author(s)</source>
         <translation>Szerző(k)</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="189"/>
+        <location filename="../filepropsdlg.cpp" line="201"/>
         <source>Series name</source>
         <translation>Sorozat neve</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="190"/>
+        <location filename="../filepropsdlg.cpp" line="202"/>
         <source>Series number</source>
         <translation>Sorozat sorszám</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="191"/>
+        <location filename="../filepropsdlg.cpp" line="203"/>
         <source>Date</source>
         <translation>Dátum</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="192"/>
+        <location filename="../filepropsdlg.cpp" line="204"/>
         <source>Genres</source>
         <translation>Műfajok</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="194"/>
+        <location filename="../filepropsdlg.cpp" line="206"/>
         <source>Translator</source>
         <translation>Fordította</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="195"/>
+        <location filename="../filepropsdlg.cpp" line="207"/>
         <source>Book info</source>
         <translation>Könyv infó</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="197"/>
+        <location filename="../filepropsdlg.cpp" line="209"/>
         <source>Document author</source>
         <translation>Dokumentum szerző</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="198"/>
+        <location filename="../filepropsdlg.cpp" line="210"/>
         <source>Document date</source>
         <translation>Dokumentum dátum</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="199"/>
+        <location filename="../filepropsdlg.cpp" line="211"/>
         <source>Document source URL</source>
         <translation>Dokumentum forrás URL</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="200"/>
+        <location filename="../filepropsdlg.cpp" line="212"/>
         <source>OCR by</source>
         <translation>Szkennelte</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="201"/>
+        <location filename="../filepropsdlg.cpp" line="213"/>
         <source>Document version</source>
         <translation>Dokumentum verzió</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="202"/>
+        <location filename="../filepropsdlg.cpp" line="214"/>
         <source>Document info</source>
         <translation>Dokumentum infó</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="204"/>
+        <location filename="../filepropsdlg.cpp" line="216"/>
         <source>Publication name</source>
         <translation>Kiadási név</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="205"/>
+        <location filename="../filepropsdlg.cpp" line="217"/>
         <source>Publisher</source>
         <translation>Kiadó</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="206"/>
+        <location filename="../filepropsdlg.cpp" line="218"/>
         <source>Publisher city</source>
         <translation>Kiadás helye</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="207"/>
+        <location filename="../filepropsdlg.cpp" line="219"/>
         <source>Publication year</source>
         <translation>Kiadás éve</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="208"/>
+        <location filename="../filepropsdlg.cpp" line="220"/>
         <source>ISBN</source>
         <translation>ISBN</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="209"/>
+        <location filename="../filepropsdlg.cpp" line="221"/>
         <source>Publication info</source>
         <translation>Kiadási infó</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="211"/>
+        <location filename="../filepropsdlg.cpp" line="223"/>
         <source>Custom info</source>
         <translation>Egyedi infó</translation>
     </message>
@@ -525,7 +525,7 @@
         <translation>Párbeszédablak</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="193"/>
+        <location filename="../filepropsdlg.cpp" line="205"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
@@ -533,87 +533,87 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="194"/>
+        <location filename="../mainwindow.cpp" line="206"/>
         <source>Open book file</source>
         <translation>Könyvfájl megnyitása</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="154"/>
+        <location filename="../mainwindow.cpp" line="166"/>
         <source>Export document to</source>
         <translation>Dokumentum exportálása ide:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="154"/>
+        <location filename="../mainwindow.cpp" line="166"/>
         <source>WOL book (*.wol)</source>
         <translation>WOL könyv (*.wol)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="159"/>
+        <location filename="../mainwindow.cpp" line="171"/>
         <source>Export to WOL format</source>
         <translation>Exportálás WOL formátumba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="196"/>
+        <location filename="../mainwindow.cpp" line="208"/>
         <source>All supported formats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="197"/>
+        <location filename="../mainwindow.cpp" line="209"/>
         <source>FB2 books</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="198"/>
+        <location filename="../mainwindow.cpp" line="210"/>
         <source>FB3 books</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="199"/>
+        <location filename="../mainwindow.cpp" line="211"/>
         <source>Text files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="200"/>
+        <location filename="../mainwindow.cpp" line="212"/>
         <source>Rich text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="201"/>
+        <location filename="../mainwindow.cpp" line="213"/>
         <source>MS Word document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="202"/>
+        <location filename="../mainwindow.cpp" line="214"/>
         <source>Open Document files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="203"/>
+        <location filename="../mainwindow.cpp" line="215"/>
         <source>HTML files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="204"/>
+        <location filename="../mainwindow.cpp" line="216"/>
         <source>EPUB files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="205"/>
+        <location filename="../mainwindow.cpp" line="217"/>
         <source>CHM files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="206"/>
+        <location filename="../mainwindow.cpp" line="218"/>
         <source>MOBI files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="207"/>
+        <location filename="../mainwindow.cpp" line="219"/>
         <source>PalmDOC files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="208"/>
+        <location filename="../mainwindow.cpp" line="220"/>
         <source>ZIP archives</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1140,32 +1140,32 @@
 <context>
     <name>RecentBooksDlg</name>
     <message>
-        <location filename="../recentdlg.cpp" line="23"/>
+        <location filename="../recentdlg.cpp" line="35"/>
         <source>#</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../recentdlg.cpp" line="23"/>
+        <location filename="../recentdlg.cpp" line="35"/>
         <source>Author</source>
         <translation>Szerző</translation>
     </message>
     <message>
-        <location filename="../recentdlg.cpp" line="23"/>
+        <location filename="../recentdlg.cpp" line="35"/>
         <source>Title</source>
         <translation>Cím</translation>
     </message>
     <message>
-        <location filename="../recentdlg.cpp" line="23"/>
+        <location filename="../recentdlg.cpp" line="35"/>
         <source>Filename</source>
         <translation>Fájlnév</translation>
     </message>
     <message>
-        <location filename="../recentdlg.cpp" line="155"/>
+        <location filename="../recentdlg.cpp" line="167"/>
         <source>Remove all history items</source>
         <translation>Minden előzmény törlése</translation>
     </message>
     <message>
-        <location filename="../recentdlg.cpp" line="156"/>
+        <location filename="../recentdlg.cpp" line="168"/>
         <source>Do you really want to remove all history records?</source>
         <translation>Biztosan törli az előzményeket?</translation>
     </message>
@@ -1228,12 +1228,12 @@
         <translation type="unfinished">Bezár</translation>
     </message>
     <message>
-        <location filename="../searchdlg.cpp" line="126"/>
+        <location filename="../searchdlg.cpp" line="138"/>
         <source>Not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../searchdlg.cpp" line="127"/>
+        <location filename="../searchdlg.cpp" line="139"/>
         <source>Search pattern is not found in document</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1241,35 +1241,35 @@
 <context>
     <name>SettingsDlg</name>
     <message>
-        <location filename="../settings.cpp" line="364"/>
+        <location filename="../settings.cpp" line="376"/>
         <source>[No hyphenation]</source>
         <translation>[Nincs elválasztás]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="366"/>
+        <location filename="../settings.cpp" line="378"/>
         <source>[Algorythmic hyphenation]</source>
         <translation>[Algoritmikus elválasztás]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="389"/>
+        <location filename="../settings.cpp" line="401"/>
         <source>The quick brown fox jumps over the lazy dog. </source>
         <translation>Árvíztűrő tükörfúrógép. </translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1025"/>
-        <location filename="../settings.cpp" line="934"/>
+        <location filename="../settings.cpp" line="946"/>
         <source>Text color</source>
         <translation>Szövegszín</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1198"/>
-        <location filename="../settings.cpp" line="938"/>
+        <location filename="../settings.cpp" line="950"/>
         <source>Background color</source>
         <translation>Háttérszín</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="468"/>
-        <location filename="../settings.cpp" line="942"/>
+        <location filename="../settings.cpp" line="954"/>
         <source>Page header text color</source>
         <translation>Állapotsor szövegszín</translation>
     </message>
@@ -1379,8 +1379,8 @@
         <location filename="../settings.ui" line="849"/>
         <location filename="../settings.ui" line="903"/>
         <location filename="../settings.ui" line="957"/>
-        <location filename="../settings.cpp" line="516"/>
-        <location filename="../settings.cpp" line="557"/>
+        <location filename="../settings.cpp" line="528"/>
+        <location filename="../settings.cpp" line="569"/>
         <source>0</source>
         <translation>0</translation>
     </message>
@@ -1579,9 +1579,9 @@
     </message>
     <message>
         <location filename="../settings.ui" line="327"/>
-        <location filename="../settings.cpp" line="205"/>
-        <location filename="../settings.cpp" line="212"/>
-        <location filename="../settings.cpp" line="742"/>
+        <location filename="../settings.cpp" line="217"/>
+        <location filename="../settings.cpp" line="224"/>
+        <location filename="../settings.cpp" line="754"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1597,7 +1597,7 @@
     </message>
     <message>
         <location filename="../settings.ui" line="562"/>
-        <location filename="../settings.cpp" line="1177"/>
+        <location filename="../settings.cpp" line="1189"/>
         <source>Selection color</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1632,7 +1632,7 @@
     </message>
     <message>
         <location filename="../settings.ui" line="745"/>
-        <location filename="../settings.cpp" line="743"/>
+        <location filename="../settings.cpp" line="755"/>
         <source>Underline</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1909,17 +1909,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="177"/>
+        <location filename="../settings.cpp" line="189"/>
         <source>Simple (FreeType only, fastest)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="178"/>
+        <location filename="../settings.cpp" line="190"/>
         <source>Light (HarfBuzz without ligatures)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="179"/>
+        <location filename="../settings.cpp" line="191"/>
         <source>Full (HarfBuzz with ligatures)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1995,29 +1995,29 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="206"/>
-        <location filename="../settings.cpp" line="213"/>
-        <location filename="../settings.cpp" line="681"/>
+        <location filename="../settings.cpp" line="218"/>
+        <location filename="../settings.cpp" line="225"/>
+        <location filename="../settings.cpp" line="693"/>
         <source>Gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="207"/>
+        <location filename="../settings.cpp" line="219"/>
         <source>LCD (RGB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="208"/>
+        <location filename="../settings.cpp" line="220"/>
         <source>LCD (BGR)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="209"/>
+        <location filename="../settings.cpp" line="221"/>
         <source>LCD (RGB) vertical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="210"/>
+        <location filename="../settings.cpp" line="222"/>
         <source>LCD (BGR) vertical</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2028,7 +2028,7 @@
     </message>
     <message>
         <location filename="../settings.ui" line="1786"/>
-        <location filename="../settings.cpp" line="396"/>
+        <location filename="../settings.cpp" line="408"/>
         <source>Default paragraph style</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2079,13 +2079,13 @@
     </message>
     <message>
         <location filename="../settings.ui" line="1917"/>
-        <location filename="../settings.cpp" line="470"/>
+        <location filename="../settings.cpp" line="482"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1927"/>
-        <location filename="../settings.cpp" line="470"/>
+        <location filename="../settings.cpp" line="482"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2105,370 +2105,370 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="397"/>
+        <location filename="../settings.cpp" line="409"/>
         <source>Title</source>
         <translation type="unfinished">Cím</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="398"/>
+        <location filename="../settings.cpp" line="410"/>
         <source>Subtitle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="399"/>
+        <location filename="../settings.cpp" line="411"/>
         <source>Preformatted text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="400"/>
+        <location filename="../settings.cpp" line="412"/>
         <source>Link</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="401"/>
+        <location filename="../settings.cpp" line="413"/>
         <source>Cite / quotation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="402"/>
+        <location filename="../settings.cpp" line="414"/>
         <source>Epigraph</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="403"/>
+        <location filename="../settings.cpp" line="415"/>
         <source>Poem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="404"/>
+        <location filename="../settings.cpp" line="416"/>
         <source>Text author</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="405"/>
+        <location filename="../settings.cpp" line="417"/>
         <source>Footnote link</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="406"/>
+        <location filename="../settings.cpp" line="418"/>
         <source>Footnote</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="407"/>
+        <location filename="../settings.cpp" line="419"/>
         <source>Footnote title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="408"/>
+        <location filename="../settings.cpp" line="420"/>
         <source>Annotation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="470"/>
-        <location filename="../settings.cpp" line="486"/>
-        <location filename="../settings.cpp" line="515"/>
-        <location filename="../settings.cpp" line="556"/>
-        <location filename="../settings.cpp" line="589"/>
-        <location filename="../settings.cpp" line="611"/>
-        <location filename="../settings.cpp" line="630"/>
-        <location filename="../settings.cpp" line="676"/>
-        <location filename="../settings.cpp" line="741"/>
-        <location filename="../settings.cpp" line="759"/>
+        <location filename="../settings.cpp" line="482"/>
+        <location filename="../settings.cpp" line="498"/>
+        <location filename="../settings.cpp" line="527"/>
+        <location filename="../settings.cpp" line="568"/>
+        <location filename="../settings.cpp" line="601"/>
+        <location filename="../settings.cpp" line="623"/>
+        <location filename="../settings.cpp" line="642"/>
+        <location filename="../settings.cpp" line="688"/>
+        <location filename="../settings.cpp" line="753"/>
+        <location filename="../settings.cpp" line="771"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="470"/>
+        <location filename="../settings.cpp" line="482"/>
         <source>Justify</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="470"/>
+        <location filename="../settings.cpp" line="482"/>
         <source>Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="486"/>
+        <location filename="../settings.cpp" line="498"/>
         <source>No indent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="486"/>
+        <location filename="../settings.cpp" line="498"/>
         <source>Small Indent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="486"/>
+        <location filename="../settings.cpp" line="498"/>
         <source>Big Indent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="486"/>
+        <location filename="../settings.cpp" line="498"/>
         <source>Small Outdent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="486"/>
+        <location filename="../settings.cpp" line="498"/>
         <source>Big Outdent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="517"/>
+        <location filename="../settings.cpp" line="529"/>
         <source>20% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="518"/>
+        <location filename="../settings.cpp" line="530"/>
         <source>30% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="519"/>
-        <location filename="../settings.cpp" line="558"/>
+        <location filename="../settings.cpp" line="531"/>
+        <location filename="../settings.cpp" line="570"/>
         <source>50% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="520"/>
-        <location filename="../settings.cpp" line="559"/>
+        <location filename="../settings.cpp" line="532"/>
+        <location filename="../settings.cpp" line="571"/>
         <source>100% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="521"/>
-        <location filename="../settings.cpp" line="560"/>
+        <location filename="../settings.cpp" line="533"/>
+        <location filename="../settings.cpp" line="572"/>
         <source>150% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="561"/>
+        <location filename="../settings.cpp" line="573"/>
         <source>200% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="562"/>
+        <location filename="../settings.cpp" line="574"/>
         <source>400% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="563"/>
+        <location filename="../settings.cpp" line="575"/>
         <source>5% of line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="564"/>
+        <location filename="../settings.cpp" line="576"/>
         <source>10% of line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="565"/>
+        <location filename="../settings.cpp" line="577"/>
         <source>15% of line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="566"/>
+        <location filename="../settings.cpp" line="578"/>
         <source>20% of line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="567"/>
+        <location filename="../settings.cpp" line="579"/>
         <source>30% of line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="590"/>
-        <location filename="../settings.cpp" line="631"/>
+        <location filename="../settings.cpp" line="602"/>
+        <location filename="../settings.cpp" line="643"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="591"/>
+        <location filename="../settings.cpp" line="603"/>
         <source>Bold</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="592"/>
+        <location filename="../settings.cpp" line="604"/>
         <source>Bolder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="593"/>
+        <location filename="../settings.cpp" line="605"/>
         <source>Lighter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="612"/>
+        <location filename="../settings.cpp" line="624"/>
         <source>Increase: 110%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="613"/>
+        <location filename="../settings.cpp" line="625"/>
         <source>Increase: 120%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="614"/>
+        <location filename="../settings.cpp" line="626"/>
         <source>Increase: 150%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="615"/>
+        <location filename="../settings.cpp" line="627"/>
         <source>Decrease: 90%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="616"/>
+        <location filename="../settings.cpp" line="628"/>
         <source>Decrease: 80%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="617"/>
+        <location filename="../settings.cpp" line="629"/>
         <source>Decrease: 70%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="618"/>
+        <location filename="../settings.cpp" line="630"/>
         <source>Decrease: 60%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="632"/>
+        <location filename="../settings.cpp" line="644"/>
         <source>Italic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="641"/>
+        <location filename="../settings.cpp" line="653"/>
         <source>[Default Sans Serif]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="643"/>
+        <location filename="../settings.cpp" line="655"/>
         <source>[Default Serif]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="645"/>
+        <location filename="../settings.cpp" line="657"/>
         <source>[Default Monospace]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="677"/>
+        <location filename="../settings.cpp" line="689"/>
         <source>Black</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="678"/>
+        <location filename="../settings.cpp" line="690"/>
         <source>Green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="679"/>
+        <location filename="../settings.cpp" line="691"/>
         <source>Silver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="680"/>
+        <location filename="../settings.cpp" line="692"/>
         <source>Lime</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="682"/>
+        <location filename="../settings.cpp" line="694"/>
         <source>Olive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="683"/>
+        <location filename="../settings.cpp" line="695"/>
         <source>White</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="684"/>
+        <location filename="../settings.cpp" line="696"/>
         <source>Yellow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="685"/>
+        <location filename="../settings.cpp" line="697"/>
         <source>Maroon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="686"/>
+        <location filename="../settings.cpp" line="698"/>
         <source>Navy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="687"/>
+        <location filename="../settings.cpp" line="699"/>
         <source>Red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="688"/>
+        <location filename="../settings.cpp" line="700"/>
         <source>Blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="689"/>
+        <location filename="../settings.cpp" line="701"/>
         <source>Purple</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="690"/>
+        <location filename="../settings.cpp" line="702"/>
         <source>Teal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="691"/>
+        <location filename="../settings.cpp" line="703"/>
         <source>Fuchsia</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="692"/>
+        <location filename="../settings.cpp" line="704"/>
         <source>Aqua</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="744"/>
+        <location filename="../settings.cpp" line="756"/>
         <source>Line through</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="745"/>
+        <location filename="../settings.cpp" line="757"/>
         <source>Overline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="760"/>
+        <location filename="../settings.cpp" line="772"/>
         <source>Baseline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="761"/>
+        <location filename="../settings.cpp" line="773"/>
         <source>Subscript</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="762"/>
+        <location filename="../settings.cpp" line="774"/>
         <source>Superscript</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1045"/>
+        <location filename="../settings.cpp" line="1057"/>
         <source>synthetic*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1047"/>
+        <location filename="../settings.cpp" line="1059"/>
         <source>synthetic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1181"/>
+        <location filename="../settings.cpp" line="1193"/>
         <source>Comment bookmark color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1185"/>
+        <location filename="../settings.cpp" line="1197"/>
         <source>Correction bookmark color</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2481,12 +2481,12 @@
 <context>
     <name>TocDlg</name>
     <message>
-        <location filename="../tocdlg.cpp" line="54"/>
+        <location filename="../tocdlg.cpp" line="66"/>
         <source>Title</source>
         <translation>Cím</translation>
     </message>
     <message>
-        <location filename="../tocdlg.cpp" line="54"/>
+        <location filename="../tocdlg.cpp" line="66"/>
         <source>Page</source>
         <translation>Oldal</translation>
     </message>
@@ -2534,7 +2534,7 @@
 <context>
     <name>crqtutils</name>
     <message>
-        <location filename="../crqtutil.cpp" line="155"/>
+        <location filename="../crqtutil.cpp" line="167"/>
         <source>Undetermined</source>
         <translation type="unfinished"></translation>
     </message>
