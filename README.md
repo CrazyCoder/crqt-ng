@@ -25,7 +25,17 @@ Main functions:
 * Background pictures, textures, or solid background
 
 ## Visuals
-TODO: add screenshots...
+#### Main window (KDE, Windows, MacOS)
+
+These screenshots use the Noto Serif font.
+
+![Main window in KDE](https://gitlab.com/coolreader-ng/crqt-ng/-/wikis/uploads/ff7ff4f312546cf189e8acd147925d73/mainwnd-kde.png "Main window in KDE")
+
+![Main window in Windows](https://gitlab.com/coolreader-ng/crqt-ng/-/wikis/uploads/6d451097d15919c639e394b6b86397b9/mainwnd-win32.png "Main window in Windows")
+
+![Main window in MacOS](https://gitlab.com/coolreader-ng/crqt-ng/-/wikis/uploads/eb57f6fbc27697a89fd708da9cff9b81/mainwnd-macos.png "Main window in MacOS")
+
+/As you can see, sub-pixel anti-aliasing works on MacOS!/
 
 ## Installation
 1. To install the program, make sure that all dependencies are installed: Qt framework and crengine-ng library.
