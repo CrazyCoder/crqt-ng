@@ -23,6 +23,7 @@ Main functions:
 * TXT auto reformat, automatic encoding recognition
 * Flexible styling with CSS files
 * Background pictures, textures, or solid background
+* HiDPI support
 
 ## Visuals
 #### Main window (KDE, Windows, MacOS)
