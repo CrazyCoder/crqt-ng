@@ -1,0 +1,82 @@
+2022-02-10  Aleksey Chernov  <valexlin@gmail.com>
+
+	* Version 1.0.0 released.
+	==========================
+
+	Tag sources with `1.0.0'.
+
+	See below for changes.
+
+2022-02-06  Aleksey Chernov  <valexlin@gmail.com>
+
+    Added some options to settings dialog: PROP_SHOW_PAGE_NUMBER, PROP_SHOW_PAGE_COUNT, PROP_SHOW_POS_PERCENT, PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT.  PROP_SHOW_PAGE_NUMBER - show current page number in status header;  PROP_SHOW_PAGE_COUNT - show total page count in status header;  PROP_SHOW_POS_PERCENT - show current position in percent in status header;  PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT - to specify minimum space width.
+
+    Settings dialog: style preview window implemented in separate tool window.
+
+    Added version info into executable file (Win32 only).
+
+2022-01-17  Aleksey Chernov  <valexlin@gmail.com>
+
+    Fixed color preview widget (due to some changes in kde-plasma).
+
+2022-01-13  Aleksey Chernov  <valexlin@gmail.com>
+
+    Fixed mouse events handlers in HiDPI environment.
+
+2022-01-05  Aleksey Chernov  <valexlin@gmail.com>
+
+    Hide options in the settings dialog that are not available in the engine.
+
+2021-12-27  Aleksey Chernov  <valexlin@gmail.com>
+
+    Reformat sources using clang-format.
+
+    Updated icon for OS Windows.
+
+    Updated sources to reflect changes in crengine-ng.
+
+    xpm icon updated.
+
+    Added workaround for MacOS: map DPI=72 to 96 before pass to engine.
+
+    Qt6 support added.
+
+2021-12-26  Aleksey Chernov  <valexlin@gmail.com>
+
+    Russian translation: revert shortcut translations.
+
+    About dialog: use default font.
+
+    About dialog: added info about fork, increased font size, dialog size.
+
+    Restored ability to build under/for MacOS.
+
+    Deprecation fixed in CR3View class: `MidButton Q_DECL_ENUMERATOR_DEPRECATED_X("MidButton is deprecated. Use MiddleButton instead") = MiddleButton'
+
+    True HiDPI support. Not tested on MacOS.
+
+    Show book/document title in mainwindow title.
+
+2021-12-24  Aleksey Chernov  <valexlin@gmail.com>
+
+    Russian translation updated.
+
+    strings rename...
+
+    call 'lupdate' always with arguments '-locations absolute'.
+
+    Removed translation files that were always 100% empty.
+
+    Rework about dialog.
+
+    Part of the command line parsing moved from mainwindow.cpp to main.cpp
+
+2021-12-23  Aleksey Chernov  <valexlin@gmail.com>
+
+    Cleanup, rename.
+
+    Renames, simplifing, cleaning. Not complete yet.
+
+2021-12-22  Aleksey Chernov  <valexlin@gmail.com>
+
+    Use external crengine-ng library instead of built-in.
