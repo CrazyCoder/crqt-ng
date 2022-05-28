@@ -157,14 +157,6 @@ int main(int argc, char* argv[]) {
             printf("Cannot init CREngine - exiting\n");
             return 2;
         }
-        if (argc >= 2 && !strcmp(argv[1], "unittest")) {
-#if 0 && defined(_DEBUG)
-			runTinyDomUnitTests();
-#endif
-            CRLog::info("UnitTests finished: exiting");
-            ShutdownCREngine();
-            return 0;
-        }
         QString datadir = cr2qt(getMainDataDir());
         QString translations = datadir + "i18n/";
         QTranslator qtTranslator;
