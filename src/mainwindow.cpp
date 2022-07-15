@@ -26,6 +26,8 @@
 #include <QTranslator>
 #include <QLibraryInfo>
 #include <QMessageBox>
+
+#include "app-props.h"
 #include "settings.h"
 #include "tocdlg.h"
 #include "recentdlg.h"
@@ -334,7 +336,7 @@ void MainWindow::onPropsChange(PropsRef props) {
         if (name == PROP_WINDOW_SHOW_SCROLLBAR) {
             ui->scroll->setVisible(v);
         }
-        if (name == PROP_BACKGROUND_IMAGE) {
+        if (name == PROP_APP_BACKGROUND_IMAGE) {
             lString32 fn = qt2cr(value);
             LVImageSourceRef img;
             if (!fn.empty() && fn[0] != '[') {

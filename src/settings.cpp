@@ -12,6 +12,7 @@
 
 #include "settings.h"
 #include "ui_settings.h"
+#include "app-props.h"
 #include "sampleview.h"
 #include "cr3widget.h"
 #include "crqtutil.h"
@@ -174,7 +175,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, CR3View* docView)
     int bgIndex = 0;
     m_backgroundFiles.append("[NONE]");
     bgFileLabels.append("[NONE]");
-    QString bgFile = m_props->getStringDef(PROP_BACKGROUND_IMAGE, "");
+    QString bgFile = m_props->getStringDef(PROP_APP_BACKGROUND_IMAGE, "");
     for (int i = 0; i < bgFiles.length(); i++) {
         lString32 fn = bgFiles[i];
         QString f = cr2qt(fn);
@@ -1182,7 +1183,7 @@ void SettingsDlg::on_cbPageSkin_currentIndexChanged(int index) {
     if (!initDone)
         return;
     if (index >= 0 && index < m_backgroundFiles.length())
-        m_props->setString(PROP_BACKGROUND_IMAGE, m_backgroundFiles[index]);
+        m_props->setString(PROP_APP_BACKGROUND_IMAGE, m_backgroundFiles[index]);
 }
 
 void SettingsDlg::on_cbFloatingPunctuation_stateChanged(int s) {

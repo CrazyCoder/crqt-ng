@@ -19,8 +19,6 @@
 #else
 #include <QtGui/QApplication>
 #endif
-#include "config.h"
-#include "mainwindow.h"
 #if QT_VERSION >= 0x050000
 #include <QtCore/QTranslator>
 #include <QtCore/QLibraryInfo>
@@ -33,6 +31,10 @@
 
 #include <crengine.h>
 #include <crtxtenc.h>
+
+#include "config.h"
+#include "mainwindow.h"
+#include "app-props.h"
 
 #if defined(QT_STATIC)
 #if QT_VERSION >= 0x050000
@@ -371,9 +373,9 @@ void InitCREngineLog(const char* cfgfile) {
         LVStreamRef cfg = LVOpenFileStream(cfgfile, LVOM_READ);
         if (!cfg.isNull()) {
             logprops->loadFromStream(cfg.get());
-            logfname = logprops->getStringDef(PROP_LOG_FILENAME, "stdout");
-            loglevelstr = logprops->getStringDef(PROP_LOG_LEVEL, "TRACE");
-            autoFlush = logprops->getBoolDef(PROP_LOG_AUTOFLUSH, false);
+            logfname = logprops->getStringDef(PROP_APP_LOG_FILENAME, "stdout");
+            loglevelstr = logprops->getStringDef(PROP_APP_LOG_LEVEL, "TRACE");
+            autoFlush = logprops->getBoolDef(PROP_APP_LOG_AUTOFLUSH, false);
         }
     }
     CRLog::log_level level = CRLog::LL_INFO;
