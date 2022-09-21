@@ -104,17 +104,26 @@
         <translation>antiword - библиотека поддержки документов Microsoft Word</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="77"/>
+        <location filename="../aboutdlg.cpp" line="78"/>
+        <source>RFC6234 (sources) - SHAsum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="80"/>
         <source>hyphman - AlReader hyphenation manager</source>
         <translation>hyphman - система переносов из AlReader</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="78"/>
-        <source>Hyphenation dictionaries - from KOReader</source>
-        <translation>Словари переносов - из проекта KOReader</translation>
+        <location filename="../aboutdlg.cpp" line="81"/>
+        <source>Hyphenation dictionaries - from Android</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="80"/>
+        <source>Hyphenation dictionaries - from KOReader</source>
+        <translation type="vanished">Словари переносов - из проекта KOReader</translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="83"/>
         <source>Languages character set database by Fontconfig</source>
         <translation>Набор символов различных письменностей от Fontconfig</translation>
     </message>

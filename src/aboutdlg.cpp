@@ -74,8 +74,11 @@ AboutDialog::AboutDialog(QWidget* parent) : QDialog(parent), m_ui(new Ui::AboutD
 #if USE_ANTIWORD == 1
     aboutText += "<p>" + tr("antiword - Microsoft Word format support") + "</p>";
 #endif
+#if USE_SHASUM == 1
+    aboutText += "<p>" + tr("RFC6234 (sources) - SHAsum") + "</p>";
+#endif
     aboutText += "<p>" + tr("hyphman - AlReader hyphenation manager") + "</p>";
-    aboutText += "<p>" + tr("Hyphenation dictionaries - from KOReader") + "</p>";
+    aboutText += "<p>" + tr("Hyphenation dictionaries - from Android") + "</p>";
 #if USE_LOCALE_DATA
     aboutText += "<p>" + tr("Languages character set database by Fontconfig") + "</p>";
 #endif

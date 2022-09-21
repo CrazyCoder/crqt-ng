@@ -104,17 +104,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="77"/>
-        <source>hyphman - AlReader hyphenation manager</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../aboutdlg.cpp" line="78"/>
-        <source>Hyphenation dictionaries - from KOReader</source>
+        <source>RFC6234 (sources) - SHAsum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../aboutdlg.cpp" line="80"/>
+        <source>hyphman - AlReader hyphenation manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="81"/>
+        <source>Hyphenation dictionaries - from Android</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="83"/>
         <source>Languages character set database by Fontconfig</source>
         <translation type="unfinished"></translation>
     </message>
