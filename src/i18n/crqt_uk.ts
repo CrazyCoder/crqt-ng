@@ -19,107 +19,112 @@
         <translation>Про</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="34"/>
+        <location filename="../aboutdlg.cpp" line="44"/>
         <source>CoolReaderNG is free open source e-book viewer based on crengine-ng library.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="35"/>
+        <location filename="../aboutdlg.cpp" line="45"/>
         <source>Source code is available at</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="36"/>
+        <location filename="../aboutdlg.cpp" line="46"/>
         <source>under the terms of GNU GPL license either version 2 or (at your option) any later version.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="38"/>
+        <location filename="../aboutdlg.cpp" line="48"/>
         <source>It is a fork of the &apos;CoolReader&apos; program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="40"/>
+        <location filename="../aboutdlg.cpp" line="50"/>
         <source>Third party components used in crengine-ng:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="43"/>
+        <location filename="../aboutdlg.cpp" line="53"/>
         <source>FreeType - font rendering</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="46"/>
+        <location filename="../aboutdlg.cpp" line="56"/>
         <source>HarfBuzz - text shaping, font kerning, ligatures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="49"/>
+        <location filename="../aboutdlg.cpp" line="59"/>
         <source>ZLib - compressing library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="52"/>
+        <location filename="../aboutdlg.cpp" line="62"/>
         <source>ZSTD - compressing library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="55"/>
+        <location filename="../aboutdlg.cpp" line="65"/>
         <source>libpng - PNG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="58"/>
+        <location filename="../aboutdlg.cpp" line="68"/>
         <source>libjpeg - JPEG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="61"/>
+        <location filename="../aboutdlg.cpp" line="71"/>
         <source>FriBiDi - RTL writing support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="64"/>
+        <location filename="../aboutdlg.cpp" line="74"/>
         <source>libunibreak - line breaking and word breaking algorithms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="67"/>
+        <location filename="../aboutdlg.cpp" line="77"/>
         <source>utf8proc - for unicode string comparision</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="70"/>
+        <location filename="../aboutdlg.cpp" line="80"/>
         <source>NanoSVG - SVG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="73"/>
+        <location filename="../aboutdlg.cpp" line="83"/>
         <source>chmlib - chm format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="76"/>
+        <location filename="../aboutdlg.cpp" line="86"/>
         <source>antiword - Microsoft Word format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="79"/>
+        <location filename="../aboutdlg.cpp" line="89"/>
         <source>RFC6234 (sources) - SHAsum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="81"/>
+        <location filename="../aboutdlg.cpp" line="91"/>
         <source>hyphman - AlReader hyphenation manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="82"/>
-        <source>Hyphenation dictionaries - from Android</source>
+        <location filename="../aboutdlg.cpp" line="92"/>
+        <source>Most hyphenation dictionaries - TEX hyphenation patterns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="84"/>
+        <location filename="../aboutdlg.cpp" line="93"/>
+        <source>Russian hyphenation dictionary - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="96"/>
         <source>Languages character set database by Fontconfig</source>
         <translation type="unfinished"></translation>
     </message>
@@ -127,13 +132,13 @@
 <context>
     <name>AddBookmarkDialog</name>
     <message>
-        <location filename="../addbookmarkdlg.cpp" line="40"/>
+        <location filename="../addbookmarkdlg.cpp" line="49"/>
         <source>Add bookmark</source>
         <translation>Додати закладку</translation>
     </message>
     <message>
-        <location filename="../addbookmarkdlg.cpp" line="48"/>
-        <location filename="../addbookmarkdlg.cpp" line="117"/>
+        <location filename="../addbookmarkdlg.cpp" line="57"/>
+        <location filename="../addbookmarkdlg.cpp" line="126"/>
         <source>Correction</source>
         <translation>Корекція</translation>
     </message>
@@ -159,7 +164,7 @@
     </message>
     <message>
         <location filename="../addbookmarkdlg.ui" line="32"/>
-        <location filename="../addbookmarkdlg.cpp" line="45"/>
+        <location filename="../addbookmarkdlg.cpp" line="54"/>
         <source>Position</source>
         <translation>Позиція</translation>
     </message>
@@ -175,8 +180,8 @@
     </message>
     <message>
         <location filename="../addbookmarkdlg.ui" line="53"/>
-        <location filename="../addbookmarkdlg.cpp" line="47"/>
-        <location filename="../addbookmarkdlg.cpp" line="113"/>
+        <location filename="../addbookmarkdlg.cpp" line="56"/>
+        <location filename="../addbookmarkdlg.cpp" line="122"/>
         <source>Comment</source>
         <translation>Коментар</translation>
     </message>
@@ -184,45 +189,45 @@
 <context>
     <name>BookmarkListDialog</name>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="38"/>
+        <location filename="../bookmarklistdlg.cpp" line="46"/>
         <source>Bookmarks</source>
         <translation>Закладки</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="42"/>
+        <location filename="../bookmarklistdlg.cpp" line="50"/>
         <source>Position</source>
         <translation>Позиція</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="42"/>
+        <location filename="../bookmarklistdlg.cpp" line="50"/>
         <source>Type</source>
         <comment>bookmark type</comment>
         <translation>Тип</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="42"/>
+        <location filename="../bookmarklistdlg.cpp" line="50"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="43"/>
+        <location filename="../bookmarklistdlg.cpp" line="51"/>
         <source>Comment</source>
         <translation>Коментар</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="80"/>
+        <location filename="../bookmarklistdlg.cpp" line="88"/>
         <source>P</source>
         <comment>Bookmark type first letter - Position</comment>
         <translation>П</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="82"/>
+        <location filename="../bookmarklistdlg.cpp" line="90"/>
         <source>C</source>
         <comment>Bookmark type first letter - Comment</comment>
         <translation>К</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="84"/>
+        <location filename="../bookmarklistdlg.cpp" line="92"/>
         <source>E</source>
         <comment>Bookmark type first letter - Correction/Edit</comment>
         <translation>Р</translation>
@@ -281,22 +286,22 @@
 <context>
     <name>CR3View</name>
     <message>
-        <location filename="../cr3widget.cpp" line="518"/>
+        <location filename="../cr3widget.cpp" line="531"/>
         <source>Error while opening document </source>
         <translation>Помилка при відкритті документу </translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1511"/>
+        <location filename="../cr3widget.cpp" line="1524"/>
         <source>Loading: please wait...</source>
         <translation>Завантажується: зачекайте…</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1166"/>
+        <location filename="../cr3widget.cpp" line="1179"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1167"/>
+        <location filename="../cr3widget.cpp" line="1180"/>
         <source>Font &quot;%1&quot; isn&apos;t compatible with language &quot;%2&quot;. Instead will be used fallback font.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -327,7 +332,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fallbackfontsdialog.cpp" line="155"/>
+        <location filename="../fallbackfontsdialog.cpp" line="163"/>
         <source>Remove this fallback font</source>
         <translation type="unfinished"></translation>
     </message>
@@ -335,7 +340,7 @@
 <context>
     <name>FilePropsDialog</name>
     <message>
-        <location filename="../filepropsdlg.cpp" line="32"/>
+        <location filename="../filepropsdlg.cpp" line="41"/>
         <source>Document properties</source>
         <translation>Властивості документу</translation>
     </message>
@@ -345,192 +350,192 @@
         <translation>Діалог</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="35"/>
+        <location filename="../filepropsdlg.cpp" line="44"/>
         <source>Property</source>
         <translation>Властивість</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="35"/>
+        <location filename="../filepropsdlg.cpp" line="44"/>
         <source>Value</source>
         <translation>Значення</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="177"/>
+        <location filename="../filepropsdlg.cpp" line="186"/>
         <source>Current page</source>
         <translation>Поточна сторінка</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="178"/>
+        <location filename="../filepropsdlg.cpp" line="187"/>
         <source>Total pages</source>
         <translation>Всього сторінок</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="179"/>
+        <location filename="../filepropsdlg.cpp" line="188"/>
         <source>Battery state</source>
         <translation>Стан батареї</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="180"/>
+        <location filename="../filepropsdlg.cpp" line="189"/>
         <source>Current Time</source>
         <translation>Поточний час</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="185"/>
+        <location filename="../filepropsdlg.cpp" line="194"/>
         <source>Current chapter</source>
         <translation>Поточний розділ</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="188"/>
+        <location filename="../filepropsdlg.cpp" line="197"/>
         <source>Status</source>
         <translation>Стан</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="190"/>
+        <location filename="../filepropsdlg.cpp" line="199"/>
         <source>Archive name</source>
         <translation>Ім&apos;я архіву</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="191"/>
+        <location filename="../filepropsdlg.cpp" line="200"/>
         <source>Archive path</source>
         <translation>Шлях до архіву</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="192"/>
+        <location filename="../filepropsdlg.cpp" line="201"/>
         <source>Archive size</source>
         <translation>Розмір архіву</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="193"/>
+        <location filename="../filepropsdlg.cpp" line="202"/>
         <source>File name</source>
         <translation>Ім&apos;я файлу</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="194"/>
+        <location filename="../filepropsdlg.cpp" line="203"/>
         <source>File path</source>
         <translation>Шлях до файлу</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="195"/>
+        <location filename="../filepropsdlg.cpp" line="204"/>
         <source>File size</source>
         <translation>Розмір файлу</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="196"/>
+        <location filename="../filepropsdlg.cpp" line="205"/>
         <source>File format</source>
         <translation>Формат файлу</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="197"/>
+        <location filename="../filepropsdlg.cpp" line="206"/>
         <source>File info</source>
         <translation>Інформація про файл</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="199"/>
+        <location filename="../filepropsdlg.cpp" line="208"/>
         <source>Title</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="200"/>
+        <location filename="../filepropsdlg.cpp" line="209"/>
         <source>Author(s)</source>
         <translation>Автор(и)</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="201"/>
+        <location filename="../filepropsdlg.cpp" line="210"/>
         <source>Series name</source>
         <translation>Назва серії</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="202"/>
+        <location filename="../filepropsdlg.cpp" line="211"/>
         <source>Series number</source>
         <translation>№ в серії</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="203"/>
+        <location filename="../filepropsdlg.cpp" line="212"/>
         <source>Date</source>
         <translation>Дата</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="204"/>
+        <location filename="../filepropsdlg.cpp" line="213"/>
         <source>Genres</source>
         <translation>Жанри</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="206"/>
+        <location filename="../filepropsdlg.cpp" line="215"/>
         <source>Translator</source>
         <translation>Перекладач</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="207"/>
+        <location filename="../filepropsdlg.cpp" line="216"/>
         <source>Book info</source>
         <translation>Інформація про книгу</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="209"/>
+        <location filename="../filepropsdlg.cpp" line="218"/>
         <source>Document author</source>
         <translation>Документ створив</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="210"/>
+        <location filename="../filepropsdlg.cpp" line="219"/>
         <source>Document date</source>
         <translation>Дата створення документу</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="211"/>
+        <location filename="../filepropsdlg.cpp" line="220"/>
         <source>Document source URL</source>
         <translation>URL тексту-джерела</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="212"/>
+        <location filename="../filepropsdlg.cpp" line="221"/>
         <source>OCR by</source>
         <translation>Оцифровувач</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="213"/>
+        <location filename="../filepropsdlg.cpp" line="222"/>
         <source>Document version</source>
         <translation>Версія документу</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="214"/>
+        <location filename="../filepropsdlg.cpp" line="223"/>
         <source>Document info</source>
         <translation>Інформація про документ</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="216"/>
+        <location filename="../filepropsdlg.cpp" line="225"/>
         <source>Publication name</source>
         <translation>Назва видання</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="217"/>
+        <location filename="../filepropsdlg.cpp" line="226"/>
         <source>Publisher</source>
         <translation>Видавництво</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="218"/>
+        <location filename="../filepropsdlg.cpp" line="227"/>
         <source>Publisher city</source>
         <translation>Місто видання</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="219"/>
+        <location filename="../filepropsdlg.cpp" line="228"/>
         <source>Publication year</source>
         <translation>Рік видання</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="220"/>
+        <location filename="../filepropsdlg.cpp" line="229"/>
         <source>ISBN</source>
         <translation>ISBN</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="221"/>
+        <location filename="../filepropsdlg.cpp" line="230"/>
         <source>Publication info</source>
         <translation>Інформація про видання</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="223"/>
+        <location filename="../filepropsdlg.cpp" line="232"/>
         <source>Custom info</source>
         <translation>Додаткова інформація</translation>
     </message>
     <message>
-        <location filename="../filepropsdlg.cpp" line="205"/>
+        <location filename="../filepropsdlg.cpp" line="214"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
@@ -538,87 +543,87 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="208"/>
+        <location filename="../mainwindow.cpp" line="219"/>
         <source>Open book file</source>
         <translation>Відкриття файлу книги</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="168"/>
+        <location filename="../mainwindow.cpp" line="179"/>
         <source>Export document to</source>
         <translation>Експорт документу до</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="168"/>
+        <location filename="../mainwindow.cpp" line="179"/>
         <source>WOL book (*.wol)</source>
         <translation>WOL-книга (*.wol)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="173"/>
+        <location filename="../mainwindow.cpp" line="184"/>
         <source>Export to WOL format</source>
         <translation>Експорт у WOL формат</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="210"/>
+        <location filename="../mainwindow.cpp" line="221"/>
         <source>All supported formats</source>
         <translation>Всі формати, які підтримуються</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="211"/>
+        <location filename="../mainwindow.cpp" line="222"/>
         <source>FB2 books</source>
         <translation>Книги FB2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="213"/>
+        <location filename="../mainwindow.cpp" line="224"/>
         <source>Text files</source>
         <translation>Текстові файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="214"/>
+        <location filename="../mainwindow.cpp" line="225"/>
         <source>Rich text</source>
         <translation>RTF файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="215"/>
+        <location filename="../mainwindow.cpp" line="226"/>
         <source>MS Word document</source>
         <translation>MS Word документи</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="217"/>
+        <location filename="../mainwindow.cpp" line="228"/>
         <source>HTML files</source>
         <translation>HTML файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="218"/>
+        <location filename="../mainwindow.cpp" line="229"/>
         <source>EPUB files</source>
         <translation>EPUB файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="219"/>
+        <location filename="../mainwindow.cpp" line="230"/>
         <source>CHM files</source>
         <translation>CHM файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="220"/>
+        <location filename="../mainwindow.cpp" line="231"/>
         <source>MOBI files</source>
         <translation>MOBI файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="221"/>
+        <location filename="../mainwindow.cpp" line="232"/>
         <source>PalmDOC files</source>
         <translation>PalmDOC файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="222"/>
+        <location filename="../mainwindow.cpp" line="233"/>
         <source>ZIP archives</source>
         <translation>ZIP архіви</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="212"/>
+        <location filename="../mainwindow.cpp" line="223"/>
         <source>FB3 books</source>
         <translation type="unfinished">Книги FB2 {3 ?}</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="216"/>
+        <location filename="../mainwindow.cpp" line="227"/>
         <source>Open Document files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1145,32 +1150,32 @@
 <context>
     <name>RecentBooksDlg</name>
     <message>
-        <location filename="../recentdlg.cpp" line="35"/>
+        <location filename="../recentdlg.cpp" line="44"/>
         <source>#</source>
         <translation>№</translation>
     </message>
     <message>
-        <location filename="../recentdlg.cpp" line="35"/>
+        <location filename="../recentdlg.cpp" line="44"/>
         <source>Author</source>
         <translation>Автор</translation>
     </message>
     <message>
-        <location filename="../recentdlg.cpp" line="35"/>
+        <location filename="../recentdlg.cpp" line="44"/>
         <source>Title</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../recentdlg.cpp" line="35"/>
+        <location filename="../recentdlg.cpp" line="44"/>
         <source>Filename</source>
         <translation>Ім&apos;я файлу</translation>
     </message>
     <message>
-        <location filename="../recentdlg.cpp" line="167"/>
+        <location filename="../recentdlg.cpp" line="176"/>
         <source>Remove all history items</source>
         <translation>Вилучити усі записи історії</translation>
     </message>
     <message>
-        <location filename="../recentdlg.cpp" line="168"/>
+        <location filename="../recentdlg.cpp" line="177"/>
         <source>Do you really want to remove all history records?</source>
         <translation>Справді бажаєте вилучити усі записи історії?</translation>
     </message>
@@ -1198,7 +1203,7 @@
 <context>
     <name>SampleView</name>
     <message>
-        <location filename="../sampleview.cpp" line="20"/>
+        <location filename="../sampleview.cpp" line="30"/>
         <source>Style Preview</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1241,12 +1246,12 @@
         <translation>Закрити</translation>
     </message>
     <message>
-        <location filename="../searchdlg.cpp" line="138"/>
+        <location filename="../searchdlg.cpp" line="148"/>
         <source>Not found</source>
         <translation>Не знайдено</translation>
     </message>
     <message>
-        <location filename="../searchdlg.cpp" line="139"/>
+        <location filename="../searchdlg.cpp" line="149"/>
         <source>Search pattern is not found in document</source>
         <translation>Пошуковий шаблон не знайдено в документі</translation>
     </message>
@@ -1254,35 +1259,35 @@
 <context>
     <name>SettingsDlg</name>
     <message>
-        <location filename="../settings.cpp" line="396"/>
+        <location filename="../settings.cpp" line="408"/>
         <source>[No hyphenation]</source>
         <translation>[Без переносів]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="398"/>
+        <location filename="../settings.cpp" line="410"/>
         <source>[Algorythmic hyphenation]</source>
         <translation>[Алгоритмічні переноси]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="961"/>
+        <location filename="../settings.cpp" line="973"/>
         <source>The quick brown fox jumps over the lazy dog. </source>
         <translation>У ґаздині є їжак. </translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1067"/>
-        <location filename="../settings.cpp" line="1019"/>
+        <location filename="../settings.cpp" line="1031"/>
         <source>Text color</source>
         <translation>Колір тексту</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1257"/>
-        <location filename="../settings.cpp" line="1023"/>
+        <location filename="../settings.cpp" line="1035"/>
         <source>Background color</source>
         <translation>Колір тла</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="549"/>
-        <location filename="../settings.cpp" line="1027"/>
+        <location filename="../settings.cpp" line="1039"/>
         <source>Page header text color</source>
         <translation>Колір тексту заголовку сторінки</translation>
     </message>
@@ -1397,8 +1402,8 @@
         <location filename="../settings.ui" line="891"/>
         <location filename="../settings.ui" line="945"/>
         <location filename="../settings.ui" line="999"/>
-        <location filename="../settings.cpp" line="562"/>
-        <location filename="../settings.cpp" line="603"/>
+        <location filename="../settings.cpp" line="574"/>
+        <location filename="../settings.cpp" line="615"/>
         <source>0</source>
         <translation>0</translation>
     </message>
@@ -1734,7 +1739,7 @@
     </message>
     <message>
         <location filename="../settings.ui" line="1815"/>
-        <location filename="../settings.cpp" line="422"/>
+        <location filename="../settings.cpp" line="434"/>
         <source>Default paragraph style</source>
         <translation>Типовий стиль абзацу</translation>
     </message>
@@ -1796,13 +1801,13 @@
     </message>
     <message>
         <location filename="../settings.ui" line="1946"/>
-        <location filename="../settings.cpp" line="516"/>
+        <location filename="../settings.cpp" line="528"/>
         <source>Left</source>
         <translation>Ліворуч</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1956"/>
-        <location filename="../settings.cpp" line="516"/>
+        <location filename="../settings.cpp" line="528"/>
         <source>Right</source>
         <translation>Праворуч</translation>
     </message>
@@ -1822,371 +1827,371 @@
         <translation>Вертикальне вирівнювання</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="423"/>
+        <location filename="../settings.cpp" line="435"/>
         <source>Title</source>
         <translation>Заголовок</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="424"/>
+        <location filename="../settings.cpp" line="436"/>
         <source>Subtitle</source>
         <translation>Підзаголовок</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="425"/>
+        <location filename="../settings.cpp" line="437"/>
         <source>Preformatted text</source>
         <translation>Форматований текст</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="426"/>
+        <location filename="../settings.cpp" line="438"/>
         <source>Link</source>
         <translation>Посилання</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="427"/>
+        <location filename="../settings.cpp" line="439"/>
         <source>Cite / quotation</source>
         <translation>Цитата</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="428"/>
+        <location filename="../settings.cpp" line="440"/>
         <source>Epigraph</source>
         <translation>Епіграф</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="429"/>
+        <location filename="../settings.cpp" line="441"/>
         <source>Poem</source>
         <translation>Вірш</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="430"/>
+        <location filename="../settings.cpp" line="442"/>
         <source>Text author</source>
         <translation>Автор тексту</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="431"/>
+        <location filename="../settings.cpp" line="443"/>
         <source>Footnote link</source>
         <translation>Посилання виноски</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="432"/>
+        <location filename="../settings.cpp" line="444"/>
         <source>Footnote</source>
         <translation>Виноска</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="433"/>
+        <location filename="../settings.cpp" line="445"/>
         <source>Footnote title</source>
         <translation>Заголовок виноски</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="434"/>
+        <location filename="../settings.cpp" line="446"/>
         <source>Annotation</source>
         <translation>Анотація</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="516"/>
-        <location filename="../settings.cpp" line="532"/>
-        <location filename="../settings.cpp" line="561"/>
-        <location filename="../settings.cpp" line="602"/>
-        <location filename="../settings.cpp" line="635"/>
-        <location filename="../settings.cpp" line="657"/>
-        <location filename="../settings.cpp" line="676"/>
-        <location filename="../settings.cpp" line="722"/>
-        <location filename="../settings.cpp" line="787"/>
-        <location filename="../settings.cpp" line="805"/>
+        <location filename="../settings.cpp" line="528"/>
+        <location filename="../settings.cpp" line="544"/>
+        <location filename="../settings.cpp" line="573"/>
+        <location filename="../settings.cpp" line="614"/>
+        <location filename="../settings.cpp" line="647"/>
+        <location filename="../settings.cpp" line="669"/>
+        <location filename="../settings.cpp" line="688"/>
+        <location filename="../settings.cpp" line="734"/>
+        <location filename="../settings.cpp" line="799"/>
+        <location filename="../settings.cpp" line="817"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="516"/>
+        <location filename="../settings.cpp" line="528"/>
         <source>Justify</source>
         <translation>Вирівняти з заповненням</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="516"/>
+        <location filename="../settings.cpp" line="528"/>
         <source>Center</source>
         <translation>По центру</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="532"/>
+        <location filename="../settings.cpp" line="544"/>
         <source>No indent</source>
         <translation>Без відступу</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="532"/>
+        <location filename="../settings.cpp" line="544"/>
         <source>Small Indent</source>
         <translation>Малий відступ</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="532"/>
+        <location filename="../settings.cpp" line="544"/>
         <source>Big Indent</source>
         <translation>Великий відступ</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="532"/>
+        <location filename="../settings.cpp" line="544"/>
         <source>Small Outdent</source>
         <translation>Малий відступ вліво</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="532"/>
+        <location filename="../settings.cpp" line="544"/>
         <source>Big Outdent</source>
         <translation>Великий відступ вліво</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="563"/>
+        <location filename="../settings.cpp" line="575"/>
         <source>20% of line height</source>
         <translation>20% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="564"/>
+        <location filename="../settings.cpp" line="576"/>
         <source>30% of line height</source>
         <translation>30% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="565"/>
-        <location filename="../settings.cpp" line="604"/>
+        <location filename="../settings.cpp" line="577"/>
+        <location filename="../settings.cpp" line="616"/>
         <source>50% of line height</source>
         <translation>50% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="566"/>
-        <location filename="../settings.cpp" line="605"/>
+        <location filename="../settings.cpp" line="578"/>
+        <location filename="../settings.cpp" line="617"/>
         <source>100% of line height</source>
         <translation>100% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="567"/>
-        <location filename="../settings.cpp" line="606"/>
+        <location filename="../settings.cpp" line="579"/>
+        <location filename="../settings.cpp" line="618"/>
         <source>150% of line height</source>
         <translation>150% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="607"/>
+        <location filename="../settings.cpp" line="619"/>
         <source>200% of line height</source>
         <translation>200% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="608"/>
+        <location filename="../settings.cpp" line="620"/>
         <source>400% of line height</source>
         <translation>400% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="609"/>
+        <location filename="../settings.cpp" line="621"/>
         <source>5% of line width</source>
         <translation>5% від ширини рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="610"/>
+        <location filename="../settings.cpp" line="622"/>
         <source>10% of line width</source>
         <translation>10% від ширини рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="611"/>
+        <location filename="../settings.cpp" line="623"/>
         <source>15% of line width</source>
         <translation>15% від ширини рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="612"/>
+        <location filename="../settings.cpp" line="624"/>
         <source>20% of line width</source>
         <translation>20% від ширини рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="613"/>
+        <location filename="../settings.cpp" line="625"/>
         <source>30% of line width</source>
         <translation>30% від ширини рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="636"/>
-        <location filename="../settings.cpp" line="677"/>
+        <location filename="../settings.cpp" line="648"/>
+        <location filename="../settings.cpp" line="689"/>
         <source>Normal</source>
         <translation>Звичайний</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="637"/>
+        <location filename="../settings.cpp" line="649"/>
         <source>Bold</source>
         <translation>Напівжирний</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="638"/>
+        <location filename="../settings.cpp" line="650"/>
         <source>Bolder</source>
         <translation>Жирний</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="639"/>
+        <location filename="../settings.cpp" line="651"/>
         <source>Lighter</source>
         <translation>Тонкий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="658"/>
+        <location filename="../settings.cpp" line="670"/>
         <source>Increase: 110%</source>
         <translation>Збільшений: 110%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="659"/>
+        <location filename="../settings.cpp" line="671"/>
         <source>Increase: 120%</source>
         <translation>Збільшений: 120%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="660"/>
+        <location filename="../settings.cpp" line="672"/>
         <source>Increase: 150%</source>
         <translation>Збільшений: 150%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="661"/>
+        <location filename="../settings.cpp" line="673"/>
         <source>Decrease: 90%</source>
         <translation>Зменшений: 90%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="662"/>
+        <location filename="../settings.cpp" line="674"/>
         <source>Decrease: 80%</source>
         <translation>Зменшений: 80%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="663"/>
+        <location filename="../settings.cpp" line="675"/>
         <source>Decrease: 70%</source>
         <translation>Зменшений: 70%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="664"/>
+        <location filename="../settings.cpp" line="676"/>
         <source>Decrease: 60%</source>
         <translation>Зменшений: 60%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="678"/>
+        <location filename="../settings.cpp" line="690"/>
         <source>Italic</source>
         <translation>Курсив</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="687"/>
+        <location filename="../settings.cpp" line="699"/>
         <source>[Default Sans Serif]</source>
         <translation>[Типовий Sans Serif]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="689"/>
+        <location filename="../settings.cpp" line="701"/>
         <source>[Default Serif]</source>
         <translation>[Типовий Serif]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="691"/>
+        <location filename="../settings.cpp" line="703"/>
         <source>[Default Monospace]</source>
         <translation>[Типовий Monospace]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="723"/>
+        <location filename="../settings.cpp" line="735"/>
         <source>Black</source>
         <translation>Чорний</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="724"/>
+        <location filename="../settings.cpp" line="736"/>
         <source>Green</source>
         <translation>Зелений</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="725"/>
+        <location filename="../settings.cpp" line="737"/>
         <source>Silver</source>
         <translation>Срібний</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="726"/>
+        <location filename="../settings.cpp" line="738"/>
         <source>Lime</source>
         <translation>Лимонний</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="223"/>
-        <location filename="../settings.cpp" line="230"/>
-        <location filename="../settings.cpp" line="727"/>
+        <location filename="../settings.cpp" line="235"/>
+        <location filename="../settings.cpp" line="242"/>
+        <location filename="../settings.cpp" line="739"/>
         <source>Gray</source>
         <translation>Сірий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="728"/>
+        <location filename="../settings.cpp" line="740"/>
         <source>Olive</source>
         <translation>Оливковий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="729"/>
+        <location filename="../settings.cpp" line="741"/>
         <source>White</source>
         <translation>Білий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="730"/>
+        <location filename="../settings.cpp" line="742"/>
         <source>Yellow</source>
         <translation>Жовтий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="731"/>
+        <location filename="../settings.cpp" line="743"/>
         <source>Maroon</source>
         <translation>Каштановий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="732"/>
+        <location filename="../settings.cpp" line="744"/>
         <source>Navy</source>
         <translation>Темно-синій</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="733"/>
+        <location filename="../settings.cpp" line="745"/>
         <source>Red</source>
         <translation>Червоний</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="734"/>
+        <location filename="../settings.cpp" line="746"/>
         <source>Blue</source>
         <translation>Синій</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="735"/>
+        <location filename="../settings.cpp" line="747"/>
         <source>Purple</source>
         <translation>Бузковий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="736"/>
+        <location filename="../settings.cpp" line="748"/>
         <source>Teal</source>
         <translation>Синьо-зелений</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="737"/>
+        <location filename="../settings.cpp" line="749"/>
         <source>Fuchsia</source>
         <translation>Фуксія</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="738"/>
+        <location filename="../settings.cpp" line="750"/>
         <source>Aqua</source>
         <translation>Зеленувато-блакитний</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="327"/>
-        <location filename="../settings.cpp" line="222"/>
-        <location filename="../settings.cpp" line="229"/>
-        <location filename="../settings.cpp" line="788"/>
+        <location filename="../settings.cpp" line="234"/>
+        <location filename="../settings.cpp" line="241"/>
+        <location filename="../settings.cpp" line="800"/>
         <source>None</source>
         <translation>Немає</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="800"/>
-        <location filename="../settings.cpp" line="789"/>
+        <location filename="../settings.cpp" line="801"/>
         <source>Underline</source>
         <translation>Підкреслений</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="790"/>
+        <location filename="../settings.cpp" line="802"/>
         <source>Line through</source>
         <translation>Перекреслений</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="791"/>
+        <location filename="../settings.cpp" line="803"/>
         <source>Overline</source>
         <translation>Надкреслений</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="806"/>
+        <location filename="../settings.cpp" line="818"/>
         <source>Baseline</source>
         <translation>По основі</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="807"/>
+        <location filename="../settings.cpp" line="819"/>
         <source>Subscript</source>
         <translation>Нижній індекс</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="808"/>
+        <location filename="../settings.cpp" line="820"/>
         <source>Superscript</source>
         <translation>Верхній індекс</translation>
     </message>
@@ -2212,17 +2217,17 @@
     </message>
     <message>
         <location filename="../settings.ui" line="617"/>
-        <location filename="../settings.cpp" line="1269"/>
+        <location filename="../settings.cpp" line="1281"/>
         <source>Selection color</source>
         <translation>Колір виділення</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1273"/>
+        <location filename="../settings.cpp" line="1285"/>
         <source>Comment bookmark color</source>
         <translation>Колір закладки-коментаря</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1277"/>
+        <location filename="../settings.cpp" line="1289"/>
         <source>Correction bookmark color</source>
         <translation>Колір закладки-поправки</translation>
     </message>
@@ -2440,17 +2445,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="194"/>
+        <location filename="../settings.cpp" line="206"/>
         <source>Simple (FreeType only, fastest)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="195"/>
+        <location filename="../settings.cpp" line="207"/>
         <source>Light (HarfBuzz without ligatures)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="196"/>
+        <location filename="../settings.cpp" line="208"/>
         <source>Full (HarfBuzz with ligatures)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2475,32 +2480,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="224"/>
+        <location filename="../settings.cpp" line="236"/>
         <source>LCD (RGB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="225"/>
+        <location filename="../settings.cpp" line="237"/>
         <source>LCD (BGR)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="226"/>
+        <location filename="../settings.cpp" line="238"/>
         <source>LCD (RGB) vertical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="227"/>
+        <location filename="../settings.cpp" line="239"/>
         <source>LCD (BGR) vertical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1130"/>
+        <location filename="../settings.cpp" line="1142"/>
         <source>synthetic*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1132"/>
+        <location filename="../settings.cpp" line="1144"/>
         <source>synthetic</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2513,12 +2518,12 @@
 <context>
     <name>TocDlg</name>
     <message>
-        <location filename="../tocdlg.cpp" line="66"/>
+        <location filename="../tocdlg.cpp" line="75"/>
         <source>Title</source>
         <translation>Заголовок</translation>
     </message>
     <message>
-        <location filename="../tocdlg.cpp" line="66"/>
+        <location filename="../tocdlg.cpp" line="75"/>
         <source>Page</source>
         <translation>Сторінка</translation>
     </message>
@@ -2566,7 +2571,7 @@
 <context>
     <name>crqtutils</name>
     <message>
-        <location filename="../crqtutil.cpp" line="167"/>
+        <location filename="../crqtutil.cpp" line="176"/>
         <source>Undetermined</source>
         <translation type="unfinished"></translation>
     </message>

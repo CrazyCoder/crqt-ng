@@ -89,7 +89,9 @@ AboutDialog::AboutDialog(QWidget* parent) : QDialog(parent), m_ui(new Ui::AboutD
     aboutText += "<p>" + tr("RFC6234 (sources) - SHAsum") + "</p>";
 #endif
     aboutText += "<p>" + tr("hyphman - AlReader hyphenation manager") + "</p>";
-    aboutText += "<p>" + tr("Hyphenation dictionaries - from Android") + "</p>";
+    aboutText += "<p>" + tr("Most hyphenation dictionaries - TEX hyphenation patterns") + "</p>";
+    aboutText += "<p>" + tr("Russian hyphenation dictionary - ") +
+                 QString("https://github.com/laboratory50/russian-spellpack") + "</p>";
 #if USE_LOCALE_DATA
     aboutText += "<p>" + tr("Languages character set database by Fontconfig") + "</p>";
 #endif
