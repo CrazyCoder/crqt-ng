@@ -30,91 +30,91 @@
     </message>
     <message>
         <location filename="../aboutdlg.cpp" line="36"/>
-        <source>under the terms of GNU GPLv2 license.</source>
-        <translation>под лицензией GNU GPL2.</translation>
+        <source>under the terms of GNU GPL license either version 2 or (at your option) any later version.</source>
+        <translation>под лицензией GNU GPL2 или (на ваш выбор) более поздней.</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="37"/>
+        <location filename="../aboutdlg.cpp" line="38"/>
         <source>It is a fork of the &apos;CoolReader&apos; program.</source>
         <translation>Является форком программы &apos;CoolReader&apos;.</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="39"/>
+        <location filename="../aboutdlg.cpp" line="40"/>
         <source>Third party components used in crengine-ng:</source>
         <translation>В crengine-ng использованы следующие сторонние компоненты:</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="42"/>
+        <location filename="../aboutdlg.cpp" line="43"/>
         <source>FreeType - font rendering</source>
         <translation>FreeType - рендеринг шрифтов</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="45"/>
+        <location filename="../aboutdlg.cpp" line="46"/>
         <source>HarfBuzz - text shaping, font kerning, ligatures</source>
         <translation>HarfBuzz - формировщик текста, кернинг, лигатуры</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="48"/>
+        <location filename="../aboutdlg.cpp" line="49"/>
         <source>ZLib - compressing library</source>
         <translation>ZLib - библиотека сжатия</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="51"/>
+        <location filename="../aboutdlg.cpp" line="52"/>
         <source>ZSTD - compressing library</source>
         <translation>ZSTD - библиотека сжатия</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="54"/>
+        <location filename="../aboutdlg.cpp" line="55"/>
         <source>libpng - PNG image format support</source>
         <translation>libpng - библиотека поддержки изображений формата PNG</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="57"/>
+        <location filename="../aboutdlg.cpp" line="58"/>
         <source>libjpeg - JPEG image format support</source>
         <translation>libjpeg - библиотека поддержки изображений формата JPEG</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="60"/>
+        <location filename="../aboutdlg.cpp" line="61"/>
         <source>FriBiDi - RTL writing support</source>
         <translation>FriBiDi - поддержка RTL письменности</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="63"/>
+        <location filename="../aboutdlg.cpp" line="64"/>
         <source>libunibreak - line breaking and word breaking algorithms</source>
         <translation>libunibreak - алгоритмы разбиения строк и слов</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="66"/>
+        <location filename="../aboutdlg.cpp" line="67"/>
         <source>utf8proc - for unicode string comparision</source>
         <translation>utf8proc - для сравнения строк юникода</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="69"/>
+        <location filename="../aboutdlg.cpp" line="70"/>
         <source>NanoSVG - SVG image format support</source>
         <translation>NanoSVG - библиотека поддержки изображений формата SVG</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="72"/>
+        <location filename="../aboutdlg.cpp" line="73"/>
         <source>chmlib - chm format support</source>
         <translation>chmlib - библиотека поддержки формата CHM</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="75"/>
+        <location filename="../aboutdlg.cpp" line="76"/>
         <source>antiword - Microsoft Word format support</source>
         <translation>antiword - библиотека поддержки документов Microsoft Word</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="78"/>
+        <location filename="../aboutdlg.cpp" line="79"/>
         <source>RFC6234 (sources) - SHAsum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="80"/>
+        <location filename="../aboutdlg.cpp" line="81"/>
         <source>hyphman - AlReader hyphenation manager</source>
         <translation>hyphman - система переносов из AlReader</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="81"/>
+        <location filename="../aboutdlg.cpp" line="82"/>
         <source>Hyphenation dictionaries - from Android</source>
         <translation type="unfinished"></translation>
     </message>
@@ -123,7 +123,7 @@
         <translation type="vanished">Словари переносов - из проекта KOReader</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="83"/>
+        <location filename="../aboutdlg.cpp" line="84"/>
         <source>Languages character set database by Fontconfig</source>
         <translation>Набор символов различных письменностей от Fontconfig</translation>
     </message>

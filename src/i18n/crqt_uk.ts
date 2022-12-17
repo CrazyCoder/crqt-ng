@@ -30,96 +30,96 @@
     </message>
     <message>
         <location filename="../aboutdlg.cpp" line="36"/>
-        <source>under the terms of GNU GPLv2 license.</source>
+        <source>under the terms of GNU GPL license either version 2 or (at your option) any later version.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="37"/>
+        <location filename="../aboutdlg.cpp" line="38"/>
         <source>It is a fork of the &apos;CoolReader&apos; program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="39"/>
+        <location filename="../aboutdlg.cpp" line="40"/>
         <source>Third party components used in crengine-ng:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="42"/>
+        <location filename="../aboutdlg.cpp" line="43"/>
         <source>FreeType - font rendering</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="45"/>
+        <location filename="../aboutdlg.cpp" line="46"/>
         <source>HarfBuzz - text shaping, font kerning, ligatures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="48"/>
+        <location filename="../aboutdlg.cpp" line="49"/>
         <source>ZLib - compressing library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="51"/>
+        <location filename="../aboutdlg.cpp" line="52"/>
         <source>ZSTD - compressing library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="54"/>
+        <location filename="../aboutdlg.cpp" line="55"/>
         <source>libpng - PNG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="57"/>
+        <location filename="../aboutdlg.cpp" line="58"/>
         <source>libjpeg - JPEG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="60"/>
+        <location filename="../aboutdlg.cpp" line="61"/>
         <source>FriBiDi - RTL writing support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="63"/>
+        <location filename="../aboutdlg.cpp" line="64"/>
         <source>libunibreak - line breaking and word breaking algorithms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="66"/>
+        <location filename="../aboutdlg.cpp" line="67"/>
         <source>utf8proc - for unicode string comparision</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="69"/>
+        <location filename="../aboutdlg.cpp" line="70"/>
         <source>NanoSVG - SVG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="72"/>
+        <location filename="../aboutdlg.cpp" line="73"/>
         <source>chmlib - chm format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="75"/>
+        <location filename="../aboutdlg.cpp" line="76"/>
         <source>antiword - Microsoft Word format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="78"/>
+        <location filename="../aboutdlg.cpp" line="79"/>
         <source>RFC6234 (sources) - SHAsum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="80"/>
+        <location filename="../aboutdlg.cpp" line="81"/>
         <source>hyphman - AlReader hyphenation manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="81"/>
+        <location filename="../aboutdlg.cpp" line="82"/>
         <source>Hyphenation dictionaries - from Android</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="83"/>
+        <location filename="../aboutdlg.cpp" line="84"/>
         <source>Languages character set database by Fontconfig</source>
         <translation type="unfinished"></translation>
     </message>

@@ -33,7 +33,8 @@ AboutDialog::AboutDialog(QWidget* parent) : QDialog(parent), m_ui(new Ui::AboutD
             "</style></head><body>";
     aboutText += "<p>" + tr("CoolReaderNG is free open source e-book viewer based on crengine-ng library.") + "</p>";
     aboutText += "<p>" + tr("Source code is available at") + QString(" <a href=\"%1\">%1</a> ").arg(project_src_url) +
-                 tr("under the terms of GNU GPLv2 license.") + "</p>";
+                 tr("under the terms of GNU GPL license either version 2 or (at your option) any later version.") +
+                 "</p>";
     aboutText += "<p>" + tr("It is a fork of the 'CoolReader' program.") + "</p>";
     aboutText += "<p style=\"-qt-paragraph-type:empty;\"><br/></p>";
     aboutText += "<p><span style=\"text-decoration: underline;\">" + tr("Third party components used in crengine-ng:") +
