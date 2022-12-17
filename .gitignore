@@ -8,3 +8,4 @@ CMakeLists.txt.user.*
 .directory
 *.orig
 *.rej
+.clang_format_exe.conf

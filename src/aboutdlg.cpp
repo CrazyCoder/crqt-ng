@@ -1,14 +1,24 @@
-/**
- * crqt-ng
- *
- * (c) Vadim Lopatin, 2000-2014
- * (c) Other CoolReader authors (See AUTHORS file)
- * (c) crqt-ng authors (See AUTHORS file)
- *
- * This source code is distributed under the terms of
- * GNU General Public License version 2
- * See LICENSE file for details
- */
+/***************************************************************************
+ *   crqt-ng                                                               *
+ *   Copyright (C) 2009,2010 Vadim Lopatin <coolreader.org@gmail.com>      *
+ *   Copyright (C) 2018 Sergey Torokhov <torokhov-s-a@yandex.ru>           *
+ *   Copyright (C) 2018,2022 Aleksey Chernov <valexlin@gmail.com>          *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or         *
+ *   modify it under the terms of the GNU General Public License           *
+ *   as published by the Free Software Foundation; either version 2        *
+ *   of the License, or (at your option) any later version.                *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the Free Software           *
+ *   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,            *
+ *   MA 02110-1301, USA.                                                   *
+ ***************************************************************************/
 
 #include "aboutdlg.h"
 #include "ui_aboutdlg.h"
@@ -33,7 +43,8 @@ AboutDialog::AboutDialog(QWidget* parent) : QDialog(parent), m_ui(new Ui::AboutD
             "</style></head><body>";
     aboutText += "<p>" + tr("CoolReaderNG is free open source e-book viewer based on crengine-ng library.") + "</p>";
     aboutText += "<p>" + tr("Source code is available at") + QString(" <a href=\"%1\">%1</a> ").arg(project_src_url) +
-                 tr("under the terms of GNU GPLv2 license.") + "</p>";
+                 tr("under the terms of GNU GPL license either version 2 or (at your option) any later version.") +
+                 "</p>";
     aboutText += "<p>" + tr("It is a fork of the 'CoolReader' program.") + "</p>";
     aboutText += "<p style=\"-qt-paragraph-type:empty;\"><br/></p>";
     aboutText += "<p><span style=\"text-decoration: underline;\">" + tr("Third party components used in crengine-ng:") +
@@ -78,7 +89,9 @@ AboutDialog::AboutDialog(QWidget* parent) : QDialog(parent), m_ui(new Ui::AboutD
     aboutText += "<p>" + tr("RFC6234 (sources) - SHAsum") + "</p>";
 #endif
     aboutText += "<p>" + tr("hyphman - AlReader hyphenation manager") + "</p>";
-    aboutText += "<p>" + tr("Hyphenation dictionaries - from Android") + "</p>";
+    aboutText += "<p>" + tr("Most hyphenation dictionaries - TEX hyphenation patterns") + "</p>";
+    aboutText += "<p>" + tr("Russian hyphenation dictionary - ") +
+                 QString("https://github.com/laboratory50/russian-spellpack") + "</p>";
 #if USE_LOCALE_DATA
     aboutText += "<p>" + tr("Languages character set database by Fontconfig") + "</p>";
 #endif

@@ -1,6 +1,8 @@
 # crqt-ng
 crqt-ng - cross-platform open source e-book reader using crengine-ng. It is a fork of the [CoolReader](https://github.com/buggins/coolreader) project.
 
+This repository is created from the official CoolReader repository by removing everything that does not belong to the "cr3qt" using the "git-filter-repo" utility.
+
 ## Description
 crqt-ng is an e-book reader.
 In fact, it is a [Qt](https://www.qt.io/) frontend for the [crengine-ng](https://gitlab.com/coolreader-ng/crengine-ng) library.
@@ -69,8 +71,5 @@ TODO: write this guide...
 ## Authors and acknowledgment
 The list of contributors can be found in the AUTHORS file.
 
-This list of authors is obtained from git history using the script tools/getauthors/getauthos.sh.
-The first significant item in the git log is 'Mon Nov 9 16:47:42 2009 +0300', but the project started around 2000, so this list can be incomplete.
-
 ## License
-This project is released under the [GNU General Public License Version 2](https://opensource.org/licenses/GPL-2.0). See LICENSE file.
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
