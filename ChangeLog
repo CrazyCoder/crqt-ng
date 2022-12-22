@@ -1,3 +1,17 @@
+2022-12-22  Aleksey Chernov  <valexlin@gmail.com>
+
+    * Version 1.0.2 released.
+    ==========================
+
+    Tag sources with `1.0.2'.
+
+    See below for changes.
+
+2022-12-22  Aleksey Chernov  <valexlin@gmail.com>
+
+    Toc dialog: do not expand multi-level items by default.
+
+
 2022-12-18  Aleksey Chernov  <valexlin@gmail.com>
 
     * Version 1.0.1 released.
