@@ -84,7 +84,6 @@ TocDlg::TocDlg(QWidget* parent, CR3View* docView) : QDialog(parent), m_ui(new Ui
     for (int i = 0; i < root->getChildCount(); i++) {
         m_ui->treeWidget->addTopLevelItem(new TocItem(root->getChild(i), currPage, nearestPage, nearestItem));
     }
-    m_ui->treeWidget->expandAll();
     if (nearestItem) {
         m_ui->treeWidget->setCurrentItem(nearestItem);
     }
