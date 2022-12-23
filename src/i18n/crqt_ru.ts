@@ -661,14 +661,29 @@
         <translation>Открыть файл</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="172"/>
+        <source>Ctrl+O</source>
+        <translation>Ctrl+O</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="177"/>
         <source>Toggle Pages/Scroll</source>
         <translation>Переключить вид Страница/Свиток</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="180"/>
+        <source>Ctrl+T</source>
+        <translation>Ctrl+T</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="189"/>
         <source>Close</source>
         <translation>Закрыть</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="192"/>
+        <source>Ctrl+Q</source>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="197"/>
@@ -812,64 +827,49 @@
         <translation>О Qt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="468"/>
+        <location filename="../mainwindow.ui" line="465"/>
         <source>Add Bookmark</source>
         <translation>Добавить закладку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="471"/>
+        <location filename="../mainwindow.ui" line="468"/>
         <source>Add bookmark</source>
         <translation>Добавить закладку</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="483"/>
+        <location filename="../mainwindow.ui" line="480"/>
         <source>Bookmark List...</source>
         <translation>Список закладок...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="486"/>
+        <location filename="../mainwindow.ui" line="483"/>
         <source>Show bookmarks list</source>
         <translation>Показать список закладок</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="498"/>
+        <location filename="../mainwindow.ui" line="495"/>
         <source>File Properties...</source>
         <translation>Свойства документа...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="501"/>
+        <location filename="../mainwindow.ui" line="498"/>
         <source>Show file properties</source>
         <translation>Свойства документа</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="513"/>
+        <location filename="../mainwindow.ui" line="510"/>
         <source>Rotate</source>
         <translation>Поворот страницы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="525"/>
+        <location filename="../mainwindow.ui" line="522"/>
         <source>Find text...</source>
         <translation>Найти текст...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="528"/>
+        <location filename="../mainwindow.ui" line="525"/>
         <source>Find text</source>
         <translation>Найти текст</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="172"/>
-        <source>F3</source>
-        <translation>F3</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="180"/>
-        <source>Ctrl+P</source>
-        <translation>Ctrl+P</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="192"/>
-        <source>F12</source>
-        <translation>F12</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="200"/>
@@ -1017,111 +1017,101 @@
         <translation>Ctrl+Ins</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="459"/>
-        <source>F1</source>
-        <translation>F1</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="474"/>
+        <location filename="../mainwindow.ui" line="471"/>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="489"/>
+        <location filename="../mainwindow.ui" line="486"/>
         <source>F6</source>
         <translation>F6</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="504"/>
+        <location filename="../mainwindow.ui" line="501"/>
         <source>Ctrl+F1</source>
         <translation>Ctrl+F1</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="516"/>
+        <location filename="../mainwindow.ui" line="513"/>
         <source>Ctrl+R</source>
         <translation>Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="531"/>
+        <location filename="../mainwindow.ui" line="528"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="542"/>
-        <source>Ctrl+E</source>
-        <translation>Ctrl+E</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="547"/>
+        <location filename="../mainwindow.ui" line="541"/>
         <source>Export</source>
         <translation>Экспорт</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="550"/>
+        <location filename="../mainwindow.ui" line="544"/>
         <source>Export document</source>
         <translation>Экспортировать документ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="553"/>
+        <location filename="../mainwindow.ui" line="547"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="558"/>
-        <location filename="../mainwindow.ui" line="561"/>
-        <location filename="../mainwindow.ui" line="580"/>
-        <location filename="../mainwindow.ui" line="583"/>
+        <location filename="../mainwindow.ui" line="552"/>
+        <location filename="../mainwindow.ui" line="555"/>
+        <location filename="../mainwindow.ui" line="574"/>
+        <location filename="../mainwindow.ui" line="577"/>
         <source>Next Page</source>
         <translation>Следующая страница</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="564"/>
+        <location filename="../mainwindow.ui" line="558"/>
         <source>Right</source>
         <translation>Right</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="569"/>
-        <location filename="../mainwindow.ui" line="572"/>
+        <location filename="../mainwindow.ui" line="563"/>
+        <location filename="../mainwindow.ui" line="566"/>
         <source>Previous Page</source>
         <translation>Предыдущая страница</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="575"/>
+        <location filename="../mainwindow.ui" line="569"/>
         <source>Left</source>
         <translation>Left</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="586"/>
+        <location filename="../mainwindow.ui" line="580"/>
         <source>Space</source>
         <translation>Space</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="536"/>
+        <location filename="../mainwindow.ui" line="533"/>
         <source>Toggle Edit Mode</source>
         <translation>Переключить режим редактирования</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="539"/>
+        <location filename="../mainwindow.ui" line="536"/>
         <source>Toggle edit mode</source>
         <translation>Переключить режим редактирования</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="591"/>
+        <location filename="../mainwindow.ui" line="585"/>
         <source>Next Sentence</source>
         <translation>Следующее предложение</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="594"/>
+        <location filename="../mainwindow.ui" line="588"/>
         <source>Move selection to next sentence</source>
         <translation>Установить выделение на следующее предложение</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="597"/>
+        <location filename="../mainwindow.ui" line="591"/>
         <source>Ctrl+Right</source>
         <translation>Ctrl+Right</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="608"/>
+        <location filename="../mainwindow.ui" line="602"/>
         <source>Ctrl+Left</source>
         <translation>Ctrl+Left</translation>
     </message>
@@ -1137,12 +1127,12 @@
         <translation>О программе CoolReaderNG/Qt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="602"/>
+        <location filename="../mainwindow.ui" line="596"/>
         <source>Prev Sentence</source>
         <translation>Предыдущее предложение</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="605"/>
+        <location filename="../mainwindow.ui" line="599"/>
         <source>Select previous sentence</source>
         <translation>Установить выделение на предыдущее предложение</translation>
     </message>

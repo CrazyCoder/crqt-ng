@@ -169,7 +169,7 @@
     <string>Open file</string>
    </property>
    <property name="shortcut">
-    <string>F3</string>
+    <string>Ctrl+O</string>
    </property>
   </action>
   <action name="actionToggle_Pages_Scroll">
@@ -177,7 +177,7 @@
     <string>Toggle Pages/Scroll</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+P</string>
+    <string>Ctrl+T</string>
    </property>
   </action>
   <action name="actionClose">
@@ -189,7 +189,7 @@
     <string>Close</string>
    </property>
    <property name="shortcut">
-    <string>F12</string>
+    <string>Ctrl+Q</string>
    </property>
   </action>
   <action name="actionMinimize">
@@ -455,9 +455,6 @@
    <property name="toolTip">
     <string>About CoolReaderNG/Qt</string>
    </property>
-   <property name="shortcut">
-    <string>F1</string>
-   </property>
   </action>
   <action name="actionAddBookmark">
    <property name="icon">
@@ -537,9 +534,6 @@
    </property>
    <property name="toolTip">
     <string>Toggle edit mode</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+E</string>
    </property>
   </action>
   <action name="actionExport">
