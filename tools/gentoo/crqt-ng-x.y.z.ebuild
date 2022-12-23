@@ -18,6 +18,7 @@ CDEPEND="app-text/crengine-ng
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtwidgets:5"
+RDEPEND="${CDEPEND}"
 BDEPEND="${CDEPEND}
 	dev-qt/linguist-tools:5"
 
