@@ -1,3 +1,23 @@
+2022-12-25  Aleksey Chernov  <valexlin@gmail.com>
+
+    * Version 1.0.3 released.
+    ==========================
+
+    Tag sources with `1.0.3'.
+
+    See below for changes.
+
+2022-12-24  Aleksey Chernov  <valexlin@gmail.com>
+
+    Mainwindow toolbar: added buttons for navigation through history.
+    These buttons may or may not be enabled depending on whether back/forward is possible.
+    It is highly recommended to update crengine-ng to version 0.9.3 to work correctly.
+
+2022-12-23  Aleksey Chernov  <valexlin@gmail.com>
+
+    Update hotkeys
+
+
 2022-12-22  Aleksey Chernov  <valexlin@gmail.com>
 
     * Version 1.0.2 released.
