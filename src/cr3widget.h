@@ -1,7 +1,7 @@
 /***************************************************************************
  *   crqt-ng                                                               *
  *   Copyright (C) 2009,2011,2014 Vadim Lopatin <coolreader.org@gmail.com> *
- *   Copyright (C) 2019-2021 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2019-2022 Aleksey Chernov <valexlin@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -34,14 +34,14 @@ class PropsChangeCallback
 {
 public:
     virtual void onPropsChange(PropsRef props) = 0;
-    virtual ~PropsChangeCallback() { }
 };
 
-class DocumentLoadingCallback
+class DocViewStatusCallback
 {
 public:
     virtual void onDocumentLoaded(const lString32& atitle, const lString32& error) = 0;
-    virtual ~DocumentLoadingCallback() { }
+    virtual void onCanGoBack(bool canGoBack) = 0;
+    virtual void onCanGoForward(bool canGoForward) = 0;
 };
 
 #define WORD_SELECTOR_ENABLED 1
@@ -80,7 +80,7 @@ public:
         return _docview;
     }
     /// go to position specified by xPointer string
-    void goToXPointer(QString xPointer);
+    void goToXPointer(QString xPointer, bool saveToHistory = false);
 
     /// returns current page
     int getCurPage();
@@ -118,8 +118,12 @@ public:
     void setPropsChangeCallback(PropsChangeCallback* propsCallback) {
         _propsCallback = propsCallback;
     }
-    void setDocumentLoadingCallback(DocumentLoadingCallback* docCallback) {
-        _docLoadingCallback = docCallback;
+    void setDocViewStatusCallback(DocViewStatusCallback* callback) {
+        _docViewStatusCallback = callback;
+        if (NULL != _docViewStatusCallback) {
+            _docViewStatusCallback->onCanGoBack(_canGoBack);
+            _docViewStatusCallback->onCanGoForward(_canGoForward);
+        }
     }
     /// toggle boolean property
     void toggleProperty(const char* name);
@@ -201,13 +205,14 @@ private:
     bool endSelection(ldomXPointer p);
     bool updateSelection(ldomXPointer p);
     void checkFontLanguageCompatibility();
+    void updateHistoryAvailability();
 
     DocViewData* _data; // to hide non-qt implementation
     LVDocView* _docview;
     QScrollBar* _scroll;
     qreal _dpr; // screen display pixel ratio (for HiDPI screens)
     PropsChangeCallback* _propsCallback;
-    DocumentLoadingCallback* _docLoadingCallback;
+    DocViewStatusCallback* _docViewStatusCallback;
     QStringList _hyphDicts;
     QCursor _normalCursor;
     QCursor _linkCursor;
@@ -226,6 +231,8 @@ private:
     int _lastBatteryState;
     int _lastBatteryChargingConn;
     int _lastBatteryChargeLevel;
+    bool _canGoBack;
+    bool _canGoForward;
 };
 
 #endif // CR3WIDGET_H

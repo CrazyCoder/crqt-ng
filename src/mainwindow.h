@@ -1,7 +1,7 @@
 /***************************************************************************
  *   crqt-ng                                                               *
  *   Copyright (C) 2009-2011,2014 Vadim Lopatin <coolreader.org@gmail.com> *
- *   Copyright (C) 2021 Aleksey Chernov <valexlin@gmail.com>               *
+ *   Copyright (C) 2021,2022 Aleksey Chernov <valexlin@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -28,7 +28,6 @@
 #else
 #include <QtGui/QMainWindow>
 #endif
-#include "settings.h"
 #include "cr3widget.h"
 
 namespace Ui
@@ -36,12 +35,10 @@ namespace Ui
     class MainWindowClass;
 }
 
-class MainWindow: public QMainWindow, public PropsChangeCallback, DocumentLoadingCallback
+class MainWindow: public QMainWindow, public PropsChangeCallback, DocViewStatusCallback
 {
     Q_OBJECT
 public:
-    virtual void onPropsChange(PropsRef props);
-    virtual void onDocumentLoaded(const lString32& atitle, const lString32& error);
     MainWindow(const QString& fileToOpen, QWidget* parent = 0);
     ~MainWindow();
 private:
@@ -55,6 +52,11 @@ protected:
 public slots:
     void contextMenu(QPoint pos);
     void on_actionFindText_triggered();
+private:
+    virtual void onPropsChange(PropsRef props);
+    virtual void onDocumentLoaded(const lString32& atitle, const lString32& error);
+    virtual void onCanGoBack(bool canGoBack);
+    virtual void onCanGoForward(bool canGoForward);
 private slots:
     void on_actionNextPage3_triggered();
     void on_actionToggleEditMode_triggered();

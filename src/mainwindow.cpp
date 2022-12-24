@@ -118,7 +118,7 @@ MainWindow::MainWindow(const QString& fileToOpen, QWidget* parent)
     ui->view->setHyphDir(userHyphDir + "hyph" + QDir::separator(), false);
     ldomDocCache::init(cacheDir32, (lvsize_t)DOC_CACHE_SIZE);
     ui->view->setPropsChangeCallback(this);
-    ui->view->setDocumentLoadingCallback(this);
+    ui->view->setDocViewStatusCallback(this);
     if (!ui->view->loadSettings(iniFile)) {
         // If config not found in homeDir, trying to load from exeDir...
         ui->view->loadSettings(iniFileInExeDir);
@@ -380,6 +380,14 @@ void MainWindow::onDocumentLoaded(const lString32& atitle, const lString32& erro
         setWindowTitle("CoolReaderNG/Qt - " + cr2qt(atitle));
     else
         setWindowTitle("CoolReaderNG/Qt");
+}
+
+void MainWindow::onCanGoBack(bool canGoBack) {
+    ui->actionBack->setEnabled(canGoBack);
+}
+
+void MainWindow::onCanGoForward(bool canGoForward) {
+    ui->actionForward->setEnabled(canGoForward);
 }
 
 void MainWindow::contextMenu(QPoint pos) {

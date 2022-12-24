@@ -336,7 +336,7 @@ CR3View::CR3View(QWidget* parent)
         : QWidget(parent, Qt::WindowFlags())
         , _scroll(NULL)
         , _propsCallback(NULL)
-        , _docLoadingCallback(NULL)
+        , _docViewStatusCallback(NULL)
         , _normalCursor(Qt::ArrowCursor)
         , _linkCursor(Qt::PointingHandCursor)
         , _selCursor(Qt::IBeamCursor)
@@ -346,7 +346,9 @@ CR3View::CR3View(QWidget* parent)
         , _editMode(false)
         , _lastBatteryState(CR_BATTERY_STATE_NO_BATTERY)
         , _lastBatteryChargingConn(CR_BATTERY_CHARGER_NO)
-        , _lastBatteryChargeLevel(0) {
+        , _lastBatteryChargeLevel(0)
+        , _canGoBack(false)
+        , _canGoForward(false) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     _dpr = screen()->devicePixelRatio();
 #elif QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
@@ -483,9 +485,10 @@ LVTocItem* CR3View::getToc() {
 }
 
 /// go to position specified by xPointer string
-void CR3View::goToXPointer(QString xPointer) {
+void CR3View::goToXPointer(QString xPointer, bool saveToHistory) {
     ldomXPointer p = _docview->getDocument()->createXPointer(qt2cr(xPointer));
-    _docview->savePosToNavigationHistory();
+    if (saveToHistory)
+        _docview->savePosToNavigationHistory();
     //if ( _docview->getViewMode() == DVM_SCROLL ) {
     doCommand(DCMD_GO_POS, p.toPoint().y);
     //} else {
@@ -531,6 +534,7 @@ bool CR3View::loadDocument(QString fileName) {
         _docview->createDefaultDocument(lString32::empty_str, qt2cr(tr("Error while opening document ") + fileName));
     }
     update();
+    updateHistoryAvailability();
     return res;
 }
 
@@ -787,19 +791,20 @@ void CR3View::scrollTo(int value) {
 
 void CR3View::nextSentence() {
     // for debugging of ReadAloud feature position movement.
-    _docview->doCommand(DCMD_SELECT_NEXT_SENTENCE, 0);
+    doCommand(DCMD_SELECT_NEXT_SENTENCE, 0);
     update();
 }
 
 void CR3View::prevSentence() {
     // for debugging of ReadAloud feature position movement.
-    _docview->doCommand(DCMD_SELECT_PREV_SENTENCE, 0);
+    doCommand(DCMD_SELECT_PREV_SENTENCE, 0);
     update();
 }
 
 void CR3View::doCommand(int cmd, int param) {
     _docview->doCommand((LVDocCmd)cmd, param);
     update();
+    updateHistoryAvailability();
 }
 
 void CR3View::togglePageScrollView() {
@@ -1193,6 +1198,21 @@ void CR3View::checkFontLanguageCompatibility() {
 #endif
 }
 
+void CR3View::updateHistoryAvailability() {
+    bool canGoBack = _docview->canGoBack();
+    bool canGoForward = _docview->canGoForward();
+    if (canGoBack != _canGoBack) {
+        _canGoBack = canGoBack;
+        if (NULL != _docViewStatusCallback)
+            _docViewStatusCallback->onCanGoBack(_canGoBack);
+    }
+    if (canGoForward != _canGoForward) {
+        _canGoForward = canGoForward;
+        if (NULL != _docViewStatusCallback)
+            _docViewStatusCallback->onCanGoForward(_canGoForward);
+    }
+}
+
 void CR3View::mousePressEvent(QMouseEvent* event) {
     bool left = event->button() == Qt::LeftButton;
     //bool right = event->button() == Qt::RightButton;
@@ -1233,8 +1253,10 @@ void CR3View::mousePressEvent(QMouseEvent* event) {
         CRLog::info("Link is selected: %s", UnicodeToUtf8(href).c_str());
         if (left) {
             // link is pressed
-            if (_docview->goLink(href))
+            if (_docview->goLink(href)) {
                 update();
+                updateHistoryAvailability();
+            }
         }
     }
     //CRLog::debug("mousePressEvent - doc pos (%d,%d), buttons: %d %d %d", pt.x, pt.y, (int)left, (int)right, (int)mid);
@@ -1301,7 +1323,7 @@ void CR3View::goToBookmark(CRBookmark* bm) {
         end = start;
     startSelection(start);
     endSelection(end);
-    goToXPointer(cr2qt(bm->getStartPos()));
+    goToXPointer(cr2qt(bm->getStartPos()), true);
     update();
 }
 
@@ -1374,14 +1396,14 @@ void CR3View::OnLoadFileStart(lString32 filename) {
 /// file load finiished with error
 void CR3View::OnLoadFileError(lString32 message) {
     setCursor(_normalCursor);
-    if (NULL != _docLoadingCallback)
-        _docLoadingCallback->onDocumentLoaded(_filename, message);
+    if (NULL != _docViewStatusCallback)
+        _docViewStatusCallback->onDocumentLoaded(_filename, message);
 }
 
 /// file loading is finished successfully - drawCoveTo() may be called there
 void CR3View::OnLoadFileEnd() {
     setCursor(_normalCursor);
-    if (NULL != _docLoadingCallback && NULL != _docview) {
+    if (NULL != _docViewStatusCallback && NULL != _docview) {
         lString32 atitle;
         lString32 author = _docview->getAuthors();
         lString32 title = _docview->getTitle();
@@ -1392,8 +1414,9 @@ void CR3View::OnLoadFileEnd() {
                 atitle = title;
         } else
             atitle = _filename;
-        _docLoadingCallback->onDocumentLoaded(atitle, lString32::empty_str);
+        _docViewStatusCallback->onDocumentLoaded(atitle, lString32::empty_str);
     }
+    updateHistoryAvailability();
 }
 
 /// document formatting started

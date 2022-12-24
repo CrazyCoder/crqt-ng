@@ -1,8 +1,8 @@
 <RCC>
-  <qresource prefix="/icons" >
+    <qresource prefix="/icons">
         <file>icons/crqt.png</file>
-  </qresource>
-  <qresource prefix="/icons/action" >
+    </qresource>
+    <qresource prefix="/icons/action">
         <file>icons/back.png</file>
         <file>icons/forward.png</file>
         <file>icons/fileopen.png</file>
@@ -28,5 +28,7 @@
         <file>icons/editcopy.png</file>
         <file>icons/bookmark.png</file>
         <file>icons/bookmark_folder.png</file>
+        <file>icons/nav_back.png</file>
+        <file>icons/nav_forward.png</file>
     </qresource>
 </RCC>

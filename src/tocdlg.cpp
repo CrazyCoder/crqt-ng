@@ -40,7 +40,7 @@ public:
             , _item(item) {
         if (item) {
             int page = item->getPage();
-            if (!nearestItem || (page <= currPage && page > nearestPage)) {
+            if (!nearestItem || (page <= currPage && page >= nearestPage)) {
                 nearestItem = this;
                 nearestPage = page;
             }
@@ -110,7 +110,7 @@ void TocDlg::changeEvent(QEvent* e) {
 
 void TocDlg::on_treeWidget_doubleClicked(QModelIndex index) {
     QString s = index.data(Qt::UserRole).toString();
-    m_docview->goToXPointer(s);
+    m_docview->goToXPointer(s, true);
     close();
 }
 

@@ -145,6 +145,9 @@
    <addaction name="separator"/>
    <addaction name="actionTOC"/>
    <addaction name="separator"/>
+   <addaction name="actionBack"/>
+   <addaction name="actionForward"/>
+   <addaction name="separator"/>
    <addaction name="actionFindText"/>
    <addaction name="separator"/>
    <addaction name="actionPrevPage"/>
@@ -278,6 +281,10 @@
    </property>
   </action>
   <action name="actionBack">
+   <property name="icon">
+    <iconset resource="crqtres.qrc">
+     <normaloff>:/icons/action/icons/nav_back.png</normaloff>:/icons/action/icons/nav_back.png</iconset>
+   </property>
    <property name="text">
     <string>Back</string>
    </property>
@@ -289,6 +296,10 @@
    </property>
   </action>
   <action name="actionForward">
+   <property name="icon">
+    <iconset resource="crqtres.qrc">
+     <normaloff>:/icons/action/icons/nav_forward.png</normaloff>:/icons/action/icons/nav_forward.png</iconset>
+   </property>
    <property name="text">
     <string>Forward</string>
    </property>
