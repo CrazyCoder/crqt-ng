@@ -939,7 +939,7 @@
     <message>
         <location filename="../mainwindow.ui" line="307"/>
         <source>Go to the next position in navigation history</source>
-        <translation>Перейти к следующей позиции і истории навигации</translation>
+        <translation>Перейти к следующей позиции в истории навигации</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="310"/>
