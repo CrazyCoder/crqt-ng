@@ -543,7 +543,7 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="219"/>
+        <location filename="../mainwindow.cpp" line="228"/>
         <source>Open book file</source>
         <translation>Otevřít soubor s knihou</translation>
     </message>
@@ -563,67 +563,72 @@
         <translation>Vyvést do formátu WOL</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="221"/>
+        <location filename="../mainwindow.cpp" line="230"/>
         <source>All supported formats</source>
         <translation>Všechny podporované formáty</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="222"/>
+        <location filename="../mainwindow.cpp" line="231"/>
         <source>FB2 books</source>
         <translation>Knihy FB2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="224"/>
+        <location filename="../mainwindow.cpp" line="233"/>
         <source>Text files</source>
         <translation>Textové soubory</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="225"/>
+        <location filename="../mainwindow.cpp" line="234"/>
         <source>Rich text</source>
         <translation>Bohatý text</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="226"/>
+        <location filename="../mainwindow.cpp" line="235"/>
         <source>MS Word document</source>
         <translation>Dokument MS Word</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="228"/>
+        <location filename="../mainwindow.cpp" line="237"/>
         <source>HTML files</source>
         <translation>Soubory HTML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="229"/>
+        <location filename="../mainwindow.cpp" line="239"/>
+        <source>Markdown files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="241"/>
         <source>EPUB files</source>
         <translation>Soubory EPUB</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="230"/>
+        <location filename="../mainwindow.cpp" line="243"/>
         <source>CHM files</source>
         <translation>Soubory CHM</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="231"/>
+        <location filename="../mainwindow.cpp" line="245"/>
         <source>MOBI files</source>
         <translation>Soubory MOBI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="232"/>
+        <location filename="../mainwindow.cpp" line="246"/>
         <source>PalmDOC files</source>
         <translation>Soubory PalmDOC</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="233"/>
+        <location filename="../mainwindow.cpp" line="247"/>
         <source>ZIP archives</source>
         <translation>Archivy ZIP</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="223"/>
+        <location filename="../mainwindow.cpp" line="232"/>
         <source>FB3 books</source>
         <translation type="unfinished">Knihy FB2 {3 ?}</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="227"/>
+        <location filename="../mainwindow.cpp" line="236"/>
         <source>Open Document files</source>
         <translation type="unfinished"></translation>
     </message>

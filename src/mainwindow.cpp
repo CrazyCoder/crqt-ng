@@ -215,10 +215,19 @@ void MainWindow::on_actionOpen_triggered() {
     if (files.length() > 0) {
         lastPath = cr2qt(files[0]->getFilePath());
     }
+    QString all_fmt_flt =
+#if (USE_CHM == 1) && ((USE_CMARK == 1) || (USE_CMARK_GFM == 1))
+            QString(" (*.fb2 *.fb3 *.txt *.tcr *.rtf *.odt *.doc *.docx *.epub *.html *.shtml *.htm *.md *.chm *.zip *.pdb *.pml *.prc *.pml *.mobi);;");
+#elif (USE_CHM == 1)
+            QString(" (*.fb2 *.fb3 *.txt *.tcr *.rtf *.odt *.doc *.docx *.epub *.html *.shtml *.htm *.chm *.zip *.pdb *.pml *.prc *.pml *.mobi);;");
+#else
+            QString(" (*.fb2 *.fb3 *.txt *.tcr *.rtf *.odt *.doc *.docx *.epub *.html *.shtml *.htm *.zip *.pdb *.pml *.prc *.pml *.mobi);;");
+#endif
+
     QString fileName = QFileDialog::getOpenFileName(
             this, tr("Open book file"), lastPath,
             // clang-format off
-        tr("All supported formats") + QString(" (*.fb2 *.fb3 *.txt *.tcr *.rtf *.odt *.doc *.docx *.epub *.html *.shtml *.htm *.chm *.zip *.pdb *.pml *.prc *.pml *.mobi);;") +
+        tr("All supported formats") + all_fmt_flt +
             tr("FB2 books") + QString(" (*.fb2 *.fb2.zip);;") +
             tr("FB3 books") + QString(" (*.fb3);;") +
             tr("Text files") + QString(" (*.txt);;") +
@@ -226,8 +235,13 @@ void MainWindow::on_actionOpen_triggered() {
             tr("MS Word document") + QString(" (*.doc *.docx);;") +
             tr("Open Document files") + QString(" (*.odt);;") +
             tr("HTML files") + QString(" (*.shtml *.htm *.html);;") +
+#if (USE_CMARK == 1) || (USE_CMARK_GFM == 1)
+            tr("Markdown files") + QString(" (*.md);;") +
+#endif
             tr("EPUB files") + QString(" (*.epub);;") +
+#if USE_CHM == 1
             tr("CHM files") + QString(" (*.chm);;") +
+#endif
             tr("MOBI files") + QString(" (*.mobi *.prc *.azw);;") +
             tr("PalmDOC files") + QString(" (*.pdb *.pml);;") +
             tr("ZIP archives") + QString(" (*.zip)"));
