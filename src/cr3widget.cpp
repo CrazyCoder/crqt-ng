@@ -1364,6 +1364,9 @@ void CR3View::OnLoadFileFormatDetected(doc_format_t fileFormat) {
             case doc_format_html:
                 filename = "htm.css";
                 break;
+            case doc_format_md:
+                filename = "markdown.css";
+                break;
             case doc_format_doc:
                 filename = "doc.css";
                 break;
