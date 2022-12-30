@@ -109,22 +109,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="91"/>
-        <source>hyphman - AlReader hyphenation manager</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../aboutdlg.cpp" line="92"/>
-        <source>Most hyphenation dictionaries - TEX hyphenation patterns</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../aboutdlg.cpp" line="93"/>
-        <source>Russian hyphenation dictionary - </source>
+        <source>cmark - CommonMark parsing and rendering library and program in C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../aboutdlg.cpp" line="96"/>
+        <source>cmark-gfm - GitHub&apos;s fork of cmark, a CommonMark parsing and rendering library and program in C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="99"/>
+        <source>hyphman - AlReader hyphenation manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="100"/>
+        <source>Most hyphenation dictionaries - TEX hyphenation patterns</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="101"/>
+        <source>Russian hyphenation dictionary - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="104"/>
         <source>Languages character set database by Fontconfig</source>
         <translation type="unfinished"></translation>
     </message>

@@ -88,6 +88,14 @@ AboutDialog::AboutDialog(QWidget* parent) : QDialog(parent), m_ui(new Ui::AboutD
 #if USE_SHASUM == 1
     aboutText += "<p>" + tr("RFC6234 (sources) - SHAsum") + "</p>";
 #endif
+#if USE_CMARK == 1
+    aboutText += "<p>" + tr("cmark - CommonMark parsing and rendering library and program in C") + "</p>";
+#endif
+#if USE_CMARK_GFM == 1
+    aboutText += "<p>" +
+                 tr("cmark-gfm - GitHub's fork of cmark, a CommonMark parsing and rendering library and program in C") +
+                 "</p>";
+#endif
     aboutText += "<p>" + tr("hyphman - AlReader hyphenation manager") + "</p>";
     aboutText += "<p>" + tr("Most hyphenation dictionaries - TEX hyphenation patterns") + "</p>";
     aboutText += "<p>" + tr("Russian hyphenation dictionary - ") +

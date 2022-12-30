@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU" sourcelanguage="en">
+<TS version="2.1" language="ru_RU" sourcelanguage="en_US">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -109,22 +109,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="91"/>
+        <location filename="../aboutdlg.cpp" line="92"/>
+        <source>cmark - CommonMark parsing and rendering library and program in C</source>
+        <translation>cmark - CommonMark библиотека парсинга и рендеринга и программа на C</translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="96"/>
+        <source>cmark-gfm - GitHub&apos;s fork of cmark, a CommonMark parsing and rendering library and program in C</source>
+        <translation>cmark-gfm - форк cmark от GitHub, CommonMark библиотеки парсинга и рендеринга и программы на C</translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="99"/>
         <source>hyphman - AlReader hyphenation manager</source>
         <translation>hyphman - система переносов из AlReader</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="92"/>
+        <location filename="../aboutdlg.cpp" line="100"/>
         <source>Most hyphenation dictionaries - TEX hyphenation patterns</source>
         <translation>Основные словари переносов - TEX hyphenation patterns</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="93"/>
+        <location filename="../aboutdlg.cpp" line="101"/>
         <source>Russian hyphenation dictionary - </source>
         <translation>Русский словарь переносов - </translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="96"/>
+        <location filename="../aboutdlg.cpp" line="104"/>
         <source>Languages character set database by Fontconfig</source>
         <translation>Набор символов различных письменностей от Fontconfig</translation>
     </message>
@@ -595,7 +605,7 @@
     <message>
         <location filename="../mainwindow.cpp" line="239"/>
         <source>Markdown files</source>
-        <translation type="unfinished"></translation>
+        <translation>файлы Markdown</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="241"/>
