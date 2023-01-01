@@ -85,7 +85,7 @@ static void printVersion() {
 int main(int argc, char* argv[]) {
     int res = 0;
     {
-#ifdef DEBUG
+#ifdef _DEBUG
         lString8 loglevel("TRACE");
         lString8 logfile("stdout");
 #else
