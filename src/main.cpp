@@ -2,7 +2,7 @@
  *   crqt-ng                                                               *
  *   Copyright (C) 2009-2012,2014 Vadim Lopatin <coolreader.org@gmail.com> *
  *   Copyright (C) 2018 EXL <exlmotodev@gmail.com>                         *
- *   Copyright (C) 2018,2020-2022 Aleksey Chernov <valexlin@gmail.com>     *
+ *   Copyright (C) 2018,2020-2023 Aleksey Chernov <valexlin@gmail.com>     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -59,6 +59,9 @@ Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
 #endif
 #endif
 #endif
+
+// Maximum cache directory size
+#define DOC_CACHE_SIZE 128 * 1024 * 1024 // 128Mb
 
 // prototypes
 void InitCREngineLog(const char* cfgfile);
@@ -151,13 +154,13 @@ int main(int argc, char* argv[]) {
         CRLog::info("main()");
         QApplication app(argc, argv);
 
-        lString32 configDir32 = getHomeConfigDir();
-        if (!LVDirectoryExists(configDir32))
-            LVCreateDirectory(configDir32);
+        lString32 configDir = getHomeConfigDir();
+        if (!LVDirectoryExists(configDir))
+            LVCreateDirectory(configDir);
 
         lString32Collection fontDirs;
-        lString32 homefonts32 = configDir32 + cs32("fonts");
-        fontDirs.add(homefonts32);
+        lString32 homefonts = configDir + cs32("fonts");
+        fontDirs.add(homefonts);
 #if MACOS == 1 && USE_FONTCONFIG != 1
         fontDirs.add(cs32("/Library/Fonts"));
         fontDirs.add(cs32("/System/Library/Fonts"));
@@ -328,17 +331,16 @@ bool InitCREngine(const char* exename, lString32Collection& fontDirs) {
     fontExt.add(cs32(".pfa"));
     fontExt.add(cs32(".pfb"));
 
-    lString32 datadir32 = getMainDataDir();
-    lString32 fontDir32 = datadir32 + "fonts";
-    fontDirs.add(fontDir32);
-    LVAppendPathDelimiter(fontDir32);
+    lString32 datadir = getMainDataDir();
+    lString32 fontDir = datadir + "fonts";
+    fontDirs.add(fontDir);
+    LVAppendPathDelimiter(fontDir);
 
     lString32Collection fonts;
     getDirectoryFonts(fontDirs, fontExt, fonts, true);
 
     // load fonts from file
     CRLog::debug("%d font files found", fonts.length());
-    //if (!fontMan->GetFontCount()) {
     for (int fi = 0; fi < fonts.length(); fi++) {
         lString8 fn = UnicodeToLocal(fonts[fi]);
         CRLog::trace("loading font: %s", fn.c_str());
@@ -346,7 +348,6 @@ bool InitCREngine(const char* exename, lString32Collection& fontDirs) {
             CRLog::trace("    failed\n");
         }
     }
-    //}
 #endif // USE_FREETYPE==1
 
     if (!fontMan->GetFontCount()) {
@@ -360,6 +361,9 @@ bool InitCREngine(const char* exename, lString32Collection& fontDirs) {
     }
 
     printf("%d fonts loaded.\n", fontMan->GetFontCount());
+
+    // init engine cache dir
+    ldomDocCache::init(getEngineCacheDir(), (lvsize_t)DOC_CACHE_SIZE);
 
     return true;
 }

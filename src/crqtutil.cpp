@@ -1,7 +1,7 @@
 /***************************************************************************
  *   crqt-ng                                                               *
  *   Copyright (C) 2009,2012 Vadim Lopatin <coolreader.org@gmail.com>      *
- *   Copyright (C) 2020,2021 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2020,2021,2023 Aleksey Chernov <valexlin@gmail.com>     s*
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -30,11 +30,11 @@
 #include <crprops.h>
 #include <crlocaledata.h>
 
-lString32 qt2cr(QString str) {
+lString32 qt2cr(const QString& str) {
     return lString32(str.toUtf8().constData());
 }
 
-QString cr2qt(lString32 str) {
+QString cr2qt(const lString32& str) {
     return QString::fromUcs4(str.c_str(), str.length());
 }
 
@@ -232,6 +232,7 @@ static lString32 s_mainDataDir;
 static lString32 s_engineDataDir;
 static lString32 s_exeDir;
 static lString32 s_homeConfigDir;
+static lString32 s_engineCacheDir;
 
 lString32& getMainDataDir() {
     if (s_mainDataDir.empty()) {
@@ -276,14 +277,47 @@ lString32& getExeDir() {
 lString32& getHomeConfigDir() {
     if (s_homeConfigDir.empty()) {
 #if MACOS == 1
-        s_homeConfigDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/Library/crui/"));
+        s_homeConfigDir = qt2cr(QDir::homePath() + "/Library/crui/");
 #elif defined(WIN32)
         // ~/crui/
         s_homeConfigDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/crui/"));
 #else
-        // ~/.config/crui/
-        s_homeConfigDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/.config/crui/"));
+        // Use $XDG_CONFIG_HOME environment variable if set or '~/.config' then concatenate '/crui/'
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+        QString xdg_config_home = qEnvironmentVariable("XDG_CONFIG_HOME", QString());
+#else
+        QByteArray env_value = qgetenv("XDG_CONFIG_HOME");
+        QString xdg_config_home = QString::fromLocal8Bit(env_value);
+#endif
+        if (xdg_config_home.isEmpty())
+            xdg_config_home = QDir::homePath() + "/.config";
+        QString path = xdg_config_home + "/crui/";
+        s_homeConfigDir = qt2cr(path);
 #endif
     }
     return s_homeConfigDir;
+}
+
+lString32& getEngineCacheDir() {
+    if (s_engineCacheDir.empty()) {
+#if MACOS == 1
+        s_engineCacheDir = qt2cr(QDir::homePath() + "/Library/crui/cache/");
+#elif defined(WIN32)
+        // ~/crui/cache
+        s_engineCacheDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/crui/cache/"));
+#else
+        // Use $XDG_CACHE_HOME environment variable if set or '~/.cache' then concatenate '/crui/'
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+        QString xdg_cache_home = qEnvironmentVariable("XDG_CACHE_HOME", QString());
+#else
+        QByteArray env_value = qgetenv("XDG_CACHE_HOME");
+        QString xdg_cache_home = QString::fromLocal8Bit(env_value);
+#endif
+        if (xdg_cache_home.isEmpty())
+            xdg_cache_home = QDir::homePath() + "/.cache";
+        QString path = xdg_cache_home + "/crui/";
+        s_engineCacheDir = qt2cr(path);
+#endif
+    }
+    return s_engineCacheDir;
 }

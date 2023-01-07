@@ -1,7 +1,7 @@
 /***************************************************************************
  *   crqt-ng                                                               *
  *   Copyright (C) 2009,2012 Vadim Lopatin <coolreader.org@gmail.com>      *
- *   Copyright (C) 2020,2021 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2020,2021,2023 Aleksey Chernov <valexlin@gmail.com>     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -27,8 +27,8 @@
 
 #include <crengine.h>
 
-lString32 qt2cr(QString str);
-QString cr2qt(lString32 str);
+lString32 qt2cr(const QString& str);
+QString cr2qt(const lString32& str);
 
 class Props;
 typedef QSharedPointer<Props> PropsRef;
@@ -90,5 +90,6 @@ lString32& getMainDataDir();
 lString32& getEngineDataDir();
 lString32& getExeDir();
 lString32& getHomeConfigDir();
+lString32& getEngineCacheDir();
 
 #endif // CRQTUTIL_H

@@ -51,8 +51,6 @@
 #include "exportprogressdlg.h"
 #include "searchdlg.h"
 
-#define DOC_CACHE_SIZE 128 * 0x100000
-
 #ifndef ENABLE_BOOKMARKS_DIR
 #define ENABLE_BOOKMARKS_DIR 1
 #endif
@@ -109,14 +107,12 @@ MainWindow::MainWindow(const QString& fileToOpen, QWidget* parent)
     QString cssFile = cr2qt(configDir32) + "fb2.css";
     QString cssFileInEngineDir = cr2qt(engineDataDir32) + "fb2.css";
     QString cssFileInExeDir = cr2qt(exeDir32) + "fb2.css";
-    lString32 cacheDir32 = configDir32 + "cache";
     QString mainHyphDir = cr2qt(engineDataDir32) + "hyph" + QDir::separator();
     QString userHyphDir = cr2qt(configDir32) + "hyph" + QDir::separator();
     QString bookmarksDir = cr2qt(configDir32) + "bookmarks" + QDir::separator();
 
     ui->view->setHyphDir(mainHyphDir);
     ui->view->setHyphDir(userHyphDir + "hyph" + QDir::separator(), false);
-    ldomDocCache::init(cacheDir32, (lvsize_t)DOC_CACHE_SIZE);
     ui->view->setPropsChangeCallback(this);
     ui->view->setDocViewStatusCallback(this);
     if (!ui->view->loadSettings(iniFile)) {
