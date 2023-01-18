@@ -156,6 +156,13 @@ void crGetFontFaceList(QStringList& dst) {
     cr2qt(dst, faceList);
 }
 
+void crGetFontFaceListFiltered(QStringList& dst, css_font_family_t family, const QString& langTag) {
+    lString32Collection faceList;
+    lString8 crlangTag = lString8(langTag.toLatin1().data());
+    fontMan->getFaceListFiltered(faceList, family, crlangTag);
+    cr2qt(dst, faceList);
+}
+
 QString getHumanReadableLocaleName(lString32 langTag) {
 #if USE_LOCALE_DATA == 1
     QString res;

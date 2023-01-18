@@ -35,6 +35,8 @@ set(SRC_LIST
   searchdlg.cpp
   fallbackfontsdialog.ui
   fallbackfontsdialog.cpp
+  fontfamiliesdialog.ui
+  fontfamiliesdialog.cpp
 )
 
 if(WIN32)
