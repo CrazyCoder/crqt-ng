@@ -11,10 +11,10 @@
 	<key>CFBundleIconFile</key>
 	<string>crqt.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.coolreader.crqt</string>
+	<string>org.coolreader-ng.crqt</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-        <key>CFBundleGetInfoString</key>
+	<key>CFBundleGetInfoString</key>
 	<string>Created by Qt/QMake</string>
 	<key>CFBundleSignature</key>
 	<string>crdr</string>
@@ -25,6 +25,6 @@
 	<key>NSHighResolutionCapable</key>
 	<string>True</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>(c)2021 coolreader-ng</string>
+	<string>(c) 2023 coolreader-ng</string>
 </dict>
 </plist>
