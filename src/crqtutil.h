@@ -77,6 +77,7 @@ void qt2cr(lString32Collection& dst, const QStringList& src);
 QString crpercent(int p);
 
 void crGetFontFaceList(QStringList& dst);
+void crGetFontFaceListFiltered(QStringList& dst, css_font_family_t family, const QString& langTag);
 
 QString getHumanReadableLocaleName(lString32 langTag);
 

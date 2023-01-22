@@ -4,7 +4,7 @@
  *   Copyright (C) 2018 EXL <exlmotodev@gmail.com>                         *
  *   Copyright (C) 2020 Konstantin Potapov <pkbo@users.sourceforge.net>    *
  *   Copyright (C) 2021 ourairquality <info@ourairquality.org>             *
- *   Copyright (C) 2018-2022 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2018-2023 Aleksey Chernov <valexlin@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -29,6 +29,7 @@
 #include "cr3widget.h"
 #include "crqtutil.h"
 #include "fallbackfontsdialog.h"
+#include "fontfamiliesdialog.h"
 #include <qglobal.h>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QColorDialog>
@@ -346,6 +347,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, CR3View* docView)
         m_ui->cbLookAndFeel->setCurrentIndex(index);
 
     crGetFontFaceList(m_faceList);
+    crGetFontFaceListFiltered(m_monoFaceList, css_ff_monospace, "");
     m_ui->cbTextFontFace->addItems(m_faceList);
     m_ui->cbTitleFontFace->addItems(m_faceList);
     QStringList sizeList;
@@ -1400,6 +1402,34 @@ void SettingsDlg::on_btnFallbackMan_clicked() {
         fallbackFaces = dlg.fallbackFaces();
         m_props->setString(PROP_FALLBACK_FONT_FACES, fallbackFaces);
         updateStyleSample();
+    }
+}
+
+void SettingsDlg::on_btnFontFamiliesMan_clicked() {
+    QString serifFace = m_props->getStringDef(PROP_GENERIC_SERIF_FONT_FACE, m_defFontFace.toLatin1().data());
+    QString sansSerifFace = m_props->getStringDef(PROP_GENERIC_SANS_SERIF_FONT_FACE, m_defFontFace.toLatin1().data());
+    QString cursiveFace = m_props->getStringDef(PROP_GENERIC_CURSIVE_FONT_FACE, m_defFontFace.toLatin1().data());
+    QString fantasyFace = m_props->getStringDef(PROP_GENERIC_FANTASY_FONT_FACE, m_defFontFace.toLatin1().data());
+    QString monospaceFace = m_props->getStringDef(PROP_GENERIC_MONOSPACE_FONT_FACE, m_defFontFace.toLatin1().data());
+    FontFamiliesDialog dlg(this);
+    dlg.setAvailableFaces(m_faceList);
+    dlg.setAvailableMonoFaces(m_monoFaceList);
+    dlg.setSerifFontFace(serifFace);
+    dlg.setSansSerifFontFace(sansSerifFace);
+    dlg.setCursiveFontFace(cursiveFace);
+    dlg.setFantasyFontFace(fantasyFace);
+    dlg.setMonospaceFontFace(monospaceFace);
+    if (dlg.exec() == QDialog::Accepted) {
+        serifFace = dlg.serifFontFace();
+        sansSerifFace = dlg.sansSerifFontFace();
+        cursiveFace = dlg.cursiveFontFace();
+        fantasyFace = dlg.fantasyFontFace();
+        monospaceFace = dlg.monospaceFontFace();
+        m_props->setString(PROP_GENERIC_SERIF_FONT_FACE, serifFace);
+        m_props->setString(PROP_GENERIC_SANS_SERIF_FONT_FACE, sansSerifFace);
+        m_props->setString(PROP_GENERIC_CURSIVE_FONT_FACE, cursiveFace);
+        m_props->setString(PROP_GENERIC_FANTASY_FONT_FACE, fantasyFace);
+        m_props->setString(PROP_GENERIC_MONOSPACE_FONT_FACE, monospaceFace);
     }
 }
 

@@ -3,7 +3,7 @@
  *   Copyright (C) 2008-2012,2014 Vadim Lopatin <coolreader.org@gmail.com> *
  *   Copyright (C) 2020 Konstantin Potapov <pkbo@users.sourceforge.net>    *
  *   Copyright (C) 2021 ourairquality <info@ourairquality.org>             *
- *   Copyright (C) 2018,2020-2022 Aleksey Chernov <valexlin@gmail.com>     *
+ *   Copyright (C) 2018,2020-2023 Aleksey Chernov <valexlin@gmail.com>     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -181,6 +181,7 @@ private:
     QString m_oldHyph;
     QStringList m_backgroundFiles;
     QStringList m_faceList;
+    QStringList m_monoFaceList;
     QString m_defFontFace;
     QString m_styleName;
     StyleItem m_styleItemAlignment;
@@ -271,6 +272,7 @@ private slots:
     void on_cbMultiLang_stateChanged(int state);
     void on_cbEnableHyph_stateChanged(int state);
     void on_btnFallbackMan_clicked();
+    void on_btnFontFamiliesMan_clicked();
     void on_cbFontWeightChange_currentIndexChanged(int index);
     void on_cbAntialiasingMode_currentIndexChanged(int index);
 };
