@@ -1,3 +1,33 @@
+2023-01-22  Aleksey Chernov  <valexlin@gmail.com>
+
+    * Version 1.0.5 released.
+    ==========================
+
+    Tag sources with `1.0.5'.
+
+    See below for changes.
+
+2023-01-19  Aleksey Chernov  <valexlin@gmail.com>
+
+    Set minimum required crengine-ng version to 0.9.6.
+
+2023-01-18  Aleksey Chernov  <valexlin@gmail.com>
+
+    Added settings for generic font families.
+
+2023-01-07  Aleksey Chernov  <valexlin@gmail.com>
+
+    Use XDG Base Directory for program config & cache where applicable (Linux & Unix).
+    For config directory: $XDG_CONFIG_HOME environment variable if set
+     or '~/.config' + '/crui/'.
+    For cache directory: $XDG_CACHE_HOME environment variable if set
+     or '~/.cache' + '/crui/'.
+
+2023-01-01  Aleksey Chernov  <valexlin@gmail.com>
+
+    Restored debug messages in debug build.
+
+
 2022-12-31  Aleksey Chernov  <valexlin@gmail.com>
 
     * Version 1.0.4 released.
@@ -9,17 +39,17 @@
 
 2022-12-31  Aleksey Chernov  <valexlin@gmail.com>
 
-        About dialog: add info about `cmark` & `cmark-gfm`.
+    About dialog: add info about `cmark` & `cmark-gfm`.
 
-        Use markdown.css for Markdown files (*.md)
+    Use markdown.css for Markdown files (*.md)
 
 2022-12-30  Aleksey Chernov  <valexlin@gmail.com>
 
-        In the file open dialog, do not display file extensions that are disabled in the crengine-ng configuration.
+    In the file open dialog, do not display file extensions that are disabled in the crengine-ng configuration.
 
 2022-12-25  Aleksey Chernov  <valexlin@gmail.com>
 
-        Update src/i18n/crqt_ru.ts: typo fixed
+    Update src/i18n/crqt_ru.ts: typo fixed
 
 
 2022-12-25  Aleksey Chernov  <valexlin@gmail.com>

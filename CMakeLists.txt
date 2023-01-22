@@ -4,9 +4,9 @@ cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/")
 
-set(FILEVERSION_V	"1, 0, 4, 30")
-set(PRODUCTVERSION_V	"1, 0, 4, 30")
-set(VERSION		"1.0.4")
+set(FILEVERSION_V	"1, 0, 5, 30")
+set(PRODUCTVERSION_V	"1, 0, 5, 30")
+set(VERSION		"1.0.5")
 set(PACKAGE_DATADIR	${CMAKE_INSTALL_PREFIX}/share)
 
 option(ADD_DEBUG_EXTRA_OPTS "Add extra debug flags and technique" OFF)
