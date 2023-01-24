@@ -12,6 +12,7 @@ set(PACKAGE_DATADIR	${CMAKE_INSTALL_PREFIX}/share)
 option(ADD_DEBUG_EXTRA_OPTS "Add extra debug flags and technique" OFF)
 set(USE_QT QT5 CACHE STRING "Qt version to use")
 set_property(CACHE USE_QT PROPERTY STRINGS QT5 QT6)
+option(STATIC_CRENGINE_NG "Link with the static version of crengine-ng" OFF)
 
 if (APPLE)
   if( ${CMAKE_SYSTEM} MATCHES "Darwin" )

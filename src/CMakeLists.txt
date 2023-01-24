@@ -95,10 +95,16 @@ if(CMAKE_GENERATOR MATCHES "Visual Studio.*")
 endif(CMAKE_GENERATOR MATCHES "Visual Studio.*")
 endif(WIN32)
 
+if(STATIC_CRENGINE_NG)
+  set(CRE_NG crengine-ng::crengine-ng_static)
+else()
+  set(CRE_NG crengine-ng::crengine-ng)
+endif()
+
 if( ${USE_QT} STREQUAL QT6 )
-  target_link_libraries(crqt crengine-ng::crengine-ng Qt6::Core Qt6::Gui Qt6::Widgets)
+  target_link_libraries(crqt ${CRE_NG} Qt6::Core Qt6::Gui Qt6::Widgets)
 elseif ( ${USE_QT} STREQUAL QT5 )
-  target_link_libraries(crqt crengine-ng::crengine-ng Qt5::Core Qt5::Gui Qt5::Widgets)
+  target_link_libraries(crqt ${CRE_NG} Qt5::Core Qt5::Gui Qt5::Widgets)
 endif()
 
 if (MACOS)
