@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>crqt.desktop</id>
-  <name>CoolReaderNG/Qt</name>
-  <project_license>GPL-2.0</project_license>
+  <name>crqt-ng</name>
+  <project_license>GPL-2.0+</project_license>
   <metadata_license>CC0-1.0</metadata_license>
   <summary>
     Cross platform open source e-book reader
   </summary>
   <description>
     <p>
-      CoolReader is fast and small cross-platform XML/CSS based eBook reader
+      crqt-ng is fast and small cross-platform XML/CSS based eBook reader
       for desktops and handheld devices. Supported formats: FB2, FB3, TXT, RTF,
-      DOC, DOCX, ODT, TCR, HTML, EPUB, CHM, PDB, MOBI.
+      DOC, DOCX, ODT, TCR, HTML, Markdown, EPUB, CHM, PDB, MOBI.
     </p>
     <p>
       Supports table of contents, search, bookmarks.

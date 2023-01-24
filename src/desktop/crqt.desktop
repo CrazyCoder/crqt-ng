@@ -68,4 +68,4 @@ Terminal=false
 Type=Application
 Icon=crqt
 Categories=Office;Viewer;Literature;
-MimeType=application/epub+zip;application/x-fictionbook+xml;application/x-zip-compressed-fb2;text/html;application/xhtml+xml;text/plain;application/x-psion-compressed-text;application/rtf;application/zip;application/x-chm;
+MimeType=application/epub+zip;application/x-fictionbook+xml;application/x-zip-compressed-fb2;text/html;application/xhtml+xml;text/plain;text/markdown;application/x-psion-compressed-text;application/rtf;application/zip;application/x-chm;application/msword;application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/vnd.oasis.opendocument.text;application/x-mobipocket-ebook;application/vnd.palm;
