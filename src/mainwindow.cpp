@@ -97,19 +97,19 @@ MainWindow::MainWindow(const QString& fileToOpen, QWidget* parent)
     addAction(ui->actionNextSentence);
     addAction(ui->actionPrevSentence);
 
-    lString32 configDir32 = getHomeConfigDir();
-    lString32 exeDir32 = getExeDir();
-    lString32 engineDataDir32 = getEngineDataDir();
-    QString iniFile = cr2qt(configDir32) + "crui.ini";
-    QString iniFileInExeDir = cr2qt(exeDir32) + "crui.ini";
-    QString histFile = cr2qt(configDir32) + "cruihist.bmk";
-    QString histFileInExeDir = cr2qt(exeDir32) + "cruihist.bmk";
-    QString cssFile = cr2qt(configDir32) + "fb2.css";
-    QString cssFileInEngineDir = cr2qt(engineDataDir32) + "fb2.css";
-    QString cssFileInExeDir = cr2qt(exeDir32) + "fb2.css";
-    QString mainHyphDir = cr2qt(engineDataDir32) + "hyph" + QDir::separator();
-    QString userHyphDir = cr2qt(configDir32) + "hyph" + QDir::separator();
-    QString bookmarksDir = cr2qt(configDir32) + "bookmarks" + QDir::separator();
+    lString32 configDir = getHomeConfigDir();
+    lString32 exeDir = getExeDir();
+    lString32 engineDataDir = getEngineDataDir();
+    QString iniFile = cr2qt(configDir) + "crui.ini";
+    QString iniFileInExeDir = cr2qt(exeDir) + "crui.ini";
+    QString histFile = cr2qt(configDir) + "cruihist.bmk";
+    QString histFileInExeDir = cr2qt(exeDir) + "cruihist.bmk";
+    QString cssFile = cr2qt(configDir) + "fb2.css";
+    QString cssFileInEngineDir = cr2qt(engineDataDir) + "fb2.css";
+    QString cssFileInExeDir = cr2qt(exeDir) + "fb2.css";
+    QString mainHyphDir = cr2qt(engineDataDir) + "hyph" + QDir::separator();
+    QString userHyphDir = cr2qt(configDir) + "hyph" + QDir::separator();
+    QString bookmarksDir = cr2qt(configDir) + "bookmarks" + QDir::separator();
 
     ui->view->setHyphDir(mainHyphDir);
     ui->view->setHyphDir(userHyphDir + "hyph" + QDir::separator(), false);
@@ -350,14 +350,11 @@ void MainWindow::onPropsChange(PropsRef props) {
             bool vv = v ? true : false;
             if (state != vv)
                 setWindowState(windowState() ^ Qt::WindowFullScreen);
-        }
-        if (name == PROP_WINDOW_SHOW_MENU) {
+        } else if (name == PROP_WINDOW_SHOW_MENU) {
             ui->menuBar->setVisible(v);
-        }
-        if (name == PROP_WINDOW_SHOW_SCROLLBAR) {
+        } else if (name == PROP_WINDOW_SHOW_SCROLLBAR) {
             ui->scroll->setVisible(v);
-        }
-        if (name == PROP_APP_BACKGROUND_IMAGE) {
+        } else if (name == PROP_APP_BACKGROUND_IMAGE) {
             lString32 fn = qt2cr(value);
             LVImageSourceRef img;
             if (!fn.empty() && fn[0] != '[') {
@@ -370,14 +367,11 @@ void MainWindow::onPropsChange(PropsRef props) {
             fn.lowercase();
             bool tiled = (fn.pos(cs32("\\textures\\")) >= 0 || fn.pos(cs32("/textures/")) >= 0);
             ui->view->getDocView()->setBackgroundImage(img, tiled);
-        }
-        if (name == PROP_WINDOW_TOOLBAR_SIZE) {
+        } else if (name == PROP_WINDOW_TOOLBAR_SIZE) {
             ui->mainToolBar->setVisible(v);
-        }
-        if (name == PROP_WINDOW_SHOW_STATUSBAR) {
+        } else if (name == PROP_WINDOW_SHOW_STATUSBAR) {
             ui->statusBar->setVisible(v);
-        }
-        if (name == PROP_WINDOW_STYLE) {
+        } else if (name == PROP_WINDOW_STYLE) {
             QApplication::setStyle(value);
         }
     }
