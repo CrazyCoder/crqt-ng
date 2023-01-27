@@ -87,10 +87,13 @@ void saveWindowPosition(QWidget* window, CRPropRef props, const char* prefix);
 /// restore window position from properties
 void restoreWindowPosition(QWidget* window, CRPropRef props, const char* prefix, bool allowFullscreen = false);
 
-lString32& getMainDataDir();
-lString32& getEngineDataDir();
-lString32& getExeDir();
-lString32& getHomeConfigDir();
-lString32& getEngineCacheDir();
+lString32 getMainDataDir();
+lString32 getEngineDataDir();
+lString32 getExeDir();
+lString32 getConfigDir();
+lString32 getEngineCacheDir();
+
+bool getPortableSettingsMode();
+void setPortableSettingsMode(bool mode);
 
 #endif // CRQTUTIL_H

@@ -602,92 +602,92 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="224"/>
+        <location filename="../mainwindow.cpp" line="220"/>
         <source>Open book file</source>
         <translation>Відкриття файлу книги</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="175"/>
+        <location filename="../mainwindow.cpp" line="171"/>
         <source>Export document to</source>
         <translation>Експорт документу до</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="175"/>
+        <location filename="../mainwindow.cpp" line="171"/>
         <source>WOL book (*.wol)</source>
         <translation>WOL-книга (*.wol)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="180"/>
+        <location filename="../mainwindow.cpp" line="176"/>
         <source>Export to WOL format</source>
         <translation>Експорт у WOL формат</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="226"/>
+        <location filename="../mainwindow.cpp" line="222"/>
         <source>All supported formats</source>
         <translation>Всі формати, які підтримуються</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="227"/>
+        <location filename="../mainwindow.cpp" line="223"/>
         <source>FB2 books</source>
         <translation>Книги FB2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="229"/>
+        <location filename="../mainwindow.cpp" line="225"/>
         <source>Text files</source>
         <translation>Текстові файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="230"/>
+        <location filename="../mainwindow.cpp" line="226"/>
         <source>Rich text</source>
         <translation>RTF файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="231"/>
+        <location filename="../mainwindow.cpp" line="227"/>
         <source>MS Word document</source>
         <translation>MS Word документи</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="233"/>
+        <location filename="../mainwindow.cpp" line="229"/>
         <source>HTML files</source>
         <translation>HTML файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="235"/>
+        <location filename="../mainwindow.cpp" line="231"/>
         <source>Markdown files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="237"/>
+        <location filename="../mainwindow.cpp" line="233"/>
         <source>EPUB files</source>
         <translation>EPUB файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="239"/>
+        <location filename="../mainwindow.cpp" line="235"/>
         <source>CHM files</source>
         <translation>CHM файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="241"/>
+        <location filename="../mainwindow.cpp" line="237"/>
         <source>MOBI files</source>
         <translation>MOBI файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="242"/>
+        <location filename="../mainwindow.cpp" line="238"/>
         <source>PalmDOC files</source>
         <translation>PalmDOC файли</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="243"/>
+        <location filename="../mainwindow.cpp" line="239"/>
         <source>ZIP archives</source>
         <translation>ZIP архіви</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="228"/>
+        <location filename="../mainwindow.cpp" line="224"/>
         <source>FB3 books</source>
         <translation type="unfinished">Книги FB2 {3 ?}</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="232"/>
+        <location filename="../mainwindow.cpp" line="228"/>
         <source>Open Document files</source>
         <translation type="unfinished"></translation>
     </message>
