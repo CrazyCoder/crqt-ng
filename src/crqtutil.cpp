@@ -238,10 +238,11 @@ void restoreWindowPosition(QWidget* window, CRPropRef props, const char* prefix,
 static lString32 s_mainDataDir;
 static lString32 s_engineDataDir;
 static lString32 s_exeDir;
-static lString32 s_homeConfigDir;
+static lString32 s_configDir;
 static lString32 s_engineCacheDir;
+static bool s_portableMode = false;
 
-lString32& getMainDataDir() {
+lString32 getMainDataDir() {
     if (s_mainDataDir.empty()) {
 #if MACOS == 1
         QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/../Resources/");
@@ -257,7 +258,7 @@ lString32& getMainDataDir() {
     return s_mainDataDir;
 }
 
-lString32& getEngineDataDir() {
+lString32 getEngineDataDir() {
     if (s_engineDataDir.empty()) {
 #if MACOS == 1
         QString resDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/../Resources/");
@@ -273,7 +274,7 @@ lString32& getEngineDataDir() {
     return s_engineDataDir;
 }
 
-lString32& getExeDir() {
+lString32 getExeDir() {
     if (s_exeDir.empty()) {
         QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/");
         s_exeDir = qt2cr(exeDir);
@@ -281,50 +282,84 @@ lString32& getExeDir() {
     return s_exeDir;
 }
 
-lString32& getHomeConfigDir() {
-    if (s_homeConfigDir.empty()) {
+lString32 getConfigDir() {
+    if (s_configDir.empty()) {
 #if MACOS == 1
-        s_homeConfigDir = qt2cr(QDir::homePath() + "/Library/crui/");
+        // Portable mode not supported
+        // I have no idea why this might be needed on MacOS
+        s_configDir = qt2cr(QDir::homePath() + "/Library/crui/");
 #elif defined(WIN32)
-        // ~/crui/
-        s_homeConfigDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/crui/"));
+        if (s_portableMode) {
+            // <exe dir> + ".config/"
+            s_configDir = LVCombinePaths(getExeDir(), cs32(".config/"));
+        } else {
+            // ~/crui/
+            s_configDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/crui/"));
+        }
 #else
-        // Use $XDG_CONFIG_HOME environment variable if set or '~/.config' then concatenate '/crui/'
+        if (s_portableMode) {
+            // <exe dir> + ".config"
+            s_configDir = LVCombinePaths(getExeDir(), cs32(".config/"));
+        } else {
+            // Use $XDG_CONFIG_HOME environment variable if set or '~/.config' then concatenate '/crui/'
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-        QString xdg_config_home = qEnvironmentVariable("XDG_CONFIG_HOME", QString());
+            QString xdg_config_home = qEnvironmentVariable("XDG_CONFIG_HOME", QString());
 #else
-        QByteArray env_value = qgetenv("XDG_CONFIG_HOME");
-        QString xdg_config_home = QString::fromLocal8Bit(env_value);
+            QByteArray env_value = qgetenv("XDG_CONFIG_HOME");
+            QString xdg_config_home = QString::fromLocal8Bit(env_value);
 #endif
-        if (xdg_config_home.isEmpty())
-            xdg_config_home = QDir::homePath() + "/.config";
-        QString path = xdg_config_home + "/crui/";
-        s_homeConfigDir = qt2cr(path);
+            if (xdg_config_home.isEmpty())
+                xdg_config_home = QDir::homePath() + "/.config";
+            QString path = xdg_config_home + "/crui/";
+            s_configDir = qt2cr(path);
+        }
 #endif
     }
-    return s_homeConfigDir;
+    return s_configDir;
 }
 
-lString32& getEngineCacheDir() {
+lString32 getEngineCacheDir() {
     if (s_engineCacheDir.empty()) {
 #if MACOS == 1
         s_engineCacheDir = qt2cr(QDir::homePath() + "/Library/crui/cache/");
 #elif defined(WIN32)
-        // ~/crui/cache
-        s_engineCacheDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/crui/cache/"));
+        if (s_portableMode) {
+            // <exe dir> + ".cache/"
+            s_engineCacheDir = LVCombinePaths(getExeDir(), cs32(".cache/"));
+        } else {
+            // ~/crui/cache
+            s_engineCacheDir = qt2cr(QDir::toNativeSeparators(QDir::homePath() + "/crui/cache/"));
+        }
 #else
-        // Use $XDG_CACHE_HOME environment variable if set or '~/.cache' then concatenate '/crui/'
+        if (s_portableMode) {
+            // <exe dir> + ".cache"
+            s_engineCacheDir = LVCombinePaths(getExeDir(), cs32(".cache/"));
+        } else {
+            // Use $XDG_CACHE_HOME environment variable if set or '~/.cache' then concatenate '/crui/'
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-        QString xdg_cache_home = qEnvironmentVariable("XDG_CACHE_HOME", QString());
+            QString xdg_cache_home = qEnvironmentVariable("XDG_CACHE_HOME", QString());
 #else
-        QByteArray env_value = qgetenv("XDG_CACHE_HOME");
-        QString xdg_cache_home = QString::fromLocal8Bit(env_value);
+            QByteArray env_value = qgetenv("XDG_CACHE_HOME");
+            QString xdg_cache_home = QString::fromLocal8Bit(env_value);
 #endif
-        if (xdg_cache_home.isEmpty())
-            xdg_cache_home = QDir::homePath() + "/.cache";
-        QString path = xdg_cache_home + "/crui/";
-        s_engineCacheDir = qt2cr(path);
+            if (xdg_cache_home.isEmpty())
+                xdg_cache_home = QDir::homePath() + "/.cache";
+            QString path = xdg_cache_home + "/crui/";
+            s_engineCacheDir = qt2cr(path);
+        }
 #endif
     }
     return s_engineCacheDir;
+}
+
+bool getPortableSettingsMode() {
+    return s_portableMode;
+}
+
+void setPortableSettingsMode(bool mode) {
+    s_portableMode = mode;
+    // clear cached value to force recreate on
+    //  next call to getConfigDir() function
+    s_configDir = lString32::empty_str;
+    s_engineCacheDir = lString32::empty_str;
 }

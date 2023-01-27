@@ -180,7 +180,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, CR3View* docView)
     m_oldHyph = cr2qt(HyphMan::getSelectedDictionary()->getId());
 
     lString32Collection baseDirs;
-    baseDirs.add(getHomeConfigDir());
+    baseDirs.add(getConfigDir());
     baseDirs.add(getMainDataDir());
     lString32Collection bgFiles;
     QStringList bgFileLabels;

@@ -154,7 +154,33 @@ int main(int argc, char* argv[]) {
         CRLog::info("main()");
         QApplication app(argc, argv);
 
-        lString32 configDir = getHomeConfigDir();
+        // Check if it is a portable installation
+        // Check portable mark file ignoring case
+        const lString32 portableMarkName = cs32("portable.mark");
+        bool portable_found = false;
+        LVContainerRef dir = LVOpenDirectory(getExeDir());
+        if (!dir.isNull()) {
+            for (int i = 0; i < dir->GetObjectCount(); i++) {
+                const LVContainerItemInfo* item = dir->GetObjectInfo(i);
+                if (NULL != item) {
+                    if (!item->IsContainer()) {
+                        lString32 name = item->GetName();
+                        name = name.lowercase();
+                        if (name == portableMarkName) {
+                            portable_found = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        if (portable_found) {
+            CRLog::debug("Portable mark file is found: '%s'", LCSTR(portableMarkName));
+            CRLog::debug("Launch in portable settings mode.");
+            setPortableSettingsMode(true);
+        }
+
+        lString32 configDir = getConfigDir();
         if (!LVDirectoryExists(configDir))
             LVCreateDirectory(configDir);
 

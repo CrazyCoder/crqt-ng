@@ -97,13 +97,11 @@ MainWindow::MainWindow(const QString& fileToOpen, QWidget* parent)
     addAction(ui->actionNextSentence);
     addAction(ui->actionPrevSentence);
 
-    lString32 configDir = getHomeConfigDir();
+    lString32 configDir = getConfigDir();
     lString32 exeDir = getExeDir();
     lString32 engineDataDir = getEngineDataDir();
     QString iniFile = cr2qt(configDir) + "crui.ini";
-    QString iniFileInExeDir = cr2qt(exeDir) + "crui.ini";
     QString histFile = cr2qt(configDir) + "cruihist.bmk";
-    QString histFileInExeDir = cr2qt(exeDir) + "cruihist.bmk";
     QString cssFile = cr2qt(configDir) + "fb2.css";
     QString cssFileInEngineDir = cr2qt(engineDataDir) + "fb2.css";
     QString cssFileInExeDir = cr2qt(exeDir) + "fb2.css";
@@ -116,13 +114,11 @@ MainWindow::MainWindow(const QString& fileToOpen, QWidget* parent)
     ui->view->setPropsChangeCallback(this);
     ui->view->setDocViewStatusCallback(this);
     if (!ui->view->loadSettings(iniFile)) {
-        // If config not found in homeDir, trying to load from exeDir...
-        ui->view->loadSettings(iniFileInExeDir);
-        // ... and save to homeDir
+        // If config file not found in config dir we use default values
+        //  and save its to config dir
         ui->view->saveSettings(iniFile);
     }
     if (!ui->view->loadHistory(histFile)) {
-        ui->view->loadHistory(histFileInExeDir);
         ui->view->saveHistory(histFile);
     }
     if (!ui->view->loadCSS(cssFile)) {
