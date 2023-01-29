@@ -703,11 +703,11 @@ void SettingsDlg::initStyleControls(const char* styleName) {
     faces.append(tr("[Default Serif]"));
     faceValues.append("font-family: serif");
     faces.append(tr("[Default Monospace]"));
-    faceValues.append("font-family: \"Courier New\", \"Courier\", monospace");
+    faceValues.append("font-family: monospace");
     for (int i = 0; i < m_faceList.length(); i++) {
         QString face = m_faceList.at(i);
         faces.append(face);
-        faceValues.append(QString("font-family: " + face));
+        faceValues.append(QString("font-family: \"%1\";").arg(face));
     }
     m_styleFontFace.init(prefix + "font-face", faceValues, faces, m_props, m_ui->cbDefFontFace);
 
