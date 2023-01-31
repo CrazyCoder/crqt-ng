@@ -3,7 +3,7 @@
  *   Copyright (C) 2009-2012,2014 Vadim Lopatin <coolreader.org@gmail.com> *
  *   Copyright (C) 2018 Mihail Slobodyanuk <slobodyanukma@gmail.com>       *
  *   Copyright (C) 2019,2020 Konstantin Potapov <pkbo@users.sourceforge.net>
- *   Copyright (C) 2018,2020-2022 Aleksey Chernov <valexlin@gmail.com>     *
+ *   Copyright (C) 2018,2020-2023 Aleksey Chernov <valexlin@gmail.com>     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -328,7 +328,11 @@ void MainWindow::on_actionRecentBooks_triggered() {
 }
 
 void MainWindow::on_actionSettings_triggered() {
-    SettingsDlg::showDlg(this, ui->view);
+    SettingsDlg dlg(this, ui->view->getOptions());
+    if (dlg.exec() == QDialog::Accepted) {
+        ui->view->setOptions(dlg.options());
+        ui->view->getDocView()->requestRender();
+    }
 }
 
 void MainWindow::toggleProperty(const char* name) {

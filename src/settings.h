@@ -144,11 +144,12 @@ class SettingsDlg: public QDialog
     Q_OBJECT
     Q_DISABLE_COPY(SettingsDlg)
 public:
+    explicit SettingsDlg(QWidget* parent, PropsRef props);
     virtual ~SettingsDlg();
-
-    static bool showDlg(QWidget* parent, CR3View* docView);
+    PropsRef options() const {
+        return m_props;
+    }
 protected:
-    explicit SettingsDlg(QWidget* parent, CR3View* docView);
     virtual void changeEvent(QEvent* e);
     virtual void showEvent(QShowEvent* event);
     virtual void hideEvent(QHideEvent* event);
@@ -182,6 +183,7 @@ private:
     QStringList m_backgroundFiles;
     QStringList m_faceList;
     QStringList m_monoFaceList;
+    QStringList m_hyphDictIdList;
     QString m_defFontFace;
     QString m_styleName;
     StyleItem m_styleItemAlignment;
@@ -234,8 +236,6 @@ private slots:
     void on_cbWindowShowMenu_stateChanged(int);
     void on_cbWindowShowToolbar_stateChanged(int);
     void on_cbWindowFullscreen_stateChanged(int);
-    void on_buttonBox_accepted();
-    void on_buttonBox_rejected();
     void on_cbFontKerning_stateChanged(int);
     void on_cbFloatingPunctuation_stateChanged(int);
     void on_cbFontGamma_currentTextChanged(QString);
