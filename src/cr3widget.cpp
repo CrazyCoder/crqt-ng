@@ -1050,7 +1050,7 @@ void CR3View::contextMenu(QPoint pos) { }
 bool CR3View::isPointInsideSelection(QPoint pos) {
     if (!_selected)
         return false;
-    lvPoint pt(pos.x(), pos.y());
+    lvPoint pt(pos.x() * _dpr, pos.y() * _dpr);
     ldomXPointerEx p(_docview->getNodeByPoint(pt));
     if (p.isNull())
         return false;
