@@ -5,7 +5,7 @@
  *   Copyright (C) 2018 EXL <exlmotodev@gmail.com>                         *
  *   Copyright (C) 2019,2020 Konstantin Potapov <pkbo@users.sourceforge.net>
  *   Copyright (C) 2020,2021 Andy Mender <andymenderunix@gmail.com>        *
- *   Copyright (C) 2018-2022 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2018-2023 Aleksey Chernov <valexlin@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -875,6 +875,10 @@ void CR3View::zoomOut() {
 
 QScrollBar* CR3View::scrollBar() const {
     return _scroll;
+}
+
+lUInt64 CR3View::id() const {
+    return (lUInt64)_docview;
 }
 
 void CR3View::setScrollBar(QScrollBar* scroll) {

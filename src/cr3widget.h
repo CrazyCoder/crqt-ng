@@ -1,7 +1,7 @@
 /***************************************************************************
  *   crqt-ng                                                               *
  *   Copyright (C) 2009,2011,2014 Vadim Lopatin <coolreader.org@gmail.com> *
- *   Copyright (C) 2019-2022 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2019-2023 Aleksey Chernov <valexlin@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -72,6 +72,9 @@ public:
     void setDocumentText(QString text);
 
     QScrollBar* scrollBar() const;
+
+    /// returns the id of this view
+    lUInt64 id() const;
 
     /// get document's table of contents
     LVTocItem* getToc();

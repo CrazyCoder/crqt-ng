@@ -37,6 +37,8 @@ set(SRC_LIST
   fallbackfontsdialog.cpp
   fontfamiliesdialog.ui
   fontfamiliesdialog.cpp
+  tabdata.cpp
+  tabscollection.cpp
 )
 
 if(WIN32)
