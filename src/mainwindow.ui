@@ -24,12 +24,9 @@
      <height>300</height>
     </size>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
      <number>0</number>
-    </property>
-    <property name="sizeConstraint">
-     <enum>QLayout::SetMinimumSize</enum>
     </property>
     <property name="leftMargin">
      <number>0</number>
@@ -44,25 +41,26 @@
      <number>0</number>
     </property>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <property name="spacing">
-       <number>0</number>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
       </property>
-      <item>
-       <widget class="CR3View" name="view" native="true">
-        <property name="contextMenuPolicy">
-         <enum>Qt::CustomContextMenu</enum>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QScrollBar" name="scroll">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-       </widget>
-      </item>
-     </layout>
+      <property name="currentIndex">
+       <number>-1</number>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideRight</enum>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -103,6 +101,8 @@
     <addaction name="actionTOC"/>
     <addaction name="actionShowBookmarksList"/>
     <addaction name="actionAddBookmark"/>
+    <addaction name="separator"/>
+    <addaction name="actionNew_tab"/>
    </widget>
    <widget class="QMenu" name="menuNavigation">
     <property name="title">
@@ -613,42 +613,24 @@
     <string>Ctrl+Left</string>
    </property>
   </action>
+  <action name="actionNew_tab">
+   <property name="icon">
+    <iconset resource="crqtres.qrc">
+     <normaloff>:/icons/action/icons/new_tab.png</normaloff>:/icons/action/icons/new_tab.png</iconset>
+   </property>
+   <property name="text">
+    <string>New tab</string>
+   </property>
+   <property name="toolTip">
+    <string>Open new tab</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>CR3View</class>
-   <extends>QWidget</extends>
-   <header>cr3widget.h</header>
-   <container>1</container>
-   <slots>
-    <signal>fileOpened()</signal>
-    <slot>open()</slot>
-    <slot>contextMenu(QPoint)</slot>
-   </slots>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="crqtres.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>view</sender>
-   <signal>customContextMenuRequested(QPoint)</signal>
-   <receiver>MainWindowClass</receiver>
-   <slot>contextMenu(QPoint)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>261</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>652</x>
-     <y>32</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>contextMenu(QPoint)</slot>
  </slots>

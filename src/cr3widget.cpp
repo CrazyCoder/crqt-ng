@@ -436,7 +436,7 @@ CR3View::~CR3View() {
         delete _wordSelector;
 #endif
     _docview->savePosition();
-    saveHistory(QString());
+    //saveHistory(QString());
     saveSettings(QString());
     delete _docview;
     delete _data;
@@ -824,6 +824,23 @@ void CR3View::setEditMode(bool flgEdit) {
     update();
 }
 
+QString CR3View::getDocTitle() const {
+    if (NULL != _docview) {
+        lString32 atitle;
+        lString32 author = _docview->getAuthors();
+        lString32 title = _docview->getTitle();
+        if (!title.empty()) {
+            if (!author.empty())
+                atitle = author + cs32(". ") + title;
+            else
+                atitle = title;
+        } else
+            atitle = _filename;
+        return cr2qt(atitle);
+    }
+    return QString();
+}
+
 void CR3View::nextPage() {
     doCommand(DCMD_PAGEDOWN, 1);
 }
@@ -1000,6 +1017,10 @@ bool CR3View::saveSettings(QString fn) {
     return _data->_props->saveToStream(stream.get());
 }
 
+void CR3View::setSharedHistory(CRFileHist* hist) {
+    _docview->setSharedHistory(hist);
+}
+
 /// load history from file
 bool CR3View::loadHistory(QString fn) {
     lString32 filename(qt2cr(fn));
@@ -1017,7 +1038,6 @@ bool CR3View::loadHistory(QString fn) {
 /// save history to file
 bool CR3View::saveHistory(QString fn) {
     lString32 filename(qt2cr(fn));
-    crtrace log;
     if (filename.empty())
         filename = _data->_historyFileName;
     if (filename.empty()) {
@@ -1030,7 +1050,7 @@ bool CR3View::saveHistory(QString fn) {
     LVAppendPathDelimiter(bmdir);
     _docview->exportBookmarks(bmdir); //use default filename
     _data->_historyFileName = filename;
-    log << "V3DocViewWin::saveHistory(" << filename << ")";
+    CRLog::trace("CR3View::saveHistory(): filename: %s", LCSTR(filename));
     LVStreamRef stream = LVOpenFileStream(filename.c_str(), LVOM_WRITE);
     if (!stream) {
         lString32 path16 = LVExtractPath(filename);
@@ -1208,12 +1228,12 @@ void CR3View::updateHistoryAvailability() {
     if (canGoBack != _canGoBack) {
         _canGoBack = canGoBack;
         if (NULL != _docViewStatusCallback)
-            _docViewStatusCallback->onCanGoBack(_canGoBack);
+            _docViewStatusCallback->onCanGoBack(id(), _canGoBack);
     }
     if (canGoForward != _canGoForward) {
         _canGoForward = canGoForward;
         if (NULL != _docViewStatusCallback)
-            _docViewStatusCallback->onCanGoForward(_canGoForward);
+            _docViewStatusCallback->onCanGoForward(id(), _canGoForward);
     }
 }
 
@@ -1404,24 +1424,15 @@ void CR3View::OnLoadFileStart(lString32 filename) {
 void CR3View::OnLoadFileError(lString32 message) {
     setCursor(_normalCursor);
     if (NULL != _docViewStatusCallback)
-        _docViewStatusCallback->onDocumentLoaded(_filename, message);
+        _docViewStatusCallback->onDocumentLoaded(id(), cr2qt(_filename), cr2qt(message));
 }
 
 /// file loading is finished successfully - drawCoveTo() may be called there
 void CR3View::OnLoadFileEnd() {
     setCursor(_normalCursor);
     if (NULL != _docViewStatusCallback && NULL != _docview) {
-        lString32 atitle;
-        lString32 author = _docview->getAuthors();
-        lString32 title = _docview->getTitle();
-        if (!title.empty()) {
-            if (!author.empty())
-                atitle = author + cs32(". ") + title;
-            else
-                atitle = title;
-        } else
-            atitle = _filename;
-        _docViewStatusCallback->onDocumentLoaded(atitle, lString32::empty_str);
+        QString atitle = getDocTitle();
+        _docViewStatusCallback->onDocumentLoaded(id(), atitle, QString());
     }
     updateHistoryAvailability();
 }

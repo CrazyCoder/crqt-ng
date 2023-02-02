@@ -39,9 +39,9 @@ public:
 class DocViewStatusCallback
 {
 public:
-    virtual void onDocumentLoaded(const lString32& atitle, const lString32& error) = 0;
-    virtual void onCanGoBack(bool canGoBack) = 0;
-    virtual void onCanGoForward(bool canGoForward) = 0;
+    virtual void onDocumentLoaded(lUInt64 viewId, const QString& atitle, const QString& error) = 0;
+    virtual void onCanGoBack(lUInt64 viewId, bool canGoBack) = 0;
+    virtual void onCanGoForward(lUInt64 viewId, bool canGoForward) = 0;
 };
 
 #define WORD_SELECTOR_ENABLED 1
@@ -92,6 +92,8 @@ public:
     bool loadSettings(QString filename);
     /// save settings from file
     bool saveSettings(QString filename);
+    /// set new file history object (can be used by multiple LVDocView instances)
+    void setSharedHistory(CRFileHist* hist);
     /// load history from file
     bool loadHistory(QString filename);
     /// save history to file
@@ -114,6 +116,7 @@ public:
     bool getEditMode() {
         return _editMode;
     }
+    QString getDocTitle() const;
 
     void saveWindowPos(QWidget* window, const char* prefix);
     void restoreWindowPos(QWidget* window, const char* prefix, bool allowExtraStates = false);
@@ -124,8 +127,8 @@ public:
     void setDocViewStatusCallback(DocViewStatusCallback* callback) {
         _docViewStatusCallback = callback;
         if (NULL != _docViewStatusCallback) {
-            _docViewStatusCallback->onCanGoBack(_canGoBack);
-            _docViewStatusCallback->onCanGoForward(_canGoForward);
+            _docViewStatusCallback->onCanGoBack(id(), _canGoBack);
+            _docViewStatusCallback->onCanGoForward(id(), _canGoForward);
         }
     }
     /// toggle boolean property
