@@ -67,9 +67,9 @@ public:
     CR3View(QWidget* parent = 0);
     virtual ~CR3View();
 
-    bool loadDocument(QString fileName);
+    bool loadDocument(const QString& fileName);
     bool loadLastDocument();
-    void setDocumentText(QString text);
+    void setDocumentText(const QString& text);
 
     QScrollBar* scrollBar() const;
 
@@ -83,29 +83,31 @@ public:
         return _docview;
     }
     /// go to position specified by xPointer string
-    void goToXPointer(QString xPointer, bool saveToHistory = false);
+    void goToXPointer(const QString& xPointer, bool saveToHistory = false);
 
     /// returns current page
     int getCurPage();
 
-    /// load settings from file
-    bool loadSettings(QString filename);
-    /// save settings from file
-    bool saveSettings(QString filename);
+    /// set shared properties (can be used by multiple LVDocView instances)
+    void setSharedSettings(CRPropRef props);
+    /// obsolete: load settings from file
+    bool loadSettings(const QString& filename);
+    /// obsolete: save settings from file
+    bool saveSettings(const QString& filename);
     /// set new file history object (can be used by multiple LVDocView instances)
     void setSharedHistory(CRFileHist* hist);
-    /// load history from file
-    bool loadHistory(QString filename);
-    /// save history to file
-    bool saveHistory(QString filename);
+    /// obsolete: load history from file
+    bool loadHistory(const QString& filename);
+    /// obsolete: save history to file
+    bool saveHistory(const QString& filename);
 
-    void setHyphDir(QString dirname, bool clear = true);
+    void setHyphDir(const QString& dirname, bool clear = true);
     const QStringList& getHyphDicts();
 
     /// load fb2.css file
     bool loadCSS(QString filename);
     /// set bookmarks dir
-    void setBookmarksDir(QString dirname);
+    void setBookmarksDir(const QString& dirname);
     /// set new option values
     PropsRef setOptions(PropsRef props);
     /// get current option values
@@ -212,6 +214,7 @@ private:
     bool updateSelection(ldomXPointer p);
     void checkFontLanguageCompatibility();
     void updateHistoryAvailability();
+    void applyTextLangMainLang(lString32 lang);
 
     DocViewData* _data; // to hide non-qt implementation
     LVDocView* _docview;
@@ -233,6 +236,7 @@ private:
     QString _cssDir;
     QString _bookmarkDir;
     lString32 _filename;
+    lString32 _doc_language;
     bool _editMode;
     int _lastBatteryState;
     int _lastBatteryChargingConn;

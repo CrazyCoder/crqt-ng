@@ -437,7 +437,7 @@ CR3View::~CR3View() {
 #endif
     _docview->savePosition();
     //saveHistory(QString());
-    saveSettings(QString());
+    //saveSettings(QString());
     delete _docview;
     delete _data;
 }
@@ -465,7 +465,7 @@ QString CR3View::endWordSelection() {
 }
 #endif
 
-void CR3View::setHyphDir(QString dirname, bool clear) {
+void CR3View::setHyphDir(const QString& dirname, bool clear) {
     HyphMan::initDictionaries(qt2cr(dirname), clear);
     _hyphDicts.clear();
     for (int i = 0; i < HyphMan::getDictList()->length(); i++) {
@@ -485,7 +485,7 @@ LVTocItem* CR3View::getToc() {
 }
 
 /// go to position specified by xPointer string
-void CR3View::goToXPointer(QString xPointer, bool saveToHistory) {
+void CR3View::goToXPointer(const QString& xPointer, bool saveToHistory) {
     ldomXPointer p = _docview->getDocument()->createXPointer(qt2cr(xPointer));
     if (saveToHistory)
         _docview->savePosToNavigationHistory();
@@ -501,7 +501,7 @@ int CR3View::getCurPage() {
     return _docview->getCurPage();
 }
 
-void CR3View::setDocumentText(QString text) {
+void CR3View::setDocumentText(const QString& text) {
     _docview->savePosition();
     clearSelection();
     _docview->createDefaultDocument(lString32::empty_str, qt2cr(text));
@@ -514,23 +514,20 @@ bool CR3View::loadLastDocument() {
     return loadDocument(cr2qt(hist->getRecords()[0]->getFilePathName()));
 }
 
-bool CR3View::loadDocument(QString fileName) {
+bool CR3View::loadDocument(const QString& fileName) {
     _docview->savePosition();
     clearSelection();
     bool res = _docview->LoadDocument(qt2cr(fileName).c_str());
     if (res) {
-        CRPropRef props = _docview->propsGetCurrent();
-        if (props->getBoolDef(PROP_TEXTLANG_EMBEDDED_LANGS_ENABLED, false)) {
-            lString32 doc_lang = _docview->getLanguage();
-            if (!doc_lang.empty())
-                _docview->propApply(lString8(PROP_TEXTLANG_MAIN_LANG), doc_lang);
-        }
+        _doc_language = _docview->getLanguage();
+        applyTextLangMainLang(_doc_language);
         //_docview->swapToCache();
         QByteArray utf8 = fileName.toUtf8();
         CRLog::debug("Trying to restore position for %s", utf8.constData());
         _docview->restorePosition();
         checkFontLanguageCompatibility();
     } else {
+        _doc_language = lString32::empty_str;
         _docview->createDefaultDocument(lString32::empty_str, qt2cr(tr("Error while opening document ") + fileName));
     }
     update();
@@ -620,6 +617,7 @@ void CR3View::paintEvent(QPaintEvent* event) {
         _lastBatteryChargingConn = newChargingConn;
         _lastBatteryChargeLevel = newChargeLevel;
     }
+    applyTextLangMainLang(_doc_language);
     LVDocImageRef ref = _docview->getPageImage(0);
     if (ref.isNull()) {
         //painter.fillRect();
@@ -921,8 +919,19 @@ bool CR3View::loadCSS(QString fn) {
     return false;
 }
 
-/// load settings from file
-bool CR3View::loadSettings(QString fn) {
+void CR3View::setSharedSettings(CRPropRef props) {
+    _data->_props = props;
+    _docview->propsUpdateDefaults(_data->_props);
+    updateDefProps();
+    CRPropRef r = _docview->propsApply(_data->_props);
+    applyTextLangMainLang(_doc_language);
+    PropsRef unknownOptions = cr2qt(r);
+    if (_propsCallback != NULL)
+        _propsCallback->onPropsChange(unknownOptions);
+}
+
+/// obsolete: load settings from file
+bool CR3View::loadSettings(const QString& fn) {
     lString32 filename(qt2cr(fn));
     _data->_settingsFileName = filename;
     LVStreamRef stream = LVOpenFileStream(filename.c_str(), LVOM_READ);
@@ -936,6 +945,7 @@ bool CR3View::loadSettings(QString fn) {
     _docview->propsUpdateDefaults(_data->_props);
     updateDefProps();
     CRPropRef r = _docview->propsApply(_data->_props);
+    applyTextLangMainLang(_doc_language);
     PropsRef unknownOptions = cr2qt(r);
     if (_propsCallback != NULL)
         _propsCallback->onPropsChange(unknownOptions);
@@ -967,10 +977,11 @@ PropsRef CR3View::setOptions(PropsRef props) {
     //        CRLog::debug("Result [%d] '%s'=%s ", i, _data->_props->getName(i), UnicodeToUtf8(_data->_props->getValue(i)).c_str() );
     //    }
     CRPropRef r = _docview->propsApply(changed);
+    applyTextLangMainLang(_doc_language);
     PropsRef unknownOptions = cr2qt(r);
     if (_propsCallback != NULL)
         _propsCallback->onPropsChange(unknownOptions);
-    saveSettings(QString());
+    //saveSettings(QString());
     checkFontLanguageCompatibility();
     update();
     return unknownOptions;
@@ -989,29 +1000,27 @@ PropsRef CR3View::getOptions() {
     return Props::clone(cr2qt(_data->_props));
 }
 
-/// save settings from file
-bool CR3View::saveSettings(QString fn) {
+/// obsolete: save settings from file
+bool CR3View::saveSettings(const QString& fn) {
     lString32 filename(qt2cr(fn));
-    crtrace log;
     if (filename.empty())
         filename = _data->_settingsFileName;
     if (filename.empty())
         return false;
     _data->_settingsFileName = filename;
-    log << "V3DocViewWin::saveSettings(" << filename << ")";
+    CRLog::trace("V3DocViewWin::saveSettings(%s)", LCSTR(filename));
     LVStreamRef stream = LVOpenFileStream(filename.c_str(), LVOM_WRITE);
     if (!stream) {
-        lString32 path16 = LVExtractPath(filename);
-        lString8 path = UnicodeToUtf8(path16);
-        if (!LVCreateDirectory(path16)) {
+        lString32 upath = LVExtractPath(filename);
+        lString8 path = UnicodeToUtf8(upath);
+        if (!LVCreateDirectory(upath)) {
             CRLog::error("Cannot create directory %s", path.c_str());
         } else {
             stream = LVOpenFileStream(filename.c_str(), LVOM_WRITE);
         }
     }
     if (stream.isNull()) {
-        lString8 fn = UnicodeToUtf8(filename);
-        CRLog::error("Cannot save settings to file %s", fn.c_str());
+        CRLog::error("Cannot save settings to file %s", LCSTR(filename));
         return false;
     }
     return _data->_props->saveToStream(stream.get());
@@ -1021,8 +1030,8 @@ void CR3View::setSharedHistory(CRFileHist* hist) {
     _docview->setSharedHistory(hist);
 }
 
-/// load history from file
-bool CR3View::loadHistory(QString fn) {
+/// obsolete: load history from file
+bool CR3View::loadHistory(const QString& fn) {
     lString32 filename(qt2cr(fn));
     CRLog::trace("V3DocViewWin::loadHistory( %s )", UnicodeToUtf8(filename).c_str());
     _data->_historyFileName = filename;
@@ -1035,8 +1044,8 @@ bool CR3View::loadHistory(QString fn) {
     return true;
 }
 
-/// save history to file
-bool CR3View::saveHistory(QString fn) {
+/// obsolete: save history to file
+bool CR3View::saveHistory(const QString& fn) {
     lString32 filename(qt2cr(fn));
     if (filename.empty())
         filename = _data->_historyFileName;
@@ -1234,6 +1243,18 @@ void CR3View::updateHistoryAvailability() {
         _canGoForward = canGoForward;
         if (NULL != _docViewStatusCallback)
             _docViewStatusCallback->onCanGoForward(id(), _canGoForward);
+    }
+}
+
+void CR3View::applyTextLangMainLang(lString32 lang) {
+    if (!lang.empty()) {
+        CRPropRef props = _docview->propsGetCurrent();
+        if (props->getBoolDef(PROP_TEXTLANG_EMBEDDED_LANGS_ENABLED, false)) {
+            _docview->propApply(lString8(PROP_TEXTLANG_MAIN_LANG), _doc_language);
+            // LVDocView::propApply() calls LVDocView::requestRender() if the property has changed
+            // LVDocView::requestRender() doesn't render the document, it only resets the render status
+            // If the LVDocView::checkRender() function is then called, the document will be rendered
+        }
     }
 }
 
@@ -1449,7 +1470,7 @@ void CR3View::OnFormatEnd() {
 }
 
 /// set bookmarks dir
-void CR3View::setBookmarksDir(QString dirname) {
+void CR3View::setBookmarksDir(const QString& dirname) {
     _bookmarkDir = dirname;
 }
 
@@ -1516,7 +1537,7 @@ void CR3View::keyPressEvent(QKeyEvent* event) {
                 event->setAccepted(true);
                 return;
         }
-        int dist = event->modifiers() & Qt::ShiftModifier ? 5 : 1;
+        int dist = (event->modifiers() & Qt::ShiftModifier) ? 5 : 1;
         _wordSelector->moveBy(dir, dist);
         update();
         event->setAccepted(true);

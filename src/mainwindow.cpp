@@ -112,24 +112,25 @@ MainWindow::MainWindow(const QString& fileToOpen, QWidget* parent)
     addAction(ui->actionNew_tab);
 
     QString configDir = cr2qt(getConfigDir());
+    QString iniFile = configDir + "crui.ini";
     QString histFile = configDir + "cruihist.bmk";
+    if (!_tabs.loadSettings(iniFile)) {
+        // If config file not found in config dir
+        //  save its to config dir
+        _tabs.saveSettings(iniFile);
+    }
     if (!_tabs.loadHistory(histFile)) {
         _tabs.saveHistory(histFile);
     }
+    _tabs.restoreWindowPos(this, "main.", true);
     addNewDocTab();
-
-    CR3View* view = currentCRView();
-    if (NULL != view)
-        view->restoreWindowPos(this, "main.", true);
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
+    _tabs.saveWindowPos(this, "main.");
     _tabs.saveHistory();
-    QString configDir = cr2qt(getConfigDir());
-    _tabs.saveTabSession(configDir + "tabs.ini");
-    CR3View* view = currentCRView();
-    if (NULL != view)
-        view->saveWindowPos(this, "main.");
+    _tabs.saveSettings();
+    _tabs.saveTabSession(cr2qt(getConfigDir()) + "tabs.ini");
 }
 
 MainWindow::~MainWindow() {
@@ -153,7 +154,6 @@ TabData MainWindow::createNewDocTabWidget() {
 
     QString configDir = cr2qt(getConfigDir());
     QString engineDataDir = cr2qt(getEngineDataDir());
-    QString iniFile = configDir + "crui.ini";
     QString cssFile = configDir + "fb2.css";
     QString cssFileInEngineDir = engineDataDir + "fb2.css";
     QString mainHyphDir = engineDataDir + "hyph" + QDir::separator();
@@ -164,11 +164,7 @@ TabData MainWindow::createNewDocTabWidget() {
     view->setHyphDir(userHyphDir + "hyph" + QDir::separator(), false);
     view->setPropsChangeCallback(this);
     view->setDocViewStatusCallback(this);
-    if (!view->loadSettings(iniFile)) {
-        // If config file not found in config dir we use default values
-        //  and save its to config dir
-        view->saveSettings(iniFile);
-    }
+    view->setSharedSettings(_tabs.getSettings());
     view->setSharedHistory(_tabs.getHistory());
     if (!view->loadCSS(cssFile)) {
         view->loadCSS(cssFileInEngineDir);
@@ -706,10 +702,9 @@ void MainWindow::showEvent(QShowEvent* event) {
     } else if (n == 0) {
         // restore session
         CRLog::info("Startup Action: Restore session (restore tabs)");
-        QString configDir = cr2qt(getConfigDir());
-        QStringList files;
-        bool res = TabsCollection::openTabSession(files, configDir + "tabs.ini");
-        if (res && files.size() > 0) {
+        bool ok;
+        QStringList files = _tabs.openTabSession(cr2qt(getConfigDir()) + "tabs.ini", &ok);
+        if (ok && files.size() > 0) {
             int processed = 0;
             int index = 0;
             TabData tab;

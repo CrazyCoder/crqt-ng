@@ -18,20 +18,45 @@
  *   MA 02110-1301, USA.                                                   *
  ***************************************************************************/
 
+/*
+ * This file contains code snippets from cr3widget.cpp
+ * Copyright (C) 2009-2012,2014 Vadim Lopatin <coolreader.org@gmail.com>
+ */
+
 #include "tabscollection.h"
 #include "cr3widget.h"
+#include "crqtutil.h"
 
 #include <QtCore/QSettings>
 
 #include <lvdocview.h>
+#include <lvstreamutils.h>
 #include <crlog.h>
 
-TabsCollection::TabsCollection() : QVector<TabData>() { }
+TabsCollection::TabsCollection() : QVector<TabData>(), m_props(LVCreatePropsContainer()) { }
 
 TabsCollection::~TabsCollection() { }
 
-bool TabsCollection::saveTabSession(const QString& filename) {
+QStringList TabsCollection::openTabSession(const QString& filename, bool* ok) {
+    QStringList files;
+    m_sessionFileName = filename;
     QSettings settings(filename, QSettings::IniFormat);
+    int size = settings.beginReadArray("tabs");
+    files.clear();
+    files.reserve(size);
+    for (int i = 0; i < size; i++) {
+        settings.setArrayIndex(i);
+        files.append(settings.value("doc-filename").toString());
+    }
+    settings.endArray();
+    if (ok)
+        *ok = (QSettings::NoError == settings.status());
+    return files;
+}
+
+bool TabsCollection::saveTabSession(const QString& filename) {
+    QString fn = !filename.isEmpty() ? filename : m_sessionFileName;
+    QSettings settings(fn, QSettings::IniFormat);
     settings.clear();
     settings.beginWriteArray("tabs");
     for (int i = 0; i < QVector::size(); i++) {
@@ -47,17 +72,51 @@ bool TabsCollection::saveTabSession(const QString& filename) {
     return QSettings::NoError == settings.status();
 }
 
-bool TabsCollection::openTabSession(QStringList& files, const QString& filename) {
-    QSettings settings(filename, QSettings::IniFormat);
-    int size = settings.beginReadArray("tabs");
-    files.clear();
-    files.reserve(size);
-    for (int i = 0; i < size; i++) {
-        settings.setArrayIndex(i);
-        files.append(settings.value("doc-filename").toString());
+bool TabsCollection::loadSettings(const QString& filename) {
+    lString32 fn(qt2cr(filename));
+    m_settingsFileName = fn;
+    LVStreamRef stream = LVOpenFileStream(fn.c_str(), LVOM_READ);
+    bool res = false;
+    if (!stream.isNull() && m_props->loadFromStream(stream.get())) {
+        CRLog::info("Loading settings from file %s", LCSTR(fn));
+        res = true;
+    } else {
+        CRLog::error("Cannot load settings from file %s", LCSTR(fn));
     }
-    settings.endArray();
-    return QSettings::NoError == settings.status();
+    //updateDefProps();
+    return res;
+}
+
+bool TabsCollection::saveSettings(const QString& filename) {
+    lString32 fn(qt2cr(filename));
+    if (fn.empty())
+        fn = m_settingsFileName;
+    if (fn.empty())
+        return false;
+    m_settingsFileName = fn;
+    LVStreamRef stream = LVOpenFileStream(fn.c_str(), LVOM_WRITE);
+    if (!stream) {
+        lString32 upath = LVExtractPath(fn);
+        lString8 path = UnicodeToUtf8(upath);
+        if (!LVCreateDirectory(upath)) {
+            CRLog::error("Cannot create directory %s", path.c_str());
+        } else {
+            stream = LVOpenFileStream(fn.c_str(), LVOM_WRITE);
+        }
+    }
+    if (stream.isNull()) {
+        CRLog::error("Cannot save settings to file %s", LCSTR(fn));
+        return false;
+    }
+    return m_props->saveToStream(stream.get());
+}
+
+void TabsCollection::saveWindowPos(QWidget* window, const char* prefix) {
+    ::saveWindowPosition(window, m_props, prefix);
+}
+
+void TabsCollection::restoreWindowPos(QWidget* window, const char* prefix, bool allowExtraStates) {
+    ::restoreWindowPosition(window, m_props, prefix, allowExtraStates);
 }
 
 bool TabsCollection::loadHistory(const QString& filename) {

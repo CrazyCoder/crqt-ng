@@ -33,8 +33,24 @@ class TabsCollection: public QVector<TabData>
 public:
     TabsCollection();
     virtual ~TabsCollection();
+    QStringList openTabSession(const QString& filename, bool* ok);
     bool saveTabSession(const QString& filename);
-    static bool openTabSession(QStringList& files, const QString& filename);
+    bool saveTabSession() {
+        return saveTabSession(QString());
+    }
+    /// load settings from file
+    bool loadSettings(const QString& filename);
+    /// save settings from file
+    bool saveSettings(const QString& filename);
+    /// save settings from file
+    bool saveSettings() {
+        return saveSettings(QString());
+    }
+    CRPropRef getSettings() {
+        return m_props;
+    }
+    void saveWindowPos(QWidget* window, const char* prefix);
+    void restoreWindowPos(QWidget* window, const char* prefix, bool allowExtraStates = false);
     /// load history from file
     bool loadHistory(const QString& filename);
     /// save history to file
@@ -49,7 +65,10 @@ public:
     int indexByViewId(lUInt64 viewId) const;
     void cleanup();
 private:
+    CRPropRef m_props;
     CRFileHist m_hist;
+    QString m_sessionFileName;
+    lString32 m_settingsFileName;
     lString32 m_historyFileName;
 };
 
