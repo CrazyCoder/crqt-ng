@@ -37,7 +37,7 @@ elseif( ${USE_QT} STREQUAL QT5 )
 endif()
 
 # crengine-ng
-find_package(crengine-ng 0.9.6 REQUIRED)
+find_package(crengine-ng 0.9.7 REQUIRED)
 
 include_directories(${CRENGINE_NG_INCLUDE_DIR})
 
