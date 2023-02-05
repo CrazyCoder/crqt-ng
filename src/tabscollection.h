@@ -73,6 +73,7 @@ public:
     CRPropRef getSettings() {
         return m_props;
     }
+    void setSettings(CRPropRef props);
     void saveWindowPos(QWidget* window, const char* prefix);
     void restoreWindowPos(QWidget* window, const char* prefix, bool allowExtraStates = false);
     /// load history from file

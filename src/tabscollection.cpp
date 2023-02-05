@@ -117,6 +117,11 @@ bool TabsCollection::saveSettings(const QString& filename) {
     return m_props->saveToStream(stream.get());
 }
 
+void TabsCollection::setSettings(CRPropRef props) {
+    CRPropRef changed = m_props ^ props;
+    m_props = changed | m_props;
+}
+
 void TabsCollection::saveWindowPos(QWidget* window, const char* prefix) {
     ::saveWindowPosition(window, m_props, prefix);
 }

@@ -549,7 +549,9 @@ void MainWindow::on_actionSettings_triggered() {
         for (TabsCollection::iterator it = _tabs.begin(); it != _tabs.end(); ++it) {
             CR3View* view = (*it).view();
             if (NULL != view) {
-                view->setOptions(dlg.options(), view == currView);
+                PropsRef newProps = dlg.options();
+                _tabs.setSettings(qt2cr(newProps));
+                view->setOptions(newProps, view == currView);
                 view->getDocView()->requestRender();
                 // docview is not rendered here, only planned
             }
