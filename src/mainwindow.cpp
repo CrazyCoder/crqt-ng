@@ -130,6 +130,11 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     _tabs.saveWindowPos(this, "main.");
     _tabs.saveHistory();
     _tabs.saveSettings();
+    int tabIndex = ui->tabWidget->currentIndex();
+    if (tabIndex >= 0)
+        _tabs.setCurrentDocument(_tabs[tabIndex].docPath());
+    else
+        _tabs.setCurrentDocument("");
     _tabs.saveTabSession(cr2qt(getConfigDir()) + "tabs.ini");
 }
 
@@ -210,14 +215,16 @@ CR3View* MainWindow::currentCRView() const {
     return view;
 }
 
-void MainWindow::syncTabWidget() {
-    QString currentDocFilePath;
-    QWidget* widget = ui->tabWidget->currentWidget();
-    for (TabsCollection::const_iterator it = _tabs.begin(); it != _tabs.end(); ++it) {
-        const TabData& tab = *it;
-        if (widget == tab.widget()) {
-            currentDocFilePath = tab.fullDocPath();
-            break;
+void MainWindow::syncTabWidget(const QString& currentDocument) {
+    QString currentDocFilePath = currentDocument;
+    if (currentDocFilePath.isEmpty()) {
+        QWidget* widget = ui->tabWidget->currentWidget();
+        for (TabsCollection::const_iterator it = _tabs.begin(); it != _tabs.end(); ++it) {
+            const TabData& tab = *it;
+            if (widget == tab.widget()) {
+                currentDocFilePath = tab.docPath();
+                break;
+            }
         }
     }
     ui->tabWidget->blockSignals(true);
@@ -229,9 +236,10 @@ void MainWindow::syncTabWidget() {
         CR3View* view = tab.view();
         int index = ui->tabWidget->addTab(tab.widget(), tab.title());
         ui->tabWidget->setTabToolTip(index, tab.title());
-        if (tab.fullDocPath() == currentDocFilePath)
+        if (tab.docPath() == currentDocFilePath)
             tabIndex = index;
     }
+    ui->tabWidget->blockSignals(false);
     if (-1 == tabIndex)
         tabIndex = ui->tabWidget->count() - 1;
     if (tabIndex >= 0) {
@@ -241,7 +249,6 @@ void MainWindow::syncTabWidget() {
         if (NULL != view)
             currentTitle = tab.title();
     }
-    ui->tabWidget->blockSignals(false);
     if (!currentTitle.isEmpty())
         setWindowTitle("CoolReaderNG/Qt - " + currentTitle);
     else
@@ -604,14 +611,17 @@ void MainWindow::onPropsChange(PropsRef props) {
     }
 }
 
-void MainWindow::onDocumentLoaded(lUInt64 viewId, const QString& atitle, const QString& error) {
+void MainWindow::onDocumentLoaded(lUInt64 viewId, const QString& atitle, const QString& error,
+                                  const QString& fullDocPath) {
     CRLog::debug("MainWindow::onDocumentLoaded '%s', error=%s ", atitle.toLocal8Bit().constData(),
                  error.toLocal8Bit().constData());
     int cbIndex = _tabs.indexByViewId(viewId);
     int currentIndex = ui->tabWidget->currentIndex();
     if (cbIndex >= 0) {
         if (error.isEmpty()) {
-            _tabs[cbIndex].setTitle(atitle);
+            TabData& tab = _tabs[cbIndex];
+            tab.setTitle(atitle);
+            tab.setDocPath(fullDocPath);
             ui->tabWidget->setTabText(cbIndex, atitle);
             ui->tabWidget->setTabToolTip(cbIndex, atitle);
         }
@@ -703,22 +713,26 @@ void MainWindow::showEvent(QShowEvent* event) {
         // restore session
         CRLog::info("Startup Action: Restore session (restore tabs)");
         bool ok;
-        QStringList files = _tabs.openTabSession(cr2qt(getConfigDir()) + "tabs.ini", &ok);
-        if (ok && files.size() > 0) {
+        TabsCollection::TabSession session = _tabs.openTabSession(cr2qt(getConfigDir()) + "tabs.ini", &ok);
+        if (ok && session.size() > 0) {
             int processed = 0;
             int index = 0;
             TabData tab;
-            for (QStringList::const_iterator it = files.begin(); it != files.end(); ++it, ++index) {
-                const QString& filePath = *it;
+            for (TabsCollection::TabSession::const_iterator it = session.begin(); it != session.end(); ++it, ++index) {
+                //const QString& filePath = *it;
+                const TabsCollection::TabProperty& data = *it;
                 if (index < _tabs.size()) {
                     tab = _tabs[index];
                 } else {
                     tab = createNewDocTabWidget();
                     _tabs.append(tab);
                 }
-                if (!filePath.isEmpty()) {
-                    if (!tab.view()->loadDocument(filePath)) {
-                        CRLog::error("cannot load document \"%s\"", filePath.toLocal8Bit().constData());
+                tab.setTitle(data.title);
+                tab.setDocPath(data.docPath);
+                _tabs[index] = tab;
+                if (!data.docPath.isEmpty()) {
+                    if (!tab.view()->loadDocument(data.docPath)) {
+                        CRLog::error("cannot load document \"%s\"", data.docPath.toLocal8Bit().constData());
                     }
                 }
                 processed++;
@@ -737,7 +751,7 @@ void MainWindow::showEvent(QShowEvent* event) {
                     _tabs.append(tab);
                 }
             }
-            syncTabWidget();
+            syncTabWidget(session.currentDocument);
         } else {
             view->loadLastDocument();
         }
@@ -876,12 +890,14 @@ void MainWindow::on_tabWidget_currentChanged(int index) {
         if (NULL != view) {
             view->getDocView()->swapToCache();
             view->getDocView()->savePosition();
+            view->setActive(false);
         }
     }
     if (index >= 0 && index < _tabs.size()) {
         const TabData& tab = _tabs[index];
         CR3View* view = tab.view();
         if (NULL != view) {
+            view->setActive(true);
             title = tab.title();
             view->getDocView()->swapToCache();
             view->getDocView()->savePosition();

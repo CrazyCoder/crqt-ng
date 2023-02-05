@@ -37,21 +37,25 @@ TabsCollection::TabsCollection() : QVector<TabData>(), m_props(LVCreatePropsCont
 
 TabsCollection::~TabsCollection() { }
 
-QStringList TabsCollection::openTabSession(const QString& filename, bool* ok) {
-    QStringList files;
+TabsCollection::TabSession TabsCollection::openTabSession(const QString& filename, bool* ok) {
+    TabSession session;
+    TabProperty data;
     m_sessionFileName = filename;
     QSettings settings(filename, QSettings::IniFormat);
     int size = settings.beginReadArray("tabs");
-    files.clear();
-    files.reserve(size);
+    session.clear();
+    session.reserve(size);
     for (int i = 0; i < size; i++) {
         settings.setArrayIndex(i);
-        files.append(settings.value("doc-filename").toString());
+        data.docPath = settings.value("doc-filename").toString();
+        data.title = settings.value("title").toString();
+        session.append(data);
     }
     settings.endArray();
+    session.currentDocument = settings.value("current").toString();
     if (ok)
         *ok = (QSettings::NoError == settings.status());
-    return files;
+    return session;
 }
 
 bool TabsCollection::saveTabSession(const QString& filename) {
@@ -65,9 +69,11 @@ bool TabsCollection::saveTabSession(const QString& filename) {
         if (NULL != view)
             view->getDocView()->savePosition();
         settings.setArrayIndex(i);
-        settings.setValue("doc-filename", tab.fullDocPath());
+        settings.setValue("doc-filename", tab.docPath());
+        settings.setValue("title", tab.title());
     }
     settings.endArray();
+    settings.setValue("current", m_currentDocument);
     settings.sync();
     return QSettings::NoError == settings.status();
 }

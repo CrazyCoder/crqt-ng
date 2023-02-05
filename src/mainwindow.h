@@ -53,7 +53,7 @@ private:
     void addNewDocTab();
     void closeDocTab(int index);
     CR3View* currentCRView() const;
-    void syncTabWidget();
+    void syncTabWidget(const QString& currentDocument = QString());
     int _prevIndex;
 protected:
     virtual void showEvent(QShowEvent* event);
@@ -64,7 +64,8 @@ public slots:
     void on_actionFindText_triggered();
 private:
     virtual void onPropsChange(PropsRef props);
-    virtual void onDocumentLoaded(lUInt64 viewId, const QString& atitle, const QString& error);
+    virtual void onDocumentLoaded(lUInt64 viewId, const QString& atitle, const QString& error,
+                                  const QString& fullDocPath);
     virtual void onCanGoBack(lUInt64 viewId, bool canGoBack);
     virtual void onCanGoForward(lUInt64 viewId, bool canGoForward);
 private slots:

@@ -21,6 +21,7 @@
 #ifndef TABSCOLLECTION_H
 #define TABSCOLLECTION_H
 
+#include <QtCore/QString>
 #include <QtCore/QVector>
 
 #include <lvstring.h>
@@ -31,9 +32,32 @@
 class TabsCollection: public QVector<TabData>
 {
 public:
+    class TabProperty
+    {
+    public:
+        TabProperty() { }
+        TabProperty(const TabProperty& other) {
+            docPath = other.docPath;
+            title = other.title;
+        }
+        TabProperty& operator=(const TabProperty& other) {
+            docPath = other.docPath;
+            title = other.title;
+            return *this;
+        }
+        QString docPath;
+        QString title;
+    };
+    class TabSession: public QVector<TabProperty>
+    {
+    public:
+        TabSession() : QVector<TabProperty>() { }
+        QString currentDocument;
+    };
+public:
     TabsCollection();
     virtual ~TabsCollection();
-    QStringList openTabSession(const QString& filename, bool* ok);
+    TabSession openTabSession(const QString& filename, bool* ok);
     bool saveTabSession(const QString& filename);
     bool saveTabSession() {
         return saveTabSession(QString());
@@ -62,6 +86,12 @@ public:
     CRFileHist* getHistory() {
         return &m_hist;
     }
+    QString currentDocument() const {
+        return m_currentDocument;
+    }
+    void setCurrentDocument(const QString& document) {
+        m_currentDocument = document;
+    }
     int indexByViewId(lUInt64 viewId) const;
     void cleanup();
 private:
@@ -70,6 +100,7 @@ private:
     QString m_sessionFileName;
     lString32 m_settingsFileName;
     lString32 m_historyFileName;
+    QString m_currentDocument;
 };
 
 #endif // TABSCOLLECTION_H

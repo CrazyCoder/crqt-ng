@@ -296,22 +296,22 @@
 <context>
     <name>CR3View</name>
     <message>
-        <location filename="../cr3widget.cpp" line="534"/>
+        <location filename="../cr3widget.cpp" line="1327"/>
         <source>Error while opening document </source>
         <translation>Ошибка открытия документа </translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1565"/>
+        <location filename="../cr3widget.cpp" line="1681"/>
         <source>Loading: please wait...</source>
         <translation>Загрузка: подождите...</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1208"/>
+        <location filename="../cr3widget.cpp" line="1222"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1209"/>
+        <location filename="../cr3widget.cpp" line="1223"/>
         <source>Font &quot;%1&quot; isn&apos;t compatible with language &quot;%2&quot;. Instead will be used fallback font.</source>
         <translation>Шрифт &quot;%1&quot; не совместим с языком &quot;%2&quot;. Вместо него будет задействован дополнительный шрифт.</translation>
     </message>
@@ -591,102 +591,102 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="343"/>
+        <location filename="../mainwindow.cpp" line="346"/>
         <source>Open book file</source>
         <translation>Открыть книгу</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="284"/>
+        <location filename="../mainwindow.cpp" line="287"/>
         <source>Export document to</source>
         <translation>Экспортировать документ в</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="186"/>
+        <location filename="../mainwindow.cpp" line="187"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="186"/>
+        <location filename="../mainwindow.cpp" line="187"/>
         <source>The maximum number of tabs has been exceeded!</source>
         <translation>Превышего максимальное количество вкладок!</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="284"/>
+        <location filename="../mainwindow.cpp" line="287"/>
         <source>WOL book (*.wol)</source>
         <translation>Книга WOL (.wol)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="289"/>
+        <location filename="../mainwindow.cpp" line="292"/>
         <source>Export to WOL format</source>
         <translation>Экспортировать в WOL формат</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="345"/>
+        <location filename="../mainwindow.cpp" line="348"/>
         <source>All supported formats</source>
         <translation>Все форматы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="346"/>
+        <location filename="../mainwindow.cpp" line="349"/>
         <source>FB2 books</source>
         <translation>Книги FB2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="348"/>
+        <location filename="../mainwindow.cpp" line="351"/>
         <source>Text files</source>
         <translation>Текстовые файлы</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="349"/>
+        <location filename="../mainwindow.cpp" line="352"/>
         <source>Rich text</source>
         <translation>Текст RTF</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="350"/>
+        <location filename="../mainwindow.cpp" line="353"/>
         <source>MS Word document</source>
         <translation>Документы MS Word</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="352"/>
+        <location filename="../mainwindow.cpp" line="355"/>
         <source>HTML files</source>
         <translation>Файлы HTML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="354"/>
+        <location filename="../mainwindow.cpp" line="357"/>
         <source>Markdown files</source>
         <translation>файлы Markdown</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
+        <location filename="../mainwindow.cpp" line="359"/>
         <source>EPUB files</source>
         <translation>Книги EPUB</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="358"/>
+        <location filename="../mainwindow.cpp" line="361"/>
         <source>CHM files</source>
         <translation>Файлы CHM</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="360"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>MOBI files</source>
         <translation>Файлы MOBI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="361"/>
+        <location filename="../mainwindow.cpp" line="364"/>
         <source>PalmDOC files</source>
         <translation>Файлы PDB/PalmDoc</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="362"/>
+        <location filename="../mainwindow.cpp" line="365"/>
         <source>ZIP archives</source>
         <translation>Архивы ZIP</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="347"/>
+        <location filename="../mainwindow.cpp" line="350"/>
         <source>FB3 books</source>
         <translation>Книги FB3</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="351"/>
+        <location filename="../mainwindow.cpp" line="354"/>
         <source>Open Document files</source>
         <translation>Файлы Open Document</translation>
     </message>

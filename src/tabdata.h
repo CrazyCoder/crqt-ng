@@ -46,6 +46,7 @@ public:
         m_layout = obj.m_layout;
         m_view = obj.m_view;
         m_scroll = obj.m_scroll;
+        m_docPath = obj.m_docPath;
         m_title = obj.m_title;
         m_canGoBack = obj.m_canGoBack;
         m_canGoForward = obj.m_canGoForward;
@@ -55,6 +56,7 @@ public:
         m_layout = obj.m_layout;
         m_view = obj.m_view;
         m_scroll = obj.m_scroll;
+        m_docPath = obj.m_docPath;
         m_title = obj.m_title;
         m_canGoBack = obj.m_canGoBack;
         m_canGoForward = obj.m_canGoForward;
@@ -78,7 +80,12 @@ public:
     QScrollBar* scrollBar() const {
         return m_scroll;
     }
-    QString fullDocPath() const;
+    QString docPath() const {
+        return m_docPath;
+    }
+    void setDocPath(const QString& path) {
+        m_docPath = path;
+    }
     QString title() const {
         return m_title;
     }
@@ -102,6 +109,7 @@ private:
     QLayout* m_layout;
     CR3View* m_view;
     QScrollBar* m_scroll;
+    QString m_docPath;
     QString m_title;
     bool m_canGoBack;
     bool m_canGoForward;

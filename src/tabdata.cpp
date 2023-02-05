@@ -31,7 +31,6 @@
 
 #include "cr3widget.h"
 #include <lvdocview.h>
-#include "crqtutil.h"
 
 void TabData::cleanup() {
     if (NULL != m_scroll) {
@@ -58,10 +57,4 @@ bool TabData::isDocumentOpened() const {
     if (NULL != m_view)
         return m_view->getDocView()->isDocumentOpened();
     return false;
-}
-
-QString TabData::fullDocPath() const {
-    if (NULL != m_view)
-        return cr2qt(m_view->getDocView()->getFilePath());
-    return QString();
 }

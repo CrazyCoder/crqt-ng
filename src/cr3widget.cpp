@@ -343,6 +343,7 @@ CR3View::CR3View(QWidget* parent)
         , _waitCursor(Qt::WaitCursor)
         , _selecting(false)
         , _selected(false)
+        , _active(false)
         , _editMode(false)
         , _lastBatteryState(CR_BATTERY_STATE_NO_BATTERY)
         , _lastBatteryChargingConn(CR_BATTERY_CHARGER_NO)
@@ -502,9 +503,11 @@ int CR3View::getCurPage() {
 }
 
 void CR3View::setDocumentText(const QString& text) {
-    _docview->savePosition();
-    clearSelection();
-    _docview->createDefaultDocument(lString32::empty_str, qt2cr(text));
+    if (_active) {
+        setDocumentTextImpl(text);
+    } else {
+        _delayed_commands.push_back(CR3ViewCommand(CR3ViewCommandType::SetDocumentText, text));
+    }
 }
 
 bool CR3View::loadLastDocument() {
@@ -515,24 +518,12 @@ bool CR3View::loadLastDocument() {
 }
 
 bool CR3View::loadDocument(const QString& fileName) {
-    _docview->savePosition();
-    clearSelection();
-    bool res = _docview->LoadDocument(qt2cr(fileName).c_str());
-    if (res) {
-        _doc_language = _docview->getLanguage();
-        applyTextLangMainLang(_doc_language);
-        //_docview->swapToCache();
-        QByteArray utf8 = fileName.toUtf8();
-        CRLog::debug("Trying to restore position for %s", utf8.constData());
-        _docview->restorePosition();
-        checkFontLanguageCompatibility();
+    if (_active) {
+        return LoadDocumentImpl(fileName);
     } else {
-        _doc_language = lString32::empty_str;
-        _docview->createDefaultDocument(lString32::empty_str, qt2cr(tr("Error while opening document ") + fileName));
+        _delayed_commands.push_back(CR3ViewCommand(CR3ViewCommandType::OpenDocument, fileName));
+        return true;
     }
-    update();
-    updateHistoryAvailability();
-    return res;
 }
 
 void CR3View::wheelEvent(QWheelEvent* event) {
@@ -570,7 +561,10 @@ void CR3View::resizeEvent(QResizeEvent* event) {
 #endif
     sz *= _dpr;
 #endif
-    _docview->Resize(sz.width(), sz.height());
+    if (_active)
+        _docview->Resize(sz.width(), sz.height());
+    else
+        _delayed_commands.push_back(CR3ViewCommand(CR3ViewCommandType::Resize, sz));
 }
 
 static bool getBatteryState(int& state, int& chargingConn, int& level) {
@@ -601,6 +595,8 @@ static bool getBatteryState(int& state, int& chargingConn, int& level) {
 }
 
 void CR3View::paintEvent(QPaintEvent* event) {
+    if (!_active)
+        return;
     QPainter painter(this);
     qreal dpr = painter.device()->devicePixelRatioF();
     if (fabs(dpr - _dpr) >= 0.01)
@@ -894,6 +890,15 @@ QScrollBar* CR3View::scrollBar() const {
 
 lUInt64 CR3View::id() const {
     return (lUInt64)_docview;
+}
+
+void CR3View::setActive(bool value) {
+    if (_active != value) {
+        _active = value;
+        if (_active) {
+            processDelayedCommands();
+        }
+    }
 }
 
 void CR3View::setScrollBar(QScrollBar* scroll) {
@@ -1258,6 +1263,81 @@ void CR3View::applyTextLangMainLang(lString32 lang) {
     }
 }
 
+static inline int s_command_weight(CR3ViewCommandType cmd) {
+    switch (cmd) {
+        case CR3ViewCommandType::OpenDocument:
+            return 1;
+            break;
+        case CR3ViewCommandType::SetDocumentText:
+            return 1;
+            break;
+        case CR3ViewCommandType::Resize:
+            return 10;
+            break;
+    }
+    return 0;
+}
+
+static struct
+{
+    bool operator()(CR3ViewCommand a, CR3ViewCommand b) const {
+        return s_command_weight(a.command()) > s_command_weight(b.command());
+    }
+} s_viewCommandWeight;
+
+void CR3View::processDelayedCommands() {
+    std::sort(_delayed_commands.begin(), _delayed_commands.end(), s_viewCommandWeight);
+    while (!_delayed_commands.isEmpty()) {
+        const CR3ViewCommand& cmd = _delayed_commands.first();
+        switch (cmd.command()) {
+            case OpenDocument: {
+                LoadDocumentImpl(cmd.data().toString());
+                break;
+            }
+            case SetDocumentText: {
+                QString text = cmd.data().toString();
+                setDocumentTextImpl(text);
+                break;
+            }
+            case Resize: {
+                QSize sz = cmd.data().toSize();
+                _docview->Resize(sz.width(), sz.height());
+                update();
+                break;
+            }
+        }
+        _delayed_commands.removeFirst();
+    }
+}
+
+bool CR3View::LoadDocumentImpl(const QString& fileName) {
+    _docview->savePosition();
+    clearSelection();
+    lString32 fn = qt2cr(fileName);
+    bool res = _docview->LoadDocument(fn.c_str());
+    if (res) {
+        _doc_language = _docview->getLanguage();
+        applyTextLangMainLang(_doc_language);
+        //_docview->swapToCache();
+        CRLog::debug("Trying to restore position for %s", LCSTR(fn));
+        _docview->restorePosition();
+        checkFontLanguageCompatibility();
+    } else {
+        _doc_language = lString32::empty_str;
+        _docview->createDefaultDocument(lString32::empty_str, qt2cr(tr("Error while opening document ") + fileName));
+    }
+    update();
+    updateHistoryAvailability();
+    return res;
+}
+
+void CR3View::setDocumentTextImpl(const QString& text) {
+    _docview->savePosition();
+    clearSelection();
+    _docview->createDefaultDocument(lString32::empty_str, qt2cr(text));
+    update();
+}
+
 void CR3View::mousePressEvent(QMouseEvent* event) {
     bool left = event->button() == Qt::LeftButton;
     //bool right = event->button() == Qt::RightButton;
@@ -1445,7 +1525,7 @@ void CR3View::OnLoadFileStart(lString32 filename) {
 void CR3View::OnLoadFileError(lString32 message) {
     setCursor(_normalCursor);
     if (NULL != _docViewStatusCallback)
-        _docViewStatusCallback->onDocumentLoaded(id(), cr2qt(_filename), cr2qt(message));
+        _docViewStatusCallback->onDocumentLoaded(id(), cr2qt(_filename), cr2qt(message), cr2qt(_filename));
 }
 
 /// file loading is finished successfully - drawCoveTo() may be called there
@@ -1453,7 +1533,22 @@ void CR3View::OnLoadFileEnd() {
     setCursor(_normalCursor);
     if (NULL != _docViewStatusCallback && NULL != _docview) {
         QString atitle = getDocTitle();
-        _docViewStatusCallback->onDocumentLoaded(id(), atitle, QString());
+        QString docPath;
+        CRPropRef doc_props = _docview->getDocProps();
+        lString32 arcFullPath;
+        lString32 path;
+        lString32 arcPath = doc_props->getStringDef(DOC_PROP_ARC_PATH);
+        lString32 arcName = doc_props->getStringDef(DOC_PROP_ARC_NAME);
+        lString32 filepath = doc_props->getStringDef(DOC_PROP_FILE_PATH);
+        lString32 filename = doc_props->getStringDef(DOC_PROP_FILE_NAME);
+        if (!arcPath.empty() || !arcName.empty()) {
+            arcFullPath = LVCombinePaths(arcPath, arcName);
+            arcFullPath += ASSET_PATH_PREFIX_S;
+            LVAppendPathDelimiter(arcFullPath);
+        }
+        path = LVCombinePaths(filepath, filename);
+        docPath = cr2qt(arcFullPath + path);
+        _docViewStatusCallback->onDocumentLoaded(id(), atitle, QString(), docPath);
     }
     updateHistoryAvailability();
 }

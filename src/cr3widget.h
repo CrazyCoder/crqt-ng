@@ -25,6 +25,7 @@
 #include <qwidget.h>
 #include <QScrollBar>
 #include "crqtutil.h"
+#include "cr3widget_commands.h"
 
 class LVDocView;
 class LVTocItem;
@@ -39,7 +40,8 @@ public:
 class DocViewStatusCallback
 {
 public:
-    virtual void onDocumentLoaded(lUInt64 viewId, const QString& atitle, const QString& error) = 0;
+    virtual void onDocumentLoaded(lUInt64 viewId, const QString& atitle, const QString& error,
+                                  const QString& fullDocPath) = 0;
     virtual void onCanGoBack(lUInt64 viewId, bool canGoBack) = 0;
     virtual void onCanGoForward(lUInt64 viewId, bool canGoForward) = 0;
 };
@@ -75,6 +77,11 @@ public:
 
     /// returns the id of this view
     lUInt64 id() const;
+
+    bool isActive() const {
+        return _active;
+    }
+    void setActive(bool value);
 
     /// get document's table of contents
     LVTocItem* getToc();
@@ -215,6 +222,10 @@ private:
     void checkFontLanguageCompatibility();
     void updateHistoryAvailability();
     void applyTextLangMainLang(lString32 lang);
+    void processDelayedCommands();
+    void reorderDelayedCommands();
+    bool LoadDocumentImpl(const QString& fileName);
+    void setDocumentTextImpl(const QString& text);
 
     DocViewData* _data; // to hide non-qt implementation
     LVDocView* _docview;
@@ -237,6 +248,8 @@ private:
     QString _bookmarkDir;
     lString32 _filename;
     lString32 _doc_language;
+    CR3ViewCommandList _delayed_commands;
+    bool _active;
     bool _editMode;
     int _lastBatteryState;
     int _lastBatteryChargingConn;
