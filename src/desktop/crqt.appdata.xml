@@ -44,6 +44,7 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.0.6" date="2023-02-06"><url>https://gitlab.com/coolreader-ng/crqt-ng/-/releases/1.0.6</url></release>
     <release version="1.0.5.1" date="2023-01-24"><url>https://gitlab.com/coolreader-ng/crqt-ng/-/tags/1.0.5.1</url></release>
     <release version="1.0.5" date="2023-01-22"><url>https://gitlab.com/coolreader-ng/crqt-ng/-/releases/1.0.5</url></release>
     <release version="1.0.4" date="2022-12-31"><url>https://gitlab.com/coolreader-ng/crqt-ng/-/releases/1.0.4</url></release>

@@ -1,3 +1,83 @@
+2023-02-06  Aleksey Chernov  <valexlin@gmail.com>
+
+    * Version 1.0.6 released.
+    ==========================
+
+    Tag sources with `1.0.6'.
+
+      Main changes:
+    Multi-tabbed interface implemented.
+
+    See below for changes.
+
+2023-02-06  Aleksey Chernov  <valexlin@gmail.com>
+
+    Update src/desktop/crqt.appdata.xml
+
+    Update README.md: added info about new featutes: Markdown format support, Multi-tabbed interface, flatpak package.
+
+    CR3View: when loading a document or applying options, an argument has been added that allows not checking font compatibility.
+    This will eliminate many font incompatibility messages when there are multiple open tabs.
+
+2023-02-05  Aleksey Chernov  <valexlin@gmail.com>
+
+    Optimization and fixes in the implementation of the multi-tabbed interface:
+    * added 'active' property for tabs, i.e. whether the tab is currently active;
+    * for inactive tabs, file loading and window resizing actions are not processed,
+      but saved to the list of scheduled actions;
+    * thus, when loading a saved session, documents for all tabs are not loaded immediately;
+    * when processing scheduled actions, they are first sorted so that the resizing of the document
+      is performed first and only after that the document is loaded, this avoids redundant rendering
+      of the document when loading the session in the presence of the document cache - 1st time when
+      opening document with default size, 2nd time when resizing;
+    * information about the active tab has been added to the session data.
+
+2023-02-04  Aleksey Chernov  <valexlin@gmail.com>
+
+    Set minimum required crengine-ng version to 0.9.7.
+
+    CR3View: applyTextLangMainLang() function added: ensure that language is properly set;
+    setSharedSettings() function added; refactoring.
+    TabsCollection: load & save shared settings (for all views in tabs).
+
+2023-02-02  Aleksey Chernov  <valexlin@gmail.com>
+
+    File personaltypes.py removed: this file (Qt Creator debugger helper) is needed for the crengine-ng library, not just the crqt-ng program.
+
+    Multi-tabbed interface implemented
+
+2023-01-31  Aleksey Chernov  <valexlin@gmail.com>
+
+    SettingsDlg: don't pass CR3View instance, only PropsDef.
+
+    CR3View::isPointInsideSelection(): fix for HiDPI affecting the context menu.
+
+2023-01-30  Aleksey Chernov  <valexlin@gmail.com>
+
+    Removed specific fonts ('Courier New', 'Courier') for element '[Default Monospace]' in style settings
+    for pre-formatted style ('pre' element & other), leaving only "monospace" generic font family.
+    When specifying a real font when forming a css style fragment, the font name is enclosed in quotation marks.
+
+2023-01-27  Aleksey Chernov  <valexlin@gmail.com>
+
+    Implemented portable settings mode.
+    This mode is enabled if a 'portable.mark' file is found in the application directory (the directory that contains the application executable).
+    In this mode, the program settings and cache are saved in the same application directory.
+    Intended mostly for portable Win32 applications.
+
+2023-01-24  Aleksey Chernov  <valexlin@gmail.com>
+
+    Update crqt.desktop & crqt.appdata.xml files to actual data.
+
+    src/CMakeLists.txt: install app icon
+
+    Added option to link with the static version of crengine-ng.
+
+2023-01-22  Aleksey Chernov  <valexlin@gmail.com>
+
+    Update src/desktop/Info.plist.cmake
+
+
 2023-01-22  Aleksey Chernov  <valexlin@gmail.com>
 
     * Version 1.0.5 released.
