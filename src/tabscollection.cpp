@@ -63,7 +63,7 @@ bool TabsCollection::saveTabSession(const QString& filename) {
     QSettings settings(fn, QSettings::IniFormat);
     settings.clear();
     settings.beginWriteArray("tabs");
-    for (int i = 0; i < QVector::size(); i++) {
+    for (int i = 0; i < QVector<TabData>::size(); i++) {
         const TabData& tab = at(i);
         CR3View* view = tab.view();
         if (NULL != view)
