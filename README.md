@@ -9,7 +9,7 @@ In fact, it is a [Qt](https://www.qt.io/) frontend for the [crengine-ng](https:/
 
 Supported platforms: Windows, Linux, MacOS. Basically all platforms that are supported by crengine-ng, Qt and cmake.
 
-Supported e-book formats: fb2, fb3 (incomplete), epub (non-DRM), doc, docx, odt, rtf, pdb, mobi (non-DRM), txt, html, chm, tcr.
+Supported e-book formats through the use of the crengine-ng library: fb2, fb3 (incomplete), epub (non-DRM), doc, docx, odt, rtf, pdb, mobi (non-DRM), txt, html, Markdown, chm, tcr.
 
 Main functions:
 * Ability to display 2 pages at the same time
@@ -26,6 +26,7 @@ Main functions:
 * Flexible styling with CSS files
 * Background pictures, textures, or solid background
 * HiDPI support
+* Multi-tabbed interface
 
 ## Visuals
 #### Main window (KDE, Windows, MacOS)
@@ -41,6 +42,15 @@ These screenshots use the Noto Serif font.
 /As you can see, sub-pixel anti-aliasing works on MacOS!/
 
 ## Installation
+You can install this program on Linux using flatpak by going to the URL <https://dl.flathub.org/repo/appstream/io.gitlab.coolreader_ng.crqt-ng.flatpakref>
+
+Or using command:
+```shell
+flatpak install flathub io.gitlab.coolreader_ng.crqt-ng
+```
+That's all.
+
+Or you can compile from source:
 1. To install the program, make sure that all dependencies are installed: Qt framework and crengine-ng library.
 
    It is best to use your Linux distribution's package manager to install Qt. Otherwise, download the installation package from https://www.qt.io/. When installing using your package manager, remember to install the "-dev" variant of the package, for example for Ubuntu use the following command:
