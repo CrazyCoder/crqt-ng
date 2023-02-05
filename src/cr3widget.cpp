@@ -519,7 +519,7 @@ bool CR3View::loadLastDocument() {
 
 bool CR3View::loadDocument(const QString& fileName) {
     if (_active) {
-        return LoadDocumentImpl(fileName);
+        return LoadDocumentImpl(fileName, false);
     } else {
         _delayed_commands.push_back(CR3ViewCommand(CR3ViewCommandType::OpenDocument, fileName));
         return true;
@@ -962,11 +962,11 @@ void CR3View::toggleProperty(const char* name) {
     int state = _data->_props->getIntDef(name, 0) != 0 ? 0 : 1;
     PropsRef props = Props::create();
     props->setString(name, state ? "1" : "0");
-    setOptions(props);
+    setOptions(props, true);
 }
 
 /// set new option values
-PropsRef CR3View::setOptions(PropsRef props) {
+PropsRef CR3View::setOptions(PropsRef props, bool silent) {
     //    for ( int i=0; i<_data->_props->getCount(); i++ ) {
     //        CRLog::debug("Old [%d] '%s'=%s ", i, _data->_props->getName(i), UnicodeToUtf8(_data->_props->getValue(i)).c_str() );
     //    }
@@ -987,7 +987,8 @@ PropsRef CR3View::setOptions(PropsRef props) {
     if (_propsCallback != NULL)
         _propsCallback->onPropsChange(unknownOptions);
     //saveSettings(QString());
-    checkFontLanguageCompatibility();
+    if (!silent)
+        checkFontLanguageCompatibility();
     update();
     return unknownOptions;
 }
@@ -1291,7 +1292,7 @@ void CR3View::processDelayedCommands() {
         const CR3ViewCommand& cmd = _delayed_commands.first();
         switch (cmd.command()) {
             case OpenDocument: {
-                LoadDocumentImpl(cmd.data().toString());
+                LoadDocumentImpl(cmd.data().toString(), true);
                 break;
             }
             case SetDocumentText: {
@@ -1310,7 +1311,7 @@ void CR3View::processDelayedCommands() {
     }
 }
 
-bool CR3View::LoadDocumentImpl(const QString& fileName) {
+bool CR3View::LoadDocumentImpl(const QString& fileName, bool silent) {
     _docview->savePosition();
     clearSelection();
     lString32 fn = qt2cr(fileName);
@@ -1321,7 +1322,8 @@ bool CR3View::LoadDocumentImpl(const QString& fileName) {
         //_docview->swapToCache();
         CRLog::debug("Trying to restore position for %s", LCSTR(fn));
         _docview->restorePosition();
-        checkFontLanguageCompatibility();
+        if (!silent)
+            checkFontLanguageCompatibility();
     } else {
         _doc_language = lString32::empty_str;
         _docview->createDefaultDocument(lString32::empty_str, qt2cr(tr("Error while opening document ") + fileName));

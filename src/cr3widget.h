@@ -116,7 +116,7 @@ public:
     /// set bookmarks dir
     void setBookmarksDir(const QString& dirname);
     /// set new option values
-    PropsRef setOptions(PropsRef props);
+    PropsRef setOptions(PropsRef props, bool silent);
     /// get current option values
     PropsRef getOptions();
     /// turns on/off Edit mode (forces Scroll view)
@@ -224,7 +224,7 @@ private:
     void applyTextLangMainLang(lString32 lang);
     void processDelayedCommands();
     void reorderDelayedCommands();
-    bool LoadDocumentImpl(const QString& fileName);
+    bool LoadDocumentImpl(const QString& fileName, bool silent);
     void setDocumentTextImpl(const QString& text);
 
     DocViewData* _data; // to hide non-qt implementation

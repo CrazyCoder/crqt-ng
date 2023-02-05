@@ -539,18 +539,19 @@ void MainWindow::on_actionRecentBooks_triggered() {
 }
 
 void MainWindow::on_actionSettings_triggered() {
-    CR3View* view = currentCRView();
-    if (NULL == view) {
+    CR3View* currView = currentCRView();
+    if (NULL == currView) {
         CRLog::debug("NULL view in current tab!");
         return;
     }
-    SettingsDlg dlg(this, view->getOptions());
+    SettingsDlg dlg(this, currView->getOptions());
     if (dlg.exec() == QDialog::Accepted) {
         for (TabsCollection::iterator it = _tabs.begin(); it != _tabs.end(); ++it) {
             CR3View* view = (*it).view();
             if (NULL != view) {
-                view->setOptions(dlg.options());
+                view->setOptions(dlg.options(), view == currView);
                 view->getDocView()->requestRender();
+                // docview is not rendered here, only planned
             }
         }
     }
