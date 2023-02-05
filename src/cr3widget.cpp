@@ -5,7 +5,7 @@
  *   Copyright (C) 2018 EXL <exlmotodev@gmail.com>                         *
  *   Copyright (C) 2019,2020 Konstantin Potapov <pkbo@users.sourceforge.net>
  *   Copyright (C) 2020,2021 Andy Mender <andymenderunix@gmail.com>        *
- *   Copyright (C) 2018-2022 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2018-2023 Aleksey Chernov <valexlin@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -343,6 +343,7 @@ CR3View::CR3View(QWidget* parent)
         , _waitCursor(Qt::WaitCursor)
         , _selecting(false)
         , _selected(false)
+        , _active(false)
         , _editMode(false)
         , _lastBatteryState(CR_BATTERY_STATE_NO_BATTERY)
         , _lastBatteryChargingConn(CR_BATTERY_CHARGER_NO)
@@ -436,8 +437,8 @@ CR3View::~CR3View() {
         delete _wordSelector;
 #endif
     _docview->savePosition();
-    saveHistory(QString());
-    saveSettings(QString());
+    //saveHistory(QString());
+    //saveSettings(QString());
     delete _docview;
     delete _data;
 }
@@ -465,7 +466,7 @@ QString CR3View::endWordSelection() {
 }
 #endif
 
-void CR3View::setHyphDir(QString dirname, bool clear) {
+void CR3View::setHyphDir(const QString& dirname, bool clear) {
     HyphMan::initDictionaries(qt2cr(dirname), clear);
     _hyphDicts.clear();
     for (int i = 0; i < HyphMan::getDictList()->length(); i++) {
@@ -485,7 +486,7 @@ LVTocItem* CR3View::getToc() {
 }
 
 /// go to position specified by xPointer string
-void CR3View::goToXPointer(QString xPointer, bool saveToHistory) {
+void CR3View::goToXPointer(const QString& xPointer, bool saveToHistory) {
     ldomXPointer p = _docview->getDocument()->createXPointer(qt2cr(xPointer));
     if (saveToHistory)
         _docview->savePosToNavigationHistory();
@@ -501,10 +502,12 @@ int CR3View::getCurPage() {
     return _docview->getCurPage();
 }
 
-void CR3View::setDocumentText(QString text) {
-    _docview->savePosition();
-    clearSelection();
-    _docview->createDefaultDocument(lString32::empty_str, qt2cr(text));
+void CR3View::setDocumentText(const QString& text) {
+    if (_active) {
+        setDocumentTextImpl(text);
+    } else {
+        _delayed_commands.push_back(CR3ViewCommand(CR3ViewCommandType::SetDocumentText, text));
+    }
 }
 
 bool CR3View::loadLastDocument() {
@@ -514,28 +517,13 @@ bool CR3View::loadLastDocument() {
     return loadDocument(cr2qt(hist->getRecords()[0]->getFilePathName()));
 }
 
-bool CR3View::loadDocument(QString fileName) {
-    _docview->savePosition();
-    clearSelection();
-    bool res = _docview->LoadDocument(qt2cr(fileName).c_str());
-    if (res) {
-        CRPropRef props = _docview->propsGetCurrent();
-        if (props->getBoolDef(PROP_TEXTLANG_EMBEDDED_LANGS_ENABLED, false)) {
-            lString32 doc_lang = _docview->getLanguage();
-            if (!doc_lang.empty())
-                _docview->propApply(lString8(PROP_TEXTLANG_MAIN_LANG), doc_lang);
-        }
-        //_docview->swapToCache();
-        QByteArray utf8 = fileName.toUtf8();
-        CRLog::debug("Trying to restore position for %s", utf8.constData());
-        _docview->restorePosition();
-        checkFontLanguageCompatibility();
+bool CR3View::loadDocument(const QString& fileName) {
+    if (_active) {
+        return LoadDocumentImpl(fileName, false);
     } else {
-        _docview->createDefaultDocument(lString32::empty_str, qt2cr(tr("Error while opening document ") + fileName));
+        _delayed_commands.push_back(CR3ViewCommand(CR3ViewCommandType::OpenDocument, fileName));
+        return true;
     }
-    update();
-    updateHistoryAvailability();
-    return res;
 }
 
 void CR3View::wheelEvent(QWheelEvent* event) {
@@ -573,7 +561,10 @@ void CR3View::resizeEvent(QResizeEvent* event) {
 #endif
     sz *= _dpr;
 #endif
-    _docview->Resize(sz.width(), sz.height());
+    if (_active)
+        _docview->Resize(sz.width(), sz.height());
+    else
+        _delayed_commands.push_back(CR3ViewCommand(CR3ViewCommandType::Resize, sz));
 }
 
 static bool getBatteryState(int& state, int& chargingConn, int& level) {
@@ -604,6 +595,8 @@ static bool getBatteryState(int& state, int& chargingConn, int& level) {
 }
 
 void CR3View::paintEvent(QPaintEvent* event) {
+    if (!_active)
+        return;
     QPainter painter(this);
     qreal dpr = painter.device()->devicePixelRatioF();
     if (fabs(dpr - _dpr) >= 0.01)
@@ -620,6 +613,7 @@ void CR3View::paintEvent(QPaintEvent* event) {
         _lastBatteryChargingConn = newChargingConn;
         _lastBatteryChargeLevel = newChargeLevel;
     }
+    applyTextLangMainLang(_doc_language);
     LVDocImageRef ref = _docview->getPageImage(0);
     if (ref.isNull()) {
         //painter.fillRect();
@@ -824,6 +818,23 @@ void CR3View::setEditMode(bool flgEdit) {
     update();
 }
 
+QString CR3View::getDocTitle() const {
+    if (NULL != _docview) {
+        lString32 atitle;
+        lString32 author = _docview->getAuthors();
+        lString32 title = _docview->getTitle();
+        if (!title.empty()) {
+            if (!author.empty())
+                atitle = author + cs32(". ") + title;
+            else
+                atitle = title;
+        } else
+            atitle = _filename;
+        return cr2qt(atitle);
+    }
+    return QString();
+}
+
 void CR3View::nextPage() {
     doCommand(DCMD_PAGEDOWN, 1);
 }
@@ -877,6 +888,19 @@ QScrollBar* CR3View::scrollBar() const {
     return _scroll;
 }
 
+lUInt64 CR3View::id() const {
+    return (lUInt64)_docview;
+}
+
+void CR3View::setActive(bool value) {
+    if (_active != value) {
+        _active = value;
+        if (_active) {
+            processDelayedCommands();
+        }
+    }
+}
+
 void CR3View::setScrollBar(QScrollBar* scroll) {
     _scroll = scroll;
     if (_scroll != NULL) {
@@ -900,8 +924,19 @@ bool CR3View::loadCSS(QString fn) {
     return false;
 }
 
-/// load settings from file
-bool CR3View::loadSettings(QString fn) {
+void CR3View::setSharedSettings(CRPropRef props) {
+    _data->_props = props;
+    _docview->propsUpdateDefaults(_data->_props);
+    updateDefProps();
+    CRPropRef r = _docview->propsApply(_data->_props);
+    applyTextLangMainLang(_doc_language);
+    PropsRef unknownOptions = cr2qt(r);
+    if (_propsCallback != NULL)
+        _propsCallback->onPropsChange(unknownOptions);
+}
+
+/// obsolete: load settings from file
+bool CR3View::loadSettings(const QString& fn) {
     lString32 filename(qt2cr(fn));
     _data->_settingsFileName = filename;
     LVStreamRef stream = LVOpenFileStream(filename.c_str(), LVOM_READ);
@@ -915,6 +950,7 @@ bool CR3View::loadSettings(QString fn) {
     _docview->propsUpdateDefaults(_data->_props);
     updateDefProps();
     CRPropRef r = _docview->propsApply(_data->_props);
+    applyTextLangMainLang(_doc_language);
     PropsRef unknownOptions = cr2qt(r);
     if (_propsCallback != NULL)
         _propsCallback->onPropsChange(unknownOptions);
@@ -926,11 +962,11 @@ void CR3View::toggleProperty(const char* name) {
     int state = _data->_props->getIntDef(name, 0) != 0 ? 0 : 1;
     PropsRef props = Props::create();
     props->setString(name, state ? "1" : "0");
-    setOptions(props);
+    setOptions(props, true);
 }
 
 /// set new option values
-PropsRef CR3View::setOptions(PropsRef props) {
+PropsRef CR3View::setOptions(PropsRef props, bool silent) {
     //    for ( int i=0; i<_data->_props->getCount(); i++ ) {
     //        CRLog::debug("Old [%d] '%s'=%s ", i, _data->_props->getName(i), UnicodeToUtf8(_data->_props->getValue(i)).c_str() );
     //    }
@@ -946,11 +982,13 @@ PropsRef CR3View::setOptions(PropsRef props) {
     //        CRLog::debug("Result [%d] '%s'=%s ", i, _data->_props->getName(i), UnicodeToUtf8(_data->_props->getValue(i)).c_str() );
     //    }
     CRPropRef r = _docview->propsApply(changed);
+    applyTextLangMainLang(_doc_language);
     PropsRef unknownOptions = cr2qt(r);
     if (_propsCallback != NULL)
         _propsCallback->onPropsChange(unknownOptions);
-    saveSettings(QString());
-    checkFontLanguageCompatibility();
+    //saveSettings(QString());
+    if (!silent)
+        checkFontLanguageCompatibility();
     update();
     return unknownOptions;
 }
@@ -968,36 +1006,38 @@ PropsRef CR3View::getOptions() {
     return Props::clone(cr2qt(_data->_props));
 }
 
-/// save settings from file
-bool CR3View::saveSettings(QString fn) {
+/// obsolete: save settings from file
+bool CR3View::saveSettings(const QString& fn) {
     lString32 filename(qt2cr(fn));
-    crtrace log;
     if (filename.empty())
         filename = _data->_settingsFileName;
     if (filename.empty())
         return false;
     _data->_settingsFileName = filename;
-    log << "V3DocViewWin::saveSettings(" << filename << ")";
+    CRLog::trace("V3DocViewWin::saveSettings(%s)", LCSTR(filename));
     LVStreamRef stream = LVOpenFileStream(filename.c_str(), LVOM_WRITE);
     if (!stream) {
-        lString32 path16 = LVExtractPath(filename);
-        lString8 path = UnicodeToUtf8(path16);
-        if (!LVCreateDirectory(path16)) {
+        lString32 upath = LVExtractPath(filename);
+        lString8 path = UnicodeToUtf8(upath);
+        if (!LVCreateDirectory(upath)) {
             CRLog::error("Cannot create directory %s", path.c_str());
         } else {
             stream = LVOpenFileStream(filename.c_str(), LVOM_WRITE);
         }
     }
     if (stream.isNull()) {
-        lString8 fn = UnicodeToUtf8(filename);
-        CRLog::error("Cannot save settings to file %s", fn.c_str());
+        CRLog::error("Cannot save settings to file %s", LCSTR(filename));
         return false;
     }
     return _data->_props->saveToStream(stream.get());
 }
 
-/// load history from file
-bool CR3View::loadHistory(QString fn) {
+void CR3View::setSharedHistory(CRFileHist* hist) {
+    _docview->setSharedHistory(hist);
+}
+
+/// obsolete: load history from file
+bool CR3View::loadHistory(const QString& fn) {
     lString32 filename(qt2cr(fn));
     CRLog::trace("V3DocViewWin::loadHistory( %s )", UnicodeToUtf8(filename).c_str());
     _data->_historyFileName = filename;
@@ -1010,10 +1050,9 @@ bool CR3View::loadHistory(QString fn) {
     return true;
 }
 
-/// save history to file
-bool CR3View::saveHistory(QString fn) {
+/// obsolete: save history to file
+bool CR3View::saveHistory(const QString& fn) {
     lString32 filename(qt2cr(fn));
-    crtrace log;
     if (filename.empty())
         filename = _data->_historyFileName;
     if (filename.empty()) {
@@ -1026,7 +1065,7 @@ bool CR3View::saveHistory(QString fn) {
     LVAppendPathDelimiter(bmdir);
     _docview->exportBookmarks(bmdir); //use default filename
     _data->_historyFileName = filename;
-    log << "V3DocViewWin::saveHistory(" << filename << ")";
+    CRLog::trace("CR3View::saveHistory(): filename: %s", LCSTR(filename));
     LVStreamRef stream = LVOpenFileStream(filename.c_str(), LVOM_WRITE);
     if (!stream) {
         lString32 path16 = LVExtractPath(filename);
@@ -1050,7 +1089,7 @@ void CR3View::contextMenu(QPoint pos) { }
 bool CR3View::isPointInsideSelection(QPoint pos) {
     if (!_selected)
         return false;
-    lvPoint pt(pos.x(), pos.y());
+    lvPoint pt(pos.x() * _dpr, pos.y() * _dpr);
     ldomXPointerEx p(_docview->getNodeByPoint(pt));
     if (p.isNull())
         return false;
@@ -1204,13 +1243,101 @@ void CR3View::updateHistoryAvailability() {
     if (canGoBack != _canGoBack) {
         _canGoBack = canGoBack;
         if (NULL != _docViewStatusCallback)
-            _docViewStatusCallback->onCanGoBack(_canGoBack);
+            _docViewStatusCallback->onCanGoBack(id(), _canGoBack);
     }
     if (canGoForward != _canGoForward) {
         _canGoForward = canGoForward;
         if (NULL != _docViewStatusCallback)
-            _docViewStatusCallback->onCanGoForward(_canGoForward);
+            _docViewStatusCallback->onCanGoForward(id(), _canGoForward);
     }
+}
+
+void CR3View::applyTextLangMainLang(lString32 lang) {
+    if (!lang.empty()) {
+        CRPropRef props = _docview->propsGetCurrent();
+        if (props->getBoolDef(PROP_TEXTLANG_EMBEDDED_LANGS_ENABLED, false)) {
+            _docview->propApply(lString8(PROP_TEXTLANG_MAIN_LANG), _doc_language);
+            // LVDocView::propApply() calls LVDocView::requestRender() if the property has changed
+            // LVDocView::requestRender() doesn't render the document, it only resets the render status
+            // If the LVDocView::checkRender() function is then called, the document will be rendered
+        }
+    }
+}
+
+static inline int s_command_weight(CR3ViewCommandType cmd) {
+    switch (cmd) {
+        case CR3ViewCommandType::OpenDocument:
+            return 1;
+            break;
+        case CR3ViewCommandType::SetDocumentText:
+            return 1;
+            break;
+        case CR3ViewCommandType::Resize:
+            return 10;
+            break;
+    }
+    return 0;
+}
+
+static struct
+{
+    bool operator()(CR3ViewCommand a, CR3ViewCommand b) const {
+        return s_command_weight(a.command()) > s_command_weight(b.command());
+    }
+} s_viewCommandWeight;
+
+void CR3View::processDelayedCommands() {
+    std::sort(_delayed_commands.begin(), _delayed_commands.end(), s_viewCommandWeight);
+    while (!_delayed_commands.isEmpty()) {
+        const CR3ViewCommand& cmd = _delayed_commands.first();
+        switch (cmd.command()) {
+            case OpenDocument: {
+                LoadDocumentImpl(cmd.data().toString(), true);
+                break;
+            }
+            case SetDocumentText: {
+                QString text = cmd.data().toString();
+                setDocumentTextImpl(text);
+                break;
+            }
+            case Resize: {
+                QSize sz = cmd.data().toSize();
+                _docview->Resize(sz.width(), sz.height());
+                update();
+                break;
+            }
+        }
+        _delayed_commands.removeFirst();
+    }
+}
+
+bool CR3View::LoadDocumentImpl(const QString& fileName, bool silent) {
+    _docview->savePosition();
+    clearSelection();
+    lString32 fn = qt2cr(fileName);
+    bool res = _docview->LoadDocument(fn.c_str());
+    if (res) {
+        _doc_language = _docview->getLanguage();
+        applyTextLangMainLang(_doc_language);
+        //_docview->swapToCache();
+        CRLog::debug("Trying to restore position for %s", LCSTR(fn));
+        _docview->restorePosition();
+        if (!silent)
+            checkFontLanguageCompatibility();
+    } else {
+        _doc_language = lString32::empty_str;
+        _docview->createDefaultDocument(lString32::empty_str, qt2cr(tr("Error while opening document ") + fileName));
+    }
+    update();
+    updateHistoryAvailability();
+    return res;
+}
+
+void CR3View::setDocumentTextImpl(const QString& text) {
+    _docview->savePosition();
+    clearSelection();
+    _docview->createDefaultDocument(lString32::empty_str, qt2cr(text));
+    update();
 }
 
 void CR3View::mousePressEvent(QMouseEvent* event) {
@@ -1400,24 +1527,30 @@ void CR3View::OnLoadFileStart(lString32 filename) {
 void CR3View::OnLoadFileError(lString32 message) {
     setCursor(_normalCursor);
     if (NULL != _docViewStatusCallback)
-        _docViewStatusCallback->onDocumentLoaded(_filename, message);
+        _docViewStatusCallback->onDocumentLoaded(id(), cr2qt(_filename), cr2qt(message), cr2qt(_filename));
 }
 
 /// file loading is finished successfully - drawCoveTo() may be called there
 void CR3View::OnLoadFileEnd() {
     setCursor(_normalCursor);
     if (NULL != _docViewStatusCallback && NULL != _docview) {
-        lString32 atitle;
-        lString32 author = _docview->getAuthors();
-        lString32 title = _docview->getTitle();
-        if (!title.empty()) {
-            if (!author.empty())
-                atitle = author + cs32(". ") + title;
-            else
-                atitle = title;
-        } else
-            atitle = _filename;
-        _docViewStatusCallback->onDocumentLoaded(atitle, lString32::empty_str);
+        QString atitle = getDocTitle();
+        QString docPath;
+        CRPropRef doc_props = _docview->getDocProps();
+        lString32 arcFullPath;
+        lString32 path;
+        lString32 arcPath = doc_props->getStringDef(DOC_PROP_ARC_PATH);
+        lString32 arcName = doc_props->getStringDef(DOC_PROP_ARC_NAME);
+        lString32 filepath = doc_props->getStringDef(DOC_PROP_FILE_PATH);
+        lString32 filename = doc_props->getStringDef(DOC_PROP_FILE_NAME);
+        if (!arcPath.empty() || !arcName.empty()) {
+            arcFullPath = LVCombinePaths(arcPath, arcName);
+            arcFullPath += ASSET_PATH_PREFIX_S;
+            LVAppendPathDelimiter(arcFullPath);
+        }
+        path = LVCombinePaths(filepath, filename);
+        docPath = cr2qt(arcFullPath + path);
+        _docViewStatusCallback->onDocumentLoaded(id(), atitle, QString(), docPath);
     }
     updateHistoryAvailability();
 }
@@ -1434,7 +1567,7 @@ void CR3View::OnFormatEnd() {
 }
 
 /// set bookmarks dir
-void CR3View::setBookmarksDir(QString dirname) {
+void CR3View::setBookmarksDir(const QString& dirname) {
     _bookmarkDir = dirname;
 }
 
@@ -1501,7 +1634,7 @@ void CR3View::keyPressEvent(QKeyEvent* event) {
                 event->setAccepted(true);
                 return;
         }
-        int dist = event->modifiers() & Qt::ShiftModifier ? 5 : 1;
+        int dist = (event->modifiers() & Qt::ShiftModifier) ? 5 : 1;
         _wordSelector->moveBy(dir, dist);
         update();
         event->setAccepted(true);

@@ -30,5 +30,6 @@
         <file>icons/bookmark_folder.png</file>
         <file>icons/nav_back.png</file>
         <file>icons/nav_forward.png</file>
+        <file>icons/new_tab.png</file>
     </qresource>
 </RCC>

@@ -3,7 +3,7 @@
  *   Copyright (C) 2009-2012,2014 Vadim Lopatin <coolreader.org@gmail.com> *
  *   Copyright (C) 2018 Mihail Slobodyanuk <slobodyanukma@gmail.com>       *
  *   Copyright (C) 2019,2020 Konstantin Potapov <pkbo@users.sourceforge.net>
- *   Copyright (C) 2018,2020-2022 Aleksey Chernov <valexlin@gmail.com>     *
+ *   Copyright (C) 2018,2020-2023 Aleksey Chernov <valexlin@gmail.com>     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -37,6 +37,8 @@
 #include <QTranslator>
 #include <QLibraryInfo>
 #include <QMessageBox>
+#include <QHBoxLayout>
+#include <QToolButton>
 
 #include "app-props.h"
 #include "settings.h"
@@ -55,12 +57,23 @@
 #define ENABLE_BOOKMARKS_DIR 1
 #endif
 
+// In the engine, the maximum number of open documents is 16
+// 1 reserved for preview in settings dialog
+#define MAX_TABS_COUNT 15
+
 MainWindow::MainWindow(const QString& fileToOpen, QWidget* parent)
         : QMainWindow(parent)
         , ui(new Ui::MainWindowClass)
-        , _filenameToOpen(fileToOpen) {
+        , _filenameToOpen(fileToOpen)
+        , _prevIndex(-1) {
     ui->setupUi(this);
-    ui->view->setScrollBar(ui->scroll);
+
+    // New tab tool button on tab widget
+    QToolButton* newTabButton = new QToolButton(this);
+    newTabButton->setIcon(ui->actionNew_tab->icon());
+    newTabButton->setToolTip(ui->actionNew_tab->toolTip());
+    ui->tabWidget->setCornerWidget(newTabButton, Qt::TopLeftCorner);
+    connect(newTabButton, SIGNAL(clicked()), this, SLOT(on_actionNew_tab_triggered()));
 
     QIcon icon = QIcon(":/icons/icons/crqt.png");
     CRLog::warn("\n\n\n*** ######### application icon %s\n\n\n", icon.isNull() ? "null" : "found");
@@ -96,52 +109,150 @@ MainWindow::MainWindow(const QString& fileToOpen, QWidget* parent)
     addAction(ui->actionToggleEditMode);
     addAction(ui->actionNextSentence);
     addAction(ui->actionPrevSentence);
+    addAction(ui->actionNew_tab);
 
-    lString32 configDir = getConfigDir();
-    lString32 exeDir = getExeDir();
-    lString32 engineDataDir = getEngineDataDir();
-    QString iniFile = cr2qt(configDir) + "crui.ini";
-    QString histFile = cr2qt(configDir) + "cruihist.bmk";
-    QString cssFile = cr2qt(configDir) + "fb2.css";
-    QString cssFileInEngineDir = cr2qt(engineDataDir) + "fb2.css";
-    QString cssFileInExeDir = cr2qt(exeDir) + "fb2.css";
-    QString mainHyphDir = cr2qt(engineDataDir) + "hyph" + QDir::separator();
-    QString userHyphDir = cr2qt(configDir) + "hyph" + QDir::separator();
-    QString bookmarksDir = cr2qt(configDir) + "bookmarks" + QDir::separator();
-
-    ui->view->setHyphDir(mainHyphDir);
-    ui->view->setHyphDir(userHyphDir + "hyph" + QDir::separator(), false);
-    ui->view->setPropsChangeCallback(this);
-    ui->view->setDocViewStatusCallback(this);
-    if (!ui->view->loadSettings(iniFile)) {
-        // If config file not found in config dir we use default values
-        //  and save its to config dir
-        ui->view->saveSettings(iniFile);
+    QString configDir = cr2qt(getConfigDir());
+    QString iniFile = configDir + "crui.ini";
+    QString histFile = configDir + "cruihist.bmk";
+    if (!_tabs.loadSettings(iniFile)) {
+        // If config file not found in config dir
+        //  save its to config dir
+        _tabs.saveSettings(iniFile);
     }
-    if (!ui->view->loadHistory(histFile)) {
-        ui->view->saveHistory(histFile);
+    if (!_tabs.loadHistory(histFile)) {
+        _tabs.saveHistory(histFile);
     }
-    if (!ui->view->loadCSS(cssFile)) {
-        if (!ui->view->loadCSS(cssFileInEngineDir))
-            ui->view->loadCSS(cssFileInExeDir);
-    }
-#if ENABLE_BOOKMARKS_DIR == 1
-    ui->view->setBookmarksDir(bookmarksDir);
-#endif
-
-    ui->view->restoreWindowPos(this, "main.", true);
+    _tabs.restoreWindowPos(this, "main.", true);
+    addNewDocTab();
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
-    ui->view->saveWindowPos(this, "main.");
+    _tabs.saveWindowPos(this, "main.");
+    _tabs.saveHistory();
+    _tabs.saveSettings();
+    int tabIndex = ui->tabWidget->currentIndex();
+    if (tabIndex >= 0)
+        _tabs.setCurrentDocument(_tabs[tabIndex].docPath());
+    else
+        _tabs.setCurrentDocument("");
+    _tabs.saveTabSession(cr2qt(getConfigDir()) + "tabs.ini");
 }
 
 MainWindow::~MainWindow() {
+    ui->tabWidget->clear();
+    _tabs.cleanup();
     delete ui;
 }
 
-void MainWindow::on_view_destroyed() {
-    //
+TabData MainWindow::createNewDocTabWidget() {
+    QWidget* widget = new QWidget(ui->tabWidget, Qt::Widget);
+    QHBoxLayout* layout = new QHBoxLayout(widget);
+    CR3View* view = new CR3View(widget);
+    QScrollBar* scrollBar = new QScrollBar(Qt::Vertical, widget);
+    layout->setSpacing(0);
+    layout->setContentsMargins(0, 0, 0, 0);
+    view->setContextMenuPolicy(Qt::CustomContextMenu);
+    layout->addWidget(view, 10);
+    layout->addWidget(scrollBar, 0);
+    view->setScrollBar(scrollBar);
+    connect(view, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenu(QPoint)));
+
+    QString configDir = cr2qt(getConfigDir());
+    QString engineDataDir = cr2qt(getEngineDataDir());
+    QString cssFile = configDir + "fb2.css";
+    QString cssFileInEngineDir = engineDataDir + "fb2.css";
+    QString mainHyphDir = engineDataDir + "hyph" + QDir::separator();
+    QString userHyphDir = configDir + "hyph" + QDir::separator();
+    QString bookmarksDir = configDir + "bookmarks" + QDir::separator();
+
+    view->setHyphDir(mainHyphDir);
+    view->setHyphDir(userHyphDir + "hyph" + QDir::separator(), false);
+    view->setPropsChangeCallback(this);
+    view->setDocViewStatusCallback(this);
+    view->setSharedSettings(_tabs.getSettings());
+    view->setSharedHistory(_tabs.getHistory());
+    if (!view->loadCSS(cssFile)) {
+        view->loadCSS(cssFileInEngineDir);
+    }
+#if ENABLE_BOOKMARKS_DIR == 1
+    view->setBookmarksDir(bookmarksDir);
+#endif
+    TabData tab(widget, layout, view, scrollBar);
+    tab.setTitle(view->getDocTitle());
+    return tab;
+}
+
+void MainWindow::addNewDocTab() {
+    if (_tabs.count() >= MAX_TABS_COUNT) {
+        QMessageBox::warning(this, tr("Warning"), tr("The maximum number of tabs has been exceeded!"), QMessageBox::Ok);
+        return;
+    }
+    TabData tab = createNewDocTabWidget();
+    if (tab.isValid()) {
+        _tabs.append(tab);
+        CR3View* view = tab.view();
+        int tabIndex = ui->tabWidget->addTab(tab.widget(), tab.title());
+        ui->tabWidget->setCurrentIndex(tabIndex);
+        ui->tabWidget->setTabToolTip(tabIndex, tab.title());
+    }
+}
+
+void MainWindow::closeDocTab(int index) {
+    if (index >= 0 && index < ui->tabWidget->count()) {
+        ui->tabWidget->removeTab(index);
+        TabData tab = _tabs[index];
+        _tabs.saveHistory();
+        tab.cleanup();
+        _tabs.remove(index);
+    }
+}
+
+CR3View* MainWindow::currentCRView() const {
+    CR3View* view = NULL;
+    int tabIndex = ui->tabWidget->currentIndex();
+    if (tabIndex >= 0)
+        return _tabs[tabIndex].view();
+    return view;
+}
+
+void MainWindow::syncTabWidget(const QString& currentDocument) {
+    QString currentDocFilePath = currentDocument;
+    if (currentDocFilePath.isEmpty()) {
+        QWidget* widget = ui->tabWidget->currentWidget();
+        for (TabsCollection::const_iterator it = _tabs.begin(); it != _tabs.end(); ++it) {
+            const TabData& tab = *it;
+            if (widget == tab.widget()) {
+                currentDocFilePath = tab.docPath();
+                break;
+            }
+        }
+    }
+    ui->tabWidget->blockSignals(true);
+    ui->tabWidget->clear();
+    int tabIndex = -1;
+    QString currentTitle;
+    for (TabsCollection::const_iterator it = _tabs.begin(); it != _tabs.end(); ++it) {
+        const TabData& tab = *it;
+        CR3View* view = tab.view();
+        int index = ui->tabWidget->addTab(tab.widget(), tab.title());
+        ui->tabWidget->setTabToolTip(index, tab.title());
+        if (tab.docPath() == currentDocFilePath)
+            tabIndex = index;
+    }
+    ui->tabWidget->blockSignals(false);
+    if (-1 == tabIndex)
+        tabIndex = ui->tabWidget->count() - 1;
+    if (tabIndex >= 0) {
+        ui->tabWidget->setCurrentIndex(tabIndex);
+        const TabData& tab = _tabs[tabIndex];
+        const CR3View* view = tab.view();
+        if (NULL != view)
+            currentTitle = tab.title();
+    }
+    if (!currentTitle.isEmpty())
+        setWindowTitle("CoolReaderNG/Qt - " + currentTitle);
+    else
+        setWindowTitle("CoolReaderNG/Qt");
 }
 
 class ExportProgressCallback: public LVDocViewCallback
@@ -168,6 +279,11 @@ public:
 };
 
 void MainWindow::on_actionExport_triggered() {
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
     QString fileName = QFileDialog::getSaveFileName(this, tr("Export document to"), QString(), tr("WOL book (*.wol)"));
     if (fileName.length() == 0)
         return;
@@ -191,10 +307,10 @@ void MainWindow::on_actionExport_triggered() {
         msg->repaint();
         repaint();
         ExportProgressCallback progress(msg);
-        LVDocViewCallback* oldCallback = ui->view->getDocView()->getCallback();
-        ui->view->getDocView()->setCallback(&progress);
-        ui->view->getDocView()->exportWolFile(qt2cr(fileName).c_str(), bpp > 1, levels);
-        ui->view->getDocView()->setCallback(oldCallback);
+        LVDocViewCallback* oldCallback = view->getDocView()->getCallback();
+        view->getDocView()->setCallback(&progress);
+        view->getDocView()->exportWolFile(qt2cr(fileName).c_str(), bpp > 1, levels);
+        view->getDocView()->setCallback(oldCallback);
         delete msg;
     } else {
         delete dlg;
@@ -202,10 +318,20 @@ void MainWindow::on_actionExport_triggered() {
 }
 
 void MainWindow::on_actionOpen_triggered() {
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
     QString lastPath;
-    LVPtrVector<CRFileHistRecord>& files = ui->view->getDocView()->getHistory()->getRecords();
+    LVPtrVector<CRFileHistRecord>& files = view->getDocView()->getHistory()->getRecords();
     if (files.length() > 0) {
-        lastPath = cr2qt(files[0]->getFilePath());
+        lString32 pathname = files[0]->getFilePathName();
+        lString32 arcPathName, arcItemPathName;
+        if (LVSplitArcName(pathname, arcPathName, arcItemPathName))
+            lastPath = cr2qt(LVExtractPath(arcPathName));
+        else
+            lastPath = cr2qt(LVExtractPath(pathname));
     }
     QString all_fmt_flt =
 #if (USE_CHM == 1) && ((USE_CMARK == 1) || (USE_CMARK_GFM == 1))
@@ -240,7 +366,7 @@ void MainWindow::on_actionOpen_triggered() {
     // clang-format on
     if (fileName.length() == 0)
         return;
-    if (!ui->view->loadDocument(fileName)) {
+    if (!view->loadDocument(fileName)) {
         // error
     } else {
         update();
@@ -256,55 +382,120 @@ void MainWindow::on_actionClose_triggered() {
 }
 
 void MainWindow::on_actionNextPage_triggered() {
-    ui->view->nextPage();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->nextPage();
 }
 
 void MainWindow::on_actionPrevPage_triggered() {
-    ui->view->prevPage();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->prevPage();
 }
 
 void MainWindow::on_actionNextPage2_triggered() {
-    ui->view->nextPage();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->nextPage();
 }
 
 void MainWindow::on_actionPrevPage2_triggered() {
-    ui->view->prevPage();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->prevPage();
 }
 
 void MainWindow::on_actionNextLine_triggered() {
-    ui->view->nextLine();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->nextLine();
 }
 
 void MainWindow::on_actionPrevLine_triggered() {
-    ui->view->prevLine();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->prevLine();
 }
 
 void MainWindow::on_actionFirstPage_triggered() {
-    ui->view->firstPage();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->firstPage();
 }
 
 void MainWindow::on_actionLastPage_triggered() {
-    ui->view->lastPage();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->lastPage();
 }
 
 void MainWindow::on_actionBack_triggered() {
-    ui->view->historyBack();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->historyBack();
 }
 
 void MainWindow::on_actionForward_triggered() {
-    ui->view->historyForward();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->historyForward();
 }
 
 void MainWindow::on_actionNextChapter_triggered() {
-    ui->view->nextChapter();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->nextChapter();
 }
 
 void MainWindow::on_actionPrevChapter_triggered() {
-    ui->view->prevChapter();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->prevChapter();
 }
 
 void MainWindow::on_actionToggle_Pages_Scroll_triggered() {
-    ui->view->togglePageScrollView();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->togglePageScrollView();
 }
 
 void MainWindow::on_actionToggle_Full_Screen_triggered() {
@@ -312,27 +503,67 @@ void MainWindow::on_actionToggle_Full_Screen_triggered() {
 }
 
 void MainWindow::on_actionZoom_In_triggered() {
-    ui->view->zoomIn();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->zoomIn();
 }
 
 void MainWindow::on_actionZoom_Out_triggered() {
-    ui->view->zoomOut();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->zoomOut();
 }
 
 void MainWindow::on_actionTOC_triggered() {
-    TocDlg::showDlg(this, ui->view);
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    TocDlg::showDlg(this, view);
 }
 
 void MainWindow::on_actionRecentBooks_triggered() {
-    RecentBooksDlg::showDlg(this, ui->view);
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    RecentBooksDlg::showDlg(this, view);
 }
 
 void MainWindow::on_actionSettings_triggered() {
-    SettingsDlg::showDlg(this, ui->view);
+    CR3View* currView = currentCRView();
+    if (NULL == currView) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    SettingsDlg dlg(this, currView->getOptions());
+    if (dlg.exec() == QDialog::Accepted) {
+        for (TabsCollection::iterator it = _tabs.begin(); it != _tabs.end(); ++it) {
+            CR3View* view = (*it).view();
+            if (NULL != view) {
+                view->setOptions(dlg.options(), view == currView);
+                view->getDocView()->requestRender();
+                // docview is not rendered here, only planned
+            }
+        }
+    }
 }
 
 void MainWindow::toggleProperty(const char* name) {
-    ui->view->toggleProperty(name);
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->toggleProperty(name);
 }
 
 void MainWindow::onPropsChange(PropsRef props) {
@@ -349,7 +580,11 @@ void MainWindow::onPropsChange(PropsRef props) {
         } else if (name == PROP_WINDOW_SHOW_MENU) {
             ui->menuBar->setVisible(v);
         } else if (name == PROP_WINDOW_SHOW_SCROLLBAR) {
-            ui->scroll->setVisible(v);
+            for (int i = 0; i < _tabs.count(); i++) {
+                const TabData& tab = _tabs[i];
+                if (NULL != tab.scrollBar())
+                    tab.scrollBar()->setVisible(v);
+            }
         } else if (name == PROP_APP_BACKGROUND_IMAGE) {
             lString32 fn = qt2cr(value);
             LVImageSourceRef img;
@@ -362,7 +597,11 @@ void MainWindow::onPropsChange(PropsRef props) {
             }
             fn.lowercase();
             bool tiled = (fn.pos(cs32("\\textures\\")) >= 0 || fn.pos(cs32("/textures/")) >= 0);
-            ui->view->getDocView()->setBackgroundImage(img, tiled);
+            for (int i = 0; i < _tabs.count(); i++) {
+                const TabData& tab = _tabs[i];
+                if (NULL != tab.view())
+                    tab.view()->getDocView()->setBackgroundImage(img, tiled);
+            }
         } else if (name == PROP_WINDOW_TOOLBAR_SIZE) {
             ui->mainToolBar->setVisible(v);
         } else if (name == PROP_WINDOW_SHOW_STATUSBAR) {
@@ -373,39 +612,76 @@ void MainWindow::onPropsChange(PropsRef props) {
     }
 }
 
-void MainWindow::onDocumentLoaded(const lString32& atitle, const lString32& error) {
-    CRLog::debug("MainWindow::onDocumentLoaded '%s', error=%s ", UnicodeToLocal(atitle).c_str(),
-                 UnicodeToLocal(error).c_str());
-    if (error.empty()) // no error
-        setWindowTitle("CoolReaderNG/Qt - " + cr2qt(atitle));
-    else
-        setWindowTitle("CoolReaderNG/Qt");
+void MainWindow::onDocumentLoaded(lUInt64 viewId, const QString& atitle, const QString& error,
+                                  const QString& fullDocPath) {
+    CRLog::debug("MainWindow::onDocumentLoaded '%s', error=%s ", atitle.toLocal8Bit().constData(),
+                 error.toLocal8Bit().constData());
+    int cbIndex = _tabs.indexByViewId(viewId);
+    int currentIndex = ui->tabWidget->currentIndex();
+    if (cbIndex >= 0) {
+        if (error.isEmpty()) {
+            TabData& tab = _tabs[cbIndex];
+            tab.setTitle(atitle);
+            tab.setDocPath(fullDocPath);
+            ui->tabWidget->setTabText(cbIndex, atitle);
+            ui->tabWidget->setTabToolTip(cbIndex, atitle);
+        }
+        if (cbIndex == currentIndex) {
+            if (error.isEmpty()) {
+                setWindowTitle("CoolReaderNG/Qt - " + atitle);
+            } else {
+                setWindowTitle("CoolReaderNG/Qt");
+            }
+        }
+    }
 }
 
-void MainWindow::onCanGoBack(bool canGoBack) {
-    ui->actionBack->setEnabled(canGoBack);
+void MainWindow::onCanGoBack(lUInt64 viewId, bool canGoBack) {
+    int cbIndex = _tabs.indexByViewId(viewId);
+    int currentIndex = ui->tabWidget->currentIndex();
+    if (cbIndex >= 0) {
+        _tabs[cbIndex].setCanGoBack(canGoBack);
+        if (cbIndex == currentIndex)
+            ui->actionBack->setEnabled(canGoBack);
+    }
 }
 
-void MainWindow::onCanGoForward(bool canGoForward) {
-    ui->actionForward->setEnabled(canGoForward);
+void MainWindow::onCanGoForward(lUInt64 viewId, bool canGoForward) {
+    int cbIndex = _tabs.indexByViewId(viewId);
+    int currentIndex = ui->tabWidget->currentIndex();
+    if (cbIndex >= 0) {
+        _tabs[cbIndex].setCanGoForward(canGoForward);
+        if (cbIndex == currentIndex)
+            ui->actionForward->setEnabled(canGoForward);
+    }
 }
 
 void MainWindow::contextMenu(QPoint pos) {
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
     QMenu* menu = new QMenu;
     menu->addAction(ui->actionOpen);
     menu->addAction(ui->actionRecentBooks);
     menu->addAction(ui->actionTOC);
     menu->addAction(ui->actionToggle_Full_Screen);
     menu->addAction(ui->actionSettings);
-    if (ui->view->isPointInsideSelection(pos))
+    if (view->isPointInsideSelection(pos))
         menu->addAction(ui->actionCopy);
     menu->addAction(ui->actionAddBookmark);
     menu->addAction(ui->actionClose);
-    menu->exec(ui->view->mapToGlobal(pos));
+    menu->exec(view->mapToGlobal(pos));
 }
 
 void MainWindow::on_actionCopy_triggered() {
-    QString txt = ui->view->getSelectionText();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    QString txt = view->getSelectionText();
     if (txt.length() > 0) {
         QClipboard* clipboard = QApplication::clipboard();
         clipboard->setText(txt);
@@ -422,22 +698,69 @@ void MainWindow::showEvent(QShowEvent* event) {
     if (!firstShow)
         return;
     CRLog::debug("first showEvent()");
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
     firstShow = false;
-    int n = ui->view->getOptions()->getIntDef(PROP_APP_START_ACTION, 0);
+    int n = view->getOptions()->getIntDef(PROP_APP_START_ACTION, 0);
     if (_filenameToOpen.length() > 0) {
         // file name specified at command line
         CRLog::info("Startup Action: filename passed in command line");
-        if (!ui->view->loadDocument(_filenameToOpen))
-            CRLog::error("cannot load document");
+        if (!view->loadDocument(_filenameToOpen))
+            CRLog::error("cannot load document \"%s\"", _filenameToOpen.toLocal8Bit().constData());
     } else if (n == 0) {
-        // open recent book
-        CRLog::info("Startup Action: Open recent book");
-        ui->view->loadLastDocument();
+        // restore session
+        CRLog::info("Startup Action: Restore session (restore tabs)");
+        bool ok;
+        TabsCollection::TabSession session = _tabs.openTabSession(cr2qt(getConfigDir()) + "tabs.ini", &ok);
+        if (ok && session.size() > 0) {
+            int processed = 0;
+            int index = 0;
+            TabData tab;
+            for (TabsCollection::TabSession::const_iterator it = session.begin(); it != session.end(); ++it, ++index) {
+                //const QString& filePath = *it;
+                const TabsCollection::TabProperty& data = *it;
+                if (index < _tabs.size()) {
+                    tab = _tabs[index];
+                } else {
+                    tab = createNewDocTabWidget();
+                    _tabs.append(tab);
+                }
+                tab.setTitle(data.title);
+                tab.setDocPath(data.docPath);
+                _tabs[index] = tab;
+                if (!data.docPath.isEmpty()) {
+                    if (!tab.view()->loadDocument(data.docPath)) {
+                        CRLog::error("cannot load document \"%s\"", data.docPath.toLocal8Bit().constData());
+                    }
+                }
+                processed++;
+                if (processed >= MAX_TABS_COUNT)
+                    break;
+            }
+            if (_tabs.size() > processed) {
+                for (int i = processed; i < _tabs.size(); i++) {
+                    _tabs[i].cleanup();
+                }
+                _tabs.resize(processed);
+            }
+            if (0 == _tabs.size()) {
+                TabData tab = createNewDocTabWidget();
+                if (tab.isValid()) {
+                    _tabs.append(tab);
+                }
+            }
+            syncTabWidget(session.currentDocument);
+        } else {
+            view->loadLastDocument();
+        }
     } else if (n == 1) {
         // show recent books dialog
         CRLog::info("Startup Action: Show recent books dialog");
         //hide();
-        RecentBooksDlg::showDlg(this, ui->view);
+        RecentBooksDlg::showDlg(this, view);
         //show();
     } else if (n == 2) {
         // show file open dialog
@@ -474,39 +797,122 @@ void MainWindow::on_actionAboutCoolReader_triggered() {
 }
 
 void MainWindow::on_actionAddBookmark_triggered() {
-    AddBookmarkDialog::showDlg(this, ui->view);
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    AddBookmarkDialog::showDlg(this, view);
 }
 
 void MainWindow::on_actionShowBookmarksList_triggered() {
-    BookmarkListDialog::showDlg(this, ui->view);
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    BookmarkListDialog::showDlg(this, view);
 }
 
 void MainWindow::on_actionFileProperties_triggered() {
-    FilePropsDialog::showDlg(this, ui->view);
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    FilePropsDialog::showDlg(this, view);
 }
 
 void MainWindow::on_actionFindText_triggered() {
-    SearchDialog::showDlg(this, ui->view);
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    SearchDialog::showDlg(this, view);
     //    QMessageBox * mb = new QMessageBox( QMessageBox::Information, tr("Not implemented"), tr("Search is not implemented yet"), QMessageBox::Close, this );
     //    mb->exec();
 }
 
 void MainWindow::on_actionRotate_triggered() {
-    ui->view->rotate(1);
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->rotate(1);
 }
 
 void MainWindow::on_actionToggleEditMode_triggered() {
-    ui->view->setEditMode(!ui->view->getEditMode());
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->setEditMode(!view->getEditMode());
 }
 
 void MainWindow::on_actionNextPage3_triggered() {
-    ui->view->nextPage();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->nextPage();
 }
 
 void MainWindow::on_actionNextSentence_triggered() {
-    ui->view->nextSentence();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->nextSentence();
 }
 
 void MainWindow::on_actionPrevSentence_triggered() {
-    ui->view->prevSentence();
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->prevSentence();
+}
+
+void MainWindow::on_actionNew_tab_triggered() {
+    addNewDocTab();
+}
+
+void MainWindow::on_tabWidget_currentChanged(int index) {
+    QString title;
+    if (_prevIndex >= 0 && _prevIndex < _tabs.size()) {
+        const TabData& tab = _tabs[_prevIndex];
+        CR3View* view = tab.view();
+        if (NULL != view) {
+            view->getDocView()->swapToCache();
+            view->getDocView()->savePosition();
+            view->setActive(false);
+        }
+    }
+    if (index >= 0 && index < _tabs.size()) {
+        const TabData& tab = _tabs[index];
+        CR3View* view = tab.view();
+        if (NULL != view) {
+            view->setActive(true);
+            title = tab.title();
+            view->getDocView()->swapToCache();
+            view->getDocView()->savePosition();
+            ui->actionBack->setEnabled(tab.canGoBack());
+            ui->actionForward->setEnabled(tab.canGoForward());
+        }
+    }
+    if (!title.isEmpty())
+        setWindowTitle("CoolReaderNG/Qt - " + title);
+    else
+        setWindowTitle("CoolReaderNG/Qt");
+    _prevIndex = index;
+}
+
+void MainWindow::on_tabWidget_tabCloseRequested(int index) {
+    closeDocTab(index);
 }

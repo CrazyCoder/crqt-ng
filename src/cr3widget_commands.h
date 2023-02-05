@@ -1,6 +1,6 @@
 /***************************************************************************
  *   crqt-ng                                                               *
- *   Copyright (C) 2022,2023 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2023 Aleksey Chernov <valexlin@gmail.com>               *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -18,28 +18,47 @@
  *   MA 02110-1301, USA.                                                   *
  ***************************************************************************/
 
-#include "sampleview.h"
+#ifndef CR3WIDGET_COMMANDS_H
+#define CR3WIDGET_COMMANDS_H
 
-#include <QVBoxLayout>
-#include <QCloseEvent>
+#include <QtCore/QVariant>
+#include <QtCore/QList>
 
-#include "cr3widget.h"
+enum CR3ViewCommandType
+{
+    OpenDocument,
+    SetDocumentText,
+    Resize
+};
 
-SampleView::SampleView(QWidget* parent)
-        : QWidget(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint) {
-    setWindowTitle(tr("Style Preview"));
-    QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->setContentsMargins(0, 0, 0, 0);
-    m_view = new CR3View(this);
-    layout->addWidget(m_view, 10);
-    setAttribute(Qt::WA_DeleteOnClose, true);
-    setMinimumSize(300, 150);
-    updatePositionForParent();
-    m_view->setActive(true);
-}
+class CR3ViewCommand
+{
+public:
+    CR3ViewCommand() { }
+    CR3ViewCommand(CR3ViewCommandType cmd, QVariant data) {
+        m_cmd = cmd;
+        m_data = data;
+    }
+    CR3ViewCommand(const CR3ViewCommand& other) {
+        m_cmd = other.m_cmd;
+        m_data = other.m_data;
+    }
+    CR3ViewCommand& operator=(const CR3ViewCommand& other) {
+        m_cmd = other.m_cmd;
+        m_data = other.m_data;
+        return *this;
+    }
+    CR3ViewCommandType command() const {
+        return m_cmd;
+    }
+    const QVariant& data() const {
+        return m_data;
+    }
+private:
+    CR3ViewCommandType m_cmd;
+    QVariant m_data;
+};
 
-void SampleView::updatePositionForParent() {
-    QPoint parentPos = parentWidget()->pos();
-    QSize parentFrameSize = parentWidget()->frameSize();
-    move(parentPos.x() + parentFrameSize.width(), parentPos.y() + 40);
-}
+typedef QList<CR3ViewCommand> CR3ViewCommandList;
+
+#endif // CR3WIDGET_COMMANDS_H

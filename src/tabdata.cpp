@@ -1,6 +1,6 @@
 /***************************************************************************
  *   crqt-ng                                                               *
- *   Copyright (C) 2022,2023 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2023 Aleksey Chernov <valexlin@gmail.com>               *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -18,28 +18,43 @@
  *   MA 02110-1301, USA.                                                   *
  ***************************************************************************/
 
-#include "sampleview.h"
+#include "tabdata.h"
 
-#include <QVBoxLayout>
-#include <QCloseEvent>
+#include <qglobal.h>
+#if QT_VERSION >= 0x050000
+#include <QtWidgets/QScrollBar>
+#include <QtWidgets/QLayout>
+#else
+#include <QtGui/QScrollBar>
+#include <QtGui/QLayout>
+#endif
 
 #include "cr3widget.h"
+#include <lvdocview.h>
 
-SampleView::SampleView(QWidget* parent)
-        : QWidget(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint) {
-    setWindowTitle(tr("Style Preview"));
-    QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->setContentsMargins(0, 0, 0, 0);
-    m_view = new CR3View(this);
-    layout->addWidget(m_view, 10);
-    setAttribute(Qt::WA_DeleteOnClose, true);
-    setMinimumSize(300, 150);
-    updatePositionForParent();
-    m_view->setActive(true);
+void TabData::cleanup() {
+    if (NULL != m_scroll) {
+        delete m_scroll;
+        m_scroll = NULL;
+    }
+    if (NULL != m_view) {
+        m_view->getDocView()->swapToCache();
+        m_view->disconnect();
+        delete m_view;
+        m_view = NULL;
+    }
+    if (NULL != m_layout) {
+        delete m_layout;
+        m_layout = NULL;
+    }
+    if (NULL != m_widget) {
+        delete m_widget;
+        m_widget = NULL;
+    }
 }
 
-void SampleView::updatePositionForParent() {
-    QPoint parentPos = parentWidget()->pos();
-    QSize parentFrameSize = parentWidget()->frameSize();
-    move(parentPos.x() + parentFrameSize.width(), parentPos.y() + 40);
+bool TabData::isDocumentOpened() const {
+    if (NULL != m_view)
+        return m_view->getDocView()->isDocumentOpened();
+    return false;
 }

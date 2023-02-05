@@ -1,7 +1,7 @@
 /***************************************************************************
  *   crqt-ng                                                               *
  *   Copyright (C) 2009-2011,2014 Vadim Lopatin <coolreader.org@gmail.com> *
- *   Copyright (C) 2021,2022 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2021-2023 Aleksey Chernov <valexlin@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -29,11 +29,14 @@
 #include <QtGui/QMainWindow>
 #endif
 #include "cr3widget.h"
+#include "tabscollection.h"
 
 namespace Ui
 {
     class MainWindowClass;
 }
+
+class QBoxLayout;
 
 class MainWindow: public QMainWindow, public PropsChangeCallback, DocViewStatusCallback
 {
@@ -43,8 +46,15 @@ public:
     ~MainWindow();
 private:
     Ui::MainWindowClass* ui;
+    TabsCollection _tabs;
     QString _filenameToOpen;
     void toggleProperty(const char* name);
+    TabData createNewDocTabWidget();
+    void addNewDocTab();
+    void closeDocTab(int index);
+    CR3View* currentCRView() const;
+    void syncTabWidget(const QString& currentDocument = QString());
+    int _prevIndex;
 protected:
     virtual void showEvent(QShowEvent* event);
     virtual void focusInEvent(QFocusEvent* event);
@@ -54,9 +64,10 @@ public slots:
     void on_actionFindText_triggered();
 private:
     virtual void onPropsChange(PropsRef props);
-    virtual void onDocumentLoaded(const lString32& atitle, const lString32& error);
-    virtual void onCanGoBack(bool canGoBack);
-    virtual void onCanGoForward(bool canGoForward);
+    virtual void onDocumentLoaded(lUInt64 viewId, const QString& atitle, const QString& error,
+                                  const QString& fullDocPath);
+    virtual void onCanGoBack(lUInt64 viewId, bool canGoBack);
+    virtual void onCanGoForward(lUInt64 viewId, bool canGoForward);
 private slots:
     void on_actionNextPage3_triggered();
     void on_actionToggleEditMode_triggered();
@@ -91,9 +102,11 @@ private slots:
     void on_actionMinimize_triggered();
     void on_actionOpen_triggered();
     void on_actionExport_triggered();
-    void on_view_destroyed();
     void on_actionNextSentence_triggered();
     void on_actionPrevSentence_triggered();
+    void on_actionNew_tab_triggered();
+    void on_tabWidget_currentChanged(int index);
+    void on_tabWidget_tabCloseRequested(int index);
 };
 
 #endif // MAINWINDOW_H

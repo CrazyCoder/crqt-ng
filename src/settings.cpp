@@ -167,15 +167,11 @@ static const char* styleNames[] = {
 };
 // clang-format on
 
-SettingsDlg::SettingsDlg(QWidget* parent, CR3View* docView)
-        : QDialog(parent)
-        , m_sample(NULL)
-        , m_ui(new Ui::SettingsDlg)
-        , m_docview(docView) {
+SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props) : QDialog(parent), m_sample(NULL), m_ui(new Ui::SettingsDlg) {
     initDone = false;
+    m_props = props;
 
     m_ui->setupUi(this);
-    m_props = m_docview->getOptions();
 
     m_oldHyph = cr2qt(HyphMan::getSelectedDictionary()->getId());
 
@@ -410,6 +406,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, CR3View* docView)
             s = tr("[No hyphenation]");
         else if (item->getType() == HDT_ALGORITHM)
             s = tr("[Algorythmic hyphenation]");
+        m_hyphDictIdList.append(cr2qt(item->getId()));
         m_ui->cbHyphenation->addItem(s);
     }
     m_ui->cbHyphenation->setCurrentIndex(hi >= 0 ? hi : 1);
@@ -460,13 +457,6 @@ SettingsDlg::~SettingsDlg() {
     delete m_ui;
 }
 
-bool SettingsDlg::showDlg(QWidget* parent, CR3View* docView) {
-    SettingsDlg* dlg = new SettingsDlg(parent, docView);
-    dlg->setAttribute(Qt::WA_DeleteOnClose, true);
-    dlg->show();
-    return true;
-}
-
 void SettingsDlg::changeEvent(QEvent* e) {
     switch (e->type()) {
         case QEvent::LanguageChange:
@@ -495,16 +485,6 @@ void SettingsDlg::moveEvent(QMoveEvent* event) {
     QDialog::moveEvent(event);
     if (m_sample)
         m_sample->updatePositionForParent();
-}
-
-void SettingsDlg::on_buttonBox_accepted() {
-    m_docview->setOptions(m_props);
-    m_docview->getDocView()->requestRender();
-    close();
-}
-
-void SettingsDlg::on_buttonBox_rejected() {
-    close();
 }
 
 void SettingsDlg::optionToUi(const char* optionName, QCheckBox* cb) {
@@ -968,7 +948,7 @@ void SettingsDlg::initSampleWindow() {
         connect(m_sample, SIGNAL(destroyed(QObject*)), this, SLOT(sampleview_destroyed(QObject*)));
     }
     CR3View* creview = m_sample->creview();
-    creview->setOptions(m_props);
+    creview->setOptions(m_props, true);
     LVDocView* sampledocview = creview->getDocView();
     sampledocview->setShowCover(false);
     sampledocview->setViewMode(DVM_SCROLL, 1);
@@ -995,7 +975,7 @@ void SettingsDlg::updateStyleSample() {
         m_sample->show();
     }
     CR3View* sample = m_sample->creview();
-    sample->setOptions(m_props);
+    sample->setOptions(m_props, true);
     sample->getDocView()->setShowCover(false);
     sample->getDocView()->setViewMode(DVM_SCROLL, 1);
 
@@ -1177,8 +1157,7 @@ void SettingsDlg::on_cbMinSpaceWidth_currentIndexChanged(int index) {
 }
 
 void SettingsDlg::on_cbHyphenation_currentIndexChanged(int index) {
-    const QStringList& dl(m_docview->getHyphDicts());
-    QString s = dl[index < dl.count() ? index : 1];
+    QString s = m_hyphDictIdList[index < m_hyphDictIdList.count() ? index : 1];
     m_props->setString(PROP_HYPHENATION_DICT, s);
     updateStyleSample();
 }
