@@ -1,5 +1,16 @@
 2023-02-06  Aleksey Chernov  <valexlin@gmail.com>
 
+    * Version 1.0.7 released.
+    ==========================
+
+    Tag sources with `1.0.7'.
+
+      Changes:
+    Fixed a bug that did not allow saving the program settings.
+
+
+2023-02-06  Aleksey Chernov  <valexlin@gmail.com>
+
     * Version 1.0.6 released.
     ==========================
 
