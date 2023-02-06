@@ -1,5 +1,25 @@
 2023-02-06  Aleksey Chernov  <valexlin@gmail.com>
 
+    * Version 1.0.8 released.
+    ==========================
+
+    Tag sources with `1.0.8'.
+
+    BUG fixes, see below.
+
+2023-02-06  Aleksey Chernov  <valexlin@gmail.com>
+
+    Update README.md: update screenshots, flatpak section.
+
+    bug fixed: when adding a new tab, the background image was not applied.
+
+    Settings, "window" tab: "Open last book" option renamed to "restore session" Settings, win32: abnormally large dialog window fixed.
+
+    Update src/tabscollection.cpp: fix compile error with clang compiler.
+
+
+2023-02-06  Aleksey Chernov  <valexlin@gmail.com>
+
     * Version 1.0.7 released.
     ==========================
 
