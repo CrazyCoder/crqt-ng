@@ -174,6 +174,18 @@ TabData MainWindow::createNewDocTabWidget() {
     if (!view->loadCSS(cssFile)) {
         view->loadCSS(cssFileInEngineDir);
     }
+    lString32 backgound = _tabs.getSettings()->getStringDef(PROP_APP_BACKGROUND_IMAGE, "");
+    if (!backgound.empty() && backgound[0] != '[') {
+        LVImageSourceRef img;
+        CRLog::debug("Background image file: %s", LCSTR(backgound));
+        LVStreamRef stream = LVOpenFileStream(backgound.c_str(), LVOM_READ);
+        if (!stream.isNull()) {
+            img = LVCreateStreamImageSource(stream);
+        }
+        backgound = backgound.lowercase();
+        bool tiled = (backgound.pos(cs32("\\textures\\")) >= 0 || backgound.pos(cs32("/textures/")) >= 0);
+        view->getDocView()->setBackgroundImage(img, tiled);
+    }
 #if ENABLE_BOOKMARKS_DIR == 1
     view->setBookmarksDir(bookmarksDir);
 #endif
