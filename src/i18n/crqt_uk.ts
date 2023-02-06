@@ -1391,9 +1391,8 @@
         <translation>Дія при запуску</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="69"/>
         <source>Open recent book</source>
-        <translation>Відкрити останню книгу</translation>
+        <translation type="vanished">Відкрити останню книгу</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="74"/>
@@ -1624,6 +1623,11 @@
         <location filename="../settings.ui" line="1257"/>
         <source>0.3</source>
         <translation>0.3</translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="69"/>
+        <source>Restore session</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../settings.ui" line="1140"/>

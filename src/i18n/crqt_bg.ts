@@ -1382,9 +1382,8 @@
         <translation>Показване на лентата за превъртане</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="69"/>
         <source>Open recent book</source>
-        <translation>Отвори последната книга</translation>
+        <translation type="vanished">Отвори последната книга</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="133"/>
@@ -1537,6 +1536,11 @@
         <location filename="../settings.ui" line="319"/>
         <source>Show page header</source>
         <translation>Показване на колонтитул</translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="69"/>
+        <source>Restore session</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../settings.ui" line="206"/>

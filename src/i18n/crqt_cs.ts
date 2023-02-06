@@ -1386,9 +1386,8 @@
         <translation>Při spuštění</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="69"/>
         <source>Open recent book</source>
-        <translation>Otevřít poslední knihu</translation>
+        <translation type="vanished">Otevřít poslední knihu</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="74"/>
@@ -1728,6 +1727,11 @@
         <location filename="../settings.ui" line="1257"/>
         <source>0.3</source>
         <translation>0.3</translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="69"/>
+        <source>Restore session</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../settings.ui" line="446"/>

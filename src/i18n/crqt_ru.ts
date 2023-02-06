@@ -1380,11 +1380,6 @@
         <translation>Действие при старте</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="69"/>
-        <source>Open recent book</source>
-        <translation>Открыть последнюю книгу</translation>
-    </message>
-    <message>
         <location filename="../settings.ui" line="74"/>
         <source>Show list of recent books</source>
         <translation>Показать список последних книг</translation>
@@ -1992,6 +1987,11 @@
         <location filename="../settings.ui" line="1257"/>
         <source>0.3</source>
         <translation>0.3</translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="69"/>
+        <source>Restore session</source>
+        <translation>Восстановить сессию</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="392"/>

@@ -1375,9 +1375,8 @@
         <translation>Programinduláskor</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="69"/>
         <source>Open recent book</source>
-        <translation>Legutóbbi könyv megnyitása</translation>
+        <translation type="vanished">Legutóbbi könyv megnyitása</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="74"/>
@@ -1598,6 +1597,11 @@
         <location filename="../settings.ui" line="1056"/>
         <source>Styles</source>
         <translation>Megjelenés</translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="69"/>
+        <source>Restore session</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../settings.ui" line="211"/>
