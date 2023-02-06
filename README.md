@@ -33,16 +33,18 @@ Main functions:
 
 These screenshots use the Noto Serif font.
 
-![Main window in KDE](https://gitlab.com/coolreader-ng/crqt-ng/-/wikis/uploads/ff7ff4f312546cf189e8acd147925d73/mainwnd-kde.png "Main window in KDE")
+![Main window in KDE](https://gitlab.com/coolreader-ng/crqt-ng/-/wikis/uploads/1aab10e451b10d8f8c60f813b0c3be21/1101-mainwnd-kde.png "Main window in KDE")
 
-![Main window in Windows](https://gitlab.com/coolreader-ng/crqt-ng/-/wikis/uploads/6d451097d15919c639e394b6b86397b9/mainwnd-win32.png "Main window in Windows")
+![Main window in Windows](https://gitlab.com/coolreader-ng/crqt-ng/-/wikis/uploads/973e89264d1e1c38bc6113ca83449ef9/1201-mainwnd-win32.png "Main window in Windows")
 
-![Main window in MacOS](https://gitlab.com/coolreader-ng/crqt-ng/-/wikis/uploads/eb57f6fbc27697a89fd708da9cff9b81/mainwnd-macos.png "Main window in MacOS")
-
-/As you can see, sub-pixel anti-aliasing works on MacOS!/
+![Main window in MacOS](https://gitlab.com/coolreader-ng/crqt-ng/-/wikis/uploads/fc528231f3b4134dd5cf094142b2ec0b/1301-mainwnd-macos.png "Main window in MacOS")
 
 ## Installation
-You can install this program on Linux using flatpak by going to the URL <https://dl.flathub.org/repo/appstream/io.gitlab.coolreader_ng.crqt-ng.flatpakref>
+You can install this program on Linux using flatpak.
+To do this, you first need to install and configure flatpak and flathub.
+How to do this is explained in this [guide](https://flatpak.org/setup/) or in [this](https://docs.flatpak.org/en/latest/using-flatpak.html).
+
+Then you can install the program from the link <https://dl.flathub.org/repo/appstream/io.gitlab.coolreader_ng.crqt-ng.flatpakref>.
 
 Or using command:
 ```shell
