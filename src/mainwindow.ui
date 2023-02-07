@@ -77,6 +77,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionNew_tab"/>
     <addaction name="actionOpen"/>
     <addaction name="actionRecentBooks"/>
     <addaction name="actionExport"/>
@@ -101,8 +102,6 @@
     <addaction name="actionTOC"/>
     <addaction name="actionShowBookmarksList"/>
     <addaction name="actionAddBookmark"/>
-    <addaction name="separator"/>
-    <addaction name="actionNew_tab"/>
    </widget>
    <widget class="QMenu" name="menuNavigation">
     <property name="title">
@@ -623,6 +622,9 @@
    </property>
    <property name="toolTip">
     <string>Open new tab</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+T</string>
    </property>
   </action>
  </widget>
