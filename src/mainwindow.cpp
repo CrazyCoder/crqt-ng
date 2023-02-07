@@ -202,7 +202,6 @@ void MainWindow::addNewDocTab() {
     TabData tab = createNewDocTabWidget();
     if (tab.isValid()) {
         _tabs.append(tab);
-        CR3View* view = tab.view();
         int tabIndex = ui->tabWidget->addTab(tab.widget(), tab.title());
         ui->tabWidget->setCurrentIndex(tabIndex);
         ui->tabWidget->setTabToolTip(tabIndex, tab.title());
@@ -265,6 +264,51 @@ void MainWindow::syncTabWidget(const QString& currentDocument) {
         setWindowTitle("CoolReaderNG/Qt - " + currentTitle);
     else
         setWindowTitle("CoolReaderNG/Qt");
+}
+
+QString MainWindow::openFileDialogImpl() {
+    QString lastPath;
+    LVPtrVector<CRFileHistRecord>& files = _tabs.getHistory()->getRecords();
+    if (files.length() > 0) {
+        lString32 pathname = files[0]->getFilePathName();
+        lString32 arcPathName, arcItemPathName;
+        if (LVSplitArcName(pathname, arcPathName, arcItemPathName))
+            lastPath = cr2qt(LVExtractPath(arcPathName));
+        else
+            lastPath = cr2qt(LVExtractPath(pathname));
+    }
+    QString all_fmt_flt =
+#if (USE_CHM == 1) && ((USE_CMARK == 1) || (USE_CMARK_GFM == 1))
+            QString(" (*.fb2 *.fb3 *.txt *.tcr *.rtf *.odt *.doc *.docx *.epub *.html *.shtml *.htm *.md *.chm *.zip *.pdb *.pml *.prc *.pml *.mobi);;");
+#elif (USE_CHM == 1)
+            QString(" (*.fb2 *.fb3 *.txt *.tcr *.rtf *.odt *.doc *.docx *.epub *.html *.shtml *.htm *.chm *.zip *.pdb *.pml *.prc *.pml *.mobi);;");
+#else
+            QString(" (*.fb2 *.fb3 *.txt *.tcr *.rtf *.odt *.doc *.docx *.epub *.html *.shtml *.htm *.zip *.pdb *.pml *.prc *.pml *.mobi);;");
+#endif
+
+    QString fileName = QFileDialog::getOpenFileName(
+            this, tr("Open book file"), lastPath,
+            // clang-format off
+            tr("All supported formats") + all_fmt_flt +
+                    tr("FB2 books") + QString(" (*.fb2 *.fb2.zip);;") +
+                    tr("FB3 books") + QString(" (*.fb3);;") +
+                    tr("Text files") + QString(" (*.txt);;") +
+                    tr("Rich text") +  QString(" (*.rtf);;") +
+                    tr("MS Word document") + QString(" (*.doc *.docx);;") +
+                    tr("Open Document files") + QString(" (*.odt);;") +
+                    tr("HTML files") + QString(" (*.shtml *.htm *.html);;") +
+#if (USE_CMARK == 1) || (USE_CMARK_GFM == 1)
+                    tr("Markdown files") + QString(" (*.md);;") +
+#endif
+                    tr("EPUB files") + QString(" (*.epub);;") +
+#if USE_CHM == 1
+                    tr("CHM files") + QString(" (*.chm);;") +
+#endif
+                    tr("MOBI files") + QString(" (*.mobi *.prc *.azw);;") +
+                    tr("PalmDOC files") + QString(" (*.pdb *.pml);;") +
+                    tr("ZIP archives") + QString(" (*.zip)"));
+    // clang-format on
+    return fileName;
 }
 
 class ExportProgressCallback: public LVDocViewCallback
@@ -335,47 +379,7 @@ void MainWindow::on_actionOpen_triggered() {
         CRLog::debug("NULL view in current tab!");
         return;
     }
-    QString lastPath;
-    LVPtrVector<CRFileHistRecord>& files = view->getDocView()->getHistory()->getRecords();
-    if (files.length() > 0) {
-        lString32 pathname = files[0]->getFilePathName();
-        lString32 arcPathName, arcItemPathName;
-        if (LVSplitArcName(pathname, arcPathName, arcItemPathName))
-            lastPath = cr2qt(LVExtractPath(arcPathName));
-        else
-            lastPath = cr2qt(LVExtractPath(pathname));
-    }
-    QString all_fmt_flt =
-#if (USE_CHM == 1) && ((USE_CMARK == 1) || (USE_CMARK_GFM == 1))
-            QString(" (*.fb2 *.fb3 *.txt *.tcr *.rtf *.odt *.doc *.docx *.epub *.html *.shtml *.htm *.md *.chm *.zip *.pdb *.pml *.prc *.pml *.mobi);;");
-#elif (USE_CHM == 1)
-            QString(" (*.fb2 *.fb3 *.txt *.tcr *.rtf *.odt *.doc *.docx *.epub *.html *.shtml *.htm *.chm *.zip *.pdb *.pml *.prc *.pml *.mobi);;");
-#else
-            QString(" (*.fb2 *.fb3 *.txt *.tcr *.rtf *.odt *.doc *.docx *.epub *.html *.shtml *.htm *.zip *.pdb *.pml *.prc *.pml *.mobi);;");
-#endif
-
-    QString fileName = QFileDialog::getOpenFileName(
-            this, tr("Open book file"), lastPath,
-            // clang-format off
-        tr("All supported formats") + all_fmt_flt +
-            tr("FB2 books") + QString(" (*.fb2 *.fb2.zip);;") +
-            tr("FB3 books") + QString(" (*.fb3);;") +
-            tr("Text files") + QString(" (*.txt);;") +
-            tr("Rich text") +  QString(" (*.rtf);;") +
-            tr("MS Word document") + QString(" (*.doc *.docx);;") +
-            tr("Open Document files") + QString(" (*.odt);;") +
-            tr("HTML files") + QString(" (*.shtml *.htm *.html);;") +
-#if (USE_CMARK == 1) || (USE_CMARK_GFM == 1)
-            tr("Markdown files") + QString(" (*.md);;") +
-#endif
-            tr("EPUB files") + QString(" (*.epub);;") +
-#if USE_CHM == 1
-            tr("CHM files") + QString(" (*.chm);;") +
-#endif
-            tr("MOBI files") + QString(" (*.mobi *.prc *.azw);;") +
-            tr("PalmDOC files") + QString(" (*.pdb *.pml);;") +
-            tr("ZIP archives") + QString(" (*.zip)"));
-    // clang-format on
+    QString fileName = openFileDialogImpl();
     if (fileName.length() == 0)
         return;
     if (!view->loadDocument(fileName)) {
@@ -734,7 +738,6 @@ void MainWindow::showEvent(QShowEvent* event) {
             int index = 0;
             TabData tab;
             for (TabsCollection::TabSession::const_iterator it = session.begin(); it != session.end(); ++it, ++index) {
-                //const QString& filePath = *it;
                 const TabsCollection::TabProperty& data = *it;
                 if (index < _tabs.size()) {
                     tab = _tabs[index];
@@ -761,7 +764,7 @@ void MainWindow::showEvent(QShowEvent* event) {
                 _tabs.resize(processed);
             }
             if (0 == _tabs.size()) {
-                TabData tab = createNewDocTabWidget();
+                tab = createNewDocTabWidget();
                 if (tab.isValid()) {
                     _tabs.append(tab);
                 }
@@ -929,4 +932,23 @@ void MainWindow::on_tabWidget_currentChanged(int index) {
 
 void MainWindow::on_tabWidget_tabCloseRequested(int index) {
     closeDocTab(index);
+}
+
+void MainWindow::on_actionOpen_in_new_tab_triggered() {
+    QString fileName = openFileDialogImpl();
+    if (fileName.length() == 0)
+        return;
+    TabData tab = createNewDocTabWidget();
+    if (tab.isValid()) {
+        _tabs.append(tab);
+        CR3View* view = tab.view();
+        int tabIndex = ui->tabWidget->addTab(tab.widget(), tab.title());
+        ui->tabWidget->setCurrentIndex(tabIndex);
+        ui->tabWidget->setTabToolTip(tabIndex, tab.title());
+        if (!view->loadDocument(fileName)) {
+            // error
+        } else {
+            update();
+        }
+    }
 }

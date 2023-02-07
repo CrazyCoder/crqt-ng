@@ -79,6 +79,7 @@
     </property>
     <addaction name="actionNew_tab"/>
     <addaction name="actionOpen"/>
+    <addaction name="actionOpen_in_new_tab"/>
     <addaction name="actionRecentBooks"/>
     <addaction name="actionExport"/>
     <addaction name="separator"/>
@@ -625,6 +626,15 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+T</string>
+   </property>
+  </action>
+  <action name="actionOpen_in_new_tab">
+   <property name="icon">
+    <iconset resource="crqtres.qrc">
+     <normaloff>:/icons/action/icons/fileopen.png</normaloff>:/icons/action/icons/fileopen.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open in new tab...</string>
    </property>
   </action>
  </widget>

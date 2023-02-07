@@ -48,13 +48,14 @@ private:
     Ui::MainWindowClass* ui;
     TabsCollection _tabs;
     QString _filenameToOpen;
+    int _prevIndex;
     void toggleProperty(const char* name);
     TabData createNewDocTabWidget();
     void addNewDocTab();
     void closeDocTab(int index);
     CR3View* currentCRView() const;
     void syncTabWidget(const QString& currentDocument = QString());
-    int _prevIndex;
+    QString openFileDialogImpl();
 protected:
     virtual void showEvent(QShowEvent* event);
     virtual void focusInEvent(QFocusEvent* event);
@@ -107,6 +108,7 @@ private slots:
     void on_actionNew_tab_triggered();
     void on_tabWidget_currentChanged(int index);
     void on_tabWidget_tabCloseRequested(int index);
+    void on_actionOpen_in_new_tab_triggered();
 };
 
 #endif // MAINWINDOW_H
