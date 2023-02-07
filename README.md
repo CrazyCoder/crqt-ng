@@ -37,7 +37,7 @@ These screenshots use the Noto Serif font.
 
 ![Main window in Windows](https://gitlab.com/coolreader-ng/crqt-ng/-/wikis/uploads/973e89264d1e1c38bc6113ca83449ef9/1201-mainwnd-win32.png "Main window in Windows")
 
-![Main window in MacOS](https://gitlab.com/coolreader-ng/crqt-ng/-/wikis/uploads/fc528231f3b4134dd5cf094142b2ec0b/1301-mainwnd-macos.png "Main window in MacOS")
+![Main window in MacOS](https://gitlab.com/coolreader-ng/crqt-ng/-/wikis/uploads/0946ab93dad8dcef6cdd6dac119df682/1301-mainwnd-macos.png "Main window in MacOS")
 
 ## Installation
 You can install this program on Linux using flatpak.
