@@ -42,12 +42,12 @@ class MainWindow: public QMainWindow, public PropsChangeCallback, DocViewStatusC
 {
     Q_OBJECT
 public:
-    MainWindow(const QString& fileToOpen, QWidget* parent = 0);
+    MainWindow(const QStringList& filesToOpen, QWidget* parent = 0);
     ~MainWindow();
 private:
     Ui::MainWindowClass* ui;
     TabsCollection _tabs;
-    QString _filenameToOpen;
+    QStringList _filenamesToOpen;
     int _prevIndex;
     void toggleProperty(const char* name);
     TabData createNewDocTabWidget();

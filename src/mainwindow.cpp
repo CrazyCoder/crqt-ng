@@ -61,10 +61,10 @@
 // 1 reserved for preview in settings dialog
 #define MAX_TABS_COUNT 15
 
-MainWindow::MainWindow(const QString& fileToOpen, QWidget* parent)
+MainWindow::MainWindow(const QStringList& filesToOpen, QWidget* parent)
         : QMainWindow(parent)
         , ui(new Ui::MainWindowClass)
-        , _filenameToOpen(fileToOpen)
+        , _filenamesToOpen(filesToOpen)
         , _prevIndex(-1) {
     ui->setupUi(this);
 
@@ -723,11 +723,44 @@ void MainWindow::showEvent(QShowEvent* event) {
     }
     firstShow = false;
     int n = view->getOptions()->getIntDef(PROP_APP_START_ACTION, 0);
-    if (_filenameToOpen.length() > 0) {
-        // file name specified at command line
+    if (!_filenamesToOpen.isEmpty()) {
+        // file names specified at command line
         CRLog::info("Startup Action: filename passed in command line");
-        if (!view->loadDocument(_filenameToOpen))
-            CRLog::error("cannot load document \"%s\"", _filenameToOpen.toLocal8Bit().constData());
+        int processed = 0;
+        int index = 0;
+        TabData tab;
+        for (QStringList::const_iterator it = _filenamesToOpen.begin(); it != _filenamesToOpen.end(); ++it, ++index) {
+            const QString& filePath = *it;
+            if (index < _tabs.size()) {
+                tab = _tabs[index];
+            } else {
+                tab = createNewDocTabWidget();
+                _tabs.append(tab);
+            }
+            // When opening files from the command line,
+            //  open them immediately without delay.
+            //  To have information on all tabs at once.
+            tab.view()->setActive(true);
+            if (!tab.view()->loadDocument(filePath)) {
+                CRLog::error("cannot load document \"%s\"", filePath.toLocal8Bit().constData());
+            }
+            processed++;
+            if (processed >= MAX_TABS_COUNT)
+                break;
+        }
+        if (_tabs.size() > processed) {
+            for (int i = processed; i < _tabs.size(); i++) {
+                _tabs[i].cleanup();
+            }
+            _tabs.resize(processed);
+        }
+        if (0 == _tabs.size()) {
+            tab = createNewDocTabWidget();
+            if (tab.isValid()) {
+                _tabs.append(tab);
+            }
+        }
+        syncTabWidget();
     } else if (n == 0) {
         // restore session
         CRLog::info("Startup Action: Restore session (restore tabs)");

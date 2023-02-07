@@ -218,15 +218,14 @@ int main(int argc, char* argv[]) {
         else
             CRLog::error("Canot load translation file %s from dir %s", UnicodeToUtf8(qt2cr(trname)).c_str(),
                          UnicodeToUtf8(qt2cr(translations)).c_str());
-        QString fileToOpen;
+        QStringList filesToOpen;
         for (int i = optpos; i < argc; i++) {
             lString8 opt(argv[i]);
             if (!opt.startsWith("--")) {
-                if (fileToOpen.isEmpty())
-                    fileToOpen = cr2qt(LocalToUnicode(opt));
+                filesToOpen.append(cr2qt(LocalToUnicode(opt)));
             }
         }
-        MainWindow w(fileToOpen);
+        MainWindow w(filesToOpen);
         w.show();
         res = app.exec();
     }
