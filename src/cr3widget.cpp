@@ -897,6 +897,7 @@ void CR3View::setActive(bool value) {
         _active = value;
         if (_active) {
             processDelayedCommands();
+            update();
         }
     }
 }

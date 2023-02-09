@@ -296,22 +296,22 @@
 <context>
     <name>CR3View</name>
     <message>
-        <location filename="../cr3widget.cpp" line="1329"/>
+        <location filename="../cr3widget.cpp" line="1330"/>
         <source>Error while opening document </source>
         <translation>Възникна грешка при отваряне на документа</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1683"/>
+        <location filename="../cr3widget.cpp" line="1684"/>
         <source>Loading: please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1223"/>
+        <location filename="../cr3widget.cpp" line="1224"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1224"/>
+        <location filename="../cr3widget.cpp" line="1225"/>
         <source>Font &quot;%1&quot; isn&apos;t compatible with language &quot;%2&quot;. Instead will be used fallback font.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -591,102 +591,102 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="290"/>
+        <location filename="../mainwindow.cpp" line="305"/>
         <source>Open book file</source>
         <translation>Отваряне на книга</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="343"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <source>Export document to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="199"/>
+        <location filename="../mainwindow.cpp" line="202"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="199"/>
+        <location filename="../mainwindow.cpp" line="202"/>
         <source>The maximum number of tabs has been exceeded!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="343"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <source>WOL book (*.wol)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="348"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Export to WOL format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="292"/>
+        <location filename="../mainwindow.cpp" line="307"/>
         <source>All supported formats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="293"/>
+        <location filename="../mainwindow.cpp" line="308"/>
         <source>FB2 books</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="295"/>
+        <location filename="../mainwindow.cpp" line="310"/>
         <source>Text files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
+        <location filename="../mainwindow.cpp" line="311"/>
         <source>Rich text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="297"/>
+        <location filename="../mainwindow.cpp" line="312"/>
         <source>MS Word document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="299"/>
+        <location filename="../mainwindow.cpp" line="314"/>
         <source>HTML files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="301"/>
+        <location filename="../mainwindow.cpp" line="316"/>
         <source>Markdown files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="303"/>
+        <location filename="../mainwindow.cpp" line="318"/>
         <source>EPUB files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="305"/>
+        <location filename="../mainwindow.cpp" line="320"/>
         <source>CHM files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="307"/>
+        <location filename="../mainwindow.cpp" line="322"/>
         <source>MOBI files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="308"/>
+        <location filename="../mainwindow.cpp" line="323"/>
         <source>PalmDOC files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="309"/>
+        <location filename="../mainwindow.cpp" line="324"/>
         <source>ZIP archives</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="294"/>
+        <location filename="../mainwindow.cpp" line="309"/>
         <source>FB3 books</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="298"/>
+        <location filename="../mainwindow.cpp" line="313"/>
         <source>Open Document files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -694,507 +694,507 @@
 <context>
     <name>MainWindowClass</name>
     <message>
-        <location filename="../mainwindow.ui" line="280"/>
+        <location filename="../mainwindow.ui" line="283"/>
         <source>End</source>
         <translation>End</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="203"/>
+        <location filename="../mainwindow.ui" line="206"/>
         <source>Esc</source>
         <translation>Esc</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="289"/>
+        <location filename="../mainwindow.ui" line="292"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="434"/>
+        <location filename="../mainwindow.ui" line="437"/>
         <source>Copy</source>
         <translation>Копиране</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="78"/>
+        <location filename="../mainwindow.ui" line="81"/>
         <source>File</source>
         <translation>Файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="125"/>
+        <location filename="../mainwindow.ui" line="128"/>
         <source>Help</source>
         <translation>Помощ</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="93"/>
+        <location filename="../mainwindow.ui" line="96"/>
         <source>View</source>
         <translation>Изглед</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="419"/>
+        <location filename="../mainwindow.ui" line="422"/>
         <source>Settings...</source>
         <translation>Настройки...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="192"/>
+        <location filename="../mainwindow.ui" line="195"/>
         <source>Close</source>
         <translation>Изход</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="200"/>
+        <location filename="../mainwindow.ui" line="203"/>
         <source>Minimize</source>
         <translation>Минимизиране</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="491"/>
+        <location filename="../mainwindow.ui" line="494"/>
         <source>Bookmark List...</source>
         <translation>Списък с отметки...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="359"/>
+        <location filename="../mainwindow.ui" line="362"/>
         <source>Zoom In</source>
         <translation>Увеличаване размера на шрифта</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="266"/>
+        <location filename="../mainwindow.ui" line="269"/>
         <source>Go to first page</source>
         <translation>Към първа страница</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="476"/>
+        <location filename="../mainwindow.ui" line="479"/>
         <source>Add Bookmark</source>
         <translation>Добавяне на отметка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="479"/>
+        <location filename="../mainwindow.ui" line="482"/>
         <source>Add bookmark</source>
         <translation>Добавяне на отметка</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="252"/>
+        <location filename="../mainwindow.ui" line="255"/>
         <source>Line Up</source>
         <translation>Един ред нагоре</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="404"/>
+        <location filename="../mainwindow.ui" line="407"/>
         <source>Recent Books</source>
         <translation>Последни книги</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="536"/>
+        <location filename="../mainwindow.ui" line="539"/>
         <source>Find text</source>
         <translation>Търсене на текст</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="241"/>
+        <location filename="../mainwindow.ui" line="244"/>
         <source>Line Down</source>
         <translation>Един ред надолу</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="552"/>
+        <location filename="../mainwindow.ui" line="555"/>
         <source>Export</source>
         <translation>Изнасяне</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="326"/>
+        <location filename="../mainwindow.ui" line="329"/>
         <source>Previous Chapter</source>
         <translation>Предишна глава</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="389"/>
+        <location filename="../mainwindow.ui" line="392"/>
         <source>Table of Contents...</source>
         <translation>Съдържание...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="521"/>
+        <location filename="../mainwindow.ui" line="524"/>
         <source>Rotate</source>
         <translation>Завъртане</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="437"/>
+        <location filename="../mainwindow.ui" line="440"/>
         <source>Copy selected text</source>
         <translation>Копиране на избрания текст</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="374"/>
+        <location filename="../mainwindow.ui" line="377"/>
         <source>Zoom Out</source>
         <translation>Умаляване размера на шрифта</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="169"/>
+        <location filename="../mainwindow.ui" line="172"/>
         <source>Open...</source>
         <translation>Отваряне...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="230"/>
+        <location filename="../mainwindow.ui" line="233"/>
         <source>Page Up</source>
         <translation>Предишна страница</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="344"/>
+        <location filename="../mainwindow.ui" line="347"/>
         <source>Toggle Full Screen</source>
         <translation>Цял екран</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="347"/>
+        <location filename="../mainwindow.ui" line="350"/>
         <source>Toggle Full Screen mode</source>
         <translation>Цял екран</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="218"/>
+        <location filename="../mainwindow.ui" line="221"/>
         <source>Go to next page</source>
         <translation>Следваща страница</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="175"/>
+        <location filename="../mainwindow.ui" line="178"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="183"/>
+        <location filename="../mainwindow.ui" line="186"/>
         <source>Ctrl+T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="195"/>
+        <location filename="../mainwindow.ui" line="198"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="362"/>
+        <location filename="../mainwindow.ui" line="365"/>
         <source>Increase font size</source>
         <translation>Увеличаване размера на шрифта</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="377"/>
+        <location filename="../mainwindow.ui" line="380"/>
         <source>Decrease font size</source>
         <translation>Умаляване размера на шрифта</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="456"/>
         <location filename="../mainwindow.ui" line="459"/>
+        <location filename="../mainwindow.ui" line="462"/>
         <source>About Qt</source>
         <translation>Относно Qt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="506"/>
+        <location filename="../mainwindow.ui" line="509"/>
         <source>File Properties...</source>
         <translation>Свойства...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="263"/>
+        <location filename="../mainwindow.ui" line="266"/>
         <source>First Page</source>
         <translation>Първа страница</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="274"/>
+        <location filename="../mainwindow.ui" line="277"/>
         <source>Last Page</source>
         <translation>Последна страница</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="180"/>
+        <location filename="../mainwindow.ui" line="183"/>
         <source>Toggle Pages/Scroll</source>
         <translation>Страница/Свитък</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="509"/>
+        <location filename="../mainwindow.ui" line="512"/>
         <source>Show file properties</source>
         <translation>Свойства</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="172"/>
+        <location filename="../mainwindow.ui" line="175"/>
         <source>Open file</source>
         <translation>Отваряне на файл</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="392"/>
+        <location filename="../mainwindow.ui" line="395"/>
         <source>Show table of contents</source>
         <translation>Съдържание</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="315"/>
+        <location filename="../mainwindow.ui" line="318"/>
         <source>Next Chapter</source>
         <translation>Следваща глава</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="422"/>
+        <location filename="../mainwindow.ui" line="425"/>
         <source>Settings dialog</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="233"/>
+        <location filename="../mainwindow.ui" line="236"/>
         <source>Back by page</source>
         <translation>Предишна страница</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="304"/>
+        <location filename="../mainwindow.ui" line="307"/>
         <source>Forward</source>
         <translation>Напред</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="215"/>
+        <location filename="../mainwindow.ui" line="218"/>
         <source>Page Down</source>
         <translation>Следваща страница</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="533"/>
+        <location filename="../mainwindow.ui" line="536"/>
         <source>Find text...</source>
         <translation>Търсене на текст...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="407"/>
+        <location filename="../mainwindow.ui" line="410"/>
         <source>Show recent books list</source>
         <translation>Показване на списък с последните книги</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="109"/>
+        <location filename="../mainwindow.ui" line="112"/>
         <source>Navigation</source>
         <translation>Навигация</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="494"/>
+        <location filename="../mainwindow.ui" line="497"/>
         <source>Show bookmarks list</source>
         <translation>Показване на списък с отметки</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="221"/>
+        <location filename="../mainwindow.ui" line="224"/>
         <source>PgDown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="236"/>
+        <location filename="../mainwindow.ui" line="239"/>
         <source>PgUp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="244"/>
+        <location filename="../mainwindow.ui" line="247"/>
         <source>Forward by one line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="247"/>
+        <location filename="../mainwindow.ui" line="250"/>
         <source>Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="255"/>
+        <location filename="../mainwindow.ui" line="258"/>
         <source>Back by line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="258"/>
+        <location filename="../mainwindow.ui" line="261"/>
         <source>Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="269"/>
+        <location filename="../mainwindow.ui" line="272"/>
         <source>Home</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="277"/>
+        <location filename="../mainwindow.ui" line="280"/>
         <source>Go to last page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="292"/>
+        <location filename="../mainwindow.ui" line="295"/>
         <source>Back in navigation history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="295"/>
+        <location filename="../mainwindow.ui" line="298"/>
         <source>Backspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="307"/>
+        <location filename="../mainwindow.ui" line="310"/>
         <source>Go to the next position in navigation history</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="310"/>
+        <location filename="../mainwindow.ui" line="313"/>
         <source>Shift+Backspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="318"/>
+        <location filename="../mainwindow.ui" line="321"/>
         <source>Go to next chapter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="321"/>
+        <location filename="../mainwindow.ui" line="324"/>
         <source>Alt+Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="329"/>
+        <location filename="../mainwindow.ui" line="332"/>
         <source>Go to previous chapter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="332"/>
+        <location filename="../mainwindow.ui" line="335"/>
         <source>Alt+Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="350"/>
+        <location filename="../mainwindow.ui" line="353"/>
         <source>Alt+Return</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="365"/>
+        <location filename="../mainwindow.ui" line="368"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="380"/>
+        <location filename="../mainwindow.ui" line="383"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="395"/>
+        <location filename="../mainwindow.ui" line="398"/>
         <source>F4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="410"/>
+        <location filename="../mainwindow.ui" line="413"/>
         <source>F5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="425"/>
+        <location filename="../mainwindow.ui" line="428"/>
         <source>F9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="440"/>
+        <location filename="../mainwindow.ui" line="443"/>
         <source>Ctrl+C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="445"/>
+        <location filename="../mainwindow.ui" line="448"/>
         <source>copy2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="448"/>
+        <location filename="../mainwindow.ui" line="451"/>
         <source>Copy alternative shortcut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="451"/>
+        <location filename="../mainwindow.ui" line="454"/>
         <source>Ctrl+Ins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="482"/>
+        <location filename="../mainwindow.ui" line="485"/>
         <source>Ctrl+B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="497"/>
+        <location filename="../mainwindow.ui" line="500"/>
         <source>F6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="512"/>
+        <location filename="../mainwindow.ui" line="515"/>
         <source>Ctrl+F1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="524"/>
+        <location filename="../mainwindow.ui" line="527"/>
         <source>Ctrl+R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="539"/>
+        <location filename="../mainwindow.ui" line="542"/>
         <source>Ctrl+F</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="544"/>
+        <location filename="../mainwindow.ui" line="547"/>
         <source>Toggle Edit Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="547"/>
+        <location filename="../mainwindow.ui" line="550"/>
         <source>Toggle edit mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="555"/>
+        <location filename="../mainwindow.ui" line="558"/>
         <source>Export document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="558"/>
+        <location filename="../mainwindow.ui" line="561"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="563"/>
         <location filename="../mainwindow.ui" line="566"/>
-        <location filename="../mainwindow.ui" line="585"/>
+        <location filename="../mainwindow.ui" line="569"/>
         <location filename="../mainwindow.ui" line="588"/>
+        <location filename="../mainwindow.ui" line="591"/>
         <source>Next Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="569"/>
+        <location filename="../mainwindow.ui" line="572"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="574"/>
         <location filename="../mainwindow.ui" line="577"/>
+        <location filename="../mainwindow.ui" line="580"/>
         <source>Previous Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="580"/>
+        <location filename="../mainwindow.ui" line="583"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="591"/>
+        <location filename="../mainwindow.ui" line="594"/>
         <source>Space</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="596"/>
+        <location filename="../mainwindow.ui" line="599"/>
         <source>Next Sentence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="599"/>
+        <location filename="../mainwindow.ui" line="602"/>
         <source>Move selection to next sentence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="602"/>
+        <location filename="../mainwindow.ui" line="605"/>
         <source>Ctrl+Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="613"/>
+        <location filename="../mainwindow.ui" line="616"/>
         <source>Ctrl+Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="622"/>
+        <location filename="../mainwindow.ui" line="625"/>
         <source>New tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="625"/>
+        <location filename="../mainwindow.ui" line="628"/>
         <source>Open new tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="628"/>
+        <location filename="../mainwindow.ui" line="631"/>
         <source>Ctrl+Shift+T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="637"/>
+        <location filename="../mainwindow.ui" line="640"/>
         <source>Open in new tab...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1204,18 +1204,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="464"/>
         <location filename="../mainwindow.ui" line="467"/>
+        <location filename="../mainwindow.ui" line="470"/>
         <source>About CoolReaderNG/Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="607"/>
+        <location filename="../mainwindow.ui" line="610"/>
         <source>Prev Sentence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="610"/>
+        <location filename="../mainwindow.ui" line="613"/>
         <source>Select previous sentence</source>
         <translation type="unfinished"></translation>
     </message>

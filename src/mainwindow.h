@@ -36,8 +36,6 @@ namespace Ui
     class MainWindowClass;
 }
 
-class QBoxLayout;
-
 class MainWindow: public QMainWindow, public PropsChangeCallback, DocViewStatusCallback
 {
     Q_OBJECT

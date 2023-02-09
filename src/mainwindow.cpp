@@ -38,7 +38,7 @@
 #include <QLibraryInfo>
 #include <QMessageBox>
 #include <QHBoxLayout>
-#include <QToolButton>
+#include <QPushButton>
 
 #include "app-props.h"
 #include "settings.h"
@@ -68,10 +68,11 @@ MainWindow::MainWindow(const QStringList& filesToOpen, QWidget* parent)
         , _prevIndex(-1) {
     ui->setupUi(this);
 
-    // New tab tool button on tab widget
-    QToolButton* newTabButton = new QToolButton(this);
+    // "New Tab" tool button on tab widget
+    QPushButton* newTabButton = new QPushButton(this);
     newTabButton->setIcon(ui->actionNew_tab->icon());
     newTabButton->setToolTip(ui->actionNew_tab->toolTip());
+    newTabButton->setFlat(true);
     ui->tabWidget->setCornerWidget(newTabButton, Qt::TopLeftCorner);
     connect(newTabButton, SIGNAL(clicked()), this, SLOT(on_actionNew_tab_triggered()));
 
@@ -111,6 +112,7 @@ MainWindow::MainWindow(const QStringList& filesToOpen, QWidget* parent)
     addAction(ui->actionPrevSentence);
     addAction(ui->actionNew_tab);
 
+    // Init tabs container
     QString configDir = cr2qt(getConfigDir());
     QString iniFile = configDir + "crui.ini";
     QString histFile = configDir + "cruihist.bmk";
@@ -122,8 +124,9 @@ MainWindow::MainWindow(const QStringList& filesToOpen, QWidget* parent)
     if (!_tabs.loadHistory(histFile)) {
         _tabs.saveHistory(histFile);
     }
-    _tabs.restoreWindowPos(this, "main.", true);
+    // Add one tab
     addNewDocTab();
+    _tabs.restoreWindowPos(this, "main.", true);
 }
 
 void MainWindow::closeEvent(QCloseEvent* event) {
@@ -131,7 +134,7 @@ void MainWindow::closeEvent(QCloseEvent* event) {
     _tabs.saveHistory();
     _tabs.saveSettings();
     int tabIndex = ui->tabWidget->currentIndex();
-    if (tabIndex >= 0)
+    if (tabIndex >= 0 && tabIndex < _tabs.size())
         _tabs.setCurrentDocument(_tabs[tabIndex].docPath());
     else
         _tabs.setCurrentDocument("");
@@ -205,24 +208,39 @@ void MainWindow::addNewDocTab() {
         int tabIndex = ui->tabWidget->addTab(tab.widget(), tab.title());
         ui->tabWidget->setCurrentIndex(tabIndex);
         ui->tabWidget->setTabToolTip(tabIndex, tab.title());
+    } else {
+        CRLog::error("MainWindow::addNewDocTab(): failed to create new tab!");
     }
 }
 
 void MainWindow::closeDocTab(int index) {
-    if (index >= 0 && index < ui->tabWidget->count()) {
-        ui->tabWidget->removeTab(index);
-        TabData tab = _tabs[index];
+    if (index >= 0 && index < _tabs.size()) {
+        CRLog::debug("MainWindow::closeDocTab(): closing tab with index=%d", index);
         _tabs.saveHistory();
-        tab.cleanup();
+        TabData tab = _tabs[index];
+        // First, we remove the element from the '_tabs' container
+        //  so that we use actual data in the tab's currentChanged() handler.
+        //  Which is called after the tab is removed.
         _tabs.remove(index);
+        // Remove tab
+        ui->tabWidget->removeTab(index);
+        //  and delete tab widgets
+        tab.cleanup();
+    } else {
+        CRLog::error("MainWindow::closeDocTab(): invalid index specified (%d), _tabs.size()=%d", index, _tabs.size());
     }
 }
 
 CR3View* MainWindow::currentCRView() const {
     CR3View* view = NULL;
     int tabIndex = ui->tabWidget->currentIndex();
-    if (tabIndex >= 0)
+    if (tabIndex >= 0 && tabIndex < _tabs.size()) {
         return _tabs[tabIndex].view();
+    } else {
+        CRLog::error(
+                "MainWindow::currentCRView(): invalid current tab index (%d), tabWidget->count()=%d, _tabs.size()=%d",
+                tabIndex, ui->tabWidget->count(), _tabs.size());
+    }
     return view;
 }
 
@@ -255,10 +273,7 @@ void MainWindow::syncTabWidget(const QString& currentDocument) {
         tabIndex = ui->tabWidget->count() - 1;
     if (tabIndex >= 0) {
         ui->tabWidget->setCurrentIndex(tabIndex);
-        const TabData& tab = _tabs[tabIndex];
-        const CR3View* view = tab.view();
-        if (NULL != view)
-            currentTitle = tab.title();
+        currentTitle = _tabs[tabIndex].title();
     }
     if (!currentTitle.isEmpty())
         setWindowTitle("CoolReaderNG/Qt - " + currentTitle);
@@ -567,7 +582,7 @@ void MainWindow::on_actionSettings_triggered() {
             if (NULL != view) {
                 PropsRef newProps = dlg.options();
                 _tabs.setSettings(qt2cr(newProps));
-                view->setOptions(newProps, view == currView);
+                view->setOptions(newProps, view != currView);
                 view->getDocView()->requestRender();
                 // docview is not rendered here, only planned
             }
@@ -657,7 +672,7 @@ void MainWindow::onDocumentLoaded(lUInt64 viewId, const QString& atitle, const Q
 void MainWindow::onCanGoBack(lUInt64 viewId, bool canGoBack) {
     int cbIndex = _tabs.indexByViewId(viewId);
     int currentIndex = ui->tabWidget->currentIndex();
-    if (cbIndex >= 0) {
+    if (cbIndex >= 0 && cbIndex < _tabs.size()) {
         _tabs[cbIndex].setCanGoBack(canGoBack);
         if (cbIndex == currentIndex)
             ui->actionBack->setEnabled(canGoBack);
@@ -667,7 +682,7 @@ void MainWindow::onCanGoBack(lUInt64 viewId, bool canGoBack) {
 void MainWindow::onCanGoForward(lUInt64 viewId, bool canGoForward) {
     int cbIndex = _tabs.indexByViewId(viewId);
     int currentIndex = ui->tabWidget->currentIndex();
-    if (cbIndex >= 0) {
+    if (cbIndex >= 0 && cbIndex < _tabs.size()) {
         _tabs[cbIndex].setCanGoForward(canGoForward);
         if (cbIndex == currentIndex)
             ui->actionForward->setEnabled(canGoForward);
@@ -983,5 +998,7 @@ void MainWindow::on_actionOpen_in_new_tab_triggered() {
         } else {
             update();
         }
+    } else {
+        CRLog::error("MainWindow::on_actionOpen_in_new_tab_triggered(): failed to create new tab!");
     }
 }
