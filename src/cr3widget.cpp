@@ -963,11 +963,11 @@ void CR3View::toggleProperty(const char* name) {
     int state = _data->_props->getIntDef(name, 0) != 0 ? 0 : 1;
     PropsRef props = Props::create();
     props->setString(name, state ? "1" : "0");
-    setOptions(props, true);
+    applyOptions(props, true);
 }
 
-/// set new option values
-PropsRef CR3View::setOptions(PropsRef props, bool silent) {
+/// apply some set of options
+PropsRef CR3View::applyOptions(PropsRef props, bool silent) {
     //    for ( int i=0; i<_data->_props->getCount(); i++ ) {
     //        CRLog::debug("Old [%d] '%s'=%s ", i, _data->_props->getName(i), UnicodeToUtf8(_data->_props->getValue(i)).c_str() );
     //    }
@@ -978,11 +978,14 @@ PropsRef CR3View::setOptions(PropsRef props, bool silent) {
     //    for ( int i=0; i<changed->getCount(); i++ ) {
     //        CRLog::debug("Changed [%d] '%s'=%s ", i, changed->getName(i), UnicodeToUtf8(changed->getValue(i)).c_str() );
     //    }
-    _data->_props = changed | _data->_props;
+    CRPropRef changed2 = _docview->getDocProps() ^ qt2cr(props);
+    CRPropRef propsToApply = changed | changed2;
+    // Don't create new props reference, but change existing
+    _data->_props->set(changed | _data->_props);
     //    for ( int i=0; i<_data->_props->getCount(); i++ ) {
     //        CRLog::debug("Result [%d] '%s'=%s ", i, _data->_props->getName(i), UnicodeToUtf8(_data->_props->getValue(i)).c_str() );
     //    }
-    CRPropRef r = _docview->propsApply(changed);
+    CRPropRef r = _docview->propsApply(propsToApply);
     applyTextLangMainLang(_doc_language);
     PropsRef unknownOptions = cr2qt(r);
     if (_propsCallback != NULL)

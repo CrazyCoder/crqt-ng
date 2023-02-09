@@ -115,8 +115,8 @@ public:
     bool loadCSS(QString filename);
     /// set bookmarks dir
     void setBookmarksDir(const QString& dirname);
-    /// set new option values
-    PropsRef setOptions(PropsRef props, bool silent);
+    /// apply some set of options
+    PropsRef applyOptions(PropsRef props, bool silent);
     /// get current option values
     PropsRef getOptions();
     /// turns on/off Edit mode (forces Scroll view)

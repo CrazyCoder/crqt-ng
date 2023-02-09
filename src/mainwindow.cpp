@@ -262,7 +262,6 @@ void MainWindow::syncTabWidget(const QString& currentDocument) {
     QString currentTitle;
     for (TabsCollection::const_iterator it = _tabs.begin(); it != _tabs.end(); ++it) {
         const TabData& tab = *it;
-        CR3View* view = tab.view();
         int index = ui->tabWidget->addTab(tab.widget(), tab.title());
         ui->tabWidget->setTabToolTip(index, tab.title());
         if (tab.docPath() == currentDocFilePath)
@@ -582,9 +581,10 @@ void MainWindow::on_actionSettings_triggered() {
             if (NULL != view) {
                 PropsRef newProps = dlg.options();
                 _tabs.setSettings(qt2cr(newProps));
-                view->setOptions(newProps, view != currView);
+                view->applyOptions(newProps, view != currView);
                 view->getDocView()->requestRender();
                 // docview is not rendered here, only planned
+                _tabs.saveSettings();
             }
         }
     }

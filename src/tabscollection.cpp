@@ -119,7 +119,8 @@ bool TabsCollection::saveSettings(const QString& filename) {
 
 void TabsCollection::setSettings(CRPropRef props) {
     CRPropRef changed = m_props ^ props;
-    m_props = changed | m_props;
+    // Don't create new props reference, but change existing
+    m_props->set(changed | m_props);
 }
 
 void TabsCollection::saveWindowPos(QWidget* window, const char* prefix) {

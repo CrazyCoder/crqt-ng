@@ -948,7 +948,7 @@ void SettingsDlg::initSampleWindow() {
         connect(m_sample, SIGNAL(destroyed(QObject*)), this, SLOT(sampleview_destroyed(QObject*)));
     }
     CR3View* creview = m_sample->creview();
-    creview->setOptions(m_props, true);
+    creview->applyOptions(m_props, true);
     LVDocView* sampledocview = creview->getDocView();
     sampledocview->setShowCover(false);
     sampledocview->setViewMode(DVM_SCROLL, 1);
@@ -975,7 +975,7 @@ void SettingsDlg::updateStyleSample() {
         m_sample->show();
     }
     CR3View* sample = m_sample->creview();
-    sample->setOptions(m_props, true);
+    sample->applyOptions(m_props, true);
     sample->getDocView()->setShowCover(false);
     sample->getDocView()->setViewMode(DVM_SCROLL, 1);
 
