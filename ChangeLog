@@ -1,3 +1,39 @@
+2023-02-11  Aleksey Chernov  <valexlin@gmail.com>
+
+    * Version 1.0.9 released.
+    ==========================
+
+    Tag sources with `1.0.9'.
+
+    Multi-tabbed interface fixes.
+
+    See below for changes.
+
+2023-02-10  Aleksey Chernov  <valexlin@gmail.com>
+
+    BUG fixed: settings are not saved after turning on full screen mode
+
+2023-02-09  Aleksey Chernov  <valexlin@gmail.com>
+
+    MainWindow: disabled the 'movable' property of the TabWidget as there is
+     no trivial way to track reordering of tabs.
+
+    Fixed multi-tabbed interface bugs:
+     * start application in full screen mode;
+     * close the tab before the current one.
+
+2023-02-08  Aleksey Chernov  <valexlin@gmail.com>
+
+    Implemented the ability to open multiple files specified on the command line.
+
+    Added "Open in new tab..." menu item to the "File" menu.
+
+2023-02-07  Aleksey Chernov  <valexlin@gmail.com>
+
+    The "New Tab" menu item has been moved from the "View" menu to the "File" menu.
+    The shortcut key assigned to this action is Ctrl+Shift+T.
+
+
 2023-02-06  Aleksey Chernov  <valexlin@gmail.com>
 
     * Version 1.0.8 released.
