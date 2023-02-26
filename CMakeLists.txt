@@ -4,9 +4,23 @@ cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/")
 
-set(FILEVERSION_V	"1, 0, 9, 30")
-set(PRODUCTVERSION_V	"1, 0, 9, 30")
-set(VERSION		"1.0.9")
+
+#  VERSION_DEV_A/CODE description:
+# alphaX - 0X; beta X - 1X; rcX - 2X; releaseX - 3X (or empty)
+set(VERSION_MAJOR 1)
+set(VERSION_MINOR 0)
+set(VERSION_PATCH 10)
+set(VERSION_DEV_A "beta1")
+set(VERSION_DEV_CODE 11)
+set(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+if (VERSION_DEV_A)
+  set(VERSION "${VERSION}-${VERSION_DEV_A}")
+endif()
+set(PACKAGE_VERSION ${VERSION})
+# for windows rc file
+set(PRODUCTVERSION_V "${VERSION_MAJOR},${VERSION_MINOR},${VERSION_PATCH},${VERSION_DEV_CODE}")
+set(FILEVERSION_V ${PRODUCTVERSION_V})
+
 set(PACKAGE_DATADIR	${CMAKE_INSTALL_PREFIX}/share)
 
 option(ADD_DEBUG_EXTRA_OPTS "Add extra debug flags and technique" OFF)
