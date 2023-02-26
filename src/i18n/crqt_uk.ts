@@ -296,22 +296,22 @@
 <context>
     <name>CR3View</name>
     <message>
-        <location filename="../cr3widget.cpp" line="1333"/>
+        <location filename="../cr3widget.cpp" line="1336"/>
         <source>Error while opening document </source>
         <translation>Помилка при відкритті документу </translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1687"/>
+        <location filename="../cr3widget.cpp" line="1697"/>
         <source>Loading: please wait...</source>
         <translation>Завантажується: зачекайте…</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1227"/>
+        <location filename="../cr3widget.cpp" line="1230"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1228"/>
+        <location filename="../cr3widget.cpp" line="1231"/>
         <source>Font &quot;%1&quot; isn&apos;t compatible with language &quot;%2&quot;. Instead will be used fallback font.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1343,35 +1343,35 @@
 <context>
     <name>SettingsDlg</name>
     <message>
-        <location filename="../settings.cpp" line="406"/>
+        <location filename="../settings.cpp" line="407"/>
         <source>[No hyphenation]</source>
         <translation>[Без переносів]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="408"/>
+        <location filename="../settings.cpp" line="409"/>
         <source>[Algorythmic hyphenation]</source>
         <translation>[Алгоритмічні переноси]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="955"/>
+        <location filename="../settings.cpp" line="960"/>
         <source>The quick brown fox jumps over the lazy dog. </source>
         <translation>У ґаздині є їжак. </translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1067"/>
-        <location filename="../settings.cpp" line="1013"/>
+        <location filename="../settings.ui" line="1084"/>
+        <location filename="../settings.cpp" line="1018"/>
         <source>Text color</source>
         <translation>Колір тексту</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1534"/>
-        <location filename="../settings.cpp" line="1017"/>
+        <location filename="../settings.ui" line="1551"/>
+        <location filename="../settings.cpp" line="1022"/>
         <source>Background color</source>
         <translation>Колір тла</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="549"/>
-        <location filename="../settings.cpp" line="1021"/>
+        <location filename="../settings.ui" line="566"/>
+        <location filename="../settings.cpp" line="1026"/>
         <source>Page header text color</source>
         <translation>Колір тексту заголовку сторінки</translation>
     </message>
@@ -1445,143 +1445,143 @@
         <translation>Показувати смугу стану</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="133"/>
+        <location filename="../settings.ui" line="150"/>
         <source>Fullscreen display</source>
         <translation>Повноекранний режим</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="141"/>
+        <location filename="../settings.ui" line="158"/>
         <source>Page</source>
         <translation>Сторінка</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="161"/>
+        <location filename="../settings.ui" line="178"/>
         <source>One page</source>
         <translation>Одна сторінка</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="166"/>
+        <location filename="../settings.ui" line="183"/>
         <source>Two pages</source>
         <translation>Дві сторінки</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="171"/>
+        <location filename="../settings.ui" line="188"/>
         <source>Scroll View</source>
         <translation>Сувій (єдина довга сторінка)</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="185"/>
+        <location filename="../settings.ui" line="202"/>
         <source>Vew Mode</source>
         <translation>Режим читання</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="198"/>
+        <location filename="../settings.ui" line="215"/>
         <source>Page margins</source>
         <translation>Поля сторінки</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="206"/>
-        <location filename="../settings.ui" line="844"/>
-        <location filename="../settings.ui" line="891"/>
-        <location filename="../settings.ui" line="945"/>
-        <location filename="../settings.ui" line="999"/>
-        <location filename="../settings.cpp" line="556"/>
-        <location filename="../settings.cpp" line="597"/>
+        <location filename="../settings.ui" line="223"/>
+        <location filename="../settings.ui" line="861"/>
+        <location filename="../settings.ui" line="908"/>
+        <location filename="../settings.ui" line="962"/>
+        <location filename="../settings.ui" line="1016"/>
+        <location filename="../settings.cpp" line="557"/>
+        <location filename="../settings.cpp" line="598"/>
         <source>0</source>
         <translation>0</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="231"/>
+        <location filename="../settings.ui" line="248"/>
         <source>5</source>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="246"/>
+        <location filename="../settings.ui" line="263"/>
         <source>8</source>
         <translation>8</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="256"/>
+        <location filename="../settings.ui" line="273"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="271"/>
+        <location filename="../settings.ui" line="288"/>
         <source>15</source>
         <translation>15</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="276"/>
+        <location filename="../settings.ui" line="293"/>
         <source>20</source>
         <translation>20</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="281"/>
+        <location filename="../settings.ui" line="298"/>
         <source>25</source>
         <translation>25</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="286"/>
+        <location filename="../settings.ui" line="303"/>
         <source>30</source>
         <translation>30</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="319"/>
+        <location filename="../settings.ui" line="336"/>
         <source>Show page header</source>
         <translation>Показувати заголовок сторінки</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="365"/>
+        <location filename="../settings.ui" line="382"/>
         <source>Book name</source>
         <translation>Назва книги</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="392"/>
+        <location filename="../settings.ui" line="409"/>
         <source>Page number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="419"/>
+        <location filename="../settings.ui" line="436"/>
         <source>Page count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="473"/>
+        <location filename="../settings.ui" line="490"/>
         <source>Clock</source>
         <translation>Годинник</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="500"/>
+        <location filename="../settings.ui" line="517"/>
         <source>Battery status</source>
         <translation>Стан батареї</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="446"/>
+        <location filename="../settings.ui" line="463"/>
         <source>Position percent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="532"/>
+        <location filename="../settings.ui" line="549"/>
         <source>Header font</source>
         <translation>Шрифт заголовку</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="564"/>
-        <location filename="../settings.ui" line="632"/>
-        <location filename="../settings.ui" line="687"/>
-        <location filename="../settings.ui" line="742"/>
-        <location filename="../settings.ui" line="1082"/>
-        <location filename="../settings.ui" line="1549"/>
+        <location filename="../settings.ui" line="581"/>
+        <location filename="../settings.ui" line="649"/>
+        <location filename="../settings.ui" line="704"/>
+        <location filename="../settings.ui" line="759"/>
+        <location filename="../settings.ui" line="1099"/>
+        <location filename="../settings.ui" line="1566"/>
         <source>Change</source>
         <translation>Змінити</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="608"/>
+        <location filename="../settings.ui" line="625"/>
         <source>Show footnotes at bottom of page</source>
         <translation>Показувати примітки внизу сторінки</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1056"/>
+        <location filename="../settings.ui" line="1073"/>
         <source>Styles</source>
         <translation>Стилі</translation>
     </message>
@@ -1590,18 +1590,18 @@
         <translation type="vanished">Шрифт тексту</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1661"/>
-        <location filename="../settings.ui" line="1675"/>
+        <location filename="../settings.ui" line="1678"/>
+        <location filename="../settings.ui" line="1692"/>
         <source>Hyphenation</source>
         <translation>Переноси</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1699"/>
+        <location filename="../settings.ui" line="1716"/>
         <source>Interline spacing</source>
         <translation>Міжрядковий інтервал</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1499"/>
+        <location filename="../settings.ui" line="1516"/>
         <source>Page skin</source>
         <translation>Жупан сторінки</translation>
     </message>
@@ -1610,27 +1610,27 @@
         <translation type="vanished">Зразок</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1789"/>
+        <location filename="../settings.ui" line="1806"/>
         <source>.TXT files</source>
         <translation>Для файлів .TXT</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1796"/>
+        <location filename="../settings.ui" line="1813"/>
         <source>Disable automatic formatting</source>
         <translation>Вимкнути автоматичне форматування</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1733"/>
+        <location filename="../settings.ui" line="1750"/>
         <source>Floating punctuation</source>
         <translation>Висяча пунктуація</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1740"/>
+        <location filename="../settings.ui" line="1757"/>
         <source>Enable floating punctuation</source>
         <translation>Дозволити висячу пунктуацію</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1257"/>
+        <location filename="../settings.ui" line="1274"/>
         <source>0.3</source>
         <translation>0.3</translation>
     </message>
@@ -1640,162 +1640,177 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1140"/>
+        <location filename="../settings.ui" line="131"/>
+        <source>Clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="138"/>
+        <source>automatically copy text to clipboard when selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="141"/>
+        <source>automatically copy when selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="1157"/>
         <source>Default font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1222"/>
+        <location filename="../settings.ui" line="1239"/>
         <source>Font gamma</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1262"/>
+        <location filename="../settings.ui" line="1279"/>
         <source>0.35</source>
         <translation>0.35</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1267"/>
+        <location filename="../settings.ui" line="1284"/>
         <source>0.4</source>
         <translation>0.4</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1272"/>
+        <location filename="../settings.ui" line="1289"/>
         <source>0.45</source>
         <translation>0.45</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1277"/>
+        <location filename="../settings.ui" line="1294"/>
         <source>0.5</source>
         <translation>0.5</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1282"/>
+        <location filename="../settings.ui" line="1299"/>
         <source>0.55</source>
         <translation>0.55</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1287"/>
+        <location filename="../settings.ui" line="1304"/>
         <source>0.6</source>
         <translation>0.6</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1292"/>
+        <location filename="../settings.ui" line="1309"/>
         <source>0.65</source>
         <translation>0.65</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1297"/>
+        <location filename="../settings.ui" line="1314"/>
         <source>0.7</source>
         <translation>0.7</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1302"/>
+        <location filename="../settings.ui" line="1319"/>
         <source>0.75</source>
         <translation>0.75</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1307"/>
+        <location filename="../settings.ui" line="1324"/>
         <source>0.8</source>
         <translation>0.8</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1312"/>
+        <location filename="../settings.ui" line="1329"/>
         <source>0.85</source>
         <translation>0.85</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1317"/>
+        <location filename="../settings.ui" line="1334"/>
         <source>0.9</source>
         <translation>0.9</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1322"/>
+        <location filename="../settings.ui" line="1339"/>
         <source>0.95</source>
         <translation>0.95</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1327"/>
+        <location filename="../settings.ui" line="1344"/>
         <source>0.98</source>
         <translation>0.98</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1332"/>
+        <location filename="../settings.ui" line="1349"/>
         <source>1.0</source>
         <translation>1.0</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1337"/>
+        <location filename="../settings.ui" line="1354"/>
         <source>1.02</source>
         <translation>1.02</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1342"/>
+        <location filename="../settings.ui" line="1359"/>
         <source>1.05</source>
         <translation>1.05</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1347"/>
+        <location filename="../settings.ui" line="1364"/>
         <source>1.1</source>
         <translation>1.1</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1352"/>
+        <location filename="../settings.ui" line="1369"/>
         <source>1.15</source>
         <translation>1.15</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1357"/>
+        <location filename="../settings.ui" line="1374"/>
         <source>1.2</source>
         <translation>1.2</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1362"/>
+        <location filename="../settings.ui" line="1379"/>
         <source>1.25</source>
         <translation>1.25</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1367"/>
+        <location filename="../settings.ui" line="1384"/>
         <source>1.3</source>
         <translation>1.3</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1372"/>
+        <location filename="../settings.ui" line="1389"/>
         <source>1.35</source>
         <translation>1.35</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1377"/>
+        <location filename="../settings.ui" line="1394"/>
         <source>1.4</source>
         <translation>1.4</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1382"/>
+        <location filename="../settings.ui" line="1399"/>
         <source>1.45</source>
         <translation>1.45</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1387"/>
+        <location filename="../settings.ui" line="1404"/>
         <source>1.5</source>
         <translation>1.5</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1392"/>
+        <location filename="../settings.ui" line="1409"/>
         <source>1.6</source>
         <translation>1.6</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1397"/>
+        <location filename="../settings.ui" line="1414"/>
         <source>1.7</source>
         <translation>1.7</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1402"/>
+        <location filename="../settings.ui" line="1419"/>
         <source>1.8</source>
         <translation>1.8</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1407"/>
+        <location filename="../settings.ui" line="1424"/>
         <source>1.9</source>
         <translation>1.9</translation>
     </message>
@@ -1804,755 +1819,755 @@
         <translation type="vanished">Гамма шрифту</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1429"/>
+        <location filename="../settings.ui" line="1446"/>
         <source>Font hinting</source>
         <translation>Хінтинг шрифтів</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1461"/>
+        <location filename="../settings.ui" line="1478"/>
         <source>No hinting</source>
         <translation>Без хінтингу</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1466"/>
+        <location filename="../settings.ui" line="1483"/>
         <source>Use bytecode</source>
         <translation>Використовувати байт-код</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1471"/>
+        <location filename="../settings.ui" line="1488"/>
         <source>Autohinting</source>
         <translation>Автохінтинг</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1479"/>
+        <location filename="../settings.ui" line="1496"/>
         <source>Fallback fonts</source>
         <translation>Додаткові шрифти</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1820"/>
+        <location filename="../settings.ui" line="1837"/>
         <source>Stylesheet</source>
         <translation>Таблиця стилів</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1829"/>
-        <location filename="../settings.cpp" line="433"/>
+        <location filename="../settings.ui" line="1846"/>
+        <location filename="../settings.cpp" line="434"/>
         <source>Default paragraph style</source>
         <translation>Типовий стиль абзацу</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1863"/>
+        <location filename="../settings.ui" line="1880"/>
         <source>Alignment</source>
         <translation>Вирівнювання</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1873"/>
+        <location filename="../settings.ui" line="1890"/>
         <source>First line</source>
         <translation>Перший рядок</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1883"/>
+        <location filename="../settings.ui" line="1900"/>
         <source>Font size</source>
         <translation>Розмір шрифту</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1893"/>
+        <location filename="../settings.ui" line="1910"/>
         <source>Font face</source>
         <translation>Накреслення шрифту</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1205"/>
-        <location filename="../settings.ui" line="1903"/>
+        <location filename="../settings.ui" line="1222"/>
+        <location filename="../settings.ui" line="1920"/>
         <source>Font weight</source>
         <translation>Насиченість шрифту</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1415"/>
+        <location filename="../settings.ui" line="1432"/>
         <source>Font antialiasing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1685"/>
+        <location filename="../settings.ui" line="1702"/>
         <source>Text shaping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1709"/>
+        <location filename="../settings.ui" line="1726"/>
         <source>Min space width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1810"/>
+        <location filename="../settings.ui" line="1827"/>
         <source>Font families</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1913"/>
+        <location filename="../settings.ui" line="1930"/>
         <source>Font style</source>
         <translation>Стиль шрифту</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1923"/>
+        <location filename="../settings.ui" line="1940"/>
         <source>Font color</source>
         <translation>Колір шрифту</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1933"/>
+        <location filename="../settings.ui" line="1950"/>
         <source>Margins:</source>
         <translation>Відступи:</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1940"/>
+        <location filename="../settings.ui" line="1957"/>
         <source>Before</source>
         <translation>Перед</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1950"/>
+        <location filename="../settings.ui" line="1967"/>
         <source>After</source>
         <translation>Після</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1960"/>
-        <location filename="../settings.cpp" line="510"/>
+        <location filename="../settings.ui" line="1977"/>
+        <location filename="../settings.cpp" line="511"/>
         <source>Left</source>
         <translation>Ліворуч</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1970"/>
-        <location filename="../settings.cpp" line="510"/>
+        <location filename="../settings.ui" line="1987"/>
+        <location filename="../settings.cpp" line="511"/>
         <source>Right</source>
         <translation>Праворуч</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1983"/>
+        <location filename="../settings.ui" line="2000"/>
         <source>Interline space</source>
         <translation>Міжрядковий інтервал</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1993"/>
+        <location filename="../settings.ui" line="2010"/>
         <source>Text decoration</source>
         <translation>Оформлення тексту</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="2003"/>
+        <location filename="../settings.ui" line="2020"/>
         <source>Vertical align</source>
         <translation>Вертикальне вирівнювання</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="434"/>
+        <location filename="../settings.cpp" line="435"/>
         <source>Title</source>
         <translation>Заголовок</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="435"/>
+        <location filename="../settings.cpp" line="436"/>
         <source>Subtitle</source>
         <translation>Підзаголовок</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="436"/>
+        <location filename="../settings.cpp" line="437"/>
         <source>Preformatted text</source>
         <translation>Форматований текст</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="437"/>
+        <location filename="../settings.cpp" line="438"/>
         <source>Link</source>
         <translation>Посилання</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="438"/>
+        <location filename="../settings.cpp" line="439"/>
         <source>Cite / quotation</source>
         <translation>Цитата</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="439"/>
+        <location filename="../settings.cpp" line="440"/>
         <source>Epigraph</source>
         <translation>Епіграф</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="440"/>
+        <location filename="../settings.cpp" line="441"/>
         <source>Poem</source>
         <translation>Вірш</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="441"/>
+        <location filename="../settings.cpp" line="442"/>
         <source>Text author</source>
         <translation>Автор тексту</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="442"/>
+        <location filename="../settings.cpp" line="443"/>
         <source>Footnote link</source>
         <translation>Посилання виноски</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="443"/>
+        <location filename="../settings.cpp" line="444"/>
         <source>Footnote</source>
         <translation>Виноска</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="444"/>
+        <location filename="../settings.cpp" line="445"/>
         <source>Footnote title</source>
         <translation>Заголовок виноски</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="445"/>
+        <location filename="../settings.cpp" line="446"/>
         <source>Annotation</source>
         <translation>Анотація</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="510"/>
-        <location filename="../settings.cpp" line="526"/>
-        <location filename="../settings.cpp" line="555"/>
-        <location filename="../settings.cpp" line="596"/>
-        <location filename="../settings.cpp" line="629"/>
-        <location filename="../settings.cpp" line="651"/>
-        <location filename="../settings.cpp" line="670"/>
-        <location filename="../settings.cpp" line="716"/>
-        <location filename="../settings.cpp" line="781"/>
-        <location filename="../settings.cpp" line="799"/>
+        <location filename="../settings.cpp" line="511"/>
+        <location filename="../settings.cpp" line="527"/>
+        <location filename="../settings.cpp" line="556"/>
+        <location filename="../settings.cpp" line="597"/>
+        <location filename="../settings.cpp" line="630"/>
+        <location filename="../settings.cpp" line="652"/>
+        <location filename="../settings.cpp" line="671"/>
+        <location filename="../settings.cpp" line="717"/>
+        <location filename="../settings.cpp" line="782"/>
+        <location filename="../settings.cpp" line="800"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="510"/>
+        <location filename="../settings.cpp" line="511"/>
         <source>Justify</source>
         <translation>Вирівняти з заповненням</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="510"/>
+        <location filename="../settings.cpp" line="511"/>
         <source>Center</source>
         <translation>По центру</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="526"/>
+        <location filename="../settings.cpp" line="527"/>
         <source>No indent</source>
         <translation>Без відступу</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="526"/>
+        <location filename="../settings.cpp" line="527"/>
         <source>Small Indent</source>
         <translation>Малий відступ</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="526"/>
+        <location filename="../settings.cpp" line="527"/>
         <source>Big Indent</source>
         <translation>Великий відступ</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="526"/>
+        <location filename="../settings.cpp" line="527"/>
         <source>Small Outdent</source>
         <translation>Малий відступ вліво</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="526"/>
+        <location filename="../settings.cpp" line="527"/>
         <source>Big Outdent</source>
         <translation>Великий відступ вліво</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="557"/>
+        <location filename="../settings.cpp" line="558"/>
         <source>20% of line height</source>
         <translation>20% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="558"/>
+        <location filename="../settings.cpp" line="559"/>
         <source>30% of line height</source>
         <translation>30% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="559"/>
-        <location filename="../settings.cpp" line="598"/>
+        <location filename="../settings.cpp" line="560"/>
+        <location filename="../settings.cpp" line="599"/>
         <source>50% of line height</source>
         <translation>50% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="560"/>
-        <location filename="../settings.cpp" line="599"/>
+        <location filename="../settings.cpp" line="561"/>
+        <location filename="../settings.cpp" line="600"/>
         <source>100% of line height</source>
         <translation>100% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="561"/>
-        <location filename="../settings.cpp" line="600"/>
+        <location filename="../settings.cpp" line="562"/>
+        <location filename="../settings.cpp" line="601"/>
         <source>150% of line height</source>
         <translation>150% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="601"/>
+        <location filename="../settings.cpp" line="602"/>
         <source>200% of line height</source>
         <translation>200% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="602"/>
+        <location filename="../settings.cpp" line="603"/>
         <source>400% of line height</source>
         <translation>400% від висоти рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="603"/>
+        <location filename="../settings.cpp" line="604"/>
         <source>5% of line width</source>
         <translation>5% від ширини рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="604"/>
+        <location filename="../settings.cpp" line="605"/>
         <source>10% of line width</source>
         <translation>10% від ширини рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="605"/>
+        <location filename="../settings.cpp" line="606"/>
         <source>15% of line width</source>
         <translation>15% від ширини рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="606"/>
+        <location filename="../settings.cpp" line="607"/>
         <source>20% of line width</source>
         <translation>20% від ширини рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="607"/>
+        <location filename="../settings.cpp" line="608"/>
         <source>30% of line width</source>
         <translation>30% від ширини рядка</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="630"/>
-        <location filename="../settings.cpp" line="671"/>
+        <location filename="../settings.cpp" line="631"/>
+        <location filename="../settings.cpp" line="672"/>
         <source>Normal</source>
         <translation>Звичайний</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="631"/>
+        <location filename="../settings.cpp" line="632"/>
         <source>Bold</source>
         <translation>Напівжирний</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="632"/>
+        <location filename="../settings.cpp" line="633"/>
         <source>Bolder</source>
         <translation>Жирний</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="633"/>
+        <location filename="../settings.cpp" line="634"/>
         <source>Lighter</source>
         <translation>Тонкий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="652"/>
+        <location filename="../settings.cpp" line="653"/>
         <source>Increase: 110%</source>
         <translation>Збільшений: 110%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="653"/>
+        <location filename="../settings.cpp" line="654"/>
         <source>Increase: 120%</source>
         <translation>Збільшений: 120%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="654"/>
+        <location filename="../settings.cpp" line="655"/>
         <source>Increase: 150%</source>
         <translation>Збільшений: 150%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="655"/>
+        <location filename="../settings.cpp" line="656"/>
         <source>Decrease: 90%</source>
         <translation>Зменшений: 90%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="656"/>
+        <location filename="../settings.cpp" line="657"/>
         <source>Decrease: 80%</source>
         <translation>Зменшений: 80%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="657"/>
+        <location filename="../settings.cpp" line="658"/>
         <source>Decrease: 70%</source>
         <translation>Зменшений: 70%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="658"/>
+        <location filename="../settings.cpp" line="659"/>
         <source>Decrease: 60%</source>
         <translation>Зменшений: 60%</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="672"/>
+        <location filename="../settings.cpp" line="673"/>
         <source>Italic</source>
         <translation>Курсив</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="681"/>
+        <location filename="../settings.cpp" line="682"/>
         <source>[Default Sans Serif]</source>
         <translation>[Типовий Sans Serif]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="683"/>
+        <location filename="../settings.cpp" line="684"/>
         <source>[Default Serif]</source>
         <translation>[Типовий Serif]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="685"/>
+        <location filename="../settings.cpp" line="686"/>
         <source>[Default Monospace]</source>
         <translation>[Типовий Monospace]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="717"/>
+        <location filename="../settings.cpp" line="718"/>
         <source>Black</source>
         <translation>Чорний</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="718"/>
+        <location filename="../settings.cpp" line="719"/>
         <source>Green</source>
         <translation>Зелений</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="719"/>
+        <location filename="../settings.cpp" line="720"/>
         <source>Silver</source>
         <translation>Срібний</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="720"/>
+        <location filename="../settings.cpp" line="721"/>
         <source>Lime</source>
         <translation>Лимонний</translation>
     </message>
     <message>
         <location filename="../settings.cpp" line="232"/>
         <location filename="../settings.cpp" line="239"/>
-        <location filename="../settings.cpp" line="721"/>
+        <location filename="../settings.cpp" line="722"/>
         <source>Gray</source>
         <translation>Сірий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="722"/>
+        <location filename="../settings.cpp" line="723"/>
         <source>Olive</source>
         <translation>Оливковий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="723"/>
+        <location filename="../settings.cpp" line="724"/>
         <source>White</source>
         <translation>Білий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="724"/>
+        <location filename="../settings.cpp" line="725"/>
         <source>Yellow</source>
         <translation>Жовтий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="725"/>
+        <location filename="../settings.cpp" line="726"/>
         <source>Maroon</source>
         <translation>Каштановий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="726"/>
+        <location filename="../settings.cpp" line="727"/>
         <source>Navy</source>
         <translation>Темно-синій</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="727"/>
+        <location filename="../settings.cpp" line="728"/>
         <source>Red</source>
         <translation>Червоний</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="728"/>
+        <location filename="../settings.cpp" line="729"/>
         <source>Blue</source>
         <translation>Синій</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="729"/>
+        <location filename="../settings.cpp" line="730"/>
         <source>Purple</source>
         <translation>Бузковий</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="730"/>
+        <location filename="../settings.cpp" line="731"/>
         <source>Teal</source>
         <translation>Синьо-зелений</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="731"/>
+        <location filename="../settings.cpp" line="732"/>
         <source>Fuchsia</source>
         <translation>Фуксія</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="732"/>
+        <location filename="../settings.cpp" line="733"/>
         <source>Aqua</source>
         <translation>Зеленувато-блакитний</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="327"/>
+        <location filename="../settings.ui" line="344"/>
         <location filename="../settings.cpp" line="231"/>
         <location filename="../settings.cpp" line="238"/>
-        <location filename="../settings.cpp" line="782"/>
+        <location filename="../settings.cpp" line="783"/>
         <source>None</source>
         <translation>Немає</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="800"/>
-        <location filename="../settings.cpp" line="783"/>
+        <location filename="../settings.ui" line="817"/>
+        <location filename="../settings.cpp" line="784"/>
         <source>Underline</source>
         <translation>Підкреслений</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="784"/>
+        <location filename="../settings.cpp" line="785"/>
         <source>Line through</source>
         <translation>Перекреслений</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="785"/>
+        <location filename="../settings.cpp" line="786"/>
         <source>Overline</source>
         <translation>Надкреслений</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="800"/>
+        <location filename="../settings.cpp" line="801"/>
         <source>Baseline</source>
         <translation>По основі</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="801"/>
+        <location filename="../settings.cpp" line="802"/>
         <source>Subscript</source>
         <translation>Нижній індекс</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="802"/>
+        <location filename="../settings.cpp" line="803"/>
         <source>Superscript</source>
         <translation>Верхній індекс</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1754"/>
+        <location filename="../settings.ui" line="1771"/>
         <source>Enable document internal styles</source>
         <translation>Дозволити вбудовані стилі</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1747"/>
+        <location filename="../settings.ui" line="1764"/>
         <source>Internal CSS</source>
         <translation>Внутрішні CSS</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1768"/>
+        <location filename="../settings.ui" line="1785"/>
         <source>Enable document embedded fonts</source>
         <translation>Дозволити вбудовані шрифти</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1761"/>
+        <location filename="../settings.ui" line="1778"/>
         <source>.EPUB</source>
         <translation>Для файлів .EPUB</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="617"/>
-        <location filename="../settings.cpp" line="1262"/>
+        <location filename="../settings.ui" line="634"/>
+        <location filename="../settings.cpp" line="1267"/>
         <source>Selection color</source>
         <translation>Колір виділення</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1266"/>
+        <location filename="../settings.cpp" line="1271"/>
         <source>Comment bookmark color</source>
         <translation>Колір закладки-коментаря</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1270"/>
+        <location filename="../settings.cpp" line="1275"/>
         <source>Correction bookmark color</source>
         <translation>Колір закладки-поправки</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="672"/>
+        <location filename="../settings.ui" line="689"/>
         <source>Comment color</source>
         <translation>Колір коментаря</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="727"/>
+        <location filename="../settings.ui" line="744"/>
         <source>Correction color</source>
         <translation>Колір поправки</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="782"/>
+        <location filename="../settings.ui" line="799"/>
         <source>Bookmark highlight</source>
         <translation>Підсвічуваня закладки</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="790"/>
-        <location filename="../settings.ui" line="825"/>
-        <location filename="../settings.ui" line="872"/>
-        <location filename="../settings.ui" line="926"/>
-        <location filename="../settings.ui" line="980"/>
+        <location filename="../settings.ui" line="807"/>
+        <location filename="../settings.ui" line="842"/>
+        <location filename="../settings.ui" line="889"/>
+        <location filename="../settings.ui" line="943"/>
+        <location filename="../settings.ui" line="997"/>
         <source>Disabled</source>
         <translation>Вимкнуто</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="795"/>
+        <location filename="../settings.ui" line="812"/>
         <source>Solid fill</source>
         <translation>Суцільне заповнення</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="815"/>
+        <location filename="../settings.ui" line="832"/>
         <source>Inline images zoom in</source>
         <translation>Збільшення inline зображень</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="830"/>
-        <location filename="../settings.ui" line="877"/>
-        <location filename="../settings.ui" line="931"/>
-        <location filename="../settings.ui" line="985"/>
+        <location filename="../settings.ui" line="847"/>
+        <location filename="../settings.ui" line="894"/>
+        <location filename="../settings.ui" line="948"/>
+        <location filename="../settings.ui" line="1002"/>
         <source>Integer scale</source>
         <translation>Ціле число раз</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="835"/>
-        <location filename="../settings.ui" line="882"/>
-        <location filename="../settings.ui" line="936"/>
-        <location filename="../settings.ui" line="990"/>
+        <location filename="../settings.ui" line="852"/>
+        <location filename="../settings.ui" line="899"/>
+        <location filename="../settings.ui" line="953"/>
+        <location filename="../settings.ui" line="1007"/>
         <source>Arbitrary scale</source>
         <translation>Довільний масштаб</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="211"/>
-        <location filename="../settings.ui" line="849"/>
-        <location filename="../settings.ui" line="896"/>
-        <location filename="../settings.ui" line="950"/>
-        <location filename="../settings.ui" line="1004"/>
+        <location filename="../settings.ui" line="228"/>
+        <location filename="../settings.ui" line="866"/>
+        <location filename="../settings.ui" line="913"/>
+        <location filename="../settings.ui" line="967"/>
+        <location filename="../settings.ui" line="1021"/>
         <source>1</source>
         <translation>х1</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="216"/>
-        <location filename="../settings.ui" line="854"/>
-        <location filename="../settings.ui" line="901"/>
-        <location filename="../settings.ui" line="955"/>
-        <location filename="../settings.ui" line="1009"/>
+        <location filename="../settings.ui" line="233"/>
+        <location filename="../settings.ui" line="871"/>
+        <location filename="../settings.ui" line="918"/>
+        <location filename="../settings.ui" line="972"/>
+        <location filename="../settings.ui" line="1026"/>
         <source>2</source>
         <translation>х2</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="221"/>
-        <location filename="../settings.ui" line="859"/>
-        <location filename="../settings.ui" line="906"/>
-        <location filename="../settings.ui" line="960"/>
-        <location filename="../settings.ui" line="1014"/>
+        <location filename="../settings.ui" line="238"/>
+        <location filename="../settings.ui" line="876"/>
+        <location filename="../settings.ui" line="923"/>
+        <location filename="../settings.ui" line="977"/>
+        <location filename="../settings.ui" line="1031"/>
         <source>3</source>
         <translation>х3</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="916"/>
+        <location filename="../settings.ui" line="933"/>
         <source>Block images zoom in</source>
         <translation>Збільшення block зображень</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="970"/>
+        <location filename="../settings.ui" line="987"/>
         <source>Block images zoom out</source>
         <translation>Зменшення block зображень</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1024"/>
+        <location filename="../settings.ui" line="1041"/>
         <source>Inline images zoom out</source>
         <translation>Зменшення inline зображень</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1031"/>
+        <location filename="../settings.ui" line="1048"/>
         <source>Image scaling options</source>
         <translation>Параметри масштабування зображень</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="226"/>
+        <location filename="../settings.ui" line="243"/>
         <source>4</source>
         <translation type="unfinished">4</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="236"/>
+        <location filename="../settings.ui" line="253"/>
         <source>6</source>
         <translation type="unfinished">6</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="241"/>
+        <location filename="../settings.ui" line="258"/>
         <source>7</source>
         <translation type="unfinished">7</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="251"/>
+        <location filename="../settings.ui" line="268"/>
         <source>9</source>
         <translation type="unfinished">9</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="261"/>
+        <location filename="../settings.ui" line="278"/>
         <source>11</source>
         <translation type="unfinished">11</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="266"/>
+        <location filename="../settings.ui" line="283"/>
         <source>12</source>
         <translation type="unfinished">12</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="291"/>
+        <location filename="../settings.ui" line="308"/>
         <source>40</source>
         <translation type="unfinished">40</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="296"/>
+        <location filename="../settings.ui" line="313"/>
         <source>50</source>
         <translation type="unfinished">50</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="301"/>
+        <location filename="../settings.ui" line="318"/>
         <source>60</source>
         <translation type="unfinished">60</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1492"/>
-        <location filename="../settings.ui" line="1803"/>
+        <location filename="../settings.ui" line="1509"/>
+        <location filename="../settings.ui" line="1820"/>
         <source>Manage...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1719"/>
+        <location filename="../settings.ui" line="1736"/>
         <source>Font kerning</source>
         <translation>шрифт кернінг</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1726"/>
+        <location filename="../settings.ui" line="1743"/>
         <source>Enable font kerning</source>
         <translation type="unfinished">Увімкнено кернінг шрифту</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="332"/>
+        <location filename="../settings.ui" line="349"/>
         <source>Page header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="337"/>
+        <location filename="../settings.ui" line="354"/>
         <source>Page footer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1595"/>
+        <location filename="../settings.ui" line="1612"/>
         <source>Rendering flags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1603"/>
-        <location filename="../settings.ui" line="1634"/>
+        <location filename="../settings.ui" line="1620"/>
+        <location filename="../settings.ui" line="1651"/>
         <source>Legacy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1608"/>
+        <location filename="../settings.ui" line="1625"/>
         <source>Flat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1613"/>
+        <location filename="../settings.ui" line="1630"/>
         <source>Book</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1618"/>
+        <location filename="../settings.ui" line="1635"/>
         <source>Web (Full)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1626"/>
+        <location filename="../settings.ui" line="1643"/>
         <source>DOM level:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1639"/>
+        <location filename="../settings.ui" line="1656"/>
         <source>Newest</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1647"/>
+        <location filename="../settings.ui" line="1664"/>
         <source>Multi languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1654"/>
+        <location filename="../settings.ui" line="1671"/>
         <source>Support for multilingual documents</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2572,12 +2587,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1782"/>
+        <location filename="../settings.ui" line="1799"/>
         <source>Ignore document margins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1668"/>
+        <location filename="../settings.ui" line="1685"/>
         <source>Enable hyphenation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2602,17 +2617,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1124"/>
+        <location filename="../settings.cpp" line="1129"/>
         <source>synthetic*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1126"/>
+        <location filename="../settings.cpp" line="1131"/>
         <source>synthetic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1775"/>
+        <location filename="../settings.ui" line="1792"/>
         <source>Margins redefine</source>
         <translation type="unfinished"></translation>
     </message>

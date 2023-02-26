@@ -148,6 +148,12 @@ public:
     QString getSelectionText() {
         return _selText;
     }
+    bool isClipboardAutoCopy() const {
+        return _clipboardAutoCopy;
+    }
+    void setClipboardAutoCopy(bool value) {
+        _clipboardAutoCopy = value;
+    }
     /// create bookmark
     CRBookmark* createBookmark();
     /// go to bookmark and highlight it
@@ -256,6 +262,7 @@ private:
     int _lastBatteryChargeLevel;
     bool _canGoBack;
     bool _canGoForward;
+    bool _clipboardAutoCopy;
 };
 
 #endif // CR3WIDGET_H

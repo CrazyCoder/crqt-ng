@@ -245,6 +245,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props) : QDialog(parent), m_s
     optionToUi(PROP_WINDOW_SHOW_SCROLLBAR, m_ui->cbWindowShowScrollbar);
     optionToUi(PROP_WINDOW_TOOLBAR_SIZE, m_ui->cbWindowShowToolbar);
     optionToUi(PROP_WINDOW_SHOW_STATUSBAR, m_ui->cbWindowShowStatusBar);
+    optionToUi(PROP_APP_CLIPBOARD_AUTOCOPY, m_ui->cbAutoClipboard);
 
     optionToUi(PROP_FOOTNOTES, m_ui->cbShowFootNotes);
     optionToUi(PROP_SHOW_PAGE_NUMBER, m_ui->cbShowPageNumber);
@@ -869,6 +870,10 @@ void SettingsDlg::on_cbWindowShowStatusBar_stateChanged(int s) {
 
 void SettingsDlg::on_cbWindowShowScrollbar_stateChanged(int s) {
     setCheck(PROP_WINDOW_SHOW_SCROLLBAR, s);
+}
+
+void SettingsDlg::on_cbAutoClipboard_stateChanged(int s) {
+    setCheck(PROP_APP_CLIPBOARD_AUTOCOPY, s);
 }
 
 void SettingsDlg::on_cbViewMode_currentIndexChanged(int index) {

@@ -54,6 +54,7 @@ namespace Ui
 #define PROP_WINDOW_SHOW_SCROLLBAR   "window.scrollbar.show"
 #define PROP_WINDOW_STYLE            "window.style"
 #define PROP_APP_START_ACTION        "cr3.app.start.action"
+#define PROP_APP_CLIPBOARD_AUTOCOPY  "clipboard.autocopy"
 
 #define DECL_DEF_CR_FONT_SIZES \
     static int cr_font_sizes[] = { 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 32, 38, 42, 48, 56, 64, 72 }
@@ -236,6 +237,7 @@ private slots:
     void on_cbWindowShowMenu_stateChanged(int);
     void on_cbWindowShowToolbar_stateChanged(int);
     void on_cbWindowFullscreen_stateChanged(int);
+    void on_cbAutoClipboard_stateChanged(int);
     void on_cbFontKerning_stateChanged(int);
     void on_cbFloatingPunctuation_stateChanged(int);
     void on_cbFontGamma_currentTextChanged(QString);

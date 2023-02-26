@@ -47,6 +47,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QMessageBox>
 #endif
+#include <QClipboard>
 #include <QUrl>
 #include <QDir>
 #include <QFileInfo>
@@ -349,7 +350,8 @@ CR3View::CR3View(QWidget* parent)
         , _lastBatteryChargingConn(CR_BATTERY_CHARGER_NO)
         , _lastBatteryChargeLevel(0)
         , _canGoBack(false)
-        , _canGoForward(false) {
+        , _canGoForward(false)
+        , _clipboardAutoCopy(false) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     _dpr = screen()->devicePixelRatio();
 #elif QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
@@ -404,6 +406,7 @@ void CR3View::updateDefProps() {
     _data->_props->setStringDef(PROP_WINDOW_TOOLBAR_SIZE, "1");
     _data->_props->setStringDef(PROP_WINDOW_SHOW_STATUSBAR, "0");
     _data->_props->setStringDef(PROP_APP_START_ACTION, "0");
+    _data->_props->setStringDef(PROP_APP_CLIPBOARD_AUTOCOPY, "0");
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
@@ -1407,8 +1410,15 @@ void CR3View::mouseReleaseEvent(QMouseEvent* event) {
         if (_editMode)
             _docview->setCursorPos(p);
     }
-    if (_selecting)
+    if (_selecting) {
         endSelection(p);
+        if (_clipboardAutoCopy) {
+            if (!_selText.isEmpty()) {
+                QClipboard* clipboard = QApplication::clipboard();
+                clipboard->setText(_selText);
+            }
+        }
+    }
     if (href.empty()) {
         //CRLog::trace("No href pressed" );
         if (!p.isNull()) {
@@ -1679,7 +1689,7 @@ void CR3View::OnFormatProgress(int percent) {
 /// first page is loaded from file an can be formatted for preview
 void CR3View::OnLoadFileFirstPagesReady() {
 #if 0 // disabled
-	if ( !_data->_props->getBoolDef( PROP_PROGRESS_SHOW_FIRST_PAGE, 1 ) ) {
+    if ( !_data->_props->getBoolDef( PROP_PROGRESS_SHOW_FIRST_PAGE, 1 ) ) {
         CRLog::info( "OnLoadFileFirstPagesReady() - don't paint first page because " PROP_PROGRESS_SHOW_FIRST_PAGE " setting is 0" );
         return;
     }

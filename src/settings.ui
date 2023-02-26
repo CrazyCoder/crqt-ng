@@ -125,6 +125,23 @@
            </item>
           </layout>
          </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_55">
+           <property name="text">
+            <string>Clipboard</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QCheckBox" name="cbAutoClipboard">
+           <property name="toolTip">
+            <string>automatically copy text to clipboard when selected</string>
+           </property>
+           <property name="text">
+            <string>automatically copy when selected</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>
