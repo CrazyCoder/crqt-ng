@@ -172,22 +172,8 @@ TabData MainWindow::createNewDocTabWidget() {
     view->setHyphDir(userHyphDir + "hyph" + QDir::separator(), false);
     view->setPropsChangeCallback(this);
     view->setDocViewStatusCallback(this);
-    view->setSharedSettings(_tabs.getSettings());
-    view->setSharedHistory(_tabs.getHistory());
     if (!view->loadCSS(cssFile)) {
         view->loadCSS(cssFileInEngineDir);
-    }
-    lString32 backgound = _tabs.getSettings()->getStringDef(PROP_APP_BACKGROUND_IMAGE, "");
-    if (!backgound.empty() && backgound[0] != '[') {
-        LVImageSourceRef img;
-        CRLog::debug("Background image file: %s", LCSTR(backgound));
-        LVStreamRef stream = LVOpenFileStream(backgound.c_str(), LVOM_READ);
-        if (!stream.isNull()) {
-            img = LVCreateStreamImageSource(stream);
-        }
-        backgound = backgound.lowercase();
-        bool tiled = (backgound.pos(cs32("\\textures\\")) >= 0 || backgound.pos(cs32("/textures/")) >= 0);
-        view->getDocView()->setBackgroundImage(img, tiled);
     }
 #if ENABLE_BOOKMARKS_DIR == 1
     view->setBookmarksDir(bookmarksDir);
@@ -198,7 +184,7 @@ TabData MainWindow::createNewDocTabWidget() {
 }
 
 void MainWindow::addNewDocTab() {
-    if (_tabs.count() >= MAX_TABS_COUNT) {
+    if (_tabs.size() >= MAX_TABS_COUNT) {
         QMessageBox::warning(this, tr("Warning"), tr("The maximum number of tabs has been exceeded!"), QMessageBox::Ok);
         return;
     }

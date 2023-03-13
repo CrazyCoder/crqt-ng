@@ -196,3 +196,9 @@ void TabsCollection::cleanup() {
     }
     clear();
 }
+
+void TabsCollection::append(const TabData& tab) {
+    QVector<TabData>::append(tab);
+    tab.view()->setSharedSettings(m_props);
+    tab.view()->setSharedHistory(&m_hist);
+}
