@@ -1,3 +1,21 @@
+2023-03-18  Aleksey Chernov  <valexlin@gmail.com>
+
+    * Version 1.0.10 released.
+    ==========================
+
+    Tag sources with `1.0.10'.
+
+    See below for changes.
+
+2023-03-13  Aleksey Chernov  <valexlin@gmail.com>
+
+    Fixed not applying window settings when starting the program, for example, "Show scroll bar", "automatically copy when selected".
+
+2023-02-26  Aleksey Chernov  <valexlin@gmail.com>
+
+    Added option: automatically copy text to clipboard when selected. Located in the settings window on the tab "Window".
+
+
 2023-02-11  Aleksey Chernov  <valexlin@gmail.com>
 
     * Version 1.0.9 released.
