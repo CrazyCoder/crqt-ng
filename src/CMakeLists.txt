@@ -46,7 +46,7 @@ if(WIN32)
   set_property(SOURCE crqt.rc PROPERTY OBJECT_DEPENDS ${CMAKE_BINARY_DIR}/config.h)
 endif(WIN32)
 
-set(LANGUAGES ru uk cs bg hu)
+set(LANGUAGES ru uk cs bg hu nl)
 message( "Languages: ${LANGUAGES}" )
 set(LANGUAGE_TS_FILES)
 foreach(LANGUAGE ${LANGUAGES})
