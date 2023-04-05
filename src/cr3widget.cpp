@@ -1407,7 +1407,8 @@ void CR3View::mousePressEvent(QMouseEvent* event) {
                 updateHistoryAvailability();
             }
         } else if (mid) {
-            // TODO:
+            if (NULL != _docViewStatusCallback)
+                _docViewStatusCallback->onOpenInNewTabRequested(cr2qt(href));
         }
     }
     //CRLog::debug("mousePressEvent - doc pos (%d,%d), buttons: %d %d %d", pt.x, pt.y, (int)left, (int)right, (int)mid);

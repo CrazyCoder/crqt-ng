@@ -45,6 +45,7 @@ public:
     virtual void onCanGoBack(lUInt64 viewId, bool canGoBack) = 0;
     virtual void onCanGoForward(lUInt64 viewId, bool canGoForward) = 0;
     virtual void onHoverLink(const QString& href) = 0;
+    virtual void onOpenInNewTabRequested(const QString& href) = 0;
 };
 
 #define WORD_SELECTOR_ENABLED 1

@@ -311,7 +311,7 @@
         <translation>Het bestand kan niet worden geopend </translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1701"/>
+        <location filename="../cr3widget.cpp" line="1702"/>
         <source>Loading: please wait...</source>
         <translation>Bezig met laden…</translation>
     </message>
@@ -592,15 +592,15 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.cpp" line="188"/>
-        <location filename="../mainwindow.cpp" line="1003"/>
-        <location filename="../mainwindow.cpp" line="1028"/>
+        <location filename="../mainwindow.cpp" line="1008"/>
+        <location filename="../mainwindow.cpp" line="1033"/>
         <source>Warning</source>
         <translation>Waarschuwing</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="188"/>
-        <location filename="../mainwindow.cpp" line="1003"/>
-        <location filename="../mainwindow.cpp" line="1028"/>
+        <location filename="../mainwindow.cpp" line="1008"/>
+        <location filename="../mainwindow.cpp" line="1033"/>
         <source>The maximum number of tabs has been exceeded!</source>
         <translation>Het maximumaantal tabbladen is bereikt!</translation>
     </message>

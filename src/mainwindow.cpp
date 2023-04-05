@@ -700,6 +700,11 @@ void MainWindow::onHoverLink(const QString& href) {
         ui->statusBar->showMessage(href);
 }
 
+void MainWindow::onOpenInNewTabRequested(const QString& href) {
+    ui->actionOpen_link_in_new_tab->setData(href);
+    emit ui->actionOpen_link_in_new_tab->triggered();
+}
+
 void MainWindow::contextMenu(QPoint pos) {
     CR3View* view = currentCRView();
     if (NULL == view) {
