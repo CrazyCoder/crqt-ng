@@ -1122,10 +1122,14 @@ void CR3View::mouseMoveEvent(QMouseEvent* event) {
     }
     if (_selecting)
         setCursor(_selCursor);
-    else if (href.empty())
-        setCursor(_normalCursor);
-    else
-        setCursor(_linkCursor);
+    else {
+        if (href.empty())
+            setCursor(_normalCursor);
+        else
+            setCursor(_linkCursor);
+        if (NULL != _docViewStatusCallback)
+            _docViewStatusCallback->onHoverLink(cr2qt(href));
+    }
     //CRLog::trace("mouseMoveEvent - doc pos (%d,%d), buttons: %d %d %d %s", pt.x, pt.y, (int)left, (int)right
     //             , (int)mid, href.empty()?"":UnicodeToUtf8(href).c_str()
     //             //, path.empty()?"":UnicodeToUtf8(path).c_str()

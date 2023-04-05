@@ -681,6 +681,13 @@ void MainWindow::onCanGoForward(lUInt64 viewId, bool canGoForward) {
     }
 }
 
+void MainWindow::onHoverLink(const QString& href) {
+    if (href.isEmpty())
+        ui->statusBar->clearMessage();
+    else
+        ui->statusBar->showMessage(href);
+}
+
 void MainWindow::contextMenu(QPoint pos) {
     CR3View* view = currentCRView();
     if (NULL == view) {

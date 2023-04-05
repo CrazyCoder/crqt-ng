@@ -44,6 +44,7 @@ public:
                                   const QString& fullDocPath) = 0;
     virtual void onCanGoBack(lUInt64 viewId, bool canGoBack) = 0;
     virtual void onCanGoForward(lUInt64 viewId, bool canGoForward) = 0;
+    virtual void onHoverLink(const QString& href) = 0;
 };
 
 #define WORD_SELECTOR_ENABLED 1
@@ -138,6 +139,7 @@ public:
         if (NULL != _docViewStatusCallback) {
             _docViewStatusCallback->onCanGoBack(id(), _canGoBack);
             _docViewStatusCallback->onCanGoForward(id(), _canGoForward);
+            _docViewStatusCallback->onHoverLink(QString());
         }
     }
     /// toggle boolean property

@@ -67,6 +67,7 @@ private:
                                   const QString& fullDocPath);
     virtual void onCanGoBack(lUInt64 viewId, bool canGoBack);
     virtual void onCanGoForward(lUInt64 viewId, bool canGoForward);
+    virtual void onHoverLink(const QString& href);
 private slots:
     void on_actionNextPage3_triggered();
     void on_actionToggleEditMode_triggered();
