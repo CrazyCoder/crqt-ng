@@ -54,6 +54,7 @@ private:
     CR3View* currentCRView() const;
     void syncTabWidget(const QString& currentDocument = QString());
     QString openFileDialogImpl();
+    bool isExternalLink(const QString& href);
 protected:
     virtual void showEvent(QShowEvent* event);
     virtual void focusInEvent(QFocusEvent* event);
@@ -108,6 +109,7 @@ private slots:
     void on_tabWidget_currentChanged(int index);
     void on_tabWidget_tabCloseRequested(int index);
     void on_actionOpen_in_new_tab_triggered();
+    void on_actionOpen_link_in_new_tab_triggered();
 };
 
 #endif // MAINWINDOW_H

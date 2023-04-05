@@ -296,7 +296,7 @@
 <context>
     <name>CR3View</name>
     <message>
-        <location filename="../cr3widget.cpp" line="1340"/>
+        <location filename="../cr3widget.cpp" line="1351"/>
         <source>Error while opening document </source>
         <translation>Помилка при відкритті документу </translation>
     </message>
@@ -306,12 +306,12 @@
         <translation>Завантажується: зачекайте…</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1234"/>
+        <location filename="../cr3widget.cpp" line="1245"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1235"/>
+        <location filename="../cr3widget.cpp" line="1246"/>
         <source>Font &quot;%1&quot; isn&apos;t compatible with language &quot;%2&quot;. Instead will be used fallback font.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -607,27 +607,31 @@
         <translation>Відкриття файлу книги</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="343"/>
+        <location filename="../mainwindow.cpp" line="355"/>
         <source>Export document to</source>
         <translation>Експорт документу до</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="188"/>
+        <location filename="../mainwindow.cpp" line="1003"/>
+        <location filename="../mainwindow.cpp" line="1028"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="188"/>
+        <location filename="../mainwindow.cpp" line="1003"/>
+        <location filename="../mainwindow.cpp" line="1028"/>
         <source>The maximum number of tabs has been exceeded!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="343"/>
+        <location filename="../mainwindow.cpp" line="355"/>
         <source>WOL book (*.wol)</source>
         <translation>WOL-книга (*.wol)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="348"/>
+        <location filename="../mainwindow.cpp" line="360"/>
         <source>Export to WOL format</source>
         <translation>Експорт у WOL формат</translation>
     </message>
@@ -1113,6 +1117,12 @@
     <message>
         <location filename="../mainwindow.ui" line="637"/>
         <source>Open in new tab...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="646"/>
+        <location filename="../mainwindow.ui" line="649"/>
+        <source>Open link in new tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

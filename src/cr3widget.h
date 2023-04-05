@@ -145,11 +145,13 @@ public:
     /// toggle boolean property
     void toggleProperty(const char* name);
     /// returns true if point is inside selected text
-    bool isPointInsideSelection(QPoint pt);
+    bool isPointInsideSelection(const QPoint& pt);
     /// returns selection text
     QString getSelectionText() {
         return _selText;
     }
+    /// returns link at this point if available
+    QString getLinkAtPoint(const QPoint& pt);
     bool isClipboardAutoCopy() const {
         return _clipboardAutoCopy;
     }

@@ -296,17 +296,17 @@
 <context>
     <name>CR3View</name>
     <message>
-        <location filename="../cr3widget.cpp" line="1234"/>
+        <location filename="../cr3widget.cpp" line="1245"/>
         <source>Warning</source>
         <translation>Waarschuwing</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1235"/>
+        <location filename="../cr3widget.cpp" line="1246"/>
         <source>Font &quot;%1&quot; isn&apos;t compatible with language &quot;%2&quot;. Instead will be used fallback font.</source>
         <translation>‘%1’ is niet compatibel met de taal ‘%2’. Er wordt een alternatief lettertype gebruikt.</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1340"/>
+        <location filename="../cr3widget.cpp" line="1351"/>
         <source>Error while opening document </source>
         <translation>Het bestand kan niet worden geopend </translation>
     </message>
@@ -592,11 +592,15 @@
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.cpp" line="188"/>
+        <location filename="../mainwindow.cpp" line="1003"/>
+        <location filename="../mainwindow.cpp" line="1028"/>
         <source>Warning</source>
         <translation>Waarschuwing</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="188"/>
+        <location filename="../mainwindow.cpp" line="1003"/>
+        <location filename="../mainwindow.cpp" line="1028"/>
         <source>The maximum number of tabs has been exceeded!</source>
         <translation>Het maximumaantal tabbladen is bereikt!</translation>
     </message>
@@ -676,17 +680,17 @@
         <translation>Zipbestanden</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="343"/>
+        <location filename="../mainwindow.cpp" line="355"/>
         <source>Export document to</source>
         <translation>Document exporteren naar</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="343"/>
+        <location filename="../mainwindow.cpp" line="355"/>
         <source>WOL book (*.wol)</source>
         <translation>WOL-boek (*.wol)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="348"/>
+        <location filename="../mainwindow.cpp" line="360"/>
         <source>Export to WOL format</source>
         <translation>Exporteren naar WOL-formaat</translation>
     </message>
@@ -1218,6 +1222,12 @@
         <location filename="../mainwindow.ui" line="637"/>
         <source>Open in new tab...</source>
         <translation>Openen op nieuw tabblad…</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="646"/>
+        <location filename="../mainwindow.ui" line="649"/>
+        <source>Open link in new tab</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

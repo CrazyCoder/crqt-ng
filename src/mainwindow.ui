@@ -637,6 +637,18 @@
     <string>Open in new tab...</string>
    </property>
   </action>
+  <action name="actionOpen_link_in_new_tab">
+   <property name="icon">
+    <iconset resource="crqtres.qrc">
+     <normaloff>:/icons/action/icons/goto.png</normaloff>:/icons/action/icons/goto.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open link in new tab</string>
+   </property>
+   <property name="toolTip">
+    <string>Open link in new tab</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>

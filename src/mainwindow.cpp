@@ -311,6 +311,18 @@ QString MainWindow::openFileDialogImpl() {
     return fileName;
 }
 
+bool MainWindow::isExternalLink(const QString& href) {
+    bool res = false;
+    if (!href.startsWith('#')) {
+        int pos = href.indexOf(':');
+        if (pos >= 0) {
+            QString protocol = href.left(pos);
+            res = protocol != "file";
+        }
+    }
+    return res;
+}
+
 class ExportProgressCallback: public LVDocViewCallback
 {
     ExportProgressDlg* _dlg;
@@ -695,6 +707,11 @@ void MainWindow::contextMenu(QPoint pos) {
         return;
     }
     QMenu* menu = new QMenu;
+    QString linkHRef = view->getLinkAtPoint(pos);
+    if (!linkHRef.isEmpty() && !isExternalLink(linkHRef)) {
+        ui->actionOpen_link_in_new_tab->setData(linkHRef);
+        menu->addAction(ui->actionOpen_link_in_new_tab);
+    }
     menu->addAction(ui->actionOpen);
     menu->addAction(ui->actionRecentBooks);
     menu->addAction(ui->actionTOC);
@@ -982,6 +999,10 @@ void MainWindow::on_tabWidget_tabCloseRequested(int index) {
 }
 
 void MainWindow::on_actionOpen_in_new_tab_triggered() {
+    if (_tabs.size() >= MAX_TABS_COUNT) {
+        QMessageBox::warning(this, tr("Warning"), tr("The maximum number of tabs has been exceeded!"), QMessageBox::Ok);
+        return;
+    }
     QString fileName = openFileDialogImpl();
     if (fileName.length() == 0)
         return;
@@ -999,5 +1020,55 @@ void MainWindow::on_actionOpen_in_new_tab_triggered() {
         }
     } else {
         CRLog::error("MainWindow::on_actionOpen_in_new_tab_triggered(): failed to create new tab!");
+    }
+}
+
+void MainWindow::on_actionOpen_link_in_new_tab_triggered() {
+    if (_tabs.size() >= MAX_TABS_COUNT) {
+        QMessageBox::warning(this, tr("Warning"), tr("The maximum number of tabs has been exceeded!"), QMessageBox::Ok);
+        return;
+    }
+    QString linkHRef = ui->actionOpen_link_in_new_tab->data().toString();
+    if (!linkHRef.isEmpty() && !isExternalLink(linkHRef)) {
+        QString currentDocFilePath;
+        lString32 currentDocDir32;
+        int pos = linkHRef.indexOf('#');
+        QString filename = linkHRef.left(pos);
+        QString intHRef = linkHRef.mid(pos);
+        if (filename.startsWith("file://"))
+            filename = filename.mid(7);
+        lString32 filename32 = qt2cr(filename);
+        int currentIndex = ui->tabWidget->currentIndex();
+        if (currentIndex >= 0) {
+            TabData& tab = _tabs[currentIndex];
+            currentDocFilePath = tab.docPath();
+            // We cannot use QFileInfo::absolutePath() here,
+            //  as this path could be the path to an archive asset &
+            //  we don't know how QFileInfo handles
+            //  (will handle in future versions of Qt) such paths.
+            currentDocDir32 = LVExtractPath(qt2cr(currentDocFilePath), true);
+        }
+        if (filename.isEmpty())
+            filename = currentDocFilePath;
+        else if (!LVIsAbsolutePath(filename32)) {
+            filename = cr2qt(LVCombinePaths(currentDocDir32, filename32));
+        }
+        TabData tab = createNewDocTabWidget();
+        if (tab.isValid()) {
+            _tabs.append(tab);
+            CR3View* view = tab.view();
+            int tabIndex = ui->tabWidget->addTab(tab.widget(), tab.title());
+            ui->tabWidget->setCurrentIndex(tabIndex);
+            ui->tabWidget->setTabToolTip(tabIndex, tab.title());
+            if (view->loadDocument(filename)) {
+                if (!intHRef.isEmpty())
+                    view->getDocView()->goLink(qt2cr(intHRef), false);
+                update();
+            } else {
+                // error
+            }
+        } else {
+            CRLog::error("MainWindow::on_actionOpen_in_new_tab_triggered(): failed to create new tab!");
+        }
     }
 }
