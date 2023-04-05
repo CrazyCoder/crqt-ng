@@ -962,7 +962,7 @@
         <location filename="../mainwindow.ui" line="646"/>
         <location filename="../mainwindow.ui" line="649"/>
         <source>Open link in new tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть ссылку в новой вкладке</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="203"/>
