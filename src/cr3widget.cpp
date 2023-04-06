@@ -1093,7 +1093,7 @@ bool CR3View::saveHistory(const QString& fn) {
 void CR3View::contextMenu(QPoint pos) { }
 
 /// returns true if point is inside selected text
-bool CR3View::isPointInsideSelection(QPoint pos) {
+bool CR3View::isPointInsideSelection(const QPoint& pos) {
     if (!_selected)
         return false;
     lvPoint pt(pos.x() * _dpr, pos.y() * _dpr);
@@ -1101,6 +1101,17 @@ bool CR3View::isPointInsideSelection(QPoint pos) {
     if (p.isNull())
         return false;
     return _selRange.isInside(p);
+}
+
+QString CR3View::getLinkAtPoint(const QPoint& pos) {
+    lvPoint pt(pos.x() * _dpr, pos.y() * _dpr);
+    ldomXPointer p = _docview->getNodeByPoint(pt);
+    if (!p.isNull()) {
+        lString32 href = p.getHRef();
+        if (!href.empty())
+            return cr2qt(href);
+    }
+    return QString();
 }
 
 void CR3View::mouseMoveEvent(QMouseEvent* event) {
@@ -1122,10 +1133,14 @@ void CR3View::mouseMoveEvent(QMouseEvent* event) {
     }
     if (_selecting)
         setCursor(_selCursor);
-    else if (href.empty())
-        setCursor(_normalCursor);
-    else
-        setCursor(_linkCursor);
+    else {
+        if (href.empty())
+            setCursor(_normalCursor);
+        else
+            setCursor(_linkCursor);
+        if (NULL != _docViewStatusCallback)
+            _docViewStatusCallback->onHoverLink(cr2qt(href));
+    }
     //CRLog::trace("mouseMoveEvent - doc pos (%d,%d), buttons: %d %d %d %s", pt.x, pt.y, (int)left, (int)right
     //             , (int)mid, href.empty()?"":UnicodeToUtf8(href).c_str()
     //             //, path.empty()?"":UnicodeToUtf8(path).c_str()
@@ -1391,6 +1406,9 @@ void CR3View::mousePressEvent(QMouseEvent* event) {
                 update();
                 updateHistoryAvailability();
             }
+        } else if (mid) {
+            if (NULL != _docViewStatusCallback)
+                _docViewStatusCallback->onOpenInNewTabRequested(cr2qt(href));
         }
     }
     //CRLog::debug("mousePressEvent - doc pos (%d,%d), buttons: %d %d %d", pt.x, pt.y, (int)left, (int)right, (int)mid);
@@ -1417,19 +1435,6 @@ void CR3View::mouseReleaseEvent(QMouseEvent* event) {
                 QClipboard* clipboard = QApplication::clipboard();
                 clipboard->setText(_selText);
             }
-        }
-    }
-    if (href.empty()) {
-        //CRLog::trace("No href pressed" );
-        if (!p.isNull()) {
-            //startSelection(p);
-        }
-    } else {
-        CRLog::info("Link is selected: %s", UnicodeToUtf8(href).c_str());
-        if (left) {
-            // link is pressed
-            //if ( _docview->goLink( href ) )
-            //    update();
         }
     }
     //CRLog::debug("mouseReleaseEvent - doc pos (%d,%d), buttons: %d %d %d", pt.x, pt.y, (int)left, (int)right, (int)mid);

@@ -54,6 +54,7 @@ private:
     CR3View* currentCRView() const;
     void syncTabWidget(const QString& currentDocument = QString());
     QString openFileDialogImpl();
+    bool isExternalLink(const QString& href);
 protected:
     virtual void showEvent(QShowEvent* event);
     virtual void focusInEvent(QFocusEvent* event);
@@ -67,6 +68,8 @@ private:
                                   const QString& fullDocPath);
     virtual void onCanGoBack(lUInt64 viewId, bool canGoBack);
     virtual void onCanGoForward(lUInt64 viewId, bool canGoForward);
+    virtual void onHoverLink(const QString& href);
+    virtual void onOpenInNewTabRequested(const QString& href);
 private slots:
     void on_actionNextPage3_triggered();
     void on_actionToggleEditMode_triggered();
@@ -107,6 +110,7 @@ private slots:
     void on_tabWidget_currentChanged(int index);
     void on_tabWidget_tabCloseRequested(int index);
     void on_actionOpen_in_new_tab_triggered();
+    void on_actionOpen_link_in_new_tab_triggered();
 };
 
 #endif // MAINWINDOW_H
