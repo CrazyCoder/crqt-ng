@@ -1,3 +1,29 @@
+2023-04-06  Aleksey Chernov  <valexlin@gmail.com>
+
+    * Version 1.0.11 released.
+    ==========================
+
+    Tag sources with `1.0.11'.
+
+    See below for changes.
+
+2023-04-05  Aleksey Chernov  <valexlin@gmail.com>
+
+    Update .clang-format: added JavaScript language stub to try to suppress clang-format error 'Configuration file(s) do(es) not support JavaScript'.
+
+    Implemented opening links in a new tab by clicking the middle mouse button.
+
+    Update src/i18n/crqt_ru.ts: russian translation for new string in UI.
+
+    Implemented opening a link in a new tab from the context menu.
+
+    Implemented display of the link address in the status bar when hovering the mouse cursor.
+
+2023-03-24  Heimen Stoffels  <vistausss@fastmail.com>
+
+    Added Dutch translation
+
+
 2023-03-18  Aleksey Chernov  <valexlin@gmail.com>
 
     * Version 1.0.10 released.
