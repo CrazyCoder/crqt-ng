@@ -6,6 +6,7 @@
  *   Copyright (C) 2019,2020 Konstantin Potapov <pkbo@users.sourceforge.net>
  *   Copyright (C) 2020,2021 Andy Mender <andymenderunix@gmail.com>        *
  *   Copyright (C) 2018-2023 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2023 Ren Tatsumoto <tatsu@autistici.org>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -53,6 +54,7 @@
 #include <QFileInfo>
 #include <QDesktopServices>
 #include <QLocale>
+#include <QProcess>
 
 #include <lvdocview.h>
 #include <crtrace.h>
@@ -1430,10 +1432,21 @@ void CR3View::mouseReleaseEvent(QMouseEvent* event) {
     }
     if (_selecting) {
         endSelection(p);
-        if (_clipboardAutoCopy) {
-            if (!_selText.isEmpty()) {
+        if (!_selText.isEmpty()) {
+            if (isClipboardAutoCopy()) {
                 QClipboard* clipboard = QApplication::clipboard();
                 clipboard->setText(_selText);
+            }
+            if (QStringList args { selectionCommand() }; !args.isEmpty()) {
+                QString const programName { args.takeFirst() };
+                for (auto& arg : args) {
+                    if (arg.contains("%TEXT%")) {
+                        arg.replace("%TEXT%", _selText);
+                    }
+                }
+                if (!args.isEmpty()) {
+                    QProcess::startDetached(programName, args);
+                }
             }
         }
     }

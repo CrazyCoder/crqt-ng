@@ -2,6 +2,7 @@
  *   crqt-ng                                                               *
  *   Copyright (C) 2009,2012 Vadim Lopatin <coolreader.org@gmail.com>      *
  *   Copyright (C) 2020,2021,2023 Aleksey Chernov <valexlin@gmail.com>     *
+ *   Copyright (C) 2023 Ren Tatsumoto <tatsu@autistici.org>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -23,6 +24,7 @@
 #define CRQTUTIL_H
 
 #include <QString>
+#include <QStringList>
 #include <QSharedPointer>
 
 #include <crengine.h>
@@ -95,5 +97,10 @@ lString32 getEngineCacheDir();
 
 bool getPortableSettingsMode();
 void setPortableSettingsMode(bool mode);
+
+/// Given a command line (name of the executable with optional arguments),
+/// separates-out the name and all the arguments into a list. Supports quotes
+/// and double-quotes.
+QStringList parseExtCommandLine(QString const&);
 
 #endif // CRQTUTIL_H

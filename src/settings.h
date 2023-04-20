@@ -4,6 +4,7 @@
  *   Copyright (C) 2020 Konstantin Potapov <pkbo@users.sourceforge.net>    *
  *   Copyright (C) 2021 ourairquality <info@ourairquality.org>             *
  *   Copyright (C) 2018,2020-2023 Aleksey Chernov <valexlin@gmail.com>     *
+ *   Copyright (C) 2023 Ren Tatsumoto <tatsu@autistici.org>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -55,6 +56,7 @@ namespace Ui
 #define PROP_WINDOW_STYLE            "window.style"
 #define PROP_APP_START_ACTION        "cr3.app.start.action"
 #define PROP_APP_CLIPBOARD_AUTOCOPY  "clipboard.autocopy"
+#define PROP_APP_SELECTION_COMMAND   "selection.command"
 
 #define DECL_DEF_CR_FONT_SIZES \
     static int cr_font_sizes[] = { 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 32, 38, 42, 48, 56, 64, 72 }
@@ -158,6 +160,7 @@ protected:
 
     void setCheck(const char* optionName, int checkState);
     void optionToUi(const char* optionName, QCheckBox* cb);
+    void optionToUiLine(const char* optionName, QLineEdit* le);
     void optionToUiString(const char* optionName, QComboBox* cb);
     void optionToUiIndex(const char* optionName, QComboBox* cb);
     void setCheckInversed(const char* optionName, int checkState);
@@ -238,6 +241,7 @@ private slots:
     void on_cbWindowShowToolbar_stateChanged(int);
     void on_cbWindowFullscreen_stateChanged(int);
     void on_cbAutoClipboard_stateChanged(int);
+    void on_cbSelectionCommand_textChanged(QString);
     void on_cbFontKerning_stateChanged(int);
     void on_cbFloatingPunctuation_stateChanged(int);
     void on_cbFontGamma_currentTextChanged(QString);
