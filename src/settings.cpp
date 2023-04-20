@@ -5,6 +5,7 @@
  *   Copyright (C) 2020 Konstantin Potapov <pkbo@users.sourceforge.net>    *
  *   Copyright (C) 2021 ourairquality <info@ourairquality.org>             *
  *   Copyright (C) 2018-2023 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2023 Ren Tatsumoto <tatsu@autistici.org>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -246,6 +247,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props) : QDialog(parent), m_s
     optionToUi(PROP_WINDOW_TOOLBAR_SIZE, m_ui->cbWindowShowToolbar);
     optionToUi(PROP_WINDOW_SHOW_STATUSBAR, m_ui->cbWindowShowStatusBar);
     optionToUi(PROP_APP_CLIPBOARD_AUTOCOPY, m_ui->cbAutoClipboard);
+    optionToUiLine(PROP_APP_SELECTION_COMMAND, m_ui->cbSelectionCommand);
 
     optionToUi(PROP_FOOTNOTES, m_ui->cbShowFootNotes);
     optionToUi(PROP_SHOW_PAGE_NUMBER, m_ui->cbShowPageNumber);
@@ -492,6 +494,12 @@ void SettingsDlg::optionToUi(const char* optionName, QCheckBox* cb) {
     bool state = m_props->getBoolDef(optionName, true);
     CRLog::debug("optionToUI(%s,%d)", optionName, (int)state);
     cb->setCheckState(state ? Qt::Checked : Qt::Unchecked);
+}
+
+void SettingsDlg::optionToUiLine(const char* optionName, QLineEdit* le) {
+    QString value = m_props->getStringDef(optionName, "");
+    CRLog::debug("optionToUILine(%s,%s)", optionName, value);
+    le->setText(value);
 }
 
 void SettingsDlg::initStyleControls(const char* styleName) {
@@ -874,6 +882,10 @@ void SettingsDlg::on_cbWindowShowScrollbar_stateChanged(int s) {
 
 void SettingsDlg::on_cbAutoClipboard_stateChanged(int s) {
     setCheck(PROP_APP_CLIPBOARD_AUTOCOPY, s);
+}
+
+void SettingsDlg::on_cbSelectionCommand_textChanged(QString s) {
+    m_props->setString(PROP_APP_SELECTION_COMMAND, s);
 }
 
 void SettingsDlg::on_cbViewMode_currentIndexChanged(int index) {

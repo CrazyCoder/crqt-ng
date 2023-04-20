@@ -1,7 +1,8 @@
 /***************************************************************************
  *   crqt-ng                                                               *
  *   Copyright (C) 2009,2012 Vadim Lopatin <coolreader.org@gmail.com>      *
- *   Copyright (C) 2020,2021,2023 Aleksey Chernov <valexlin@gmail.com>     s*
+ *   Copyright (C) 2020,2021,2023 Aleksey Chernov <valexlin@gmail.com>     *
+ *   Copyright (C) 2023 Ren Tatsumoto <tatsu@autistici.org>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -362,4 +363,40 @@ void setPortableSettingsMode(bool mode) {
     //  next call to getConfigDir() function
     s_configDir = lString32::empty_str;
     s_engineCacheDir = lString32::empty_str;
+}
+
+QStringList parseExtCommandLine(QString const& commandLine) {
+    // Parse arguments. Handle quotes correctly.
+    QStringList args;
+    bool openQuote = false;
+    bool possibleDoubleQuote = false;
+    bool startNew = true;
+    for (QString::const_iterator c = commandLine.begin(), e = commandLine.end(); c != e;) {
+        if (*c == '"' && !possibleDoubleQuote) {
+            ++c;
+            if (!openQuote) {
+                openQuote = true;
+                if (startNew) {
+                    args.push_back(QString());
+                    startNew = false;
+                }
+            } else
+                possibleDoubleQuote = true;
+        } else if (possibleDoubleQuote && *c != '"') {
+            openQuote = false;
+            possibleDoubleQuote = false;
+        } else if (*c == ' ' && !openQuote) {
+            ++c;
+            startNew = true;
+        } else {
+            if (startNew) {
+                args.push_back(QString());
+                startNew = false;
+            }
+            args.last().push_back(*c++);
+            possibleDoubleQuote = false;
+        }
+    }
+
+    return args;
 }

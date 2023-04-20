@@ -4,6 +4,7 @@
  *   Copyright (C) 2018 Mihail Slobodyanuk <slobodyanukma@gmail.com>       *
  *   Copyright (C) 2019,2020 Konstantin Potapov <pkbo@users.sourceforge.net>
  *   Copyright (C) 2018,2020-2023 Aleksey Chernov <valexlin@gmail.com>     *
+ *   Copyright (C) 2023 Ren Tatsumoto <tatsu@autistici.org>                *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -599,8 +600,8 @@ void MainWindow::toggleProperty(const char* name) {
 
 void MainWindow::onPropsChange(PropsRef props) {
     for (int i = 0; i < props->count(); i++) {
-        QString name = props->name(i);
-        QString value = props->value(i);
+        QString const name = props->name(i);
+        QString const value = props->value(i);
         int v = (value != "0");
         CRLog::debug("MainWindow::onPropsChange [%d] '%s'=%s ", i, props->name(i), props->value(i).toUtf8().data());
         if (name == PROP_WINDOW_FULLSCREEN) {
@@ -644,6 +645,12 @@ void MainWindow::onPropsChange(PropsRef props) {
                 const TabData& tab = _tabs[i];
                 if (NULL != tab.view())
                     tab.view()->setClipboardAutoCopy(v != 0);
+            }
+        } else if (name == PROP_APP_SELECTION_COMMAND) {
+            for (TabData const& tab : _tabs) {
+                if (NULL != tab.view()) {
+                    tab.view()->setSelectionCommand(value);
+                }
             }
         }
     }
