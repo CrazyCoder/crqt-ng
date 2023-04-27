@@ -498,7 +498,7 @@ void SettingsDlg::optionToUi(const char* optionName, QCheckBox* cb) {
 
 void SettingsDlg::optionToUiLine(const char* optionName, QLineEdit* le) {
     QString value = m_props->getStringDef(optionName, "");
-    CRLog::debug("optionToUILine(%s,%s)", optionName, value);
+    CRLog::debug("optionToUILine(%s,%s)", optionName, value.toUtf8().constData());
     le->setText(value);
 }
 
