@@ -142,6 +142,7 @@ protected:
     virtual void showEvent(QShowEvent* event);
     virtual void hideEvent(QHideEvent* event);
     virtual void moveEvent(QMoveEvent* event);
+    virtual void resizeEvent(QResizeEvent* event);
 
     void setCheck(const char* optionName, int checkState);
     void optionToUi(const char* optionName, QCheckBox* cb);

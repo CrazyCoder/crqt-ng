@@ -493,6 +493,12 @@ void SettingsDlg::moveEvent(QMoveEvent* event) {
         m_sample->updatePositionForParent();
 }
 
+void SettingsDlg::resizeEvent(QResizeEvent* event) {
+    QDialog::resizeEvent(event);
+    if (m_sample)
+        m_sample->updatePositionForParent();
+}
+
 void SettingsDlg::optionToUi(const char* optionName, QCheckBox* cb) {
     bool state = m_props->getBoolDef(optionName, true);
     CRLog::debug("optionToUI(%s,%d)", optionName, (int)state);
