@@ -123,6 +123,13 @@
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QCheckBox" name="cbWindowFixedTabSize">
+             <property name="text">
+              <string>Fixed tab size</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item row="3" column="0">

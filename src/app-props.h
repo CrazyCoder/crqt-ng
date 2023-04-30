@@ -44,5 +44,6 @@
 #define PROP_APP_LOG_FILENAME            "crengine.log.filename"
 #define PROP_APP_LOG_LEVEL               "crengine.log.level"
 #define PROP_APP_LOG_AUTOFLUSH           "crengine.log.autoflush"
+#define PROP_APP_TABS_FIXED_SIZE         "crui.app.tabs.fixedsize"
 
 #endif // APP_PROPS_H

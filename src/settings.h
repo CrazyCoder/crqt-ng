@@ -225,6 +225,7 @@ private slots:
     void on_cbWindowShowMenu_stateChanged(int);
     void on_cbWindowShowToolbar_stateChanged(int);
     void on_cbWindowFullscreen_stateChanged(int);
+    void on_cbWindowFixedTabSize_toggled(bool checked);
     void on_cbAutoClipboard_stateChanged(int);
     void on_cbSelectionCommand_textChanged(QString);
     void on_cbFontKerning_stateChanged(int);

@@ -602,20 +602,20 @@ void MainWindow::onPropsChange(PropsRef props) {
     for (int i = 0; i < props->count(); i++) {
         QString const name = props->name(i);
         QString const value = props->value(i);
-        int v = (value != "0");
+        int iv = value.toInt();
+        bool bv = iv != 0;
         CRLog::debug("MainWindow::onPropsChange [%d] '%s'=%s ", i, props->name(i), props->value(i).toUtf8().data());
         if (name == PROP_APP_WINDOW_FULLSCREEN) {
             bool state = windowState().testFlag(Qt::WindowFullScreen);
-            bool vv = v ? true : false;
-            if (state != vv)
+            if (state != bv)
                 setWindowState(windowState() ^ Qt::WindowFullScreen);
         } else if (name == PROP_APP_WINDOW_SHOW_MENU) {
-            ui->menuBar->setVisible(v);
+            ui->menuBar->setVisible(bv);
         } else if (name == PROP_APP_WINDOW_SHOW_SCROLLBAR) {
             for (int i = 0; i < _tabs.count(); i++) {
                 const TabData& tab = _tabs[i];
                 if (NULL != tab.scrollBar())
-                    tab.scrollBar()->setVisible(v);
+                    tab.scrollBar()->setVisible(bv);
             }
         } else if (name == PROP_APP_BACKGROUND_IMAGE) {
             lString32 fn = qt2cr(value);
@@ -635,22 +635,28 @@ void MainWindow::onPropsChange(PropsRef props) {
                     tab.view()->getDocView()->setBackgroundImage(img, tiled);
             }
         } else if (name == PROP_APP_WINDOW_SHOW_TOOLBAR) {
-            ui->mainToolBar->setVisible(v);
+            ui->mainToolBar->setVisible(bv);
         } else if (name == PROP_APP_WINDOW_SHOW_STATUSBAR) {
-            ui->statusBar->setVisible(v);
+            ui->statusBar->setVisible(bv);
         } else if (name == PROP_APP_WINDOW_STYLE) {
             QApplication::setStyle(value);
         } else if (name == PROP_APP_CLIPBOARD_AUTOCOPY) {
             for (int i = 0; i < _tabs.count(); i++) {
                 const TabData& tab = _tabs[i];
                 if (NULL != tab.view())
-                    tab.view()->setClipboardAutoCopy(v != 0);
+                    tab.view()->setClipboardAutoCopy(bv);
             }
         } else if (name == PROP_APP_SELECTION_COMMAND) {
             for (TabData const& tab : _tabs) {
                 if (NULL != tab.view()) {
                     tab.view()->setSelectionCommand(value);
                 }
+            }
+        } else if (name == PROP_APP_TABS_FIXED_SIZE) {
+            if (bv) {
+                ui->tabWidget->setStyleSheet("QTabBar::tab { width: 7em; }");
+            } else {
+                ui->tabWidget->setStyleSheet("");
             }
         }
     }

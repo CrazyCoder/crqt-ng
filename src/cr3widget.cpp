@@ -410,6 +410,7 @@ void CR3View::updateDefProps() {
     _data->_props->setStringDef(PROP_APP_WINDOW_SHOW_STATUSBAR, "0");
     _data->_props->setStringDef(PROP_APP_START_ACTION, "0");
     _data->_props->setStringDef(PROP_APP_CLIPBOARD_AUTOCOPY, "0");
+    _data->_props->setStringDef(PROP_APP_TABS_FIXED_SIZE, "1");
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
