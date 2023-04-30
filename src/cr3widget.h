@@ -100,16 +100,8 @@ public:
 
     /// set shared properties (can be used by multiple LVDocView instances)
     void setSharedSettings(CRPropRef props);
-    /// obsolete: load settings from file
-    bool loadSettings(const QString& filename);
-    /// obsolete: save settings from file
-    bool saveSettings(const QString& filename);
     /// set new file history object (can be used by multiple LVDocView instances)
     void setSharedHistory(CRFileHist* hist);
-    /// obsolete: load history from file
-    bool loadHistory(const QString& filename);
-    /// obsolete: save history to file
-    bool saveHistory(const QString& filename);
 
     void setHyphDir(const QString& dirname, bool clear = true);
     const QStringList& getHyphDicts();
