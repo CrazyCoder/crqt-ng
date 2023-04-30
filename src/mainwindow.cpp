@@ -646,11 +646,17 @@ void MainWindow::onPropsChange(PropsRef props) {
                 if (NULL != tab.view())
                     tab.view()->setClipboardAutoCopy(bv);
             }
+        } else if (name == PROP_APP_SELECTION_AUTO_CMDEXEC) {
+            for (int i = 0; i < _tabs.count(); i++) {
+                const TabData& tab = _tabs[i];
+                if (NULL != tab.view())
+                    tab.view()->setOnTextSelectAutoCmdExec(bv);
+            }
         } else if (name == PROP_APP_SELECTION_COMMAND) {
-            for (TabData const& tab : _tabs) {
-                if (NULL != tab.view()) {
+            for (int i = 0; i < _tabs.count(); i++) {
+                const TabData& tab = _tabs[i];
+                if (NULL != tab.view())
                     tab.view()->setSelectionCommand(value);
-                }
             }
         } else if (name == PROP_APP_TABS_FIXED_SIZE) {
             if (bv) {

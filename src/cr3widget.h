@@ -152,6 +152,12 @@ public:
     void setClipboardAutoCopy(bool value) {
         _clipboardAutoCopy = value;
     }
+    bool isOnTextSelectAutoCmdExec() const {
+        return _onTextSelectAutoCmdExec;
+    }
+    void setOnTextSelectAutoCmdExec(bool value) {
+        _onTextSelectAutoCmdExec = value;
+    }
     /// Setting that controls what program is run when text is selected.
     QStringList const& selectionCommand() const {
         return _selectionCommand;
@@ -268,6 +274,7 @@ private:
     bool _canGoBack;
     bool _canGoForward;
     bool _clipboardAutoCopy;
+    bool _onTextSelectAutoCmdExec;
     // Store a copy of the command that should run when text is selected.
     QStringList _selectionCommand {};
 };

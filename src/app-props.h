@@ -39,6 +39,7 @@
 #define PROP_APP_WINDOW_STYLE            "window.style"
 #define PROP_APP_START_ACTION            "cr3.app.start.action"
 #define PROP_APP_CLIPBOARD_AUTOCOPY      "clipboard.autocopy"
+#define PROP_APP_SELECTION_AUTO_CMDEXEC  "crui.app.selection.auto.cmdexec"
 #define PROP_APP_SELECTION_COMMAND       "selection.command"
 #define PROP_APP_BACKGROUND_IMAGE        "background.image.filename"
 #define PROP_APP_LOG_FILENAME            "crengine.log.filename"
