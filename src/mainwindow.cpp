@@ -634,7 +634,7 @@ void MainWindow::onPropsChange(PropsRef props) {
                 if (NULL != tab.view())
                     tab.view()->getDocView()->setBackgroundImage(img, tiled);
             }
-        } else if (name == PROP_APP_WINDOW_TOOLBAR_SIZE) {
+        } else if (name == PROP_APP_WINDOW_SHOW_TOOLBAR) {
             ui->mainToolBar->setVisible(v);
         } else if (name == PROP_APP_WINDOW_SHOW_STATUSBAR) {
             ui->statusBar->setVisible(v);

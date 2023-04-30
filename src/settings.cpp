@@ -244,7 +244,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props) : QDialog(parent), m_s
     optionToUi(PROP_APP_WINDOW_FULLSCREEN, m_ui->cbWindowFullscreen);
     optionToUi(PROP_APP_WINDOW_SHOW_MENU, m_ui->cbWindowShowMenu);
     optionToUi(PROP_APP_WINDOW_SHOW_SCROLLBAR, m_ui->cbWindowShowScrollbar);
-    optionToUi(PROP_APP_WINDOW_TOOLBAR_SIZE, m_ui->cbWindowShowToolbar);
+    optionToUi(PROP_APP_WINDOW_SHOW_TOOLBAR, m_ui->cbWindowShowToolbar);
     optionToUi(PROP_APP_WINDOW_SHOW_STATUSBAR, m_ui->cbWindowShowStatusBar);
     optionToUi(PROP_APP_CLIPBOARD_AUTOCOPY, m_ui->cbAutoClipboard);
     optionToUiLine(PROP_APP_SELECTION_COMMAND, m_ui->cbSelectionCommand);
@@ -865,7 +865,7 @@ void SettingsDlg::on_cbWindowFullscreen_stateChanged(int s) {
 }
 
 void SettingsDlg::on_cbWindowShowToolbar_stateChanged(int s) {
-    setCheck(PROP_APP_WINDOW_TOOLBAR_SIZE, s);
+    setCheck(PROP_APP_WINDOW_SHOW_TOOLBAR, s);
 }
 
 void SettingsDlg::on_cbWindowShowMenu_stateChanged(int s) {

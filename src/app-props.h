@@ -32,7 +32,7 @@
 #define PROP_APP_WINDOW_MINIMIZED        "window.minimized"
 #define PROP_APP_WINDOW_MAXIMIZED        "window.maximized"
 #define PROP_APP_WINDOW_SHOW_MENU        "window.menu.show"
-#define PROP_APP_WINDOW_TOOLBAR_SIZE     "window.toolbar.size"
+#define PROP_APP_WINDOW_SHOW_TOOLBAR     "window.toolbar.show"
 #define PROP_APP_WINDOW_TOOLBAR_POSITION "window.toolbar.position"
 #define PROP_APP_WINDOW_SHOW_STATUSBAR   "window.statusbar.show"
 #define PROP_APP_WINDOW_SHOW_SCROLLBAR   "window.scrollbar.show"
