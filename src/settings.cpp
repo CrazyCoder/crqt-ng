@@ -247,7 +247,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props) : QDialog(parent), m_s
     optionToUi(PROP_APP_WINDOW_SHOW_TOOLBAR, m_ui->cbWindowShowToolbar);
     optionToUi(PROP_APP_WINDOW_SHOW_STATUSBAR, m_ui->cbWindowShowStatusBar);
     optionToUi(PROP_APP_TABS_FIXED_SIZE, m_ui->cbWindowFixedTabSize);
-    optionToUi(PROP_APP_CLIPBOARD_AUTOCOPY, m_ui->cbAutoClipboard);
+    optionToUi(PROP_APP_SELECTION_AUTO_CLIPBOARD_COPY, m_ui->cbAutoClipboard);
     optionToUi(PROP_APP_SELECTION_AUTO_CMDEXEC, m_ui->cbAutoCmdExec);
     optionToUiLine(PROP_APP_SELECTION_COMMAND, m_ui->cbSelectionCommand);
     m_ui->cbSelectionCommand->setEnabled(m_props->getBoolDef(PROP_APP_SELECTION_AUTO_CMDEXEC, false));
@@ -888,7 +888,7 @@ void SettingsDlg::on_cbWindowShowScrollbar_stateChanged(int s) {
 }
 
 void SettingsDlg::on_cbAutoClipboard_stateChanged(int s) {
-    setCheck(PROP_APP_CLIPBOARD_AUTOCOPY, s);
+    setCheck(PROP_APP_SELECTION_AUTO_CLIPBOARD_COPY, s);
 }
 
 void SettingsDlg::on_cbAutoCmdExec_toggled(bool checked) {

@@ -354,7 +354,7 @@ CR3View::CR3View(QWidget* parent)
         , _lastBatteryChargeLevel(0)
         , _canGoBack(false)
         , _canGoForward(false)
-        , _clipboardAutoCopy(false)
+        , _onTextSelectAutoClipboardCopy(false)
         , _onTextSelectAutoCmdExec(false) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     _dpr = screen()->devicePixelRatio();
@@ -410,7 +410,7 @@ void CR3View::updateDefProps() {
     _data->_props->setStringDef(PROP_APP_WINDOW_SHOW_TOOLBAR, "1");
     _data->_props->setStringDef(PROP_APP_WINDOW_SHOW_STATUSBAR, "0");
     _data->_props->setStringDef(PROP_APP_TABS_FIXED_SIZE, "1");
-    _data->_props->setStringDef(PROP_APP_CLIPBOARD_AUTOCOPY, "0");
+    _data->_props->setStringDef(PROP_APP_SELECTION_AUTO_CLIPBOARD_COPY, "0");
     _data->_props->setStringDef(PROP_APP_SELECTION_AUTO_CMDEXEC, "0");
     _data->_props->setStringDef(PROP_APP_WINDOW_FULLSCREEN, "0");
 
@@ -1339,17 +1339,17 @@ void CR3View::mouseReleaseEvent(QMouseEvent* event) {
     if (_selecting) {
         endSelection(p);
         if (!_selText.isEmpty()) {
-            if (_clipboardAutoCopy) {
+            if (_onTextSelectAutoClipboardCopy) {
                 QClipboard* clipboard = QApplication::clipboard();
                 clipboard->setText(_selText);
             }
             if (_onTextSelectAutoCmdExec) {
-                if (QStringList args { _selectionCommand }; !args.isEmpty()) {
-                    QString const programName { args.takeFirst() };
-                    for (auto& arg : args) {
-                        if (arg.contains("%TEXT%")) {
-                            arg.replace("%TEXT%", _selText);
-                        }
+                QStringList args = _selectionCommand;
+                if (!args.isEmpty()) {
+                    QString programName = args.takeFirst();
+                    for (QStringList::iterator it = args.begin(); it != args.end(); ++it) {
+                        if (it->contains("%TEXT%"))
+                            it->replace("%TEXT%", _selText);
                     }
                     if (!args.isEmpty()) {
                         QProcess::startDetached(programName, args);

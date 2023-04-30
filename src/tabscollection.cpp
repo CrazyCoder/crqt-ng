@@ -206,9 +206,12 @@ void TabsCollection::append(const TabData& tab) {
 }
 
 void TabsCollection::upgradeSettings() {
-    static const char* obsolete_toolbar_size = "window.toolbar.size";
+    static const char* const obsolete_toolbar_size = "window.toolbar.size";
+    static const char* const obsolete_clipboard_autocopy = "clipboard.autocopy";
+    static const char* const obsolete_selection_command = "selection.command";
     // add other obsolete properties here
-    static const char* all_obsolete_props[] = { obsolete_toolbar_size, NULL };
+    static const char* const all_obsolete_props[] = { obsolete_toolbar_size, obsolete_clipboard_autocopy,
+                                                      obsolete_selection_command, NULL };
 
     bool changed = false;
     CRPropRef newProps = LVCreatePropsContainer();
@@ -224,14 +227,21 @@ void TabsCollection::upgradeSettings() {
                     bool showToolbar = 0 != toolbarSize;
                     newProps->setBoolDef(PROP_APP_WINDOW_SHOW_TOOLBAR, showToolbar);
                     CRLog::debug("Save as %s=%d", PROP_APP_WINDOW_SHOW_TOOLBAR, showToolbar ? 1 : 0);
+                } else if (propName == obsolete_clipboard_autocopy) {
+                    newProps->setString(PROP_APP_SELECTION_AUTO_CLIPBOARD_COPY, propValue);
+                    CRLog::debug("Save as %s=%s", PROP_APP_SELECTION_AUTO_CLIPBOARD_COPY, LCSTR(propValue));
+                } else if (propName == obsolete_selection_command) {
+                    newProps->setString(PROP_APP_SELECTION_COMMAND, propValue);
+                    CRLog::debug("Save as %s=%s", PROP_APP_SELECTION_COMMAND, LCSTR(propValue));
                 }
                 // process other obsolete properties here
                 found = true;
-                changed = true;
             }
         }
         if (!found)
             newProps->setString(propName.c_str(), propValue);
+        else
+            changed = true;
     }
     if (changed)
         m_props = newProps;

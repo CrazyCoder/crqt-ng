@@ -640,11 +640,11 @@ void MainWindow::onPropsChange(PropsRef props) {
             ui->statusBar->setVisible(bv);
         } else if (name == PROP_APP_WINDOW_STYLE) {
             QApplication::setStyle(value);
-        } else if (name == PROP_APP_CLIPBOARD_AUTOCOPY) {
+        } else if (name == PROP_APP_SELECTION_AUTO_CLIPBOARD_COPY) {
             for (int i = 0; i < _tabs.count(); i++) {
                 const TabData& tab = _tabs[i];
                 if (NULL != tab.view())
-                    tab.view()->setClipboardAutoCopy(bv);
+                    tab.view()->setOnTextSelectAutoClipboardCopy(bv);
             }
         } else if (name == PROP_APP_SELECTION_AUTO_CMDEXEC) {
             for (int i = 0; i < _tabs.count(); i++) {

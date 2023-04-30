@@ -146,11 +146,11 @@ public:
     }
     /// returns link at this point if available
     QString getLinkAtPoint(const QPoint& pt);
-    bool isClipboardAutoCopy() const {
-        return _clipboardAutoCopy;
+    bool isOnTextSelectAutoClipboardCopy() const {
+        return _onTextSelectAutoClipboardCopy;
     }
-    void setClipboardAutoCopy(bool value) {
-        _clipboardAutoCopy = value;
+    void setOnTextSelectAutoClipboardCopy(bool value) {
+        _onTextSelectAutoClipboardCopy = value;
     }
     bool isOnTextSelectAutoCmdExec() const {
         return _onTextSelectAutoCmdExec;
@@ -273,10 +273,10 @@ private:
     int _lastBatteryChargeLevel;
     bool _canGoBack;
     bool _canGoForward;
-    bool _clipboardAutoCopy;
+    bool _onTextSelectAutoClipboardCopy;
     bool _onTextSelectAutoCmdExec;
     // Store a copy of the command that should run when text is selected.
-    QStringList _selectionCommand {};
+    QStringList _selectionCommand;
 };
 
 #endif // CR3WIDGET_H
