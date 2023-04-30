@@ -241,11 +241,11 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props) : QDialog(parent), m_s
 #endif
     m_ui->cbAntialiasingMode->setCurrentIndex(aai);
 
-    optionToUi(PROP_WINDOW_FULLSCREEN, m_ui->cbWindowFullscreen);
-    optionToUi(PROP_WINDOW_SHOW_MENU, m_ui->cbWindowShowMenu);
-    optionToUi(PROP_WINDOW_SHOW_SCROLLBAR, m_ui->cbWindowShowScrollbar);
-    optionToUi(PROP_WINDOW_TOOLBAR_SIZE, m_ui->cbWindowShowToolbar);
-    optionToUi(PROP_WINDOW_SHOW_STATUSBAR, m_ui->cbWindowShowStatusBar);
+    optionToUi(PROP_APP_WINDOW_FULLSCREEN, m_ui->cbWindowFullscreen);
+    optionToUi(PROP_APP_WINDOW_SHOW_MENU, m_ui->cbWindowShowMenu);
+    optionToUi(PROP_APP_WINDOW_SHOW_SCROLLBAR, m_ui->cbWindowShowScrollbar);
+    optionToUi(PROP_APP_WINDOW_TOOLBAR_SIZE, m_ui->cbWindowShowToolbar);
+    optionToUi(PROP_APP_WINDOW_SHOW_STATUSBAR, m_ui->cbWindowShowStatusBar);
     optionToUi(PROP_APP_CLIPBOARD_AUTOCOPY, m_ui->cbAutoClipboard);
     optionToUiLine(PROP_APP_SELECTION_COMMAND, m_ui->cbSelectionCommand);
 
@@ -334,7 +334,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props) : QDialog(parent), m_s
     m_ui->cbMargins->setCurrentIndex(mi);
 
     QStringList styles = QStyleFactory::keys();
-    QString style = m_props->getStringDef(PROP_WINDOW_STYLE, "");
+    QString style = m_props->getStringDef(PROP_APP_WINDOW_STYLE, "");
     m_ui->cbLookAndFeel->addItems(styles);
     QStyle* s = QApplication::style();
     QString currStyle = s->objectName();
@@ -861,23 +861,23 @@ void SettingsDlg::on_cbFontKerning_stateChanged(int s) {
 }
 
 void SettingsDlg::on_cbWindowFullscreen_stateChanged(int s) {
-    setCheck(PROP_WINDOW_FULLSCREEN, s);
+    setCheck(PROP_APP_WINDOW_FULLSCREEN, s);
 }
 
 void SettingsDlg::on_cbWindowShowToolbar_stateChanged(int s) {
-    setCheck(PROP_WINDOW_TOOLBAR_SIZE, s);
+    setCheck(PROP_APP_WINDOW_TOOLBAR_SIZE, s);
 }
 
 void SettingsDlg::on_cbWindowShowMenu_stateChanged(int s) {
-    setCheck(PROP_WINDOW_SHOW_MENU, s);
+    setCheck(PROP_APP_WINDOW_SHOW_MENU, s);
 }
 
 void SettingsDlg::on_cbWindowShowStatusBar_stateChanged(int s) {
-    setCheck(PROP_WINDOW_SHOW_STATUSBAR, s);
+    setCheck(PROP_APP_WINDOW_SHOW_STATUSBAR, s);
 }
 
 void SettingsDlg::on_cbWindowShowScrollbar_stateChanged(int s) {
-    setCheck(PROP_WINDOW_SHOW_SCROLLBAR, s);
+    setCheck(PROP_APP_WINDOW_SHOW_SCROLLBAR, s);
 }
 
 void SettingsDlg::on_cbAutoClipboard_stateChanged(int s) {
@@ -1042,7 +1042,7 @@ void SettingsDlg::on_cbLookAndFeel_currentTextChanged(QString styleName) {
     if (!initDone)
         return;
     CRLog::debug("on_cbLookAndFeel_currentIndexChanged(%s)", styleName.toUtf8().data());
-    m_props->setString(PROP_WINDOW_STYLE, styleName);
+    m_props->setString(PROP_APP_WINDOW_STYLE, styleName);
 }
 
 void SettingsDlg::on_cbTitleFontFace_currentTextChanged(QString s) {

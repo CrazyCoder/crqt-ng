@@ -528,7 +528,7 @@ void MainWindow::on_actionToggle_Pages_Scroll_triggered() {
 }
 
 void MainWindow::on_actionToggle_Full_Screen_triggered() {
-    toggleProperty(PROP_WINDOW_FULLSCREEN);
+    toggleProperty(PROP_APP_WINDOW_FULLSCREEN);
 }
 
 void MainWindow::on_actionZoom_In_triggered() {
@@ -604,14 +604,14 @@ void MainWindow::onPropsChange(PropsRef props) {
         QString const value = props->value(i);
         int v = (value != "0");
         CRLog::debug("MainWindow::onPropsChange [%d] '%s'=%s ", i, props->name(i), props->value(i).toUtf8().data());
-        if (name == PROP_WINDOW_FULLSCREEN) {
+        if (name == PROP_APP_WINDOW_FULLSCREEN) {
             bool state = windowState().testFlag(Qt::WindowFullScreen);
             bool vv = v ? true : false;
             if (state != vv)
                 setWindowState(windowState() ^ Qt::WindowFullScreen);
-        } else if (name == PROP_WINDOW_SHOW_MENU) {
+        } else if (name == PROP_APP_WINDOW_SHOW_MENU) {
             ui->menuBar->setVisible(v);
-        } else if (name == PROP_WINDOW_SHOW_SCROLLBAR) {
+        } else if (name == PROP_APP_WINDOW_SHOW_SCROLLBAR) {
             for (int i = 0; i < _tabs.count(); i++) {
                 const TabData& tab = _tabs[i];
                 if (NULL != tab.scrollBar())
@@ -634,11 +634,11 @@ void MainWindow::onPropsChange(PropsRef props) {
                 if (NULL != tab.view())
                     tab.view()->getDocView()->setBackgroundImage(img, tiled);
             }
-        } else if (name == PROP_WINDOW_TOOLBAR_SIZE) {
+        } else if (name == PROP_APP_WINDOW_TOOLBAR_SIZE) {
             ui->mainToolBar->setVisible(v);
-        } else if (name == PROP_WINDOW_SHOW_STATUSBAR) {
+        } else if (name == PROP_APP_WINDOW_SHOW_STATUSBAR) {
             ui->statusBar->setVisible(v);
-        } else if (name == PROP_WINDOW_STYLE) {
+        } else if (name == PROP_APP_WINDOW_STYLE) {
             QApplication::setStyle(value);
         } else if (name == PROP_APP_CLIPBOARD_AUTOCOPY) {
             for (int i = 0; i < _tabs.count(); i++) {

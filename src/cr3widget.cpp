@@ -27,8 +27,9 @@
 #include "cr3widget.h"
 #include "crqtutil.h"
 #include "qpainter.h"
-#include "settings.h"
+#include "app-props.h"
 #include "addbookmarkdlg.h"
+
 #include <qglobal.h>
 #if QT_VERSION >= 0x050000
 #include <QResizeEvent>
@@ -402,11 +403,11 @@ CR3View::CR3View(QWidget* parent)
 }
 
 void CR3View::updateDefProps() {
-    _data->_props->setStringDef(PROP_WINDOW_FULLSCREEN, "0");
-    _data->_props->setStringDef(PROP_WINDOW_SHOW_MENU, "1");
-    _data->_props->setStringDef(PROP_WINDOW_SHOW_SCROLLBAR, "1");
-    _data->_props->setStringDef(PROP_WINDOW_TOOLBAR_SIZE, "1");
-    _data->_props->setStringDef(PROP_WINDOW_SHOW_STATUSBAR, "0");
+    _data->_props->setStringDef(PROP_APP_WINDOW_FULLSCREEN, "0");
+    _data->_props->setStringDef(PROP_APP_WINDOW_SHOW_MENU, "1");
+    _data->_props->setStringDef(PROP_APP_WINDOW_SHOW_SCROLLBAR, "1");
+    _data->_props->setStringDef(PROP_APP_WINDOW_TOOLBAR_SIZE, "1");
+    _data->_props->setStringDef(PROP_APP_WINDOW_SHOW_STATUSBAR, "0");
     _data->_props->setStringDef(PROP_APP_START_ACTION, "0");
     _data->_props->setStringDef(PROP_APP_CLIPBOARD_AUTOCOPY, "0");
 
@@ -431,9 +432,9 @@ void CR3View::updateDefProps() {
     QStyle* s = QApplication::style();
     QString currStyle = s->objectName();
     CRLog::debug("Current system style is %s", currStyle.toUtf8().data());
-    QString style = cr2qt(_data->_props->getStringDef(PROP_WINDOW_STYLE, currStyle.toUtf8().data()));
+    QString style = cr2qt(_data->_props->getStringDef(PROP_APP_WINDOW_STYLE, currStyle.toUtf8().data()));
     if (!styles.contains(style, Qt::CaseInsensitive))
-        _data->_props->setString(PROP_WINDOW_STYLE, qt2cr(currStyle));
+        _data->_props->setString(PROP_APP_WINDOW_STYLE, qt2cr(currStyle));
 }
 
 CR3View::~CR3View() {
