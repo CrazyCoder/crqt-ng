@@ -1442,22 +1442,22 @@
     <message>
         <location filename="../settings.ui" line="138"/>
         <source>Automatically when selected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматически при выделении:</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="148"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопировать в буфер обмена</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="155"/>
         <source>Run command:</source>
-        <translation type="unfinished"></translation>
+        <translation>Выполнить команду:</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="169"/>
         <source>goldendict %TEXT%, qolibri %TEXT%, etc.</source>
-        <translation type="unfinished"></translation>
+        <translation>goldendict %TEXT%, qolibri %TEXT%, и т.д.</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="178"/>
@@ -2036,11 +2036,7 @@
     <message>
         <location filename="../settings.ui" line="129"/>
         <source>Fixed tab size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Clipboard</source>
-        <translation type="vanished">Буфер обмена</translation>
+        <translation>Фиксированная ширина вкладок</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="145"/>
@@ -2048,19 +2044,16 @@
         <translation>При выделении текста автоматически копировать в буфер обмена</translation>
     </message>
     <message>
-        <source>automatically copy when selected</source>
-        <translation type="vanished">автоматически копировать при выделении</translation>
-    </message>
-    <message>
         <location filename="../settings.ui" line="162"/>
         <source>Automatically send selected text to this application.
 %TEXT% will be replaced with the selected text.</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматически передать выделенный текст в это приложение.
+%TEXT% будет заменён выделенным текстом.</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="406"/>
         <source>Header elements</source>
-        <translation type="unfinished"></translation>
+        <translation>Элементы колонтитула</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="419"/>
