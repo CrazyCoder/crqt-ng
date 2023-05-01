@@ -1981,6 +1981,18 @@
   <tabstop>cbTitleFontFace</tabstop>
   <tabstop>cbTitleFontSize</tabstop>
   <tabstop>cbShowFootNotes</tabstop>
+  <tabstop>btnSelectionColor</tabstop>
+  <tabstop>cbBookmarkHighlightMode</tabstop>
+  <tabstop>btnCommentColor</tabstop>
+  <tabstop>btnCorrectionColor</tabstop>
+  <tabstop>cbImageInlineZoominMode</tabstop>
+  <tabstop>cbImageInlineZoominScale</tabstop>
+  <tabstop>cbImageInlineZoomoutMode</tabstop>
+  <tabstop>cbImageInlineZoomoutScale</tabstop>
+  <tabstop>cbImageBlockZoominMode</tabstop>
+  <tabstop>cbImageBlockZoominScale</tabstop>
+  <tabstop>cbImageBlockZoomoutMode</tabstop>
+  <tabstop>cbImageBlockZoomoutScale</tabstop>
   <tabstop>btnTextColor</tabstop>
   <tabstop>cbTextFontFace</tabstop>
   <tabstop>cbTextFontSize</tabstop>
