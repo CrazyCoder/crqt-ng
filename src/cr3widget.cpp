@@ -1352,7 +1352,13 @@ void CR3View::mouseReleaseEvent(QMouseEvent* event) {
                             it->replace("%TEXT%", _selText);
                     }
                     if (!args.isEmpty()) {
-                        QProcess::startDetached(programName, args);
+                        QString dbgCmdLine = programName + QString(" ") + args.join(' ');
+                        CRLog::debug("Starting program: %s", dbgCmdLine.toUtf8().constData());
+                        bool res = QProcess::startDetached(programName, args);
+                        if (res)
+                            CRLog::debug("the program has been successfully launched");
+                        else
+                            CRLog::warn("failed to run program");
                     }
                 }
             }

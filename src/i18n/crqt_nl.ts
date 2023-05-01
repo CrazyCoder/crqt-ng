@@ -311,7 +311,7 @@
         <translation>Het bestand kan niet worden geopend </translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1623"/>
+        <location filename="../cr3widget.cpp" line="1629"/>
         <source>Loading: please wait...</source>
         <translation>Bezig met laden…</translation>
     </message>

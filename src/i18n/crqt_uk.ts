@@ -301,7 +301,7 @@
         <translation>Помилка при відкритті документу </translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1623"/>
+        <location filename="../cr3widget.cpp" line="1629"/>
         <source>Loading: please wait...</source>
         <translation>Завантажується: зачекайте…</translation>
     </message>
