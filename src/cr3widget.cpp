@@ -27,8 +27,9 @@
 #include "cr3widget.h"
 #include "crqtutil.h"
 #include "qpainter.h"
-#include "settings.h"
+#include "app-props.h"
 #include "addbookmarkdlg.h"
+
 #include <qglobal.h>
 #if QT_VERSION >= 0x050000
 #include <QResizeEvent>
@@ -353,7 +354,8 @@ CR3View::CR3View(QWidget* parent)
         , _lastBatteryChargeLevel(0)
         , _canGoBack(false)
         , _canGoForward(false)
-        , _clipboardAutoCopy(false) {
+        , _onTextSelectAutoClipboardCopy(false)
+        , _onTextSelectAutoCmdExec(false) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     _dpr = screen()->devicePixelRatio();
 #elif QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
@@ -402,13 +404,15 @@ CR3View::CR3View(QWidget* parent)
 }
 
 void CR3View::updateDefProps() {
-    _data->_props->setStringDef(PROP_WINDOW_FULLSCREEN, "0");
-    _data->_props->setStringDef(PROP_WINDOW_SHOW_MENU, "1");
-    _data->_props->setStringDef(PROP_WINDOW_SHOW_SCROLLBAR, "1");
-    _data->_props->setStringDef(PROP_WINDOW_TOOLBAR_SIZE, "1");
-    _data->_props->setStringDef(PROP_WINDOW_SHOW_STATUSBAR, "0");
     _data->_props->setStringDef(PROP_APP_START_ACTION, "0");
-    _data->_props->setStringDef(PROP_APP_CLIPBOARD_AUTOCOPY, "0");
+    _data->_props->setStringDef(PROP_APP_WINDOW_SHOW_MENU, "1");
+    _data->_props->setStringDef(PROP_APP_WINDOW_SHOW_SCROLLBAR, "1");
+    _data->_props->setStringDef(PROP_APP_WINDOW_SHOW_TOOLBAR, "1");
+    _data->_props->setStringDef(PROP_APP_WINDOW_SHOW_STATUSBAR, "0");
+    _data->_props->setStringDef(PROP_APP_TABS_FIXED_SIZE, "1");
+    _data->_props->setStringDef(PROP_APP_SELECTION_AUTO_CLIPBOARD_COPY, "0");
+    _data->_props->setStringDef(PROP_APP_SELECTION_AUTO_CMDEXEC, "0");
+    _data->_props->setStringDef(PROP_APP_WINDOW_FULLSCREEN, "0");
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
@@ -431,9 +435,9 @@ void CR3View::updateDefProps() {
     QStyle* s = QApplication::style();
     QString currStyle = s->objectName();
     CRLog::debug("Current system style is %s", currStyle.toUtf8().data());
-    QString style = cr2qt(_data->_props->getStringDef(PROP_WINDOW_STYLE, currStyle.toUtf8().data()));
+    QString style = cr2qt(_data->_props->getStringDef(PROP_APP_WINDOW_STYLE, currStyle.toUtf8().data()));
     if (!styles.contains(style, Qt::CaseInsensitive))
-        _data->_props->setString(PROP_WINDOW_STYLE, qt2cr(currStyle));
+        _data->_props->setString(PROP_APP_WINDOW_STYLE, qt2cr(currStyle));
 }
 
 CR3View::~CR3View() {
@@ -442,8 +446,6 @@ CR3View::~CR3View() {
         delete _wordSelector;
 #endif
     _docview->savePosition();
-    //saveHistory(QString());
-    //saveSettings(QString());
     delete _docview;
     delete _data;
 }
@@ -941,28 +943,6 @@ void CR3View::setSharedSettings(CRPropRef props) {
         _propsCallback->onPropsChange(unknownOptions);
 }
 
-/// obsolete: load settings from file
-bool CR3View::loadSettings(const QString& fn) {
-    lString32 filename(qt2cr(fn));
-    _data->_settingsFileName = filename;
-    LVStreamRef stream = LVOpenFileStream(filename.c_str(), LVOM_READ);
-    bool res = false;
-    if (!stream.isNull() && _data->_props->loadFromStream(stream.get())) {
-        CRLog::info("Loading settings from file %s", fn.toUtf8().data());
-        res = true;
-    } else {
-        CRLog::error("Cannot load settings from file %s", fn.toUtf8().data());
-    }
-    _docview->propsUpdateDefaults(_data->_props);
-    updateDefProps();
-    CRPropRef r = _docview->propsApply(_data->_props);
-    applyTextLangMainLang(_doc_language);
-    PropsRef unknownOptions = cr2qt(r);
-    if (_propsCallback != NULL)
-        _propsCallback->onPropsChange(unknownOptions);
-    return res;
-}
-
 /// toggle boolean property
 void CR3View::toggleProperty(const char* name) {
     int state = _data->_props->getIntDef(name, 0) != 0 ? 0 : 1;
@@ -995,7 +975,6 @@ PropsRef CR3View::applyOptions(PropsRef props, bool silent) {
     PropsRef unknownOptions = cr2qt(r);
     if (_propsCallback != NULL)
         _propsCallback->onPropsChange(unknownOptions);
-    //saveSettings(QString());
     if (!silent)
         checkFontLanguageCompatibility();
     update();
@@ -1015,81 +994,8 @@ PropsRef CR3View::getOptions() {
     return Props::clone(cr2qt(_data->_props));
 }
 
-/// obsolete: save settings from file
-bool CR3View::saveSettings(const QString& fn) {
-    lString32 filename(qt2cr(fn));
-    if (filename.empty())
-        filename = _data->_settingsFileName;
-    if (filename.empty())
-        return false;
-    _data->_settingsFileName = filename;
-    CRLog::trace("V3DocViewWin::saveSettings(%s)", LCSTR(filename));
-    LVStreamRef stream = LVOpenFileStream(filename.c_str(), LVOM_WRITE);
-    if (!stream) {
-        lString32 upath = LVExtractPath(filename);
-        lString8 path = UnicodeToUtf8(upath);
-        if (!LVCreateDirectory(upath)) {
-            CRLog::error("Cannot create directory %s", path.c_str());
-        } else {
-            stream = LVOpenFileStream(filename.c_str(), LVOM_WRITE);
-        }
-    }
-    if (stream.isNull()) {
-        CRLog::error("Cannot save settings to file %s", LCSTR(filename));
-        return false;
-    }
-    return _data->_props->saveToStream(stream.get());
-}
-
 void CR3View::setSharedHistory(CRFileHist* hist) {
     _docview->setSharedHistory(hist);
-}
-
-/// obsolete: load history from file
-bool CR3View::loadHistory(const QString& fn) {
-    lString32 filename(qt2cr(fn));
-    CRLog::trace("V3DocViewWin::loadHistory( %s )", UnicodeToUtf8(filename).c_str());
-    _data->_historyFileName = filename;
-    LVStreamRef stream = LVOpenFileStream(filename.c_str(), LVOM_READ);
-    if (stream.isNull()) {
-        return false;
-    }
-    if (!_docview->getHistory()->loadFromStream(stream))
-        return false;
-    return true;
-}
-
-/// obsolete: save history to file
-bool CR3View::saveHistory(const QString& fn) {
-    lString32 filename(qt2cr(fn));
-    if (filename.empty())
-        filename = _data->_historyFileName;
-    if (filename.empty()) {
-        CRLog::info("Cannot write history file - no file name specified");
-        return false;
-    }
-    //CRLog::debug("Exporting bookmarks to %s", UnicodeToUtf8(_bookmarkDir).c_str());
-    //_docview->exportBookmarks(_bookmarkDir); //use default filename
-    lString32 bmdir = qt2cr(_bookmarkDir);
-    LVAppendPathDelimiter(bmdir);
-    _docview->exportBookmarks(bmdir); //use default filename
-    _data->_historyFileName = filename;
-    CRLog::trace("CR3View::saveHistory(): filename: %s", LCSTR(filename));
-    LVStreamRef stream = LVOpenFileStream(filename.c_str(), LVOM_WRITE);
-    if (!stream) {
-        lString32 path16 = LVExtractPath(filename);
-        lString8 path = UnicodeToUtf8(path16);
-        if (!LVCreateDirectory(path16)) {
-            CRLog::error("Cannot create directory %s", path.c_str());
-        } else {
-            stream = LVOpenFileStream(filename.c_str(), LVOM_WRITE);
-        }
-    }
-    if (stream.isNull()) {
-        CRLog::error("Error while creating history file %s - position will be lost", UnicodeToUtf8(filename).c_str());
-        return false;
-    }
-    return _docview->getHistory()->saveToStream(stream.get());
 }
 
 void CR3View::contextMenu(QPoint pos) { }
@@ -1433,19 +1339,27 @@ void CR3View::mouseReleaseEvent(QMouseEvent* event) {
     if (_selecting) {
         endSelection(p);
         if (!_selText.isEmpty()) {
-            if (isClipboardAutoCopy()) {
+            if (_onTextSelectAutoClipboardCopy) {
                 QClipboard* clipboard = QApplication::clipboard();
                 clipboard->setText(_selText);
             }
-            if (QStringList args { selectionCommand() }; !args.isEmpty()) {
-                QString const programName { args.takeFirst() };
-                for (auto& arg : args) {
-                    if (arg.contains("%TEXT%")) {
-                        arg.replace("%TEXT%", _selText);
-                    }
-                }
+            if (_onTextSelectAutoCmdExec) {
+                QStringList args = _selectionCommand;
                 if (!args.isEmpty()) {
-                    QProcess::startDetached(programName, args);
+                    QString programName = args.takeFirst();
+                    for (QStringList::iterator it = args.begin(); it != args.end(); ++it) {
+                        if (it->contains("%TEXT%"))
+                            it->replace("%TEXT%", _selText);
+                    }
+                    if (!args.isEmpty()) {
+                        QString dbgCmdLine = programName + QString(" ") + args.join(' ');
+                        CRLog::debug("Starting program: %s", dbgCmdLine.toUtf8().constData());
+                        bool res = QProcess::startDetached(programName, args);
+                        if (res)
+                            CRLog::debug("the program has been successfully launched");
+                        else
+                            CRLog::warn("failed to run program");
+                    }
                 }
             }
         }

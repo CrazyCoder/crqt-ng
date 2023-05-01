@@ -96,6 +96,8 @@ public:
     int indexByViewId(lUInt64 viewId) const;
     void cleanup();
     void append(const TabData& tab);
+protected:
+    void upgradeSettings();
 private:
     CRPropRef m_props;
     CRFileHist m_hist;

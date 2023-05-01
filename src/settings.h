@@ -43,21 +43,6 @@ namespace Ui
     class SettingsDlg;
 }
 
-#define PROP_WINDOW_RECT       "window.rect"
-#define PROP_WINDOW_FULLSCREEN "window.fullscreen"
-#define PROP_WINDOW_MINIMIZED  "window.minimized"
-#define PROP_WINDOW_MAXIMIZED  "window.maximized"
-#define PROP_WINDOW_SHOW_MENU  "window.menu.show"
-//#define PROP_WINDOW_ROTATE_ANGLE  "window.rotate.angle"
-#define PROP_WINDOW_TOOLBAR_SIZE     "window.toolbar.size"
-#define PROP_WINDOW_TOOLBAR_POSITION "window.toolbar.position"
-#define PROP_WINDOW_SHOW_STATUSBAR   "window.statusbar.show"
-#define PROP_WINDOW_SHOW_SCROLLBAR   "window.scrollbar.show"
-#define PROP_WINDOW_STYLE            "window.style"
-#define PROP_APP_START_ACTION        "cr3.app.start.action"
-#define PROP_APP_CLIPBOARD_AUTOCOPY  "clipboard.autocopy"
-#define PROP_APP_SELECTION_COMMAND   "selection.command"
-
 #define DECL_DEF_CR_FONT_SIZES \
     static int cr_font_sizes[] = { 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 32, 38, 42, 48, 56, 64, 72 }
 
@@ -157,6 +142,7 @@ protected:
     virtual void showEvent(QShowEvent* event);
     virtual void hideEvent(QHideEvent* event);
     virtual void moveEvent(QMoveEvent* event);
+    virtual void resizeEvent(QResizeEvent* event);
 
     void setCheck(const char* optionName, int checkState);
     void optionToUi(const char* optionName, QCheckBox* cb);
@@ -240,7 +226,9 @@ private slots:
     void on_cbWindowShowMenu_stateChanged(int);
     void on_cbWindowShowToolbar_stateChanged(int);
     void on_cbWindowFullscreen_stateChanged(int);
+    void on_cbWindowFixedTabSize_toggled(bool checked);
     void on_cbAutoClipboard_stateChanged(int);
+    void on_cbAutoCmdExec_toggled(bool checked);
     void on_cbSelectionCommand_textChanged(QString);
     void on_cbFontKerning_stateChanged(int);
     void on_cbFloatingPunctuation_stateChanged(int);

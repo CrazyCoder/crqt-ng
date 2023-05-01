@@ -528,7 +528,7 @@ void MainWindow::on_actionToggle_Pages_Scroll_triggered() {
 }
 
 void MainWindow::on_actionToggle_Full_Screen_triggered() {
-    toggleProperty(PROP_WINDOW_FULLSCREEN);
+    toggleProperty(PROP_APP_WINDOW_FULLSCREEN);
 }
 
 void MainWindow::on_actionZoom_In_triggered() {
@@ -602,20 +602,20 @@ void MainWindow::onPropsChange(PropsRef props) {
     for (int i = 0; i < props->count(); i++) {
         QString const name = props->name(i);
         QString const value = props->value(i);
-        int v = (value != "0");
+        int iv = value.toInt();
+        bool bv = iv != 0;
         CRLog::debug("MainWindow::onPropsChange [%d] '%s'=%s ", i, props->name(i), props->value(i).toUtf8().data());
-        if (name == PROP_WINDOW_FULLSCREEN) {
+        if (name == PROP_APP_WINDOW_FULLSCREEN) {
             bool state = windowState().testFlag(Qt::WindowFullScreen);
-            bool vv = v ? true : false;
-            if (state != vv)
+            if (state != bv)
                 setWindowState(windowState() ^ Qt::WindowFullScreen);
-        } else if (name == PROP_WINDOW_SHOW_MENU) {
-            ui->menuBar->setVisible(v);
-        } else if (name == PROP_WINDOW_SHOW_SCROLLBAR) {
+        } else if (name == PROP_APP_WINDOW_SHOW_MENU) {
+            ui->menuBar->setVisible(bv);
+        } else if (name == PROP_APP_WINDOW_SHOW_SCROLLBAR) {
             for (int i = 0; i < _tabs.count(); i++) {
                 const TabData& tab = _tabs[i];
                 if (NULL != tab.scrollBar())
-                    tab.scrollBar()->setVisible(v);
+                    tab.scrollBar()->setVisible(bv);
             }
         } else if (name == PROP_APP_BACKGROUND_IMAGE) {
             lString32 fn = qt2cr(value);
@@ -634,23 +634,35 @@ void MainWindow::onPropsChange(PropsRef props) {
                 if (NULL != tab.view())
                     tab.view()->getDocView()->setBackgroundImage(img, tiled);
             }
-        } else if (name == PROP_WINDOW_TOOLBAR_SIZE) {
-            ui->mainToolBar->setVisible(v);
-        } else if (name == PROP_WINDOW_SHOW_STATUSBAR) {
-            ui->statusBar->setVisible(v);
-        } else if (name == PROP_WINDOW_STYLE) {
+        } else if (name == PROP_APP_WINDOW_SHOW_TOOLBAR) {
+            ui->mainToolBar->setVisible(bv);
+        } else if (name == PROP_APP_WINDOW_SHOW_STATUSBAR) {
+            ui->statusBar->setVisible(bv);
+        } else if (name == PROP_APP_WINDOW_STYLE) {
             QApplication::setStyle(value);
-        } else if (name == PROP_APP_CLIPBOARD_AUTOCOPY) {
+        } else if (name == PROP_APP_SELECTION_AUTO_CLIPBOARD_COPY) {
             for (int i = 0; i < _tabs.count(); i++) {
                 const TabData& tab = _tabs[i];
                 if (NULL != tab.view())
-                    tab.view()->setClipboardAutoCopy(v != 0);
+                    tab.view()->setOnTextSelectAutoClipboardCopy(bv);
+            }
+        } else if (name == PROP_APP_SELECTION_AUTO_CMDEXEC) {
+            for (int i = 0; i < _tabs.count(); i++) {
+                const TabData& tab = _tabs[i];
+                if (NULL != tab.view())
+                    tab.view()->setOnTextSelectAutoCmdExec(bv);
             }
         } else if (name == PROP_APP_SELECTION_COMMAND) {
-            for (TabData const& tab : _tabs) {
-                if (NULL != tab.view()) {
+            for (int i = 0; i < _tabs.count(); i++) {
+                const TabData& tab = _tabs[i];
+                if (NULL != tab.view())
                     tab.view()->setSelectionCommand(value);
-                }
+            }
+        } else if (name == PROP_APP_TABS_FIXED_SIZE) {
+            if (bv) {
+                ui->tabWidget->setStyleSheet("QTabBar::tab { width: 7em; }");
+            } else {
+                ui->tabWidget->setStyleSheet("");
             }
         }
     }

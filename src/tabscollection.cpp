@@ -26,6 +26,7 @@
 #include "tabscollection.h"
 #include "cr3widget.h"
 #include "crqtutil.h"
+#include "app-props.h"
 
 #include <QtCore/QSettings>
 
@@ -85,6 +86,7 @@ bool TabsCollection::loadSettings(const QString& filename) {
     bool res = false;
     if (!stream.isNull() && m_props->loadFromStream(stream.get())) {
         CRLog::info("Loading settings from file %s", LCSTR(fn));
+        upgradeSettings();
         res = true;
     } else {
         CRLog::error("Cannot load settings from file %s", LCSTR(fn));
@@ -201,4 +203,46 @@ void TabsCollection::append(const TabData& tab) {
     QVector<TabData>::append(tab);
     tab.view()->setSharedSettings(m_props);
     tab.view()->setSharedHistory(&m_hist);
+}
+
+void TabsCollection::upgradeSettings() {
+    static const char* const obsolete_toolbar_size = "window.toolbar.size";
+    static const char* const obsolete_clipboard_autocopy = "clipboard.autocopy";
+    static const char* const obsolete_selection_command = "selection.command";
+    // add other obsolete properties here
+    static const char* const all_obsolete_props[] = { obsolete_toolbar_size, obsolete_clipboard_autocopy,
+                                                      obsolete_selection_command, NULL };
+
+    bool changed = false;
+    CRPropRef newProps = LVCreatePropsContainer();
+    for (int i = 0; i < m_props->getCount(); i++) {
+        lString8 propName = lString8(m_props->getName(i));
+        lString32 propValue = m_props->getValue(i);
+        bool found = false;
+        for (int j = 0; all_obsolete_props[j] != NULL; j++) {
+            if (propName == all_obsolete_props[j]) {
+                CRLog::debug("Found obsolete property: %s=%s", propName.c_str(), LCSTR(propValue));
+                if (propName == obsolete_toolbar_size) {
+                    int toolbarSize = propValue.atoi();
+                    bool showToolbar = 0 != toolbarSize;
+                    newProps->setBoolDef(PROP_APP_WINDOW_SHOW_TOOLBAR, showToolbar);
+                    CRLog::debug("Save as %s=%d", PROP_APP_WINDOW_SHOW_TOOLBAR, showToolbar ? 1 : 0);
+                } else if (propName == obsolete_clipboard_autocopy) {
+                    newProps->setString(PROP_APP_SELECTION_AUTO_CLIPBOARD_COPY, propValue);
+                    CRLog::debug("Save as %s=%s", PROP_APP_SELECTION_AUTO_CLIPBOARD_COPY, LCSTR(propValue));
+                } else if (propName == obsolete_selection_command) {
+                    newProps->setString(PROP_APP_SELECTION_COMMAND, propValue);
+                    CRLog::debug("Save as %s=%s", PROP_APP_SELECTION_COMMAND, LCSTR(propValue));
+                }
+                // process other obsolete properties here
+                found = true;
+            }
+        }
+        if (!found)
+            newProps->setString(propName.c_str(), propValue);
+        else
+            changed = true;
+    }
+    if (changed)
+        m_props = newProps;
 }

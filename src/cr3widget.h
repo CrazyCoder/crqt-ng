@@ -100,16 +100,8 @@ public:
 
     /// set shared properties (can be used by multiple LVDocView instances)
     void setSharedSettings(CRPropRef props);
-    /// obsolete: load settings from file
-    bool loadSettings(const QString& filename);
-    /// obsolete: save settings from file
-    bool saveSettings(const QString& filename);
     /// set new file history object (can be used by multiple LVDocView instances)
     void setSharedHistory(CRFileHist* hist);
-    /// obsolete: load history from file
-    bool loadHistory(const QString& filename);
-    /// obsolete: save history to file
-    bool saveHistory(const QString& filename);
 
     void setHyphDir(const QString& dirname, bool clear = true);
     const QStringList& getHyphDicts();
@@ -154,11 +146,17 @@ public:
     }
     /// returns link at this point if available
     QString getLinkAtPoint(const QPoint& pt);
-    bool isClipboardAutoCopy() const {
-        return _clipboardAutoCopy;
+    bool isOnTextSelectAutoClipboardCopy() const {
+        return _onTextSelectAutoClipboardCopy;
     }
-    void setClipboardAutoCopy(bool value) {
-        _clipboardAutoCopy = value;
+    void setOnTextSelectAutoClipboardCopy(bool value) {
+        _onTextSelectAutoClipboardCopy = value;
+    }
+    bool isOnTextSelectAutoCmdExec() const {
+        return _onTextSelectAutoCmdExec;
+    }
+    void setOnTextSelectAutoCmdExec(bool value) {
+        _onTextSelectAutoCmdExec = value;
     }
     /// Setting that controls what program is run when text is selected.
     QStringList const& selectionCommand() const {
@@ -275,9 +273,10 @@ private:
     int _lastBatteryChargeLevel;
     bool _canGoBack;
     bool _canGoForward;
-    bool _clipboardAutoCopy;
+    bool _onTextSelectAutoClipboardCopy;
+    bool _onTextSelectAutoCmdExec;
     // Store a copy of the command that should run when text is selected.
-    QStringList _selectionCommand {};
+    QStringList _selectionCommand;
 };
 
 #endif // CR3WIDGET_H
