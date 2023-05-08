@@ -267,7 +267,7 @@ lString32 getEngineDataDir() {
         s_engineDataDir = qt2cr(resDir);
 #elif defined(WIN32)
         QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/");
-        s_mainDataDir = qt2cr(exeDir);
+        s_engineDataDir = qt2cr(exeDir);
 #else
         s_engineDataDir = lString32(CRE_NG_DATADIR);
 #endif
