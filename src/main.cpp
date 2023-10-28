@@ -64,7 +64,6 @@ Q_IMPORT_PLUGIN(QCocoaIntegrationPlugin);
 #define DOC_CACHE_SIZE 128 * 1024 * 1024 // 128Mb
 
 // prototypes
-void InitCREngineLog(const char* cfgfile);
 bool InitCREngine(const char* exename, lString32Collection& fontDirs);
 void ShutdownCREngine();
 #if (USE_FREETYPE == 1)
@@ -285,11 +284,6 @@ bool getDirectoryFonts(lString32Collection& pathList, lString32Collection& ext, 
 
 bool InitCREngine(const char* exename, lString32Collection& fontDirs) {
     CRLog::trace("InitCREngine(%s)", exename);
-#if defined(_WIN32)
-    lString32 appPath32 = getExeDir();
-    lString32 cfgfile32 = appPath32 + "crui.ini";
-    InitCREngineLog(UnicodeToUtf8(cfgfile32).c_str());
-#endif
     InitFontManager(lString8::empty_str);
 #if defined(_WIN32) && USE_FONTCONFIG != 1
     wchar_t sysdir_w[MAX_PATH + 1];
@@ -391,57 +385,4 @@ bool InitCREngine(const char* exename, lString32Collection& fontDirs) {
     ldomDocCache::init(getEngineCacheDir(), (lvsize_t)DOC_CACHE_SIZE);
 
     return true;
-}
-
-void InitCREngineLog(const char* cfgfile) {
-    if (!cfgfile) {
-        CRLog::setStdoutLogger();
-        CRLog::setLogLevel(CRLog::LL_TRACE);
-        return;
-    }
-    lString32 logfname;
-    lString32 loglevelstr =
-#ifdef _DEBUG
-            U"TRACE";
-#else
-            U"INFO";
-#endif
-    bool autoFlush = false;
-    CRPropRef logprops = LVCreatePropsContainer();
-    {
-        LVStreamRef cfg = LVOpenFileStream(cfgfile, LVOM_READ);
-        if (!cfg.isNull()) {
-            logprops->loadFromStream(cfg.get());
-            logfname = logprops->getStringDef(PROP_APP_LOG_FILENAME, "stdout");
-            loglevelstr = logprops->getStringDef(PROP_APP_LOG_LEVEL, "TRACE");
-            autoFlush = logprops->getBoolDef(PROP_APP_LOG_AUTOFLUSH, false);
-        }
-    }
-    CRLog::log_level level = CRLog::LL_INFO;
-    if (loglevelstr == "OFF") {
-        level = CRLog::LL_FATAL;
-        logfname.clear();
-    } else if (loglevelstr == "FATAL") {
-        level = CRLog::LL_FATAL;
-    } else if (loglevelstr == "ERROR") {
-        level = CRLog::LL_ERROR;
-    } else if (loglevelstr == "WARN") {
-        level = CRLog::LL_WARN;
-    } else if (loglevelstr == "INFO") {
-        level = CRLog::LL_INFO;
-    } else if (loglevelstr == "DEBUG") {
-        level = CRLog::LL_DEBUG;
-    } else if (loglevelstr == "TRACE") {
-        level = CRLog::LL_TRACE;
-    }
-    if (!logfname.empty()) {
-        if (logfname == "stdout")
-            CRLog::setStdoutLogger();
-        else if (logfname == "stderr")
-            CRLog::setStderrLogger();
-        else
-            CRLog::setFileLogger(UnicodeToUtf8(logfname).c_str(), autoFlush);
-    }
-    CRLog::setLogLevel(level);
-    CRLog::trace("Log initialization done.");
 }
