@@ -1,3 +1,67 @@
+2023-10-29  Aleksey Chernov  <valexlin@gmail.com>
+
+    * Version 1.0.12 released.
+    ==========================
+
+    Tag sources with `1.0.12'.
+
+    See below for changes.
+
+2023-10-29  Aleksey Chernov  <valexlin@gmail.com>
+
+    The Windows version no longer uses logging parameters from the configuration file, thereby overriding the parameters specified on the command line.
+
+2023-05-09  Aleksey Chernov  <valexlin@gmail.com>
+
+    Copy-paste issue fixed in getEngineDataDir()
+
+2023-05-02  Aleksey Chernov  <valexlin@gmail.com>
+
+    Update README.md
+
+2023-05-01  Aleksey Chernov  <valexlin@gmail.com>
+
+    Update src/settings.ui: restored tabstop order
+
+    CR3View: added debug messages about external program running.
+
+    Update src/settings.ui: optimizations. SettingsDlg: also move sample window on resize event.
+
+    Refactoring: change properties names, remove C++11 code to bring the code to a single style.
+
+    Update Russian translation
+
+2023-05-01  Aleksey Chernov  <valexlin@gmail.com>
+
+    PROP_APP_SELECTION_AUTO_CMDEXEC ("crui.app.selection.auto.cmdexec") property added to enable/disable the call of an external program when text is selected without the need to clear the PROP_APP_SELECTION_COMMAND property.
+
+2023-04-30  Aleksey Chernov  <valexlin@gmail.com>
+
+    Update src/settings.ui: optimizations
+
+    Added application property PROP_APP_TABS_FIXED_SIZE ("crui.app.tabs.fixedsize") to enable/disable fixed tab width.
+
+    The PROP_APP_WINDOW_TOOLBAR_SIZE ("window.toolbar.size") application property has been renamed to PROP_APP_WINDOW_SHOW_TOOLBAR ("window.toolbar.show") as it was actually used to enable/disable the display of the toolbar. Also implemented is an update of the existing configuration file with the replacement of the old property with a new one.
+
+    CR3View: removed obsolete methods: loadSettings(), saveSettings(), loadHistory(), saveHistory().
+
+    Move application properties defines from settings.h to app-props.h
+
+2023-04-27  Aleksey Chernov  <valexlin@gmail.com>
+
+    Update translations (only source line numbers).
+
+    Fixed compile error introduced in !9.
+
+2023-04-20  Aleksey Chernov  <valexlin@gmail.com>
+
+    Update tools/gentoo/crqt-ng-x.y.z.ebuild
+
+2023-04-20  Ren Tatsumoto  <tatsu@autistici.org>
+
+    Automatically run command when text is selected.
+
+
 2023-04-06  Aleksey Chernov  <valexlin@gmail.com>
 
     * Version 1.0.11 released.
