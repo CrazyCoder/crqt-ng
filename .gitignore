@@ -9,3 +9,5 @@ CMakeLists.txt.user.*
 *.orig
 *.rej
 .clang_format_exe.conf
+.idea
+cmake-build-*
