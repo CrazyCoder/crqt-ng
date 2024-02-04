@@ -1,6 +1,6 @@
 /***************************************************************************
  *   crqt-ng                                                               *
- *   Copyright (C) 2023 Aleksey Chernov <valexlin@gmail.com>               *
+ *   Copyright (C) 2023,2024 Aleksey Chernov <valexlin@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -26,6 +26,7 @@
 
 enum CR3ViewCommandType
 {
+    Noop,
     OpenDocument,
     SetDocumentText,
     Resize
@@ -34,8 +35,10 @@ enum CR3ViewCommandType
 class CR3ViewCommand
 {
 public:
-    CR3ViewCommand() { }
-    CR3ViewCommand(CR3ViewCommandType cmd, QVariant data) {
+    CR3ViewCommand() {
+        m_cmd = CR3ViewCommandType::Noop;
+    }
+    CR3ViewCommand(CR3ViewCommandType cmd, const QVariant& data) {
         m_cmd = cmd;
         m_data = data;
     }

@@ -5,8 +5,8 @@
  *   Copyright (C) 2018 EXL <exlmotodev@gmail.com>                         *
  *   Copyright (C) 2019,2020 Konstantin Potapov <pkbo@users.sourceforge.net>
  *   Copyright (C) 2020,2021 Andy Mender <andymenderunix@gmail.com>        *
- *   Copyright (C) 2018-2023 Aleksey Chernov <valexlin@gmail.com>          *
  *   Copyright (C) 2023 Ren Tatsumoto <tatsu@autistici.org>                *
+ *   Copyright (C) 2018-2024 Aleksey Chernov <valexlin@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -54,8 +54,8 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QDesktopServices>
-#include <QLocale>
 #include <QProcess>
+#include <QTimer>
 
 #include <lvdocview.h>
 #include <crtrace.h>
@@ -366,6 +366,8 @@ CR3View::CR3View(QWidget* parent)
 #if WORD_SELECTOR_ENABLED == 1
     _wordSelector = NULL;
 #endif
+    _resizeTimer = new QTimer(this);
+    _resizeTimer->setSingleShot(true);
     _data = new DocViewData();
     _data->_props = LVCreatePropsContainer();
     _docview = new LVDocView();
@@ -401,6 +403,8 @@ CR3View::CR3View(QWidget* parent)
     setMouseTracking(true);
     setFocusPolicy(Qt::StrongFocus);
     setMinimumSize(SCREEN_SIZE_MIN, SCREEN_SIZE_MIN);
+
+    connect(_resizeTimer, SIGNAL(timeout()), this, SLOT(resizeTimerTimeout()));
 }
 
 void CR3View::updateDefProps() {
@@ -561,17 +565,12 @@ void CR3View::wheelEvent(QWheelEvent* event) {
 }
 
 void CR3View::resizeEvent(QResizeEvent* event) {
-    QSize sz = event->size();
-#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    _dpr = screen()->devicePixelRatio();
-#endif
-    sz *= _dpr;
-#endif
-    if (_active)
-        _docview->Resize(sz.width(), sz.height());
-    else
-        _delayed_commands.push_back(CR3ViewCommand(CR3ViewCommandType::Resize, sz));
+    if (_active) {
+        _resizeTimer->stop();
+        _resizeTimer->start(100);
+    } else {
+        _delayed_commands.push_back(CR3ViewCommand(CR3ViewCommandType::Resize, event->size()));
+    }
 }
 
 static bool getBatteryState(int& state, int& chargingConn, int& level) {
@@ -608,7 +607,6 @@ void CR3View::paintEvent(QPaintEvent* event) {
     qreal dpr = painter.device()->devicePixelRatioF();
     if (fabs(dpr - _dpr) >= 0.01)
         CRLog::error("Device pixel ratio is changed! (prev=%.1f, now=%.1f)", _dpr, dpr);
-    QRect rc = rect();
     int newBatteryState;
     int newChargingConn;
     int newChargeLevel;
@@ -647,7 +645,7 @@ void CR3View::paintEvent(QPaintEvent* event) {
                 //                src++;
             }
         }
-        painter.drawImage(rc, img);
+        painter.drawImage(0, 0, img);
     } else if (bpp == 2) {
         QImage img(dx, dy, QImage::Format_RGB16);
         img.setDevicePixelRatio(_dpr);
@@ -673,8 +671,7 @@ void CR3View::paintEvent(QPaintEvent* event) {
                 //                src++;
             }
         }
-        painter.drawImage(rc, img);
-
+        painter.drawImage(0, 0, img);
     } else if (bpp == 1) {
         QImage img(dx, dy, QImage::Format_RGB16);
         img.setDevicePixelRatio(_dpr);
@@ -699,8 +696,7 @@ void CR3View::paintEvent(QPaintEvent* event) {
                 //                src++;
             }
         }
-        painter.drawImage(rc, img);
-
+        painter.drawImage(0, 0, img);
     } else if (bpp == 16) {
         QImage img(dx, dy, QImage::Format_RGB16);
         img.setDevicePixelRatio(_dpr);
@@ -715,7 +711,7 @@ void CR3View::paintEvent(QPaintEvent* event) {
                 //                src++;
             }
         }
-        painter.drawImage(rc, img);
+        painter.drawImage(0, 0, img);
     } else if (bpp == 32) {
         QImage img(dx, dy, QImage::Format_RGB32);
         img.setDevicePixelRatio(_dpr);
@@ -730,7 +726,7 @@ void CR3View::paintEvent(QPaintEvent* event) {
                 src++;
             }
         }
-        painter.drawImage(rc, img);
+        painter.drawImage(0, 0, img);
     }
     _dpr = dpr;
     if (_editMode) {
@@ -889,6 +885,18 @@ void CR3View::zoomIn() {
 void CR3View::zoomOut() {
     doCommand(DCMD_ZOOM_OUT, 1);
     refreshPropFromView(PROP_FONT_SIZE);
+}
+
+void CR3View::resizeTimerTimeout() {
+    QSize sz = size();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+    _dpr = screen()->devicePixelRatio();
+#endif
+    sz *= _dpr;
+#endif
+    _docview->Resize(sz.width(), sz.height());
+    update();
 }
 
 QScrollBar* CR3View::scrollBar() const {
@@ -1221,6 +1229,8 @@ void CR3View::processDelayedCommands() {
     while (!_delayed_commands.isEmpty()) {
         const CR3ViewCommand& cmd = _delayed_commands.first();
         switch (cmd.command()) {
+            case Noop:
+                break;
             case OpenDocument: {
                 LoadDocumentImpl(cmd.data().toString(), true);
                 break;
@@ -1232,6 +1242,12 @@ void CR3View::processDelayedCommands() {
             }
             case Resize: {
                 QSize sz = cmd.data().toSize();
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+                _dpr = screen()->devicePixelRatio();
+#endif
+                sz *= _dpr;
+#endif
                 _docview->Resize(sz.width(), sz.height());
                 update();
                 break;
