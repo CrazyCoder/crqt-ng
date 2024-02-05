@@ -1355,10 +1355,10 @@ void CR3View::mouseReleaseEvent(QMouseEvent* event) {
     if (_selecting) {
         endSelection(p);
         if (!_selText.isEmpty()) {
-            if (_onTextSelectAutoClipboardCopy) {
-                QClipboard* clipboard = QApplication::clipboard();
-                clipboard->setText(_selText);
-            }
+            QClipboard* clipboard = QApplication::clipboard();
+            clipboard->setText(_selText, QClipboard::Selection);
+            if (_onTextSelectAutoClipboardCopy)
+                clipboard->setText(_selText, QClipboard::Clipboard);
             if (_onTextSelectAutoCmdExec) {
                 QStringList args = _selectionCommand;
                 if (!args.isEmpty()) {

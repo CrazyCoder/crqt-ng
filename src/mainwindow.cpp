@@ -757,7 +757,7 @@ void MainWindow::on_actionCopy_triggered() {
     QString txt = view->getSelectionText();
     if (txt.length() > 0) {
         QClipboard* clipboard = QApplication::clipboard();
-        clipboard->setText(txt);
+        clipboard->setText(txt, QClipboard::Clipboard);
     }
 }
 
