@@ -383,6 +383,11 @@ CR3View::CR3View(QWidget* parent)
     LVArray<int> sizes(cr_font_sizes, sizeof(cr_font_sizes) / sizeof(int));
     _docview->setFontSizes(sizes, false);
 #endif
+    _clipboardSupportsMouseSelection = QApplication::clipboard()->supportsSelection();
+    if (_clipboardSupportsMouseSelection)
+        CRLog::debug("Clipboard supports global mouse selection");
+    else
+        CRLog::debug("Clipboard NOT supports global mouse selection");
 
     _docview->setBatteryIcons(getBatteryIcons(0x000000));
     _docview->setBatteryState(CR_BATTERY_STATE_NO_BATTERY, CR_BATTERY_CHARGER_NO,
@@ -1356,7 +1361,8 @@ void CR3View::mouseReleaseEvent(QMouseEvent* event) {
         endSelection(p);
         if (!_selText.isEmpty()) {
             QClipboard* clipboard = QApplication::clipboard();
-            clipboard->setText(_selText, QClipboard::Selection);
+            if (_clipboardSupportsMouseSelection)
+                clipboard->setText(_selText, QClipboard::Selection);
             if (_onTextSelectAutoClipboardCopy)
                 clipboard->setText(_selText, QClipboard::Clipboard);
             if (_onTextSelectAutoCmdExec) {
