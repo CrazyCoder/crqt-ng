@@ -731,20 +731,23 @@ void MainWindow::contextMenu(QPoint pos) {
         return;
     }
     QMenu* menu = new QMenu;
-    QString linkHRef = view->getLinkAtPoint(pos);
-    if (!linkHRef.isEmpty() && !isExternalLink(linkHRef)) {
-        ui->actionOpen_link_in_new_tab->setData(linkHRef);
-        menu->addAction(ui->actionOpen_link_in_new_tab);
-    }
-    menu->addAction(ui->actionOpen);
-    menu->addAction(ui->actionRecentBooks);
-    menu->addAction(ui->actionTOC);
-    menu->addAction(ui->actionToggle_Full_Screen);
-    menu->addAction(ui->actionSettings);
-    if (view->isPointInsideSelection(pos))
+    if (view->isPointInsideSelection(pos)) {
         menu->addAction(ui->actionCopy);
-    menu->addAction(ui->actionAddBookmark);
-    menu->addAction(ui->actionClose);
+        menu->addAction(ui->actionAddBookmark);
+    } else {
+        QString linkHRef = view->getLinkAtPoint(pos);
+        if (!linkHRef.isEmpty() && !isExternalLink(linkHRef)) {
+            ui->actionOpen_link_in_new_tab->setData(linkHRef);
+            menu->addAction(ui->actionOpen_link_in_new_tab);
+        }
+        menu->addAction(ui->actionOpen);
+        menu->addAction(ui->actionRecentBooks);
+        menu->addAction(ui->actionTOC);
+        menu->addAction(ui->actionToggle_Full_Screen);
+        menu->addAction(ui->actionSettings);
+        menu->addAction(ui->actionAddBookmark);
+        menu->addAction(ui->actionClose);
+    }
     menu->exec(view->mapToGlobal(pos));
 }
 

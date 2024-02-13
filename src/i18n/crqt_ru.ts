@@ -602,15 +602,15 @@
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="189"/>
-        <location filename="../mainwindow.cpp" line="1027"/>
-        <location filename="../mainwindow.cpp" line="1052"/>
+        <location filename="../mainwindow.cpp" line="1030"/>
+        <location filename="../mainwindow.cpp" line="1055"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="189"/>
-        <location filename="../mainwindow.cpp" line="1027"/>
-        <location filename="../mainwindow.cpp" line="1052"/>
+        <location filename="../mainwindow.cpp" line="1030"/>
+        <location filename="../mainwindow.cpp" line="1055"/>
         <source>The maximum number of tabs has been exceeded!</source>
         <translation>Превышего максимальное количество вкладок!</translation>
     </message>
