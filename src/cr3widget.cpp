@@ -347,6 +347,7 @@ CR3View::CR3View(QWidget* parent)
         , _waitCursor(Qt::WaitCursor)
         , _selecting(false)
         , _selected(false)
+        , _doubleClick(false)
         , _active(false)
         , _editMode(false)
         , _lastBatteryState(CR_BATTERY_STATE_NO_BATTERY)
@@ -1043,13 +1044,13 @@ void CR3View::mouseMoveEvent(QMouseEvent* event) {
         href = p.getHRef();
         if (_editMode && _selecting)
             _docview->setCursorPos(p);
-        updateSelection(p);
     } else {
         //CRLog::trace("Node not found for %d, %d", event->x(), event->y());
     }
-    if (_selecting)
+    if (_selecting) {
+        updateSelection(p);
         setCursor(_selCursor);
-    else {
+    } else {
         if (href.empty())
             setCursor(_normalCursor);
         else
@@ -1104,7 +1105,7 @@ bool CR3View::updateSelection(ldomXPointer p) {
     if (r.getStart().isNull() || r.getEnd().isNull())
         return false;
     r.sort();
-    if (!_editMode) {
+    if (_doubleClick && !_editMode) {
         if (!r.getStart().isVisibleWordStart()) {
             //CRLog::trace("calling prevVisibleWordStart : %s", LCSTR(r.getStart().toString()));
             r.getStart().prevVisibleWordStart();
@@ -1350,6 +1351,7 @@ void CR3View::mouseReleaseEvent(QMouseEvent* event) {
     }
     if (_selecting) {
         endSelection(p);
+        setCursor(_normalCursor);
         if (!_selText.isEmpty()) {
             QClipboard* clipboard = QApplication::clipboard();
             if (_clipboardSupportsMouseSelection)
@@ -1377,7 +1379,19 @@ void CR3View::mouseReleaseEvent(QMouseEvent* event) {
             }
         }
     }
+    _doubleClick = false;
     //CRLog::debug("mouseReleaseEvent - doc pos (%d,%d), buttons: %d %d %d", pt.x, pt.y, (int)left, (int)right, (int)mid);
+}
+
+void CR3View::mouseDoubleClickEvent(QMouseEvent* event) {
+    _doubleClick = true;
+    QWidget::mouseDoubleClickEvent(event);
+    if (_selecting) {
+        lvPoint pt(qRound(event->localPos().x() * _dpr), qRound(event->localPos().y() * _dpr));
+        ldomXPointer p = _docview->getNodeByPoint(pt);
+        updateSelection(p);
+        setCursor(_selCursor);
+    }
 }
 
 /// Override to handle external links
