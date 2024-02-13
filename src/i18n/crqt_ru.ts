@@ -296,22 +296,22 @@
 <context>
     <name>CR3View</name>
     <message>
-        <location filename="../cr3widget.cpp" line="1278"/>
+        <location filename="../cr3widget.cpp" line="1275"/>
         <source>Error while opening document </source>
         <translation>Ошибка открытия документа </translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1649"/>
+        <location filename="../cr3widget.cpp" line="1642"/>
         <source>Loading: please wait...</source>
         <translation>Загрузка: подождите...</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1164"/>
+        <location filename="../cr3widget.cpp" line="1161"/>
         <source>Warning</source>
         <translation>Предупреждение</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1165"/>
+        <location filename="../cr3widget.cpp" line="1162"/>
         <source>Font &quot;%1&quot; isn&apos;t compatible with language &quot;%2&quot;. Instead will be used fallback font.</source>
         <translation>Шрифт &quot;%1&quot; не совместим с языком &quot;%2&quot;. Вместо него будет задействован дополнительный шрифт.</translation>
     </message>

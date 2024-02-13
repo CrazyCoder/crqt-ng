@@ -1036,15 +1036,10 @@ QString CR3View::getLinkAtPoint(const QPoint& pos) {
 }
 
 void CR3View::mouseMoveEvent(QMouseEvent* event) {
-    //bool left = (event->buttons() & Qt::LeftButton);
-    //bool right = (event->buttons() & Qt::RightButton);
-    //bool mid = (event->buttons() & Qt::MidButton);
-    lvPoint pt(event->pos().x() * _dpr, event->pos().y() * _dpr);
+    lvPoint pt(qRound(event->localPos().x() * _dpr), qRound(event->localPos().y() * _dpr));
     ldomXPointer p = _docview->getNodeByPoint(pt);
-    lString32 path;
     lString32 href;
     if (!p.isNull()) {
-        path = p.toString();
         href = p.getHRef();
         if (_editMode && _selecting)
             _docview->setCursorPos(p);
@@ -1293,13 +1288,12 @@ void CR3View::setDocumentTextImpl(const QString& text) {
 
 void CR3View::mousePressEvent(QMouseEvent* event) {
     bool left = event->button() == Qt::LeftButton;
-    //bool right = event->button() == Qt::RightButton;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     bool mid = event->button() == Qt::MiddleButton;
 #else
     bool mid = event->button() == Qt::MidButton;
 #endif
-    lvPoint pt(event->pos().x() * _dpr, event->pos().y() * _dpr);
+    lvPoint pt(qRound(event->localPos().x() * _dpr), qRound(event->localPos().y() * _dpr));
     ldomXPointer p = _docview->getNodeByPoint(pt);
     // test imageByPoint
     LVImageSourceRef img = _docview->getImageByPoint(pt);
@@ -1322,10 +1316,14 @@ void CR3View::mousePressEvent(QMouseEvent* event) {
     }
     if (href.empty()) {
         //CRLog::trace("No href pressed" );
-        if (!p.isNull() && left) {
-            if (_editMode)
-                _docview->setCursorPos(p);
-            startSelection(p);
+        if (left) {
+            if (!p.isNull()) {
+                if (_editMode)
+                    _docview->setCursorPos(p);
+                startSelection(p);
+            } else {
+                clearSelection();
+            }
         }
     } else {
         CRLog::info("Link is selected: %s", UnicodeToUtf8(href).c_str());
@@ -1344,16 +1342,9 @@ void CR3View::mousePressEvent(QMouseEvent* event) {
 }
 
 void CR3View::mouseReleaseEvent(QMouseEvent* event) {
-    bool left = event->button() == Qt::LeftButton;
-    //bool right = event->button() == Qt::RightButton;
-    //bool mid = event->button() == Qt::MidButton;
-    lvPoint pt(event->pos().x() * _dpr, event->pos().y() * _dpr);
+    lvPoint pt(qRound(event->localPos().x() * _dpr), qRound(event->localPos().y() * _dpr));
     ldomXPointer p = _docview->getNodeByPoint(pt);
-    lString32 path;
-    lString32 href;
     if (!p.isNull()) {
-        path = p.toString();
-        href = p.getHRef();
         if (_editMode)
             _docview->setCursorPos(p);
     }
