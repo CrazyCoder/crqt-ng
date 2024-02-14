@@ -1342,32 +1342,32 @@
 <context>
     <name>SettingsDlg</name>
     <message>
-        <location filename="../settings.ui" line="196"/>
+        <location filename="../settings.ui" line="202"/>
         <source>Page</source>
         <translation>Страница</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="473"/>
+        <location filename="../settings.ui" line="440"/>
         <source>Clock</source>
         <translation>Час</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="95"/>
+        <location filename="../settings.ui" line="101"/>
         <source>Show toolbar</source>
         <translation>Показване на панела с инструменти</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="388"/>
+        <location filename="../settings.ui" line="225"/>
         <source>Two pages</source>
         <translation>Две страници</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="393"/>
+        <location filename="../settings.ui" line="230"/>
         <source>Scroll View</source>
         <translation>Свитък</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="45"/>
+        <location filename="../settings.ui" line="51"/>
         <source>Look &amp; feel</source>
         <translation>Визуален стил</translation>
     </message>
@@ -1377,27 +1377,27 @@
         <translation>[Без сричкопренасяне]</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1690"/>
+        <location filename="../settings.ui" line="1613"/>
         <source>Interline spacing</source>
         <translation>Интервал между редовете</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="383"/>
+        <location filename="../settings.ui" line="220"/>
         <source>One page</source>
         <translation>Една страница</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="545"/>
-        <location filename="../settings.ui" line="604"/>
-        <location filename="../settings.ui" line="643"/>
-        <location filename="../settings.ui" line="818"/>
-        <location filename="../settings.ui" line="1073"/>
-        <location filename="../settings.ui" line="1540"/>
+        <location filename="../settings.ui" line="512"/>
+        <location filename="../settings.ui" line="578"/>
+        <location filename="../settings.ui" line="655"/>
+        <location filename="../settings.ui" line="706"/>
+        <location filename="../settings.ui" line="996"/>
+        <location filename="../settings.ui" line="1463"/>
         <source>Change</source>
         <translation>Промяна</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="109"/>
+        <location filename="../settings.ui" line="115"/>
         <source>Show scroll bar</source>
         <translation>Показване на лентата за превъртане</translation>
     </message>
@@ -1406,12 +1406,12 @@
         <translation type="vanished">Отвори последната книга</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="172"/>
+        <location filename="../settings.ui" line="178"/>
         <source>Fullscreen display</source>
         <translation>Режим на цял екран</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="78"/>
+        <location filename="../settings.ui" line="84"/>
         <source>Do nothing</source>
         <translation>Не прави нищо</translation>
     </message>
@@ -1420,64 +1420,64 @@
         <translation type="vanished">Пример</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1007"/>
+        <location filename="../settings.ui" line="970"/>
         <source>Styles</source>
         <translation>Стилове</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="445"/>
+        <location filename="../settings.ui" line="412"/>
         <source>Book name</source>
         <translation>Заглавие</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="37"/>
+        <location filename="../settings.ui" line="43"/>
         <source>Window</source>
         <translation>Прозорец</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="31"/>
+        <location filename="../settings.ui" line="37"/>
         <source>Window options</source>
         <translation>Прозорец</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="86"/>
+        <location filename="../settings.ui" line="92"/>
         <source>Controls</source>
         <translation>Управление</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1058"/>
+        <location filename="../settings.ui" line="981"/>
         <location filename="../settings.cpp" line="1048"/>
         <source>Text color</source>
         <translation>Цвят на текста</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1780"/>
+        <location filename="../settings.ui" line="1703"/>
         <source>.TXT files</source>
         <translation>.TXT файлове</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="102"/>
+        <location filename="../settings.ui" line="108"/>
         <source>Show menu</source>
         <translation>Показване на менюто</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="252"/>
+        <location filename="../settings.ui" line="257"/>
         <source>Page margins</source>
         <translation>Бели полета</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="73"/>
+        <location filename="../settings.ui" line="79"/>
         <source>Show File Open dialog</source>
         <translation>Показване диалог за отваряне на файл</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1525"/>
+        <location filename="../settings.ui" line="1448"/>
         <location filename="../settings.cpp" line="1052"/>
         <source>Background color</source>
         <translation>Цвят на фона</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1787"/>
+        <location filename="../settings.ui" line="1710"/>
         <source>Disable automatic formatting</source>
         <translation>Изключване на автоформатирането</translation>
     </message>
@@ -1487,44 +1487,44 @@
         <translation>Вкъщи не яж сьомга с фиде без ракийка и хапка люта чушчица.</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="68"/>
+        <location filename="../settings.ui" line="74"/>
         <source>Show list of recent books</source>
         <translation>Показване на списъка с последните книги</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="513"/>
+        <location filename="../settings.ui" line="480"/>
         <source>Header font</source>
         <translation>Шрифт на колонтитула</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1652"/>
-        <location filename="../settings.ui" line="1666"/>
+        <location filename="../settings.ui" line="1575"/>
+        <location filename="../settings.ui" line="1589"/>
         <source>Hyphenation</source>
         <translation>Сричкопренасяне</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="369"/>
+        <location filename="../settings.ui" line="244"/>
         <source>Vew Mode</source>
         <translation>Режим за преглеждане</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="17"/>
+        <location filename="../settings.ui" line="23"/>
         <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="55"/>
+        <location filename="../settings.ui" line="61"/>
         <source>Startup action</source>
         <translation>Действие при стартиране</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="530"/>
+        <location filename="../settings.ui" line="497"/>
         <location filename="../settings.cpp" line="1056"/>
         <source>Page header text color</source>
         <translation>Цвят на колонтитула</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="116"/>
+        <location filename="../settings.ui" line="122"/>
         <source>Show status bar</source>
         <translation>Показване на лентата за състояние</translation>
     </message>
@@ -1534,12 +1534,12 @@
         <translation>[Алгоритмично сричкопренасяне]</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1490"/>
+        <location filename="../settings.ui" line="1413"/>
         <source>Page skin</source>
         <translation>Стил на фона</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="480"/>
+        <location filename="../settings.ui" line="447"/>
         <source>Battery status</source>
         <translation>Състояние на батарията</translation>
     </message>
@@ -1548,608 +1548,608 @@
         <translation type="vanished">Шрифт</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="589"/>
+        <location filename="../settings.ui" line="556"/>
         <source>Show footnotes at bottom of page</source>
         <translation>Показване на бележките под линия в края на страницата</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="411"/>
+        <location filename="../settings.ui" line="378"/>
         <source>Show page header</source>
         <translation>Показване на колонтитул</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="63"/>
+        <location filename="../settings.ui" line="69"/>
         <source>Restore session</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="123"/>
+        <location filename="../settings.ui" line="129"/>
         <source>Fixed tab size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="139"/>
+        <location filename="../settings.ui" line="145"/>
         <source>automatically copy text to clipboard when selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="156"/>
+        <location filename="../settings.ui" line="162"/>
         <source>Automatically send selected text to this application.
 %TEXT% will be replaced with the selected text.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="260"/>
-        <location filename="../settings.ui" line="694"/>
-        <location filename="../settings.ui" line="732"/>
-        <location filename="../settings.ui" line="833"/>
-        <location filename="../settings.ui" line="964"/>
+        <location filename="../settings.ui" line="265"/>
+        <location filename="../settings.ui" line="781"/>
+        <location filename="../settings.ui" line="831"/>
+        <location filename="../settings.ui" line="881"/>
+        <location filename="../settings.ui" line="931"/>
         <location filename="../settings.cpp" line="574"/>
         <location filename="../settings.cpp" line="615"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="265"/>
-        <location filename="../settings.ui" line="699"/>
-        <location filename="../settings.ui" line="737"/>
-        <location filename="../settings.ui" line="838"/>
-        <location filename="../settings.ui" line="969"/>
+        <location filename="../settings.ui" line="270"/>
+        <location filename="../settings.ui" line="786"/>
+        <location filename="../settings.ui" line="836"/>
+        <location filename="../settings.ui" line="886"/>
+        <location filename="../settings.ui" line="936"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="270"/>
-        <location filename="../settings.ui" line="704"/>
-        <location filename="../settings.ui" line="742"/>
-        <location filename="../settings.ui" line="843"/>
-        <location filename="../settings.ui" line="974"/>
+        <location filename="../settings.ui" line="275"/>
+        <location filename="../settings.ui" line="791"/>
+        <location filename="../settings.ui" line="841"/>
+        <location filename="../settings.ui" line="891"/>
+        <location filename="../settings.ui" line="941"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="275"/>
-        <location filename="../settings.ui" line="709"/>
-        <location filename="../settings.ui" line="747"/>
-        <location filename="../settings.ui" line="848"/>
-        <location filename="../settings.ui" line="979"/>
+        <location filename="../settings.ui" line="280"/>
+        <location filename="../settings.ui" line="796"/>
+        <location filename="../settings.ui" line="846"/>
+        <location filename="../settings.ui" line="896"/>
+        <location filename="../settings.ui" line="946"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="280"/>
+        <location filename="../settings.ui" line="285"/>
         <source>4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="285"/>
+        <location filename="../settings.ui" line="290"/>
         <source>5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="290"/>
+        <location filename="../settings.ui" line="295"/>
         <source>6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="295"/>
+        <location filename="../settings.ui" line="300"/>
         <source>7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="300"/>
+        <location filename="../settings.ui" line="305"/>
         <source>8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="305"/>
+        <location filename="../settings.ui" line="310"/>
         <source>9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="310"/>
+        <location filename="../settings.ui" line="315"/>
         <source>10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="315"/>
+        <location filename="../settings.ui" line="320"/>
         <source>11</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="320"/>
+        <location filename="../settings.ui" line="325"/>
         <source>12</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="325"/>
+        <location filename="../settings.ui" line="330"/>
         <source>15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="330"/>
+        <location filename="../settings.ui" line="335"/>
         <source>20</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="335"/>
+        <location filename="../settings.ui" line="340"/>
         <source>25</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="340"/>
+        <location filename="../settings.ui" line="345"/>
         <source>30</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="345"/>
+        <location filename="../settings.ui" line="350"/>
         <source>40</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="350"/>
+        <location filename="../settings.ui" line="355"/>
         <source>50</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="355"/>
+        <location filename="../settings.ui" line="360"/>
         <source>60</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="466"/>
+        <location filename="../settings.ui" line="433"/>
         <source>Position percent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="679"/>
+        <location filename="../settings.ui" line="565"/>
         <location filename="../settings.cpp" line="1297"/>
         <source>Selection color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="630"/>
+        <location filename="../settings.ui" line="642"/>
         <source>Comment color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="724"/>
+        <location filename="../settings.ui" line="693"/>
         <source>Correction color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="856"/>
+        <location filename="../settings.ui" line="616"/>
         <source>Bookmark highlight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="612"/>
-        <location filename="../settings.ui" line="661"/>
-        <location filename="../settings.ui" line="794"/>
-        <location filename="../settings.ui" line="864"/>
-        <location filename="../settings.ui" line="945"/>
+        <location filename="../settings.ui" line="624"/>
+        <location filename="../settings.ui" line="762"/>
+        <location filename="../settings.ui" line="812"/>
+        <location filename="../settings.ui" line="862"/>
+        <location filename="../settings.ui" line="912"/>
         <source>Disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="950"/>
+        <location filename="../settings.ui" line="629"/>
         <source>Solid fill</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="955"/>
+        <location filename="../settings.ui" line="634"/>
         <location filename="../settings.cpp" line="801"/>
         <source>Underline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="717"/>
+        <location filename="../settings.ui" line="754"/>
         <source>Inline images zoom in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="617"/>
-        <location filename="../settings.ui" line="666"/>
-        <location filename="../settings.ui" line="799"/>
-        <location filename="../settings.ui" line="869"/>
+        <location filename="../settings.ui" line="767"/>
+        <location filename="../settings.ui" line="817"/>
+        <location filename="../settings.ui" line="867"/>
+        <location filename="../settings.ui" line="917"/>
         <source>Integer scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="622"/>
-        <location filename="../settings.ui" line="671"/>
-        <location filename="../settings.ui" line="804"/>
-        <location filename="../settings.ui" line="874"/>
+        <location filename="../settings.ui" line="772"/>
+        <location filename="../settings.ui" line="822"/>
+        <location filename="../settings.ui" line="872"/>
+        <location filename="../settings.ui" line="922"/>
         <source>Arbitrary scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="825"/>
+        <location filename="../settings.ui" line="854"/>
         <source>Block images zoom in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="786"/>
+        <location filename="../settings.ui" line="904"/>
         <source>Block images zoom out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="686"/>
+        <location filename="../settings.ui" line="804"/>
         <source>Inline images zoom out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="650"/>
+        <location filename="../settings.ui" line="744"/>
         <source>Image scaling options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1131"/>
+        <location filename="../settings.ui" line="1054"/>
         <source>Default font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1213"/>
+        <location filename="../settings.ui" line="1136"/>
         <source>Font gamma</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1406"/>
+        <location filename="../settings.ui" line="1329"/>
         <source>Font antialiasing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1483"/>
-        <location filename="../settings.ui" line="1794"/>
+        <location filename="../settings.ui" line="1406"/>
+        <location filename="../settings.ui" line="1717"/>
         <source>Manage...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1676"/>
+        <location filename="../settings.ui" line="1599"/>
         <source>Text shaping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1724"/>
+        <location filename="../settings.ui" line="1647"/>
         <source>Floating punctuation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1731"/>
+        <location filename="../settings.ui" line="1654"/>
         <source>Enable floating punctuation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1248"/>
+        <location filename="../settings.ui" line="1171"/>
         <source>0.3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="132"/>
+        <location filename="../settings.ui" line="138"/>
         <source>Automatically when selected:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="142"/>
+        <location filename="../settings.ui" line="148"/>
         <source>Copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="149"/>
+        <location filename="../settings.ui" line="155"/>
         <source>Run command:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="163"/>
+        <location filename="../settings.ui" line="169"/>
         <source>goldendict %TEXT%, qolibri %TEXT%, etc.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="439"/>
+        <location filename="../settings.ui" line="406"/>
         <source>Header elements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="452"/>
+        <location filename="../settings.ui" line="419"/>
         <source>Page number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="459"/>
+        <location filename="../settings.ui" line="426"/>
         <source>Page count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1253"/>
+        <location filename="../settings.ui" line="1176"/>
         <source>0.35</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1258"/>
+        <location filename="../settings.ui" line="1181"/>
         <source>0.4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1263"/>
+        <location filename="../settings.ui" line="1186"/>
         <source>0.45</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1268"/>
+        <location filename="../settings.ui" line="1191"/>
         <source>0.5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1273"/>
+        <location filename="../settings.ui" line="1196"/>
         <source>0.55</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1278"/>
+        <location filename="../settings.ui" line="1201"/>
         <source>0.6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1283"/>
+        <location filename="../settings.ui" line="1206"/>
         <source>0.65</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1288"/>
+        <location filename="../settings.ui" line="1211"/>
         <source>0.7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1293"/>
+        <location filename="../settings.ui" line="1216"/>
         <source>0.75</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1298"/>
+        <location filename="../settings.ui" line="1221"/>
         <source>0.8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1303"/>
+        <location filename="../settings.ui" line="1226"/>
         <source>0.85</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1308"/>
+        <location filename="../settings.ui" line="1231"/>
         <source>0.9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1313"/>
+        <location filename="../settings.ui" line="1236"/>
         <source>0.95</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1318"/>
+        <location filename="../settings.ui" line="1241"/>
         <source>0.98</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1323"/>
+        <location filename="../settings.ui" line="1246"/>
         <source>1.0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1328"/>
+        <location filename="../settings.ui" line="1251"/>
         <source>1.02</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1333"/>
+        <location filename="../settings.ui" line="1256"/>
         <source>1.05</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1338"/>
+        <location filename="../settings.ui" line="1261"/>
         <source>1.1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1343"/>
+        <location filename="../settings.ui" line="1266"/>
         <source>1.15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1348"/>
+        <location filename="../settings.ui" line="1271"/>
         <source>1.2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1353"/>
+        <location filename="../settings.ui" line="1276"/>
         <source>1.25</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1358"/>
+        <location filename="../settings.ui" line="1281"/>
         <source>1.3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1363"/>
+        <location filename="../settings.ui" line="1286"/>
         <source>1.35</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1368"/>
+        <location filename="../settings.ui" line="1291"/>
         <source>1.4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1373"/>
+        <location filename="../settings.ui" line="1296"/>
         <source>1.45</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1378"/>
+        <location filename="../settings.ui" line="1301"/>
         <source>1.5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1383"/>
+        <location filename="../settings.ui" line="1306"/>
         <source>1.6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1388"/>
+        <location filename="../settings.ui" line="1311"/>
         <source>1.7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1393"/>
+        <location filename="../settings.ui" line="1316"/>
         <source>1.8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1398"/>
+        <location filename="../settings.ui" line="1321"/>
         <source>1.9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1420"/>
+        <location filename="../settings.ui" line="1343"/>
         <source>Font hinting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1452"/>
+        <location filename="../settings.ui" line="1375"/>
         <source>No hinting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1457"/>
+        <location filename="../settings.ui" line="1380"/>
         <source>Use bytecode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1462"/>
+        <location filename="../settings.ui" line="1385"/>
         <source>Autohinting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1470"/>
+        <location filename="../settings.ui" line="1393"/>
         <source>Fallback fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1745"/>
+        <location filename="../settings.ui" line="1668"/>
         <source>Enable document internal styles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1738"/>
+        <location filename="../settings.ui" line="1661"/>
         <source>Internal CSS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1759"/>
+        <location filename="../settings.ui" line="1682"/>
         <source>Enable document embedded fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1752"/>
+        <location filename="../settings.ui" line="1675"/>
         <source>.EPUB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1822"/>
+        <location filename="../settings.ui" line="1743"/>
         <location filename="../settings.cpp" line="439"/>
         <source>Default paragraph style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1877"/>
+        <location filename="../settings.ui" line="1777"/>
         <source>Alignment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1887"/>
+        <location filename="../settings.ui" line="1787"/>
         <source>First line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1897"/>
+        <location filename="../settings.ui" line="1797"/>
         <source>Font size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1907"/>
+        <location filename="../settings.ui" line="1807"/>
         <source>Font face</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1196"/>
-        <location filename="../settings.ui" line="1917"/>
+        <location filename="../settings.ui" line="1119"/>
+        <location filename="../settings.ui" line="1817"/>
         <source>Font weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1700"/>
+        <location filename="../settings.ui" line="1623"/>
         <source>Min space width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1801"/>
+        <location filename="../settings.ui" line="1724"/>
         <source>Font families</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1927"/>
+        <location filename="../settings.ui" line="1827"/>
         <source>Font style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1937"/>
+        <location filename="../settings.ui" line="1837"/>
         <source>Font color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1977"/>
+        <location filename="../settings.ui" line="1877"/>
         <source>Margins:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1984"/>
+        <location filename="../settings.ui" line="1884"/>
         <source>Before</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1994"/>
+        <location filename="../settings.ui" line="1894"/>
         <source>After</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="2004"/>
+        <location filename="../settings.ui" line="1904"/>
         <location filename="../settings.cpp" line="528"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="2014"/>
+        <location filename="../settings.ui" line="1914"/>
         <location filename="../settings.cpp" line="528"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1950"/>
+        <location filename="../settings.ui" line="1850"/>
         <source>Interline space</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1960"/>
+        <location filename="../settings.ui" line="1860"/>
         <source>Text decoration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1970"/>
+        <location filename="../settings.ui" line="1870"/>
         <source>Vertical align</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1813"/>
+        <location filename="../settings.ui" line="1734"/>
         <source>Stylesheet</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2484,7 +2484,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="419"/>
+        <location filename="../settings.ui" line="386"/>
         <location filename="../settings.cpp" line="232"/>
         <location filename="../settings.cpp" line="239"/>
         <location filename="../settings.cpp" line="800"/>
@@ -2527,58 +2527,58 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="424"/>
+        <location filename="../settings.ui" line="391"/>
         <source>Page header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="429"/>
+        <location filename="../settings.ui" line="396"/>
         <source>Page footer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1586"/>
+        <location filename="../settings.ui" line="1509"/>
         <source>Rendering flags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1594"/>
-        <location filename="../settings.ui" line="1625"/>
+        <location filename="../settings.ui" line="1517"/>
+        <location filename="../settings.ui" line="1548"/>
         <source>Legacy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1599"/>
+        <location filename="../settings.ui" line="1522"/>
         <source>Flat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1604"/>
+        <location filename="../settings.ui" line="1527"/>
         <source>Book</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1609"/>
+        <location filename="../settings.ui" line="1532"/>
         <source>Web (Full)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1617"/>
+        <location filename="../settings.ui" line="1540"/>
         <source>DOM level:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1630"/>
+        <location filename="../settings.ui" line="1553"/>
         <source>Newest</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1638"/>
+        <location filename="../settings.ui" line="1561"/>
         <source>Multi languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1645"/>
+        <location filename="../settings.ui" line="1568"/>
         <source>Support for multilingual documents</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2598,22 +2598,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1710"/>
+        <location filename="../settings.ui" line="1633"/>
         <source>Font kerning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1717"/>
+        <location filename="../settings.ui" line="1640"/>
         <source>Enable font kerning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1773"/>
+        <location filename="../settings.ui" line="1696"/>
         <source>Ignore document margins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1659"/>
+        <location filename="../settings.ui" line="1582"/>
         <source>Enable hyphenation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2648,7 +2648,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1766"/>
+        <location filename="../settings.ui" line="1689"/>
         <source>Margins redefine</source>
         <translation type="unfinished"></translation>
     </message>
