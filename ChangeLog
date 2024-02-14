@@ -1,3 +1,46 @@
+2024-02-14  Aleksey Chernov  <valexlin@gmail.com>
+
+    * Version 1.0.13 released.
+    ==========================
+
+    Tag sources with `1.0.13'.
+
+    See below for changes.
+
+2024-02-14  Aleksey Chernov  <valexlin@gmail.com>
+
+    Revert "Settings dialog: scrolling has been added to make a large number of controls fit on a small screen."
+    This doesn't work well on Windows OS.
+
+    The deprecated function QMouseEvent::localPos() is not used in Qt 6.
+
+2024-02-13  Aleksey Chernov  <valexlin@gmail.com>
+
+    Changed text selection mode: now, when selecting text by single-clicking the left mouse button and then moving it, the text is selected up to the letter, not the word.
+    And when double-clicking and moving - along the boundaries of the word. That is, like in most applications.
+
+    A separate menu is used for selected text so as not to confuse the user.
+
+    Clicking the left mouse button on a space free from nodes clears the text selection.
+    Code cleanup (unnecessary code, including commented code).
+
+2024-02-11  Aleksey Chernov  <valexlin@gmail.com>
+
+    Don't save text to the global mouse selection buffer if it's not available on the system.
+
+2024-02-05  Aleksey Chernov  <valexlin@gmail.com>
+
+    The user's selection of text is automatically copied to the selection's clipboard (which, on Linux, can be pasted into another application by pressing the middle mouse button).
+
+    Settings dialog: scrolling has been added to make a large number of controls fit on a small screen.
+
+2024-02-04  Aleksey Chernov  <valexlin@gmail.com>
+
+    The window resizing handler has been optimized - in fact, the size changes with a delay with the cancellation of previous events, which eliminates slowdown and stuttering, since changing the window size with the mouse actually generates a large number of such events.
+
+    Update .gitignore
+
+
 2023-10-29  Aleksey Chernov  <valexlin@gmail.com>
 
     * Version 1.0.12 released.
