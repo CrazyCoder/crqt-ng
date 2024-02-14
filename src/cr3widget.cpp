@@ -1037,7 +1037,11 @@ QString CR3View::getLinkAtPoint(const QPoint& pos) {
 }
 
 void CR3View::mouseMoveEvent(QMouseEvent* event) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    lvPoint pt(qRound(event->position().x() * _dpr), qRound(event->position().y() * _dpr));
+#else
     lvPoint pt(qRound(event->localPos().x() * _dpr), qRound(event->localPos().y() * _dpr));
+#endif
     ldomXPointer p = _docview->getNodeByPoint(pt);
     lString32 href;
     if (!p.isNull()) {
@@ -1294,7 +1298,11 @@ void CR3View::mousePressEvent(QMouseEvent* event) {
 #else
     bool mid = event->button() == Qt::MidButton;
 #endif
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    lvPoint pt(qRound(event->position().x() * _dpr), qRound(event->position().y() * _dpr));
+#else
     lvPoint pt(qRound(event->localPos().x() * _dpr), qRound(event->localPos().y() * _dpr));
+#endif
     ldomXPointer p = _docview->getNodeByPoint(pt);
     // test imageByPoint
     LVImageSourceRef img = _docview->getImageByPoint(pt);
@@ -1343,7 +1351,11 @@ void CR3View::mousePressEvent(QMouseEvent* event) {
 }
 
 void CR3View::mouseReleaseEvent(QMouseEvent* event) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    lvPoint pt(qRound(event->position().x() * _dpr), qRound(event->position().y() * _dpr));
+#else
     lvPoint pt(qRound(event->localPos().x() * _dpr), qRound(event->localPos().y() * _dpr));
+#endif
     ldomXPointer p = _docview->getNodeByPoint(pt);
     if (!p.isNull()) {
         if (_editMode)
@@ -1387,7 +1399,11 @@ void CR3View::mouseDoubleClickEvent(QMouseEvent* event) {
     _doubleClick = true;
     QWidget::mouseDoubleClickEvent(event);
     if (_selecting) {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        lvPoint pt(qRound(event->position().x() * _dpr), qRound(event->position().y() * _dpr));
+#else
         lvPoint pt(qRound(event->localPos().x() * _dpr), qRound(event->localPos().y() * _dpr));
+#endif
         ldomXPointer p = _docview->getNodeByPoint(pt);
         updateSelection(p);
         setCursor(_selCursor);
