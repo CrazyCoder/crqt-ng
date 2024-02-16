@@ -6,7 +6,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <summary>Cross platform open source e-book reader</summary>
   <content_rating type="oars-1.1" />
-  <developer_name>Aleksey Chernov at al.</developer_name>
+  <developer_name>Aleksey Chernov et al.</developer_name>
   <description>
     <p>
       crqt-ng is fast and small cross-platform XML/CSS based eBook reader. Written using the Qt framework.
