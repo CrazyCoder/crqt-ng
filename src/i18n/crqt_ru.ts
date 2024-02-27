@@ -5,8 +5,8 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../aboutdlg.ui" line="20"/>
-        <source>About CoolReaderNG/Qt</source>
-        <translation>О программе CoolReaderNG/Qt</translation>
+        <source>About crqt-ng</source>
+        <translation>О программе crqt-ng</translation>
     </message>
     <message>
         <location filename="../aboutdlg.ui" line="79"/>
@@ -20,8 +20,8 @@
     </message>
     <message>
         <location filename="../aboutdlg.cpp" line="44"/>
-        <source>CoolReaderNG is free open source e-book viewer based on crengine-ng library.</source>
-        <translation>CoolReaderNG - это свободная программа с открытым исходным кодом для просмотра электронных книг основанная на движке crengine-ng.</translation>
+        <source>crqt-ng is free open source e-book viewer based on crengine-ng library.</source>
+        <translation>crqt-ng - это свободная программа с открытым исходным кодом для просмотра электронных книг основанная на движке crengine-ng.</translation>
     </message>
     <message>
         <location filename="../aboutdlg.cpp" line="45"/>
@@ -889,9 +889,18 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="456"/>
+        <source>About Qt...</source>
+        <translation>О Qt...</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="459"/>
         <source>About Qt</source>
         <translation>О Qt</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="467"/>
+        <source>About the program</source>
+        <translation>О программе</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="476"/>
@@ -968,6 +977,11 @@
         <location filename="../mainwindow.ui" line="203"/>
         <source>Esc</source>
         <translation>Esc</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="14"/>
+        <source>crqt-ng</source>
+        <translation>crqt-ng</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="218"/>
@@ -1110,6 +1124,11 @@
         <translation>Ctrl+Ins</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="464"/>
+        <source>About crqt-ng...</source>
+        <translation>О crqt-ng...</translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="482"/>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
@@ -1207,17 +1226,6 @@
         <location filename="../mainwindow.ui" line="613"/>
         <source>Ctrl+Left</source>
         <translation>Ctrl+Left</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="14"/>
-        <source>CoolReaderNG/Qt</source>
-        <translation>CoolReaderNG/Qt</translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="464"/>
-        <location filename="../mainwindow.ui" line="467"/>
-        <source>About CoolReaderNG/Qt</source>
-        <translation>О программе CoolReaderNG/Qt</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="607"/>

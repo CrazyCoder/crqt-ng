@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>CoolReaderNG/Qt</string>
+   <string>crqt-ng</string>
   </property>
   <property name="windowIcon">
    <iconset resource="crqtres.qrc">
@@ -453,7 +453,7 @@
   </action>
   <action name="actionAboutQT">
    <property name="text">
-    <string>About Qt</string>
+    <string>About Qt...</string>
    </property>
    <property name="toolTip">
     <string>About Qt</string>
@@ -461,10 +461,10 @@
   </action>
   <action name="actionAboutCoolReader">
    <property name="text">
-    <string>About CoolReaderNG/Qt</string>
+    <string>About crqt-ng...</string>
    </property>
    <property name="toolTip">
-    <string>About CoolReaderNG/Qt</string>
+    <string>About the program</string>
    </property>
   </action>
   <action name="actionAddBookmark">

@@ -262,9 +262,9 @@ void MainWindow::syncTabWidget(const QString& currentDocument) {
         currentTitle = _tabs[tabIndex].title();
     }
     if (!currentTitle.isEmpty())
-        setWindowTitle("CoolReaderNG/Qt - " + currentTitle);
+        setWindowTitle("crqt-ng - " + currentTitle);
     else
-        setWindowTitle("CoolReaderNG/Qt");
+        setWindowTitle("crqt-ng");
 }
 
 QString MainWindow::openFileDialogImpl() {
@@ -684,9 +684,9 @@ void MainWindow::onDocumentLoaded(lUInt64 viewId, const QString& atitle, const Q
         }
         if (cbIndex == currentIndex) {
             if (error.isEmpty()) {
-                setWindowTitle("CoolReaderNG/Qt - " + atitle);
+                setWindowTitle("crqt-ng - " + atitle);
             } else {
-                setWindowTitle("CoolReaderNG/Qt");
+                setWindowTitle("crqt-ng");
             }
         }
     }
@@ -1015,9 +1015,9 @@ void MainWindow::on_tabWidget_currentChanged(int index) {
         }
     }
     if (!title.isEmpty())
-        setWindowTitle("CoolReaderNG/Qt - " + title);
+        setWindowTitle("crqt-ng - " + title);
     else
-        setWindowTitle("CoolReaderNG/Qt");
+        setWindowTitle("crqt-ng");
     _prevIndex = index;
 }
 

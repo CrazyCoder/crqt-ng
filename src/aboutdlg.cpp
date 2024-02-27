@@ -41,7 +41,7 @@ AboutDialog::AboutDialog(QWidget* parent) : QDialog(parent), m_ui(new Ui::AboutD
             "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">"
             "p, li { white-space: pre-wrap; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; }"
             "</style></head><body>";
-    aboutText += "<p>" + tr("CoolReaderNG is free open source e-book viewer based on crengine-ng library.") + "</p>";
+    aboutText += "<p>" + tr("crqt-ng is free open source e-book viewer based on crengine-ng library.") + "</p>";
     aboutText += "<p>" + tr("Source code is available at") + QString(" <a href=\"%1\">%1</a> ").arg(project_src_url) +
                  tr("under the terms of GNU GPL license either version 2 or (at your option) any later version.") +
                  "</p>";

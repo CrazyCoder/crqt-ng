@@ -5,7 +5,7 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../aboutdlg.ui" line="20"/>
-        <source>About CoolReaderNG/Qt</source>
+        <source>About crqt-ng</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -20,7 +20,7 @@
     </message>
     <message>
         <location filename="../aboutdlg.cpp" line="44"/>
-        <source>CoolReaderNG is free open source e-book viewer based on crengine-ng library.</source>
+        <source>crqt-ng is free open source e-book viewer based on crengine-ng library.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -873,10 +873,14 @@
         <translation>Умаляване размера на шрифта</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="456"/>
         <location filename="../mainwindow.ui" line="459"/>
         <source>About Qt</source>
         <translation>Относно Qt</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="464"/>
+        <source>About crqt-ng...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="506"/>
@@ -961,6 +965,11 @@
     <message>
         <location filename="../mainwindow.ui" line="221"/>
         <source>PgDown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="14"/>
+        <source>crqt-ng</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1089,6 +1098,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="456"/>
+        <source>About Qt...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="467"/>
+        <source>About the program</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="482"/>
         <source>Ctrl+B</source>
         <translation type="unfinished"></translation>
@@ -1206,17 +1225,6 @@
         <location filename="../mainwindow.ui" line="646"/>
         <location filename="../mainwindow.ui" line="649"/>
         <source>Open link in new tab</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="14"/>
-        <source>CoolReaderNG/Qt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="464"/>
-        <location filename="../mainwindow.ui" line="467"/>
-        <source>About CoolReaderNG/Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -5,7 +5,7 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../aboutdlg.ui" line="20"/>
-        <source>About CoolReaderNG/Qt</source>
+        <source>About crqt-ng</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -20,7 +20,7 @@
     </message>
     <message>
         <location filename="../aboutdlg.cpp" line="44"/>
-        <source>CoolReaderNG is free open source e-book viewer based on crengine-ng library.</source>
+        <source>crqt-ng is free open source e-book viewer based on crengine-ng library.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -999,9 +999,18 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="456"/>
+        <source>About Qt...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="459"/>
         <source>About Qt</source>
         <translation>A Qt-ról</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="467"/>
+        <source>About the program</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="476"/>
@@ -1115,6 +1124,11 @@
         <translation>Fájl</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="14"/>
+        <source>crqt-ng</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="93"/>
         <source>View</source>
         <translation>Nézet</translation>
@@ -1145,11 +1159,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="14"/>
-        <source>CoolReaderNG/Qt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../mainwindow.ui" line="175"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
@@ -1166,8 +1175,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="464"/>
-        <location filename="../mainwindow.ui" line="467"/>
-        <source>About CoolReaderNG/Qt</source>
+        <source>About crqt-ng...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

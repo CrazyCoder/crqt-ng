@@ -5,7 +5,7 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../aboutdlg.ui" line="20"/>
-        <source>About CoolReaderNG/Qt</source>
+        <source>About crqt-ng</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -20,7 +20,7 @@
     </message>
     <message>
         <location filename="../aboutdlg.cpp" line="44"/>
-        <source>CoolReaderNG is free open source e-book viewer based on crengine-ng library.</source>
+        <source>crqt-ng is free open source e-book viewer based on crengine-ng library.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1010,9 +1010,18 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="456"/>
+        <source>About Qt...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="459"/>
         <source>About Qt</source>
         <translation>O Qt</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="467"/>
+        <source>About the program</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="476"/>
@@ -1126,6 +1135,11 @@
         <translation>Soubor</translation>
     </message>
     <message>
+        <location filename="../mainwindow.ui" line="14"/>
+        <source>crqt-ng</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../mainwindow.ui" line="93"/>
         <source>View</source>
         <translation>Pohled</translation>
@@ -1153,6 +1167,11 @@
     <message>
         <location filename="../mainwindow.ui" line="195"/>
         <source>Ctrl+Q</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="464"/>
+        <source>About crqt-ng...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1217,17 +1236,6 @@
     <message>
         <location filename="../mainwindow.ui" line="613"/>
         <source>Ctrl+Left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="14"/>
-        <source>CoolReaderNG/Qt</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mainwindow.ui" line="464"/>
-        <location filename="../mainwindow.ui" line="467"/>
-        <source>About CoolReaderNG/Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
