@@ -199,6 +199,7 @@ public slots:
     /// on scroll
     void togglePageScrollView();
     void scrollTo(int value);
+    void scrollBy(int px);
     void nextPage();
     void prevPage();
     void nextLine();
@@ -282,6 +283,7 @@ private:
     bool _clipboardSupportsMouseSelection;
     // Store a copy of the command that should run when text is selected.
     QStringList _selectionCommand;
+    int _wheelIntegralDegrees;
 };
 
 #endif // CR3WIDGET_H
