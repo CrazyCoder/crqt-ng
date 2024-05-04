@@ -356,7 +356,8 @@ CR3View::CR3View(QWidget* parent)
         , _canGoBack(false)
         , _canGoForward(false)
         , _onTextSelectAutoClipboardCopy(false)
-        , _onTextSelectAutoCmdExec(false) {
+        , _onTextSelectAutoCmdExec(false)
+        , _wheelIntegralDegrees(0) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     _dpr = screen()->devicePixelRatio();
 #elif QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
@@ -545,26 +546,53 @@ bool CR3View::loadDocument(const QString& fileName) {
 
 void CR3View::wheelEvent(QWheelEvent* event) {
     // Get degrees delta from vertical scrolling
+    int px = 0;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     int numDegrees = event->angleDelta().y() / 8;
+#if MACOS == 1
+    px = event->pixelDelta().y();
+#endif
 #else
     int numDegrees = event->delta() / 8;
 #endif
     int numSteps = numDegrees / 15;
-    if (numSteps == 0 && numDegrees != 0)
-        numSteps = numDegrees > 0 ? 1 : -1;
 
-    if (numSteps) {
-        if (_docview->getViewMode() == DVM_SCROLL) {
+    if (_docview->getViewMode() == DVM_SCROLL) {
+        if (0 == numSteps) {
+            if (0 == px) {
+                // 15 degrees -> 1 line
+                // x degrees -> x/15 lines
+                px = (_docview->getAvgTextLineHeight() * numDegrees) / 15;
+            }
+            if (0 == px && 0 != numDegrees)
+                px = numDegrees > 0 ? 1 : -1;
+            if (0 != px)
+                scrollBy(-px);
+        } else {
             if (numSteps > 0)
                 doCommand(DCMD_LINEDOWN, -numSteps);
             else
                 doCommand(DCMD_LINEUP, numSteps);
-        } else {
+        }
+    } else {
+        if (0 == numSteps) {
+#if MACOS == 1
+            if (0 != numDegrees)
+                numSteps = numDegrees > 0 ? 1 : -1;
+#else
+            _wheelIntegralDegrees += numDegrees;
+            if (_wheelIntegralDegrees > 0)
+                numSteps = (_wheelIntegralDegrees + 3) / 15;
+            else
+                numSteps = (_wheelIntegralDegrees - 3) / 15;
+#endif
+        }
+        if (0 != numSteps) {
             if (numSteps > 0)
                 doCommand(DCMD_PAGEUP, -numSteps);
             else
                 doCommand(DCMD_PAGEDOWN, numSteps);
+            _wheelIntegralDegrees = 0;
         }
     }
     event->accept();
@@ -790,6 +818,11 @@ void CR3View::scrollTo(int value) {
     if (currPos != value && value >= 0) {
         doCommand(DCMD_GO_SCROLL_POS, value);
     }
+}
+
+void CR3View::scrollBy(int px) {
+    _docview->SetPos(_docview->GetPos() + px, true, false);
+    update();
 }
 
 void CR3View::nextSentence() {
