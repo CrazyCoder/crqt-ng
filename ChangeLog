@@ -1,3 +1,39 @@
+2024-05-09  Aleksey Chernov  <valexlin@gmail.com>
+
+    * Version 1.0.14 released.
+    ==========================
+
+    Tag sources with `1.0.14'.
+
+    See below for changes.
+
+2024-05-09  Aleksey Chernov  <valexlin@gmail.com>
+
+    Mainwindow main menu: menu role for some menu items is specified.
+
+    Update .gitignore
+
+2024-05-03  Aleksey Chernov  <valexlin@gmail.com>
+
+    Improved handling of the mouse wheel scroll event - added support for
+    intermediate mouse wheel positions, which gives smoother text scrolling when
+    using the appropriate hardware.
+
+2024-02-27  Aleksey Chernov  <valexlin@gmail.com>
+
+    The use of the name “CoolReaderNG” in the source code is excluded, since
+    “CoolReaderNG” is not the name of this program, but the name of a group of
+    projects.
+
+2024-02-16  Aleksey Chernov  <valexlin@gmail.com>
+
+    Update crqt.appdata.xml: typo fixed
+
+2024-02-14  Aleksey Chernov  <valexlin@gmail.com>
+
+    Fixed AppStream metadata: added missing 'developer_name' tag.
+
+
 2024-02-14  Aleksey Chernov  <valexlin@gmail.com>
 
     * Version 1.0.13 released.
