@@ -1,7 +1,7 @@
 /***************************************************************************
  *   crqt-ng                                                               *
  *   Copyright (C) 2009-2011,2014 Vadim Lopatin <coolreader.org@gmail.com> *
- *   Copyright (C) 2021-2023 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2021-2024 Aleksey Chernov <valexlin@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -77,7 +77,7 @@ private slots:
     void on_actionFileProperties_triggered();
     void on_actionShowBookmarksList_triggered();
     void on_actionAddBookmark_triggered();
-    void on_actionAboutCoolReader_triggered();
+    void on_actionAbout_triggered();
     void on_actionAboutQT_triggered();
     void on_actionCopy2_triggered();
     void on_actionCopy_triggered();

@@ -125,7 +125,7 @@
      <string>Help</string>
     </property>
     <addaction name="actionAboutQT"/>
-    <addaction name="actionAboutCoolReader"/>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuView"/>
@@ -193,6 +193,9 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
    </property>
   </action>
   <action name="actionMinimize">
@@ -458,13 +461,19 @@
    <property name="toolTip">
     <string>About Qt</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::AboutQtRole</enum>
+   </property>
   </action>
-  <action name="actionAboutCoolReader">
+  <action name="actionAbout">
    <property name="text">
     <string>About crqt-ng...</string>
    </property>
    <property name="toolTip">
     <string>About the program</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
    </property>
   </action>
   <action name="actionAddBookmark">

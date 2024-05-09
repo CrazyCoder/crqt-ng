@@ -3,8 +3,8 @@
  *   Copyright (C) 2009-2012,2014 Vadim Lopatin <coolreader.org@gmail.com> *
  *   Copyright (C) 2018 Mihail Slobodyanuk <slobodyanukma@gmail.com>       *
  *   Copyright (C) 2019,2020 Konstantin Potapov <pkbo@users.sourceforge.net>
- *   Copyright (C) 2018,2020-2023 Aleksey Chernov <valexlin@gmail.com>     *
  *   Copyright (C) 2023 Ren Tatsumoto <tatsu@autistici.org>                *
+ *   Copyright (C) 2018,2020-2024 Aleksey Chernov <valexlin@gmail.com>     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -900,7 +900,7 @@ void MainWindow::on_actionAboutQT_triggered() {
     QApplication::aboutQt();
 }
 
-void MainWindow::on_actionAboutCoolReader_triggered() {
+void MainWindow::on_actionAbout_triggered() {
     AboutDialog::showDlg(this);
 }
 
