@@ -3,19 +3,19 @@
 <plist version="0.1">
 <dict>
 	<key>CFBundleName</key>
-	<string>CoolReaderNG/Qt</string>
+	<string>crqt-ng</string>
 	<key>CFBundleDisplayName</key>
-	<string>CoolReader NG</string>
+	<string>crqt-ng</string>
 	<key>CFBundleVersion</key>
+	<string>@VERSION@</string>
+	<key>CFBundleShortVersionString</key>
 	<string>@VERSION@</string>
 	<key>CFBundleIconFile</key>
 	<string>crqt.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.coolreader-ng.crqt</string>
+	<string>io.gitlab.coolreader-ng.crqt</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-	<key>CFBundleGetInfoString</key>
-	<string>Created by Qt/QMake</string>
 	<key>CFBundleSignature</key>
 	<string>crdr</string>
 	<key>CFBundleExecutable</key>
@@ -25,6 +25,6 @@
 	<key>NSHighResolutionCapable</key>
 	<string>True</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>(c) 2023 coolreader-ng</string>
+	<string>(c) 2023,2024 coolreader-ng</string>
 </dict>
 </plist>
