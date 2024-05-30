@@ -2,7 +2,7 @@
  *   crqt-ng                                                               *
  *   Copyright (C) 2010,2014 Vadim Lopatin <coolreader.org@gmail.com>      *
  *   Copyright (C) 2020 Daniel Bedrenko <d.bedrenko@gmail.com>             *
- *   Copyright (C) 2020 Aleksey Chernov <valexlin@gmail.com>               *
+ *   Copyright (C) 2020,2024 Aleksey Chernov <valexlin@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -53,6 +53,9 @@ SearchDialog::SearchDialog(QWidget* parent, CR3View* docView)
     ui->setupUi(this);
     ui->cbCaseSensitive->setCheckState(Qt::Unchecked);
     ui->rbForward->toggle();
+    connect(ui->btnFindNext, SIGNAL(clicked()), this, SLOT(slot_btnFindNext()));
+    connect(ui->btnClose, SIGNAL(clicked()), this, SLOT(reject()));
+    connect(this, SIGNAL(finished(int)), this, SLOT(slot_finished(int)));
 }
 
 SearchDialog::~SearchDialog() {
@@ -68,13 +71,6 @@ void SearchDialog::changeEvent(QEvent* e) {
         default:
             break;
     }
-}
-
-void SearchDialog::closeEvent(QCloseEvent* e) {
-    QDialog::closeEvent(e);
-    // this dialog instance will be deleted by Qt because
-    // we set the WA_DeleteOnClose attribute for this window to true.
-    SearchDialog::_instance = NULL;
 }
 
 bool SearchDialog::findText(lString32 pattern, int origin, bool reverse, bool caseInsensitive) {
@@ -135,24 +131,25 @@ bool SearchDialog::findText(lString32 pattern, int origin, bool reverse, bool ca
     return false;
 }
 
-void SearchDialog::on_btnFindNext_clicked() {
+void SearchDialog::slot_btnFindNext() {
     bool found = false;
     QString pattern = ui->edPattern->text();
-    lString32 p16 = qt2cr(pattern);
+    lString32 p32 = qt2cr(pattern);
     bool reverse = ui->rbBackward->isChecked();
     bool caseInsensitive = ui->cbCaseSensitive->checkState() != Qt::Checked;
-    found = findText(p16, 1, reverse, caseInsensitive);
+    found = findText(p32, 1, reverse, caseInsensitive);
     if (!found)
-        found = findText(p16, -1, reverse, caseInsensitive);
+        found = findText(p32, -1, reverse, caseInsensitive);
     if (!found) {
-        QMessageBox* mb = new QMessageBox(QMessageBox::Information, tr("Not found"),
-                                          tr("Search pattern is not found in document"), QMessageBox::Close, this);
-        mb->exec();
+        QMessageBox::information(this, tr("Not found"), tr("Search pattern is not found in document"),
+                                 QMessageBox::Close);
     } else {
         _docview->update();
     }
 }
 
-void SearchDialog::on_btnClose_clicked() {
-    this->close();
+void SearchDialog::slot_finished(int result) {
+    // This dialog instance will be deleted by Qt because we have
+    //  set the WA_DeleteOnClose attribute for this window to true.
+    SearchDialog::_instance = NULL;
 }

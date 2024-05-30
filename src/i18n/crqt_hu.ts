@@ -1337,12 +1337,12 @@
         <translation type="unfinished">Bezár</translation>
     </message>
     <message>
-        <location filename="../searchdlg.cpp" line="148"/>
+        <location filename="../searchdlg.cpp" line="144"/>
         <source>Not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../searchdlg.cpp" line="149"/>
+        <location filename="../searchdlg.cpp" line="144"/>
         <source>Search pattern is not found in document</source>
         <translation type="unfinished"></translation>
     </message>

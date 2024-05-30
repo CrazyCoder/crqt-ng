@@ -1313,12 +1313,12 @@
 <context>
     <name>SearchDialog</name>
     <message>
-        <location filename="../searchdlg.cpp" line="148"/>
+        <location filename="../searchdlg.cpp" line="144"/>
         <source>Not found</source>
         <translation>Nenalezeno</translation>
     </message>
     <message>
-        <location filename="../searchdlg.cpp" line="149"/>
+        <location filename="../searchdlg.cpp" line="144"/>
         <source>Search pattern is not found in document</source>
         <translation>Hledaný vzor nebyl v dokumentu nalezen</translation>
     </message>

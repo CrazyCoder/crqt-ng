@@ -1337,12 +1337,12 @@
         <translation>Sluiten</translation>
     </message>
     <message>
-        <location filename="../searchdlg.cpp" line="148"/>
+        <location filename="../searchdlg.cpp" line="144"/>
         <source>Not found</source>
         <translation>Niet gevonden</translation>
     </message>
     <message>
-        <location filename="../searchdlg.cpp" line="149"/>
+        <location filename="../searchdlg.cpp" line="144"/>
         <source>Search pattern is not found in document</source>
         <translation>De gezochte tekst is niet aangetroffen</translation>
     </message>

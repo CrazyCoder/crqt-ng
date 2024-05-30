@@ -2,7 +2,7 @@
  *   crqt-ng                                                               *
  *   Copyright (C) 2010 Vadim Lopatin <coolreader.org@gmail.com>           *
  *   Copyright (C) 2020 Daniel Bedrenko <d.bedrenko@gmail.com>             *
- *   Copyright (C) 2020 Aleksey Chernov <valexlin@gmail.com>               *
+ *   Copyright (C) 2020,2024 Aleksey Chernov <valexlin@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -43,15 +43,14 @@ protected:
     SearchDialog(QWidget* parent, CR3View* docView);
     ~SearchDialog();
     void changeEvent(QEvent* e);
-    void closeEvent(QCloseEvent* e);
 private:
     Ui::SearchDialog* ui;
     CR3View* _docview;
     lString32 _lastPattern;
     static SearchDialog* _instance;
 private slots:
-    void on_btnFindNext_clicked();
-    void on_btnClose_clicked();
+    void slot_btnFindNext();
+    void slot_finished(int result);
 };
 
 #endif // SEARCHDLG_H
