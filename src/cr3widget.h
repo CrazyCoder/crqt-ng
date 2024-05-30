@@ -228,9 +228,10 @@ protected:
     virtual void mousePressEvent(QMouseEvent* event);
     virtual void mouseReleaseEvent(QMouseEvent* event);
     virtual void mouseDoubleClickEvent(QMouseEvent* event);
+    virtual void changeEvent(QEvent* event);
+
     virtual void refreshPropFromView(const char* propName);
     virtual QSize minimumSizeHint() const;
-
 private slots:
     void resizeTimerTimeout();
 private:

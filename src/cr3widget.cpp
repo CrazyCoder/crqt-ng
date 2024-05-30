@@ -406,6 +406,9 @@ CR3View::CR3View(QWidget* parent)
     //            _docview->setBackgroundImage(img, true);
     //        }
     //    }
+    lString32 decimalPoint = qt2cr(locale().decimalPoint());
+    if (!decimalPoint.empty())
+        _docview->setDecimalPointChar(decimalPoint[0]);
     updateDefProps();
     setMouseTracking(true);
     setFocusPolicy(Qt::StrongFocus);
@@ -1440,6 +1443,17 @@ void CR3View::mouseDoubleClickEvent(QMouseEvent* event) {
         ldomXPointer p = _docview->getNodeByPoint(pt);
         updateSelection(p);
         setCursor(_selCursor);
+    }
+}
+
+void CR3View::changeEvent(QEvent* event) {
+    QWidget::changeEvent(event);
+    if (QEvent::LocaleChange == event->type()) {
+        lString32 decimalPoint = qt2cr(locale().decimalPoint());
+        if (!decimalPoint.empty()) {
+            _docview->setDecimalPointChar(decimalPoint[0]);
+            update();
+        }
     }
 }
 
