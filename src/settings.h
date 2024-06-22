@@ -149,6 +149,7 @@ protected:
     void optionToUiLine(const char* optionName, QLineEdit* le);
     void optionToUiString(const char* optionName, QComboBox* cb);
     void optionToUiIndex(const char* optionName, QComboBox* cb);
+    void optionToComboWithFloats(const char* optionName, QComboBox* cb, int defaultIdx);
     void setCheckInversed(const char* optionName, int checkState);
     void optionToUiInversed(const char* optionName, QCheckBox* cb);
     void fontToUi(const char* faceOptionName, const char* sizeOptionName, QComboBox* faceCombo, QComboBox* sizeCombo,

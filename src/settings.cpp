@@ -4,8 +4,8 @@
  *   Copyright (C) 2018 EXL <exlmotodev@gmail.com>                         *
  *   Copyright (C) 2020 Konstantin Potapov <pkbo@users.sourceforge.net>    *
  *   Copyright (C) 2021 ourairquality <info@ourairquality.org>             *
- *   Copyright (C) 2018-2023 Aleksey Chernov <valexlin@gmail.com>          *
  *   Copyright (C) 2023 Ren Tatsumoto <tatsu@autistici.org>                *
+ *   Copyright (C) 2018-2024 Aleksey Chernov <valexlin@gmail.com>          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -40,6 +40,7 @@
 #include <QtGui/QStyleFactory>
 #endif
 #include <QDir>
+#include <QLocale>
 
 #include <lvrend.h> // for BLOCK_RENDERING_FLAGS_XXX presets
 
@@ -72,6 +73,12 @@ static int aa_variants[] = { font_aa_none, font_aa_gray };
 static int interline_spaces[] = { 75, 80, 85, 90, 95, 100, 110, 120, 140, 150 };
 
 static int minspace_widths[] = { 50, 60, 70, 80, 90, 100 };
+
+static float font_gammas[] = { 0.30f, 0.35f, 0.40f, 0.45f, 0.50f, 0.55f, 0.60f, 0.65f, 0.70f, 0.75f, 0.80f,
+                               0.85f, 0.90f, 0.95f, 0.98f, 1.00f, 1.02f, 1.05f, 1.10f, 1.15f, 1.20f, 1.25f,
+                               1.30f, 1.35f, 1.40f, 1.45f, 1.50f, 1.60f, 1.70f, 1.80f, 1.90f, 2.00f };
+#define GAMMA_VARIANTS_SZ (sizeof(font_gammas) / sizeof(float))
+static const int default_gamma_index = 15; // gamma 1.0
 
 static bool initDone = false;
 static bool suppressOnChange = false;
@@ -277,7 +284,12 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props) : QDialog(parent), m_s
     QString gamma = m_props->getStringDef(PROP_FONT_GAMMA, "");
     if (gamma == "")
         m_props->setString(PROP_FONT_GAMMA, "1.0");
-    optionToUiString(PROP_FONT_GAMMA, m_ui->cbFontGamma);
+    QLocale locale = QLocale::system();
+    for (int i = 0; i < GAMMA_VARIANTS_SZ; i++) {
+        QString str = locale.toString(font_gammas[i], 'g', 3);
+        m_ui->cbFontGamma->addItem(str);
+    }
+    optionToComboWithFloats(PROP_FONT_GAMMA, m_ui->cbFontGamma, default_gamma_index);
 
     QString ignoreDocMargins = m_props->getStringDef("styles.body.margin", "");
     m_ui->cbIgnoreDocumentMargins->setCheckState(ignoreDocMargins.length() > 0 ? Qt::Checked : Qt::Unchecked);
@@ -846,6 +858,32 @@ void SettingsDlg::optionToUiIndex(const char* optionName, QComboBox* cb) {
     cb->setCurrentIndex(value);
 }
 
+void SettingsDlg::optionToComboWithFloats(const char* optionName, QComboBox* cb, int defaultIdx) {
+    QLocale locale = QLocale::system();
+    QString str_value = m_props->getStringDef(optionName, "");
+    bool parseRes;
+    float value = locale.toFloat(str_value, &parseRes);
+    if (!parseRes) {
+        // parse using 'C' locale as fallback
+        value = str_value.toFloat(&parseRes);
+    }
+    if (!parseRes)
+        value = font_gammas[defaultIdx];
+    int index = -1;
+    for (int i = 0; i < cb->count(); i++) {
+        float item_value = locale.toFloat(cb->itemText(i), &parseRes);
+        if (parseRes) {
+            if (fabsf(value - item_value) < 0.01f) {
+                index = i;
+                break;
+            }
+        }
+    }
+    if (index < 0)
+        index = defaultIdx;
+    cb->setCurrentIndex(index);
+}
+
 void SettingsDlg::optionToUiInversed(const char* optionName, QCheckBox* cb) {
     int state = (m_props->getIntDef(optionName, 1) != 0) ? 1 : 0;
     CRLog::debug("optionToUIInversed(%s,%d)", optionName, state);
@@ -1220,7 +1258,20 @@ void SettingsDlg::on_cbFloatingPunctuation_stateChanged(int s) {
 }
 
 void SettingsDlg::on_cbFontGamma_currentTextChanged(QString s) {
-    m_props->setString(PROP_FONT_GAMMA, s);
+    if (!initDone)
+        return;
+    bool parseRes;
+    // Parse string as float using system locale
+    QLocale locale = QLocale::system();
+    float value = locale.toFloat(s, &parseRes);
+    if (!parseRes) {
+        // Parse using 'C' locale as fallback
+        value = s.toFloat(&parseRes);
+    }
+    if (parseRes) {
+        // Convert float to string using 'C' locale
+        m_props->setString(PROP_FONT_GAMMA, QString::number(value, 'g', 3));
+    }
     updateStyleSample();
 }
 
