@@ -156,6 +156,11 @@ static QString getWeightName(int weight) {
     return name;
 }
 
+template <class T>
+static inline T my_abs(T value) {
+    return (value >= 0) ? value : -value;
+}
+
 // clang-format off
 static const char* styleNames[] = {
     "def",
@@ -873,7 +878,7 @@ void SettingsDlg::optionToComboWithFloats(const char* optionName, QComboBox* cb,
     for (int i = 0; i < cb->count(); i++) {
         float item_value = locale.toFloat(cb->itemText(i), &parseRes);
         if (parseRes) {
-            if (fabsf(value - item_value) < 0.01f) {
+            if (my_abs(value - item_value) < 0.01f) {
                 index = i;
                 break;
             }
