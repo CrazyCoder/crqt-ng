@@ -119,22 +119,27 @@
         <translation>cmark-gfm - форк cmark от GitHub, CommonMark библиотеки парсинга и рендеринга и программы на C</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="99"/>
+        <location filename="../aboutdlg.cpp" line="101"/>
+        <source>MD4C - MD4C stands for &quot;Markdown for C&quot; and that&apos;s exactly what this project is about.</source>
+        <translation>MD4C - MD4C означает &quot;Markdown for C&quot; и это точное описание этого проекта.</translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="104"/>
         <source>hyphman - AlReader hyphenation manager</source>
         <translation>hyphman - система переносов из AlReader</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="100"/>
+        <location filename="../aboutdlg.cpp" line="105"/>
         <source>Most hyphenation dictionaries - TEX hyphenation patterns</source>
         <translation>Основные словари переносов - TEX hyphenation patterns</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="101"/>
+        <location filename="../aboutdlg.cpp" line="106"/>
         <source>Russian hyphenation dictionary - </source>
         <translation>Русский словарь переносов - </translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="104"/>
+        <location filename="../aboutdlg.cpp" line="109"/>
         <source>Languages character set database by Fontconfig</source>
         <translation>Набор символов различных письменностей от Fontconfig</translation>
     </message>

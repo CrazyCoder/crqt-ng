@@ -119,22 +119,27 @@
         <translation>cmark - GitHubs afsplitsing van cmark, een CommonMark-verwerking, -renderingbibliotheek en -programma, geschreven in C</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="99"/>
+        <location filename="../aboutdlg.cpp" line="101"/>
+        <source>MD4C - MD4C stands for &quot;Markdown for C&quot; and that&apos;s exactly what this project is about.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../aboutdlg.cpp" line="104"/>
         <source>hyphman - AlReader hyphenation manager</source>
         <translation>hyphman - AlReader-woordafbrekingsbeheer</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="100"/>
+        <location filename="../aboutdlg.cpp" line="105"/>
         <source>Most hyphenation dictionaries - TEX hyphenation patterns</source>
         <translation>De meeste woordafbrekingswoordenboeken - TEX-woordafbrekingspatronen</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="101"/>
+        <location filename="../aboutdlg.cpp" line="106"/>
         <source>Russian hyphenation dictionary - </source>
         <translation>Russisch woordafbrekingswoordenboek - </translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="104"/>
+        <location filename="../aboutdlg.cpp" line="109"/>
         <source>Languages character set database by Fontconfig</source>
         <translation>Tekencoderingsdatabank van Fontconfig</translation>
     </message>

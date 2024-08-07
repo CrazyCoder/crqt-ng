@@ -279,7 +279,7 @@ QString MainWindow::openFileDialogImpl() {
             lastPath = cr2qt(LVExtractPath(pathname));
     }
     QString all_fmt_flt =
-#if (USE_CHM == 1) && ((USE_CMARK == 1) || (USE_CMARK_GFM == 1))
+#if (USE_CHM == 1) && ((USE_CMARK_GFM == 1) || (USE_MD4C == 1))
             QString(" (*.fb2 *.fb3 *.txt *.tcr *.rtf *.odt *.doc *.docx *.epub *.html *.shtml *.htm *.md *.chm *.zip *.pdb *.pml *.prc *.pml *.mobi);;");
 #elif (USE_CHM == 1)
             QString(" (*.fb2 *.fb3 *.txt *.tcr *.rtf *.odt *.doc *.docx *.epub *.html *.shtml *.htm *.chm *.zip *.pdb *.pml *.prc *.pml *.mobi);;");
@@ -298,7 +298,7 @@ QString MainWindow::openFileDialogImpl() {
                     tr("MS Word document") + QString(" (*.doc *.docx);;") +
                     tr("Open Document files") + QString(" (*.odt);;") +
                     tr("HTML files") + QString(" (*.shtml *.htm *.html);;") +
-#if (USE_CMARK == 1) || (USE_CMARK_GFM == 1)
+#if (USE_CMARK_GFM == 1) || (USE_MD4C == 1)
                     tr("Markdown files") + QString(" (*.md);;") +
 #endif
                     tr("EPUB files") + QString(" (*.epub);;") +

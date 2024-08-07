@@ -96,6 +96,11 @@ AboutDialog::AboutDialog(QWidget* parent) : QDialog(parent), m_ui(new Ui::AboutD
                  tr("cmark-gfm - GitHub's fork of cmark, a CommonMark parsing and rendering library and program in C") +
                  "</p>";
 #endif
+#if USE_MD4C == 1
+    aboutText += "<p>" +
+                 tr("MD4C - MD4C stands for \"Markdown for C\" and that's exactly what this project is about.") +
+                 "</p>";
+#endif
     aboutText += "<p>" + tr("hyphman - AlReader hyphenation manager") + "</p>";
     aboutText += "<p>" + tr("Most hyphenation dictionaries - TEX hyphenation patterns") + "</p>";
     aboutText += "<p>" + tr("Russian hyphenation dictionary - ") +
