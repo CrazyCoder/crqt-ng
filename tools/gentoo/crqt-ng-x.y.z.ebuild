@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,15 +12,25 @@ SRC_URI="https://gitlab.com/coolreader-ng/${PN}/-/archive/${PV}/${P}.tar.bz2"
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="qt6"
 
-CDEPEND="app-text/crengine-ng
-	dev-qt/qtcore:5
-	dev-qt/qtgui:5
-	dev-qt/qtwidgets:5"
+CDEPEND=">=app-text/crengine-ng-0.9.7
+	!qt6? (
+		dev-qt/qtcore:5
+		dev-qt/qtgui:5
+		dev-qt/qtwidgets:5
+	)
+	qt6? (
+		dev-qt/qtbase:6[gui,widgets]
+	)"
 RDEPEND="${CDEPEND}"
 BDEPEND="${CDEPEND}
-	dev-qt/linguist-tools:5"
+	!qt6? (
+		dev-qt/linguist-tools:5
+	)
+	qt6? (
+		dev-qt/qttools:6[linguist]
+	)"
 
 src_prepare() {
 	cmake_src_prepare
@@ -35,7 +45,11 @@ src_prepare() {
 
 src_configure() {
 	CMAKE_USE_DIR="${S}"
-	CMAKE_BUILD_TYPE="Release"
-	local mycmakeargs=(-DUSE_QT=QT5)
+	local mycmakeargs=
+	if use qt6 ; then
+		mycmakeargs=(-DUSE_QT=QT6)
+	else
+		mycmakeargs=(-DUSE_QT=QT5)
+	fi
 	cmake_src_configure
 }
