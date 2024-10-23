@@ -1,3 +1,33 @@
+2024-10-23  Aleksey Chernov  <valexlin@gmail.com>
+
+    * Version 1.0.15 released.
+    ==========================
+
+    Tag sources with `1.0.15'.
+
+    See below for changes.
+
+2024-08-07  Aleksey Chernov  <valexlin@gmail.com>
+
+    Added information to the About dialog box about the md4c library. Updated filters for file open dialog: support for crengine-ng's Markdown implementation using the md4c library.
+
+2024-06-24  Aleksey Chernov  <valexlin@gmail.com>
+
+    settings.cpp: added my_abs() function to avoid using fabsf() function.
+
+2024-06-23  Aleksey Chernov  <valexlin@gmail.com>
+
+    In the settings, when displaying font gamma values (floating point numbers), the decimal separator of the current system locale is used, rather than '.' ("C" locale).
+
+2024-05-31  Aleksey Chernov  <valexlin@gmail.com>
+
+    Fixed a SEGFAULT when opening the search dialog if it was previously opened and then closed using the ESC key.
+
+2024-05-30  Aleksey Chernov  <valexlin@gmail.com>
+
+    Added use of the new function LVDocView::setDecimalPointChar() from crengine-ng-0.9.12 to specify the decimal point from the current locale.
+
+
 2024-05-09  Aleksey Chernov  <valexlin@gmail.com>
 
     * Version 1.0.14 released.
