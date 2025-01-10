@@ -94,6 +94,7 @@ MainWindow::MainWindow(const QStringList& filesToOpen, QWidget* parent)
     addAction(ui->actionNextPage2);
     addAction(ui->actionPrevPage2);
     addAction(ui->actionNextPage3);
+    addAction(ui->actionPrevPage3);
     addAction(ui->actionNextLine);
     addAction(ui->actionPrevLine);
     addAction(ui->actionFirstPage);
@@ -438,6 +439,15 @@ void MainWindow::on_actionNextPage2_triggered() {
 }
 
 void MainWindow::on_actionPrevPage2_triggered() {
+    CR3View* view = currentCRView();
+    if (NULL == view) {
+        CRLog::debug("NULL view in current tab!");
+        return;
+    }
+    view->prevPage();
+}
+
+void MainWindow::on_actionPrevPage3_triggered() {
     CR3View* view = currentCRView();
     if (NULL == view) {
         CRLog::debug("NULL view in current tab!");
