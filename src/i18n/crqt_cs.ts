@@ -607,106 +607,106 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="291"/>
+        <location filename="../mainwindow.cpp" line="293"/>
         <source>Open book file</source>
         <translation>Otevřít soubor s knihou</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <source>Export document to</source>
         <translation>Vyvést dokument do</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="189"/>
-        <location filename="../mainwindow.cpp" line="1030"/>
-        <location filename="../mainwindow.cpp" line="1055"/>
+        <location filename="../mainwindow.cpp" line="191"/>
+        <location filename="../mainwindow.cpp" line="1041"/>
+        <location filename="../mainwindow.cpp" line="1066"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="189"/>
-        <location filename="../mainwindow.cpp" line="1030"/>
-        <location filename="../mainwindow.cpp" line="1055"/>
+        <location filename="../mainwindow.cpp" line="191"/>
+        <location filename="../mainwindow.cpp" line="1041"/>
+        <location filename="../mainwindow.cpp" line="1066"/>
         <source>The maximum number of tabs has been exceeded!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
+        <location filename="../mainwindow.cpp" line="358"/>
         <source>WOL book (*.wol)</source>
         <translation>Kniha WOL (*.wol)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="361"/>
+        <location filename="../mainwindow.cpp" line="363"/>
         <source>Export to WOL format</source>
         <translation>Vyvést do formátu WOL</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="293"/>
+        <location filename="../mainwindow.cpp" line="295"/>
         <source>All supported formats</source>
         <translation>Všechny podporované formáty</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="294"/>
+        <location filename="../mainwindow.cpp" line="296"/>
         <source>FB2 books</source>
         <translation>Knihy FB2</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
+        <location filename="../mainwindow.cpp" line="298"/>
         <source>Text files</source>
         <translation>Textové soubory</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="297"/>
+        <location filename="../mainwindow.cpp" line="299"/>
         <source>Rich text</source>
         <translation>Bohatý text</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="298"/>
+        <location filename="../mainwindow.cpp" line="300"/>
         <source>MS Word document</source>
         <translation>Dokument MS Word</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="300"/>
+        <location filename="../mainwindow.cpp" line="302"/>
         <source>HTML files</source>
         <translation>Soubory HTML</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="302"/>
+        <location filename="../mainwindow.cpp" line="304"/>
         <source>Markdown files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="304"/>
+        <location filename="../mainwindow.cpp" line="306"/>
         <source>EPUB files</source>
         <translation>Soubory EPUB</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="306"/>
+        <location filename="../mainwindow.cpp" line="308"/>
         <source>CHM files</source>
         <translation>Soubory CHM</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="308"/>
+        <location filename="../mainwindow.cpp" line="310"/>
         <source>MOBI files</source>
         <translation>Soubory MOBI</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="309"/>
+        <location filename="../mainwindow.cpp" line="311"/>
         <source>PalmDOC files</source>
         <translation>Soubory PalmDOC</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="310"/>
+        <location filename="../mainwindow.cpp" line="312"/>
         <source>ZIP archives</source>
         <translation>Archivy ZIP</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="295"/>
+        <location filename="../mainwindow.cpp" line="297"/>
         <source>FB3 books</source>
         <translation type="unfinished">Knihy FB2 {3 ?}</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="299"/>
+        <location filename="../mainwindow.cpp" line="301"/>
         <source>Open Document files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1109,28 +1109,33 @@
         <translation>Přepnout režim úprav</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="631"/>
+        <location filename="../mainwindow.ui" line="600"/>
+        <source>Shift+Space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="642"/>
         <source>New tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="634"/>
+        <location filename="../mainwindow.ui" line="645"/>
         <source>Open new tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="637"/>
+        <location filename="../mainwindow.ui" line="648"/>
         <source>Ctrl+Shift+T</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="646"/>
+        <location filename="../mainwindow.ui" line="657"/>
         <source>Open in new tab...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="655"/>
-        <location filename="../mainwindow.ui" line="658"/>
+        <location filename="../mainwindow.ui" line="666"/>
+        <location filename="../mainwindow.ui" line="669"/>
         <source>Open link in new tab</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1197,8 +1202,8 @@
     <message>
         <location filename="../mainwindow.ui" line="572"/>
         <location filename="../mainwindow.ui" line="575"/>
-        <location filename="../mainwindow.ui" line="594"/>
-        <location filename="../mainwindow.ui" line="597"/>
+        <location filename="../mainwindow.ui" line="605"/>
+        <location filename="../mainwindow.ui" line="608"/>
         <source>Next Page</source>
         <translation>Další strana</translation>
     </message>
@@ -1210,6 +1215,8 @@
     <message>
         <location filename="../mainwindow.ui" line="583"/>
         <location filename="../mainwindow.ui" line="586"/>
+        <location filename="../mainwindow.ui" line="594"/>
+        <location filename="../mainwindow.ui" line="597"/>
         <source>Previous Page</source>
         <translation>Předchozí strana</translation>
     </message>
@@ -1219,37 +1226,37 @@
         <translation>Šipka vlevo</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="600"/>
+        <location filename="../mainwindow.ui" line="611"/>
         <source>Space</source>
         <translation>Mezerník</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="605"/>
+        <location filename="../mainwindow.ui" line="616"/>
         <source>Next Sentence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="608"/>
+        <location filename="../mainwindow.ui" line="619"/>
         <source>Move selection to next sentence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="611"/>
+        <location filename="../mainwindow.ui" line="622"/>
         <source>Ctrl+Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="622"/>
+        <location filename="../mainwindow.ui" line="633"/>
         <source>Ctrl+Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="616"/>
+        <location filename="../mainwindow.ui" line="627"/>
         <source>Prev Sentence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="619"/>
+        <location filename="../mainwindow.ui" line="630"/>
         <source>Select previous sentence</source>
         <translation type="unfinished"></translation>
     </message>
