@@ -99,6 +99,7 @@ private slots:
     void on_actionPrevPage_triggered();
     void on_actionNextPage_triggered();
     void on_actionPrevPage2_triggered();
+    void on_actionPrevPage3_triggered();
     void on_actionNextPage2_triggered();
     void on_actionClose_triggered();
     void on_actionMinimize_triggered();
