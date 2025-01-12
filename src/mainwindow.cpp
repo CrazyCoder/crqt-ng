@@ -5,6 +5,7 @@
  *   Copyright (C) 2019,2020 Konstantin Potapov <pkbo@users.sourceforge.net>
  *   Copyright (C) 2023 Ren Tatsumoto <tatsu@autistici.org>                *
  *   Copyright (C) 2018,2020-2024 Aleksey Chernov <valexlin@gmail.com>     *
+ *   Copyright (C) 2025 Sergey Alirzaev <l29ah@riseup.net>                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
