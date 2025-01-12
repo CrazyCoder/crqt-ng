@@ -6,7 +6,7 @@
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 
 default:
-  image: ubuntu:22.04
+  image: ubuntu:24.04
 
 stages:
 - test
