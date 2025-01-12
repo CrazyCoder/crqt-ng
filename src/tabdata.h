@@ -33,7 +33,11 @@ class CR3View;
 class TabData
 {
 public:
-    TabData() : m_widget(NULL), m_layout(NULL), m_view(NULL), m_scroll(NULL) { }
+    TabData()
+            : m_widget(NULL)
+            , m_layout(NULL)
+            , m_view(NULL)
+            , m_scroll(NULL) { }
     TabData(QWidget* widget, QLayout* layout, CR3View* view, QScrollBar* scrollBar)
             : m_widget(widget)
             , m_layout(layout)

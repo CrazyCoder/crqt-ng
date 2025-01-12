@@ -28,7 +28,9 @@
 #include <QToolButton>
 #include <QSpacerItem>
 
-FallbackFontsDialog::FallbackFontsDialog(QWidget* parent) : QDialog(parent), ui(new Ui::FallbackFontsDialog) {
+FallbackFontsDialog::FallbackFontsDialog(QWidget* parent)
+        : QDialog(parent)
+        , ui(new Ui::FallbackFontsDialog) {
     ui->setupUi(this);
     m_layout = new QVBoxLayout;
     m_spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);

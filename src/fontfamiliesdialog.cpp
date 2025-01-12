@@ -21,7 +21,9 @@
 #include "fontfamiliesdialog.h"
 #include "ui_fontfamiliesdialog.h"
 
-FontFamiliesDialog::FontFamiliesDialog(QWidget* parent) : QDialog(parent), ui(new Ui::FontFamiliesDialog) {
+FontFamiliesDialog::FontFamiliesDialog(QWidget* parent)
+        : QDialog(parent)
+        , ui(new Ui::FontFamiliesDialog) {
     ui->setupUi(this);
 }
 

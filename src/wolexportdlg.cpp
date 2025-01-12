@@ -21,7 +21,9 @@
 #include "wolexportdlg.h"
 #include "ui_wolexportdlg.h"
 
-WolExportDlg::WolExportDlg(QWidget* parent) : QDialog(parent), m_ui(new Ui::WolExportDlg) {
+WolExportDlg::WolExportDlg(QWidget* parent)
+        : QDialog(parent)
+        , m_ui(new Ui::WolExportDlg) {
     m_bpp = 2;
     m_tocLevels = 3;
     m_ui->setupUi(this);

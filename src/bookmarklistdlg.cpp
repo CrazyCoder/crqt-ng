@@ -46,9 +46,10 @@ BookmarkListDialog::BookmarkListDialog(QWidget* parent, CR3View* docView)
     setWindowTitle(tr("Bookmarks"));
 
     m_ui->tableWidget->setColumnCount(4);
-    m_ui->tableWidget->setHorizontalHeaderLabels(
-            QStringList() << tr("Position") << tr("Type", "bookmark type") /*<< tr("Chapter") */ << tr("Text")
-                          << tr("Comment"));
+    m_ui->tableWidget->setHorizontalHeaderLabels(QStringList()
+                                                 << tr("Position")
+                                                 << tr("Type", "bookmark type") /*<< tr("Chapter") */ << tr("Text")
+                                                 << tr("Comment"));
     m_ui->tableWidget->verticalHeader()->hide();
     int i = 0;
     m_ui->tableWidget->horizontalHeader()->setResizeModeMethod(i++, QHeaderView::ResizeToContents);

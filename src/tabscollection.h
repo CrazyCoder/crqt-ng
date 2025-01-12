@@ -51,7 +51,8 @@ public:
     class TabSession: public QVector<TabProperty>
     {
     public:
-        TabSession() : QVector<TabProperty>() { }
+        TabSession()
+                : QVector<TabProperty>() { }
         QString currentDocument;
     };
 public:

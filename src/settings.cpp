@@ -180,7 +180,10 @@ static const char* styleNames[] = {
 };
 // clang-format on
 
-SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props) : QDialog(parent), m_sample(NULL), m_ui(new Ui::SettingsDlg) {
+SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
+        : QDialog(parent)
+        , m_sample(NULL)
+        , m_ui(new Ui::SettingsDlg) {
     initDone = false;
     m_props = props;
 

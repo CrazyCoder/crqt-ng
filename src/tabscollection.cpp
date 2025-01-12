@@ -34,7 +34,9 @@
 #include <lvstreamutils.h>
 #include <crlog.h>
 
-TabsCollection::TabsCollection() : QVector<TabData>(), m_props(LVCreatePropsContainer()) { }
+TabsCollection::TabsCollection()
+        : QVector<TabData>()
+        , m_props(LVCreatePropsContainer()) { }
 
 TabsCollection::~TabsCollection() { }
 

@@ -46,7 +46,8 @@ public:
     CRPropRef getRef() {
         return _ref;
     }
-    CRPropsImpl(CRPropRef ref) : _ref(ref) { }
+    CRPropsImpl(CRPropRef ref)
+            : _ref(ref) { }
     virtual int count() {
         return _ref->getCount();
     }
@@ -115,26 +116,26 @@ PropsRef Props::clone(PropsRef v) {
 
 /// returns common items from props1 not containing in props2
 PropsRef operator-(PropsRef props1, PropsRef props2) {
-    return QSharedPointer<Props>(
-            new CRPropsImpl(((CRPropsImpl*)props1.data())->getRef() - ((CRPropsImpl*)props2.data())->getRef()));
+    return QSharedPointer<Props>(new CRPropsImpl(((CRPropsImpl*)props1.data())->getRef() -
+                                                 ((CRPropsImpl*)props2.data())->getRef()));
 }
 
 /// returns common items containing in props1 or props2
 PropsRef operator|(PropsRef props1, PropsRef props2) {
-    return QSharedPointer<Props>(
-            new CRPropsImpl(((CRPropsImpl*)props1.data())->getRef() | ((CRPropsImpl*)props2.data())->getRef()));
+    return QSharedPointer<Props>(new CRPropsImpl(((CRPropsImpl*)props1.data())->getRef() |
+                                                 ((CRPropsImpl*)props2.data())->getRef()));
 }
 
 /// returns common items of props1 and props2
 PropsRef operator&(PropsRef props1, PropsRef props2) {
-    return QSharedPointer<Props>(
-            new CRPropsImpl(((CRPropsImpl*)props1.data())->getRef() & ((CRPropsImpl*)props2.data())->getRef()));
+    return QSharedPointer<Props>(new CRPropsImpl(((CRPropsImpl*)props1.data())->getRef() &
+                                                 ((CRPropsImpl*)props2.data())->getRef()));
 }
 
 /// returns added or changed items of props2 compared to props1
 PropsRef operator^(PropsRef props1, PropsRef props2) {
-    return QSharedPointer<Props>(
-            new CRPropsImpl(((CRPropsImpl*)props1.data())->getRef() ^ ((CRPropsImpl*)props2.data())->getRef()));
+    return QSharedPointer<Props>(new CRPropsImpl(((CRPropsImpl*)props1.data())->getRef() ^
+                                                 ((CRPropsImpl*)props2.data())->getRef()));
 }
 
 void cr2qt(QStringList& dst, const lString32Collection& src) {

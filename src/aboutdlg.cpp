@@ -28,7 +28,9 @@
 #include <crengine-ng-config.h>
 #include "config.h"
 
-AboutDialog::AboutDialog(QWidget* parent) : QDialog(parent), m_ui(new Ui::AboutDialog) {
+AboutDialog::AboutDialog(QWidget* parent)
+        : QDialog(parent)
+        , m_ui(new Ui::AboutDialog) {
     m_ui->setupUi(this);
     QString crqt_ver = m_ui->lblVersion->text().replace("%ver%", QString("%1").arg(VERSION));
     m_ui->lblVersion->setText(crqt_ver);

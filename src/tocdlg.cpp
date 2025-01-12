@@ -68,7 +68,10 @@ bool TocDlg::showDlg(QWidget* parent, CR3View* docView) {
     return true;
 }
 
-TocDlg::TocDlg(QWidget* parent, CR3View* docView) : QDialog(parent), m_ui(new Ui::TocDlg), m_docview(docView) {
+TocDlg::TocDlg(QWidget* parent, CR3View* docView)
+        : QDialog(parent)
+        , m_ui(new Ui::TocDlg)
+        , m_docview(docView) {
     setAttribute(Qt::WA_DeleteOnClose, true);
     m_ui->setupUi(this);
     m_ui->treeWidget->setColumnCount(2);

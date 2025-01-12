@@ -21,7 +21,9 @@
 #include "exportprogressdlg.h"
 #include "ui_exportprogressdlg.h"
 
-ExportProgressDlg::ExportProgressDlg(QWidget* parent) : QDialog(parent), m_ui(new Ui::ExportProgressDlg) {
+ExportProgressDlg::ExportProgressDlg(QWidget* parent)
+        : QDialog(parent)
+        , m_ui(new Ui::ExportProgressDlg) {
     m_ui->setupUi(this);
     m_ui->progressBar->setRange(0, 100);
 }

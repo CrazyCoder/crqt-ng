@@ -289,9 +289,8 @@ QString MainWindow::openFileDialogImpl() {
             QString(" (*.fb2 *.fb3 *.txt *.tcr *.rtf *.odt *.doc *.docx *.epub *.html *.shtml *.htm *.zip *.pdb *.pml *.prc *.pml *.mobi);;");
 #endif
 
-    QString fileName = QFileDialog::getOpenFileName(
-            this, tr("Open book file"), lastPath,
-            // clang-format off
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open book file"), lastPath,
+                                                    // clang-format off
             tr("All supported formats") + all_fmt_flt +
                     tr("FB2 books") + QString(" (*.fb2 *.fb2.zip);;") +
                     tr("FB3 books") + QString(" (*.fb3);;") +
@@ -330,7 +329,8 @@ class ExportProgressCallback: public LVDocViewCallback
 {
     ExportProgressDlg* _dlg;
 public:
-    ExportProgressCallback(ExportProgressDlg* dlg) : _dlg(dlg) { }
+    ExportProgressCallback(ExportProgressDlg* dlg)
+            : _dlg(dlg) { }
     /// document formatting started
     virtual void OnFormatStart() {
         _dlg->setPercent(0);
