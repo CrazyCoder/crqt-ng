@@ -222,6 +222,7 @@ private slots:
     void on_cbShowPositionPercent_stateChanged(int s);
     void on_cbShowBattery_stateChanged(int s);
     void on_cbShowClock_stateChanged(int s);
+    void on_cbShowChapterMarks_stateChanged(int s);
     void on_cbShowBookName_stateChanged(int s);
     void on_cbIgnoreDocumentMargins_stateChanged(int s);
     void on_cbShowPageHeader_currentIndexChanged(int index);
