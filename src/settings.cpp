@@ -70,13 +70,14 @@ static int aa_variants[] = { font_aa_none, font_aa_gray };
 #endif
 #define AA_VARIANTS_SZ (sizeof(aa_variants) / sizeof(int))
 
-static int interline_spaces[] = { 75, 80, 85, 90, 95, 100, 110, 120, 140, 150 };
+static int interline_spaces[] = { 60, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150 };
 
-static int minspace_widths[] = { 50, 60, 70, 80, 90, 100 };
+static int minspace_widths[] = { 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
 
 static float font_gammas[] = { 0.30f, 0.35f, 0.40f, 0.45f, 0.50f, 0.55f, 0.60f, 0.65f, 0.70f, 0.75f, 0.80f,
                                0.85f, 0.90f, 0.95f, 0.98f, 1.00f, 1.02f, 1.05f, 1.10f, 1.15f, 1.20f, 1.25f,
-                               1.30f, 1.35f, 1.40f, 1.45f, 1.50f, 1.60f, 1.70f, 1.80f, 1.90f, 2.00f };
+                               1.30f, 1.35f, 1.40f, 1.45f, 1.50f, 1.60f, 1.70f, 1.80f, 1.90f, 2.00f, 
+                               2.10f, 2.20f, 2.30f, 2.40f, 2.50f, 2.60f, 2.70f, 2.80f, 2.90f, 3.00f };
 #define GAMMA_VARIANTS_SZ (sizeof(font_gammas) / sizeof(float))
 static const int default_gamma_index = 15; // gamma 1.0
 
@@ -234,6 +235,12 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
     m_ui->btnFallbackMan->setVisible(false);
     m_ui->label_36->setVisible(false);
 #endif
+    
+#if 1
+    m_ui->cbTTInterpreter->setVisible(false);
+    m_ui->label_55->setVisible(false);
+#endif
+    
 
     int aa = m_props->getIntDef(PROP_FONT_ANTIALIASING, (int)font_aa_gray);
     int aai = 1;
@@ -246,10 +253,10 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
 #if USE_FREETYPE == 1
     m_ui->cbAntialiasingMode->addItem(tr("None"));
     m_ui->cbAntialiasingMode->addItem(tr("Gray"));
-    m_ui->cbAntialiasingMode->addItem(tr("LCD (RGB)"));
-    m_ui->cbAntialiasingMode->addItem(tr("LCD (BGR)"));
-    m_ui->cbAntialiasingMode->addItem(tr("LCD (RGB) vertical"));
-    m_ui->cbAntialiasingMode->addItem(tr("LCD (BGR) vertical"));
+    // m_ui->cbAntialiasingMode->addItem(tr("LCD (RGB)"));
+    // m_ui->cbAntialiasingMode->addItem(tr("LCD (BGR)"));
+    // m_ui->cbAntialiasingMode->addItem(tr("LCD (RGB) vertical"));
+    // m_ui->cbAntialiasingMode->addItem(tr("LCD (BGR) vertical"));
 #elif USE_WIN32_FONTS == 1 && USE_WIN32_DRAWFONTS == 0
     m_ui->cbAntialiasingMode->addItem(tr("None"));
     m_ui->cbAntialiasingMode->addItem(tr("Gray"));
@@ -322,6 +329,9 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
         m_ui->cbViewMode->setCurrentIndex(lp == 1 ? 0 : 1);
     int hinting = m_props->getIntDef(PROP_FONT_HINTING, 2);
     m_ui->cbFontHinting->setCurrentIndex(hinting);
+    int interpteter = m_props->getIntDef(PROP_FONT_INTERPRETER, 40);
+    m_ui->cbTTInterpreter->model()->sort(0, Qt::DescendingOrder);
+    m_ui->cbTTInterpreter->setCurrentIndex(interpteter == 40 ? 0 : interpteter == 38 ? 1 : 2);
     int highlight = m_props->getIntDef(PROP_HIGHLIGHT_COMMENT_BOOKMARKS, 1);
     m_ui->cbBookmarkHighlightMode->setCurrentIndex(highlight);
 
@@ -345,16 +355,21 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
     }
     m_ui->cbDOMLevel->setCurrentIndex(DOMVersionIndex);
 
-    int n = m_props->getIntDef(PROP_PAGE_MARGIN_LEFT, 8);
-    int mi = 0;
-    for (int i = 0; i < (int)MAX_MARGIN_INDEX; i++) {
-        if (n <= def_margins[i]) {
-            mi = i;
-            break;
+    // Initialize separate margin controls
+    auto setMarginComboIndex = [](QComboBox* cb, int marginValue) {
+        int mi = 0;
+        for (int i = 0; i < (int)MAX_MARGIN_INDEX; i++) {
+            if (marginValue <= def_margins[i]) {
+                mi = i;
+                break;
+            }
         }
-    }
-    CRLog::debug("initial margins index: %d", mi);
-    m_ui->cbMargins->setCurrentIndex(mi);
+        cb->setCurrentIndex(mi);
+    };
+    setMarginComboIndex(m_ui->cbMarginTop, m_props->getIntDef(PROP_PAGE_MARGIN_TOP, 8));
+    setMarginComboIndex(m_ui->cbMarginBottom, m_props->getIntDef(PROP_PAGE_MARGIN_BOTTOM, 8));
+    setMarginComboIndex(m_ui->cbMarginLeft, m_props->getIntDef(PROP_PAGE_MARGIN_LEFT, 8));
+    setMarginComboIndex(m_ui->cbMarginRight, m_props->getIntDef(PROP_PAGE_MARGIN_RIGHT, 8));
 
     QStringList styles = QStyleFactory::keys();
     QString style = m_props->getStringDef(PROP_APP_WINDOW_STYLE, "");
@@ -1007,12 +1022,31 @@ void SettingsDlg::on_cbShowFootNotes_stateChanged(int s) {
     setCheck(PROP_FOOTNOTES, s);
 }
 
-void SettingsDlg::on_cbMargins_currentIndexChanged(int index) {
+void SettingsDlg::on_cbMarginTop_currentIndexChanged(int index) {
+    if (!initDone)
+        return;
     int m = def_margins[index];
-    CRLog::debug("marginsChanged: %d", index);
-    m_props->setInt(PROP_PAGE_MARGIN_BOTTOM, m * 2 / 3);
     m_props->setInt(PROP_PAGE_MARGIN_TOP, m);
+}
+
+void SettingsDlg::on_cbMarginBottom_currentIndexChanged(int index) {
+    if (!initDone)
+        return;
+    int m = def_margins[index];
+    m_props->setInt(PROP_PAGE_MARGIN_BOTTOM, m);
+}
+
+void SettingsDlg::on_cbMarginLeft_currentIndexChanged(int index) {
+    if (!initDone)
+        return;
+    int m = def_margins[index];
     m_props->setInt(PROP_PAGE_MARGIN_LEFT, m);
+}
+
+void SettingsDlg::on_cbMarginRight_currentIndexChanged(int index) {
+    if (!initDone)
+        return;
+    int m = def_margins[index];
     m_props->setInt(PROP_PAGE_MARGIN_RIGHT, m);
 }
 
@@ -1034,7 +1068,8 @@ void SettingsDlg::initSampleWindow() {
     sampledocview->setShowCover(false);
     sampledocview->setViewMode(DVM_SCROLL, 1);
     QString testPhrase = tr("The quick brown fox jumps over the lazy dog. ");
-    sampledocview->createDefaultDocument(lString32::empty_str, qt2cr(testPhrase + testPhrase + testPhrase));
+    sampledocview->createDefaultDocument(lString32::empty_str,
+                                         qt2cr(testPhrase + testPhrase + testPhrase + testPhrase + testPhrase));
 }
 
 void SettingsDlg::updateStyleSample() {
@@ -1332,6 +1367,22 @@ void SettingsDlg::on_cbDefFontColor_currentIndexChanged(int index) {
     m_styleFontColor.update(index);
 }
 
+void SettingsDlg::on_cbDefTextDecoration_currentIndexChanged(int index) {
+    m_styleTextDecoration.update(index);
+}
+
+void SettingsDlg::on_cbDefVerticalAlign_currentIndexChanged(int index) {
+    m_verticalAlignDecoration.update(index);
+}
+
+void SettingsDlg::on_cbDefLineHeight_currentIndexChanged(int index) {
+    m_styleLineHeight.update(index);
+}
+
+void SettingsDlg::on_cbTTInterpreter_currentIndexChanged(int index) {
+    m_props->setInt(PROP_FONT_INTERPRETER, index == 0 ? 40 : index == 1 ? 38 : 35);
+    updateStyleSample();
+}
 void SettingsDlg::on_cbFontHinting_currentIndexChanged(int index) {
     m_props->setInt(PROP_FONT_HINTING, index);
     updateStyleSample();

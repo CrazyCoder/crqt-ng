@@ -44,7 +44,8 @@ namespace Ui
 }
 
 #define DECL_DEF_CR_FONT_SIZES \
-    static int cr_font_sizes[] = { 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 32, 38, 42, 48, 56, 64, 72 }
+    static int cr_font_sizes[] = { 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 29, 30, \
+    31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 45, 50, 55, 60, 65, 70, 75, 80, 85 }
 
 struct StyleItem
 {
@@ -211,7 +212,10 @@ private slots:
     void on_btnHeaderTextColor_clicked();
     void on_btnBgColor_clicked();
     void on_btnTextColor_clicked();
-    void on_cbMargins_currentIndexChanged(int index);
+    void on_cbMarginTop_currentIndexChanged(int index);
+    void on_cbMarginBottom_currentIndexChanged(int index);
+    void on_cbMarginLeft_currentIndexChanged(int index);
+    void on_cbMarginRight_currentIndexChanged(int index);
     void on_cbShowFootNotes_stateChanged(int s);
     void on_cbShowPageNumber_stateChanged(int s);
     void on_cbShowPageCount_stateChanged(int s);
@@ -246,6 +250,10 @@ private slots:
     void on_cbDefFontWeight_currentIndexChanged(int index);
     void on_cbDefFontStyle_currentIndexChanged(int index);
     void on_cbDefFontColor_currentIndexChanged(int index);
+    void on_cbDefTextDecoration_currentIndexChanged(int index);
+    void on_cbDefVerticalAlign_currentIndexChanged(int index);
+    void on_cbDefLineHeight_currentIndexChanged(int index);
+    void on_cbTTInterpreter_currentIndexChanged(int index);
     void on_cbFontHinting_currentIndexChanged(int index);
     void on_cbEnableEmbeddedFonts_toggled(bool checked);
     void on_cbEnableDocumentStyles_toggled(bool checked);

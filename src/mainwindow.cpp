@@ -350,42 +350,56 @@ public:
 };
 
 void MainWindow::on_actionExport_triggered() {
+    CRLog::debug("Exporting!");
     CR3View* view = currentCRView();
     if (NULL == view) {
         CRLog::debug("NULL view in current tab!");
         return;
     }
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Export document to"), QString(), tr("WOL book (*.wol)"));
-    if (fileName.length() == 0)
-        return;
-    WolExportDlg* dlg = new WolExportDlg(this);
+    // QString fileName = QFileDialog::getSaveFileName(this, tr("Export document to"), QString(), tr("WOL book (*.wol)"));
+    // if (fileName.length() == 0)
+        // return;
+    
+    QString fileName = "d:\\shared\\Xteink\\cr-conv\\test.wol";
+    // WolExportDlg* dlg = new WolExportDlg(this);
     //dlg->setModal( true );
-    dlg->setWindowTitle(tr("Export to WOL format"));
+    // dlg->setWindowTitle(tr("Export to WOL format"));
     //    dlg->setModal( true );
     //    dlg->show();
     //dlg->raise();
     //dlg->activateWindow();
-    int result = dlg->exec();
-    if (result == QDialog::Accepted) {
-        int bpp = dlg->getBitsPerPixel();
-        int levels = dlg->getTocLevels();
-        delete dlg;
-        repaint();
-        ExportProgressDlg* msg = new ExportProgressDlg(this);
-        msg->show();
-        msg->raise();
-        msg->activateWindow();
-        msg->repaint();
-        repaint();
-        ExportProgressCallback progress(msg);
-        LVDocViewCallback* oldCallback = view->getDocView()->getCallback();
-        view->getDocView()->setCallback(&progress);
-        view->getDocView()->exportWolFile(qt2cr(fileName).c_str(), bpp > 1, levels);
-        view->getDocView()->setCallback(oldCallback);
-        delete msg;
-    } else {
-        delete dlg;
-    }
+    // int result = dlg->exec();
+    // if (result == QDialog::Accepted) {
+        // int bpp = dlg->getBitsPerPixel();
+        // int levels = dlg->getTocLevels();
+        // delete dlg;
+        // repaint();
+    ExportProgressDlg* msg = new ExportProgressDlg(this);
+    msg->show();
+    msg->raise();
+    msg->activateWindow();
+    msg->repaint();
+    repaint();
+    ExportProgressCallback progress(msg);
+    LVDocViewCallback* oldCallback = view->getDocView()->getCallback();
+    view->getDocView()->setCallback(&progress);
+    // view->getDocView()->exportWolFile(qt2cr(fileName).c_str(), bpp > 1, levels);
+    view->getDocView()->exportXtbFile(qt2cr(fileName).c_str(), 480, 800, 1, 0, true);
+    XtcExporter exporter;
+    exporter.setFormat(XTC_FORMAT_XTC)
+            .setGrayPolicy(GRAY_ALL_TO_BLACK)
+            .setPageRange(0, 100)
+            // .setProgressCallback(progress)
+            .setMetadata(UnicodeToUtf8(view->getDocView()->getTitle()), UnicodeToUtf8(view->getDocView()->getAuthors()))
+            .setDimensions(480, 800);
+    CRLog::debug("Exporter parameters set!");
+    exporter.exportDocument(view->getDocView(), qt2cr(fileName + ".xtc").c_str());
+    // view->getDocView()->exportXtcFile(qt2cr(fileName).c_str(), XTC_FORMAT_XTC, 480, 800);
+    view->getDocView()->setCallback(oldCallback);
+    delete msg;
+    // } else {
+        // delete dlg;
+    // }
 }
 
 void MainWindow::on_actionOpen_triggered() {

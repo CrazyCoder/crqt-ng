@@ -694,7 +694,8 @@ void CR3View::paintEvent(QPaintEvent* event) {
                 lUInt16 cl = *src; //(*src << (8 - bpp)) & 0xF8;
                 lUInt16 cl2 = (cl << shift) & 0xC0;
                 cl2 = cl2 | (cl2 >> 2);
-                cl2 = (cl2 << 8) | (cl2 << 3) | (cl2 >> 3);
+                cl2 = cl2 | (cl2 >> 4);
+                cl2 = ((cl2 << 8) & 0xF800) | ((cl2 << 3) & 0x07E0) | (cl2 >> 3);
                 if ((x & 3) == 3) {
                     src++;
                     shift = 0;

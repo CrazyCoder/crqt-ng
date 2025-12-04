@@ -19,127 +19,127 @@
         <translation>Licensz</translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="44"/>
+        <location filename="../aboutdlg.cpp" line="46"/>
         <source>crqt-ng is free open source e-book viewer based on crengine-ng library.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="45"/>
+        <location filename="../aboutdlg.cpp" line="47"/>
         <source>Source code is available at</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="46"/>
+        <location filename="../aboutdlg.cpp" line="48"/>
         <source>under the terms of GNU GPL license either version 2 or (at your option) any later version.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="48"/>
+        <location filename="../aboutdlg.cpp" line="50"/>
         <source>It is a fork of the &apos;CoolReader&apos; program.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="50"/>
+        <location filename="../aboutdlg.cpp" line="52"/>
         <source>Third party components used in crengine-ng:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="53"/>
+        <location filename="../aboutdlg.cpp" line="55"/>
         <source>FreeType - font rendering</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="56"/>
+        <location filename="../aboutdlg.cpp" line="58"/>
         <source>HarfBuzz - text shaping, font kerning, ligatures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="59"/>
+        <location filename="../aboutdlg.cpp" line="61"/>
         <source>ZLib - compressing library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="62"/>
+        <location filename="../aboutdlg.cpp" line="64"/>
         <source>ZSTD - compressing library</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="65"/>
+        <location filename="../aboutdlg.cpp" line="67"/>
         <source>libpng - PNG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="68"/>
+        <location filename="../aboutdlg.cpp" line="70"/>
         <source>libjpeg - JPEG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="71"/>
+        <location filename="../aboutdlg.cpp" line="73"/>
         <source>FriBiDi - RTL writing support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="74"/>
+        <location filename="../aboutdlg.cpp" line="76"/>
         <source>libunibreak - line breaking and word breaking algorithms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="77"/>
+        <location filename="../aboutdlg.cpp" line="79"/>
         <source>utf8proc - for unicode string comparision</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="80"/>
+        <location filename="../aboutdlg.cpp" line="82"/>
         <source>NanoSVG - SVG image format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="83"/>
+        <location filename="../aboutdlg.cpp" line="85"/>
         <source>chmlib - chm format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="86"/>
+        <location filename="../aboutdlg.cpp" line="88"/>
         <source>antiword - Microsoft Word format support</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="89"/>
+        <location filename="../aboutdlg.cpp" line="91"/>
         <source>RFC6234 (sources) - SHAsum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="92"/>
+        <location filename="../aboutdlg.cpp" line="94"/>
         <source>cmark - CommonMark parsing and rendering library and program in C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="96"/>
+        <location filename="../aboutdlg.cpp" line="98"/>
         <source>cmark-gfm - GitHub&apos;s fork of cmark, a CommonMark parsing and rendering library and program in C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="101"/>
+        <location filename="../aboutdlg.cpp" line="103"/>
         <source>MD4C - MD4C stands for &quot;Markdown for C&quot; and that&apos;s exactly what this project is about.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="104"/>
+        <location filename="../aboutdlg.cpp" line="106"/>
         <source>hyphman - AlReader hyphenation manager</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="105"/>
+        <location filename="../aboutdlg.cpp" line="107"/>
         <source>Most hyphenation dictionaries - TEX hyphenation patterns</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="106"/>
+        <location filename="../aboutdlg.cpp" line="108"/>
         <source>Russian hyphenation dictionary - </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../aboutdlg.cpp" line="109"/>
+        <location filename="../aboutdlg.cpp" line="111"/>
         <source>Languages character set database by Fontconfig</source>
         <translation type="unfinished"></translation>
     </message>
@@ -214,35 +214,35 @@
         <translation>Pozíció</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="50"/>
+        <location filename="../bookmarklistdlg.cpp" line="51"/>
         <source>Type</source>
         <comment>bookmark type</comment>
         <translation>Típus</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="50"/>
+        <location filename="../bookmarklistdlg.cpp" line="51"/>
         <source>Text</source>
         <translation>Szöveg</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="51"/>
+        <location filename="../bookmarklistdlg.cpp" line="52"/>
         <source>Comment</source>
         <translation>Megjegyzés</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="88"/>
+        <location filename="../bookmarklistdlg.cpp" line="89"/>
         <source>P</source>
         <comment>Bookmark type first letter - Position</comment>
         <translation>P</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="90"/>
+        <location filename="../bookmarklistdlg.cpp" line="91"/>
         <source>C</source>
         <comment>Bookmark type first letter - Comment</comment>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="../bookmarklistdlg.cpp" line="92"/>
+        <location filename="../bookmarklistdlg.cpp" line="93"/>
         <source>E</source>
         <comment>Bookmark type first letter - Correction/Edit</comment>
         <translation>K</translation>
@@ -301,22 +301,22 @@
 <context>
     <name>CR3View</name>
     <message>
-        <location filename="../cr3widget.cpp" line="1316"/>
+        <location filename="../cr3widget.cpp" line="1317"/>
         <source>Error while opening document </source>
         <translation>Hiba a dokumentum megnyitása közben: </translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1719"/>
+        <location filename="../cr3widget.cpp" line="1720"/>
         <source>Loading: please wait...</source>
         <translation>Betöltés. Kérem, várjon...</translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1202"/>
+        <location filename="../cr3widget.cpp" line="1203"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../cr3widget.cpp" line="1203"/>
+        <location filename="../cr3widget.cpp" line="1204"/>
         <source>Font &quot;%1&quot; isn&apos;t compatible with language &quot;%2&quot;. Instead will be used fallback font.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -347,7 +347,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../fallbackfontsdialog.cpp" line="163"/>
+        <location filename="../fallbackfontsdialog.cpp" line="165"/>
         <source>Remove this fallback font</source>
         <translation type="unfinished"></translation>
     </message>
@@ -596,106 +596,103 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="293"/>
+        <location filename="../mainwindow.cpp" line="292"/>
         <source>Open book file</source>
         <translation>Könyvfájl megnyitása</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="358"/>
         <source>Export document to</source>
-        <translation>Dokumentum exportálása ide:</translation>
+        <translation type="vanished">Dokumentum exportálása ide:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
-        <location filename="../mainwindow.cpp" line="1041"/>
-        <location filename="../mainwindow.cpp" line="1066"/>
+        <location filename="../mainwindow.cpp" line="1055"/>
+        <location filename="../mainwindow.cpp" line="1080"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="191"/>
-        <location filename="../mainwindow.cpp" line="1041"/>
-        <location filename="../mainwindow.cpp" line="1066"/>
+        <location filename="../mainwindow.cpp" line="1055"/>
+        <location filename="../mainwindow.cpp" line="1080"/>
         <source>The maximum number of tabs has been exceeded!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="358"/>
         <source>WOL book (*.wol)</source>
-        <translation>WOL könyv (*.wol)</translation>
+        <translation type="vanished">WOL könyv (*.wol)</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="363"/>
         <source>Export to WOL format</source>
-        <translation>Exportálás WOL formátumba</translation>
+        <translation type="vanished">Exportálás WOL formátumba</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="295"/>
+        <location filename="../mainwindow.cpp" line="294"/>
         <source>All supported formats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="296"/>
+        <location filename="../mainwindow.cpp" line="295"/>
         <source>FB2 books</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="297"/>
+        <location filename="../mainwindow.cpp" line="296"/>
         <source>FB3 books</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="298"/>
+        <location filename="../mainwindow.cpp" line="297"/>
         <source>Text files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="299"/>
+        <location filename="../mainwindow.cpp" line="298"/>
         <source>Rich text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="300"/>
+        <location filename="../mainwindow.cpp" line="299"/>
         <source>MS Word document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="301"/>
+        <location filename="../mainwindow.cpp" line="300"/>
         <source>Open Document files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="302"/>
+        <location filename="../mainwindow.cpp" line="301"/>
         <source>HTML files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="304"/>
+        <location filename="../mainwindow.cpp" line="303"/>
         <source>Markdown files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="306"/>
+        <location filename="../mainwindow.cpp" line="305"/>
         <source>EPUB files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="308"/>
+        <location filename="../mainwindow.cpp" line="307"/>
         <source>CHM files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="310"/>
+        <location filename="../mainwindow.cpp" line="309"/>
         <source>MOBI files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="311"/>
+        <location filename="../mainwindow.cpp" line="310"/>
         <source>PalmDOC files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="312"/>
+        <location filename="../mainwindow.cpp" line="311"/>
         <source>ZIP archives</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1362,35 +1359,35 @@
 <context>
     <name>SettingsDlg</name>
     <message>
-        <location filename="../settings.cpp" line="429"/>
+        <location filename="../settings.cpp" line="447"/>
         <source>[No hyphenation]</source>
         <translation>[Nincs elválasztás]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="431"/>
+        <location filename="../settings.cpp" line="449"/>
         <source>[Algorythmic hyphenation]</source>
         <translation>[Algoritmikus elválasztás]</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1033"/>
+        <location filename="../settings.cpp" line="1070"/>
         <source>The quick brown fox jumps over the lazy dog. </source>
         <translation>Árvíztűrő tükörfúrógép. </translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="981"/>
-        <location filename="../settings.cpp" line="1091"/>
+        <location filename="../settings.ui" line="1332"/>
+        <location filename="../settings.cpp" line="1129"/>
         <source>Text color</source>
         <translation>Szövegszín</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1293"/>
-        <location filename="../settings.cpp" line="1095"/>
+        <location filename="../settings.ui" line="1658"/>
+        <location filename="../settings.cpp" line="1133"/>
         <source>Background color</source>
         <translation>Háttérszín</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="497"/>
-        <location filename="../settings.cpp" line="1099"/>
+        <location filename="../settings.ui" line="848"/>
+        <location filename="../settings.cpp" line="1137"/>
         <source>Page header text color</source>
         <translation>Állapotsor szövegszín</translation>
     </message>
@@ -1484,108 +1481,130 @@
         <translation>Görgetés</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="244"/>
         <source>Vew Mode</source>
-        <translation>Olvasási mód</translation>
+        <translation type="vanished">Olvasási mód</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="257"/>
         <source>Page margins</source>
-        <translation>Margók</translation>
+        <translation type="vanished">Margók</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="265"/>
-        <location filename="../settings.ui" line="781"/>
-        <location filename="../settings.ui" line="831"/>
-        <location filename="../settings.ui" line="881"/>
-        <location filename="../settings.ui" line="931"/>
-        <location filename="../settings.cpp" line="591"/>
-        <location filename="../settings.cpp" line="632"/>
+        <location filename="../settings.ui" line="382"/>
+        <location filename="../settings.ui" line="499"/>
+        <location filename="../settings.ui" line="616"/>
+        <location filename="../settings.ui" line="1132"/>
+        <location filename="../settings.ui" line="1182"/>
+        <location filename="../settings.ui" line="1232"/>
+        <location filename="../settings.ui" line="1282"/>
+        <location filename="../settings.cpp" line="609"/>
+        <location filename="../settings.cpp" line="650"/>
         <source>0</source>
         <translation>0</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="290"/>
+        <location filename="../settings.ui" line="407"/>
+        <location filename="../settings.ui" line="524"/>
+        <location filename="../settings.ui" line="641"/>
         <source>5</source>
         <translation>5</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="305"/>
+        <location filename="../settings.ui" line="422"/>
+        <location filename="../settings.ui" line="539"/>
+        <location filename="../settings.ui" line="656"/>
         <source>8</source>
         <translation>8</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="315"/>
+        <location filename="../settings.ui" line="432"/>
+        <location filename="../settings.ui" line="549"/>
+        <location filename="../settings.ui" line="666"/>
         <source>10</source>
         <translation>10</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="330"/>
+        <location filename="../settings.ui" line="447"/>
+        <location filename="../settings.ui" line="564"/>
+        <location filename="../settings.ui" line="681"/>
         <source>15</source>
         <translation>15</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="335"/>
+        <location filename="../settings.ui" line="452"/>
+        <location filename="../settings.ui" line="569"/>
+        <location filename="../settings.ui" line="686"/>
         <source>20</source>
         <translation>20</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="340"/>
+        <location filename="../settings.ui" line="457"/>
+        <location filename="../settings.ui" line="574"/>
+        <location filename="../settings.ui" line="691"/>
         <source>25</source>
         <translation>25</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="345"/>
+        <location filename="../settings.ui" line="462"/>
+        <location filename="../settings.ui" line="579"/>
+        <location filename="../settings.ui" line="696"/>
         <source>30</source>
         <translation>30</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="378"/>
+        <location filename="../settings.ui" line="729"/>
         <source>Show page header</source>
         <translation>Állapotsor megjelenítése</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="412"/>
+        <location filename="../settings.ui" line="763"/>
         <source>Book name</source>
         <translation>Könyv neve</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="419"/>
+        <location filename="../settings.ui" line="770"/>
         <source>Page number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="426"/>
+        <location filename="../settings.ui" line="777"/>
         <source>Page count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="440"/>
+        <location filename="../settings.ui" line="791"/>
         <source>Clock</source>
         <translation>Óra</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="447"/>
+        <location filename="../settings.ui" line="798"/>
         <source>Battery status</source>
         <translation>Akkumulátor állapot</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="480"/>
+        <location filename="../settings.ui" line="831"/>
         <source>Header font</source>
         <translation>Állapotsor betűtípus</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="512"/>
-        <location filename="../settings.ui" line="578"/>
-        <location filename="../settings.ui" line="655"/>
-        <location filename="../settings.ui" line="706"/>
-        <location filename="../settings.ui" line="996"/>
-        <location filename="../settings.ui" line="1308"/>
+        <location filename="../settings.ui" line="863"/>
+        <location filename="../settings.ui" line="929"/>
+        <location filename="../settings.ui" line="1006"/>
+        <location filename="../settings.ui" line="1057"/>
+        <location filename="../settings.ui" line="1347"/>
+        <location filename="../settings.ui" line="1673"/>
         <source>Change</source>
         <translation>Változtatás</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="556"/>
+        <location filename="../settings.ui" line="907"/>
         <source>Show footnotes at bottom of page</source>
         <translation>Lábjegyzetek megjelenítése a lap alján</translation>
     </message>
@@ -1599,23 +1618,23 @@
         <translation type="vanished">Betűtípus</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1420"/>
-        <location filename="../settings.ui" line="1434"/>
+        <location filename="../settings.ui" line="1785"/>
+        <location filename="../settings.ui" line="1799"/>
         <source>Hyphenation</source>
         <translation>Elválasztás</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1444"/>
+        <location filename="../settings.ui" line="1809"/>
         <source>Text shaping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1458"/>
+        <location filename="../settings.ui" line="1823"/>
         <source>Interline spacing</source>
         <translation>Sorköz</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1258"/>
+        <location filename="../settings.ui" line="1623"/>
         <source>Page skin</source>
         <translation>Háttérmintázat</translation>
     </message>
@@ -1624,17 +1643,17 @@
         <translation type="vanished">Minta</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1548"/>
+        <location filename="../settings.ui" line="1913"/>
         <source>.TXT files</source>
         <translation>.TXT fájlok</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1555"/>
+        <location filename="../settings.ui" line="1920"/>
         <source>Disable automatic formatting</source>
         <translation>Automatikus formázás tiltása</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="970"/>
+        <location filename="../settings.ui" line="1321"/>
         <source>Styles</source>
         <translation>Megjelenés</translation>
     </message>
@@ -1660,251 +1679,313 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../settings.ui" line="244"/>
+        <source>View Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="257"/>
+        <source>Margin top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../settings.ui" line="270"/>
-        <location filename="../settings.ui" line="786"/>
-        <location filename="../settings.ui" line="836"/>
-        <location filename="../settings.ui" line="886"/>
-        <location filename="../settings.ui" line="936"/>
+        <location filename="../settings.ui" line="387"/>
+        <location filename="../settings.ui" line="504"/>
+        <location filename="../settings.ui" line="621"/>
+        <location filename="../settings.ui" line="1137"/>
+        <location filename="../settings.ui" line="1187"/>
+        <location filename="../settings.ui" line="1237"/>
+        <location filename="../settings.ui" line="1287"/>
         <source>1</source>
         <translation type="unfinished">1</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="275"/>
-        <location filename="../settings.ui" line="791"/>
-        <location filename="../settings.ui" line="841"/>
-        <location filename="../settings.ui" line="891"/>
-        <location filename="../settings.ui" line="941"/>
+        <location filename="../settings.ui" line="392"/>
+        <location filename="../settings.ui" line="509"/>
+        <location filename="../settings.ui" line="626"/>
+        <location filename="../settings.ui" line="1142"/>
+        <location filename="../settings.ui" line="1192"/>
+        <location filename="../settings.ui" line="1242"/>
+        <location filename="../settings.ui" line="1292"/>
         <source>2</source>
         <translation type="unfinished">2</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="280"/>
-        <location filename="../settings.ui" line="796"/>
-        <location filename="../settings.ui" line="846"/>
-        <location filename="../settings.ui" line="896"/>
-        <location filename="../settings.ui" line="946"/>
+        <location filename="../settings.ui" line="397"/>
+        <location filename="../settings.ui" line="514"/>
+        <location filename="../settings.ui" line="631"/>
+        <location filename="../settings.ui" line="1147"/>
+        <location filename="../settings.ui" line="1197"/>
+        <location filename="../settings.ui" line="1247"/>
+        <location filename="../settings.ui" line="1297"/>
         <source>3</source>
         <translation type="unfinished">3</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="285"/>
+        <location filename="../settings.ui" line="402"/>
+        <location filename="../settings.ui" line="519"/>
+        <location filename="../settings.ui" line="636"/>
         <source>4</source>
         <translation type="unfinished">4</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="295"/>
+        <location filename="../settings.ui" line="412"/>
+        <location filename="../settings.ui" line="529"/>
+        <location filename="../settings.ui" line="646"/>
         <source>6</source>
         <translation type="unfinished">6</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="300"/>
+        <location filename="../settings.ui" line="417"/>
+        <location filename="../settings.ui" line="534"/>
+        <location filename="../settings.ui" line="651"/>
         <source>7</source>
         <translation type="unfinished">7</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="310"/>
+        <location filename="../settings.ui" line="427"/>
+        <location filename="../settings.ui" line="544"/>
+        <location filename="../settings.ui" line="661"/>
         <source>9</source>
         <translation type="unfinished">9</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="320"/>
+        <location filename="../settings.ui" line="437"/>
+        <location filename="../settings.ui" line="554"/>
+        <location filename="../settings.ui" line="671"/>
         <source>11</source>
         <translation type="unfinished">11</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="325"/>
+        <location filename="../settings.ui" line="442"/>
+        <location filename="../settings.ui" line="559"/>
+        <location filename="../settings.ui" line="676"/>
         <source>12</source>
         <translation type="unfinished">12</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="350"/>
+        <location filename="../settings.ui" line="467"/>
+        <location filename="../settings.ui" line="584"/>
+        <location filename="../settings.ui" line="701"/>
+        <location filename="../settings.ui" line="1938"/>
         <source>40</source>
         <translation type="unfinished">40</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="355"/>
+        <location filename="../settings.ui" line="472"/>
+        <location filename="../settings.ui" line="589"/>
+        <location filename="../settings.ui" line="706"/>
         <source>50</source>
         <translation type="unfinished">50</translation>
     </message>
     <message>
         <location filename="../settings.ui" line="360"/>
+        <location filename="../settings.ui" line="477"/>
+        <location filename="../settings.ui" line="594"/>
+        <location filename="../settings.ui" line="711"/>
         <source>60</source>
         <translation type="unfinished">60</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="386"/>
-        <location filename="../settings.cpp" line="244"/>
-        <location filename="../settings.cpp" line="251"/>
-        <location filename="../settings.cpp" line="817"/>
+        <location filename="../settings.ui" line="374"/>
+        <source>Margin bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="491"/>
+        <source>Margin left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="608"/>
+        <source>Margin right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="737"/>
+        <location filename="../settings.cpp" line="254"/>
+        <location filename="../settings.cpp" line="261"/>
+        <location filename="../settings.cpp" line="835"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="391"/>
+        <location filename="../settings.ui" line="742"/>
         <source>Page header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="396"/>
+        <location filename="../settings.ui" line="747"/>
         <source>Page footer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="433"/>
+        <location filename="../settings.ui" line="784"/>
         <source>Position percent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="565"/>
-        <location filename="../settings.cpp" line="1353"/>
+        <location filename="../settings.ui" line="916"/>
+        <location filename="../settings.cpp" line="1407"/>
         <source>Selection color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="642"/>
+        <location filename="../settings.ui" line="993"/>
         <source>Comment color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="693"/>
+        <location filename="../settings.ui" line="1044"/>
         <source>Correction color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="616"/>
+        <location filename="../settings.ui" line="967"/>
         <source>Bookmark highlight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="624"/>
-        <location filename="../settings.ui" line="762"/>
-        <location filename="../settings.ui" line="812"/>
-        <location filename="../settings.ui" line="862"/>
-        <location filename="../settings.ui" line="912"/>
+        <location filename="../settings.ui" line="975"/>
+        <location filename="../settings.ui" line="1113"/>
+        <location filename="../settings.ui" line="1163"/>
+        <location filename="../settings.ui" line="1213"/>
+        <location filename="../settings.ui" line="1263"/>
         <source>Disabled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="629"/>
+        <location filename="../settings.ui" line="980"/>
         <source>Solid fill</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="634"/>
-        <location filename="../settings.cpp" line="818"/>
+        <location filename="../settings.ui" line="985"/>
+        <location filename="../settings.cpp" line="836"/>
         <source>Underline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="754"/>
+        <location filename="../settings.ui" line="1105"/>
         <source>Inline images zoom in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="767"/>
-        <location filename="../settings.ui" line="817"/>
-        <location filename="../settings.ui" line="867"/>
-        <location filename="../settings.ui" line="917"/>
+        <location filename="../settings.ui" line="1118"/>
+        <location filename="../settings.ui" line="1168"/>
+        <location filename="../settings.ui" line="1218"/>
+        <location filename="../settings.ui" line="1268"/>
         <source>Integer scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="772"/>
-        <location filename="../settings.ui" line="822"/>
-        <location filename="../settings.ui" line="872"/>
-        <location filename="../settings.ui" line="922"/>
+        <location filename="../settings.ui" line="1123"/>
+        <location filename="../settings.ui" line="1173"/>
+        <location filename="../settings.ui" line="1223"/>
+        <location filename="../settings.ui" line="1273"/>
         <source>Arbitrary scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="854"/>
+        <location filename="../settings.ui" line="1205"/>
         <source>Block images zoom in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="904"/>
+        <location filename="../settings.ui" line="1255"/>
         <source>Block images zoom out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="804"/>
+        <location filename="../settings.ui" line="1155"/>
         <source>Inline images zoom out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="744"/>
+        <location filename="../settings.ui" line="1095"/>
         <source>Image scaling options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1054"/>
+        <location filename="../settings.ui" line="1405"/>
         <source>Default font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1136"/>
+        <location filename="../settings.ui" line="1487"/>
         <source>Font gamma</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1174"/>
+        <location filename="../settings.ui" line="1525"/>
         <source>Font antialiasing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1251"/>
-        <location filename="../settings.ui" line="1562"/>
+        <location filename="../settings.ui" line="1602"/>
+        <location filename="../settings.ui" line="1616"/>
         <source>Manage...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1354"/>
+        <location filename="../settings.ui" line="1719"/>
         <source>Rendering flags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1362"/>
-        <location filename="../settings.ui" line="1393"/>
+        <location filename="../settings.ui" line="1727"/>
+        <location filename="../settings.ui" line="1758"/>
         <source>Legacy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1367"/>
+        <location filename="../settings.ui" line="1732"/>
         <source>Flat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1372"/>
+        <location filename="../settings.ui" line="1737"/>
         <source>Book</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1377"/>
+        <location filename="../settings.ui" line="1742"/>
         <source>Web (Full)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1385"/>
+        <location filename="../settings.ui" line="1750"/>
         <source>DOM level:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1398"/>
+        <location filename="../settings.ui" line="1763"/>
         <source>Newest</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1406"/>
+        <location filename="../settings.ui" line="1771"/>
         <source>Multi languages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1413"/>
+        <location filename="../settings.ui" line="1778"/>
         <source>Support for multilingual documents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1569"/>
+        <location filename="../settings.ui" line="1609"/>
         <source>Font families</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1933,7 +2014,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="406"/>
+        <location filename="../settings.ui" line="757"/>
         <source>Header elements</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2058,586 +2139,581 @@
         <translation type="obsolete">1.9</translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1188"/>
+        <location filename="../settings.ui" line="1539"/>
         <source>Font hinting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1220"/>
+        <location filename="../settings.ui" line="1571"/>
         <source>No hinting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1225"/>
+        <location filename="../settings.ui" line="1576"/>
         <source>Use bytecode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1230"/>
+        <location filename="../settings.ui" line="1581"/>
         <source>Autohinting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1468"/>
+        <location filename="../settings.ui" line="1833"/>
         <source>Min space width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="216"/>
+        <location filename="../settings.cpp" line="220"/>
         <source>Simple (FreeType only, fastest)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="217"/>
+        <location filename="../settings.cpp" line="221"/>
         <source>Light (HarfBuzz without ligatures)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="218"/>
+        <location filename="../settings.cpp" line="222"/>
         <source>Full (HarfBuzz with ligatures)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1478"/>
+        <location filename="../settings.ui" line="1843"/>
         <source>Font kerning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1485"/>
+        <location filename="../settings.ui" line="1850"/>
         <source>Enable font kerning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1492"/>
+        <location filename="../settings.ui" line="1857"/>
         <source>Floating punctuation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1499"/>
+        <location filename="../settings.ui" line="1864"/>
         <source>Enable floating punctuation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1506"/>
+        <location filename="../settings.ui" line="1871"/>
         <source>Internal CSS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1513"/>
+        <location filename="../settings.ui" line="1878"/>
         <source>Enable document internal styles</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1520"/>
+        <location filename="../settings.ui" line="1885"/>
         <source>.EPUB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1527"/>
+        <location filename="../settings.ui" line="1892"/>
         <source>Enable document embedded fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1541"/>
+        <location filename="../settings.ui" line="1906"/>
         <source>Ignore document margins</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1427"/>
+        <location filename="../settings.ui" line="1792"/>
         <source>Enable hyphenation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1119"/>
-        <location filename="../settings.ui" line="1662"/>
+        <location filename="../settings.ui" line="1470"/>
+        <location filename="../settings.ui" line="2042"/>
         <source>Font weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1238"/>
+        <location filename="../settings.ui" line="1589"/>
         <source>Fallback fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="245"/>
-        <location filename="../settings.cpp" line="252"/>
-        <location filename="../settings.cpp" line="756"/>
+        <location filename="../settings.cpp" line="255"/>
+        <location filename="../settings.cpp" line="262"/>
+        <location filename="../settings.cpp" line="774"/>
         <source>Gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="246"/>
-        <source>LCD (RGB)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings.cpp" line="247"/>
-        <source>LCD (BGR)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings.cpp" line="248"/>
-        <source>LCD (RGB) vertical</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings.cpp" line="249"/>
-        <source>LCD (BGR) vertical</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings.ui" line="1579"/>
+        <location filename="../settings.ui" line="1959"/>
         <source>Stylesheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1588"/>
-        <location filename="../settings.cpp" line="456"/>
+        <location filename="../settings.ui" line="1968"/>
+        <location filename="../settings.cpp" line="474"/>
         <source>Default paragraph style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1622"/>
+        <location filename="../settings.ui" line="2002"/>
         <source>Alignment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1632"/>
+        <location filename="../settings.ui" line="2012"/>
         <source>First line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1642"/>
+        <location filename="../settings.ui" line="2022"/>
         <source>Font size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1652"/>
+        <location filename="../settings.ui" line="2032"/>
         <source>Font face</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1672"/>
+        <location filename="../settings.ui" line="2052"/>
         <source>Font style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1682"/>
+        <location filename="../settings.ui" line="2062"/>
         <source>Font color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1722"/>
+        <location filename="../settings.ui" line="2102"/>
         <source>Margins:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1729"/>
+        <location filename="../settings.ui" line="2109"/>
         <source>Before</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1739"/>
+        <location filename="../settings.ui" line="2119"/>
         <source>After</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1749"/>
-        <location filename="../settings.cpp" line="545"/>
+        <location filename="../settings.ui" line="2129"/>
+        <location filename="../settings.cpp" line="563"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1759"/>
-        <location filename="../settings.cpp" line="545"/>
+        <location filename="../settings.ui" line="2139"/>
+        <location filename="../settings.cpp" line="563"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1695"/>
+        <location filename="../settings.ui" line="2075"/>
         <source>Interline space</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1705"/>
+        <location filename="../settings.ui" line="1948"/>
+        <source>35</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="1943"/>
+        <source>38</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="1927"/>
+        <source>TrueType interpreter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings.ui" line="2085"/>
         <source>Text decoration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1715"/>
+        <location filename="../settings.ui" line="2095"/>
         <source>Vertical align</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="457"/>
+        <location filename="../settings.cpp" line="475"/>
         <source>Title</source>
         <translation type="unfinished">Cím</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="458"/>
+        <location filename="../settings.cpp" line="476"/>
         <source>Subtitle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="459"/>
+        <location filename="../settings.cpp" line="477"/>
         <source>Preformatted text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="460"/>
+        <location filename="../settings.cpp" line="478"/>
         <source>Link</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="461"/>
+        <location filename="../settings.cpp" line="479"/>
         <source>Cite / quotation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="462"/>
+        <location filename="../settings.cpp" line="480"/>
         <source>Epigraph</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="463"/>
+        <location filename="../settings.cpp" line="481"/>
         <source>Poem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="464"/>
+        <location filename="../settings.cpp" line="482"/>
         <source>Text author</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="465"/>
+        <location filename="../settings.cpp" line="483"/>
         <source>Footnote link</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="466"/>
+        <location filename="../settings.cpp" line="484"/>
         <source>Footnote</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="467"/>
+        <location filename="../settings.cpp" line="485"/>
         <source>Footnote title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="468"/>
+        <location filename="../settings.cpp" line="486"/>
         <source>Annotation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="545"/>
-        <location filename="../settings.cpp" line="561"/>
-        <location filename="../settings.cpp" line="590"/>
-        <location filename="../settings.cpp" line="631"/>
-        <location filename="../settings.cpp" line="664"/>
-        <location filename="../settings.cpp" line="686"/>
-        <location filename="../settings.cpp" line="705"/>
-        <location filename="../settings.cpp" line="751"/>
-        <location filename="../settings.cpp" line="816"/>
+        <location filename="../settings.cpp" line="563"/>
+        <location filename="../settings.cpp" line="579"/>
+        <location filename="../settings.cpp" line="608"/>
+        <location filename="../settings.cpp" line="649"/>
+        <location filename="../settings.cpp" line="682"/>
+        <location filename="../settings.cpp" line="704"/>
+        <location filename="../settings.cpp" line="723"/>
+        <location filename="../settings.cpp" line="769"/>
         <location filename="../settings.cpp" line="834"/>
+        <location filename="../settings.cpp" line="852"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="545"/>
+        <location filename="../settings.cpp" line="563"/>
         <source>Justify</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="545"/>
+        <location filename="../settings.cpp" line="563"/>
         <source>Center</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="561"/>
+        <location filename="../settings.cpp" line="579"/>
         <source>No indent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="561"/>
+        <location filename="../settings.cpp" line="579"/>
         <source>Small Indent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="561"/>
+        <location filename="../settings.cpp" line="579"/>
         <source>Big Indent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="561"/>
+        <location filename="../settings.cpp" line="579"/>
         <source>Small Outdent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="561"/>
+        <location filename="../settings.cpp" line="579"/>
         <source>Big Outdent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="592"/>
+        <location filename="../settings.cpp" line="610"/>
         <source>20% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="593"/>
+        <location filename="../settings.cpp" line="611"/>
         <source>30% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="594"/>
-        <location filename="../settings.cpp" line="633"/>
+        <location filename="../settings.cpp" line="612"/>
+        <location filename="../settings.cpp" line="651"/>
         <source>50% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="595"/>
-        <location filename="../settings.cpp" line="634"/>
+        <location filename="../settings.cpp" line="613"/>
+        <location filename="../settings.cpp" line="652"/>
         <source>100% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="596"/>
-        <location filename="../settings.cpp" line="635"/>
+        <location filename="../settings.cpp" line="614"/>
+        <location filename="../settings.cpp" line="653"/>
         <source>150% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="636"/>
+        <location filename="../settings.cpp" line="654"/>
         <source>200% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="637"/>
+        <location filename="../settings.cpp" line="655"/>
         <source>400% of line height</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="638"/>
+        <location filename="../settings.cpp" line="656"/>
         <source>5% of line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="639"/>
+        <location filename="../settings.cpp" line="657"/>
         <source>10% of line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="640"/>
+        <location filename="../settings.cpp" line="658"/>
         <source>15% of line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="641"/>
+        <location filename="../settings.cpp" line="659"/>
         <source>20% of line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="642"/>
+        <location filename="../settings.cpp" line="660"/>
         <source>30% of line width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="665"/>
-        <location filename="../settings.cpp" line="706"/>
+        <location filename="../settings.cpp" line="683"/>
+        <location filename="../settings.cpp" line="724"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="666"/>
+        <location filename="../settings.cpp" line="684"/>
         <source>Bold</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="667"/>
+        <location filename="../settings.cpp" line="685"/>
         <source>Bolder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="668"/>
+        <location filename="../settings.cpp" line="686"/>
         <source>Lighter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="687"/>
+        <location filename="../settings.cpp" line="705"/>
         <source>Increase: 110%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="688"/>
+        <location filename="../settings.cpp" line="706"/>
         <source>Increase: 120%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="689"/>
+        <location filename="../settings.cpp" line="707"/>
         <source>Increase: 150%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="690"/>
+        <location filename="../settings.cpp" line="708"/>
         <source>Decrease: 90%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="691"/>
+        <location filename="../settings.cpp" line="709"/>
         <source>Decrease: 80%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="692"/>
+        <location filename="../settings.cpp" line="710"/>
         <source>Decrease: 70%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="693"/>
+        <location filename="../settings.cpp" line="711"/>
         <source>Decrease: 60%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="707"/>
+        <location filename="../settings.cpp" line="725"/>
         <source>Italic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="716"/>
+        <location filename="../settings.cpp" line="734"/>
         <source>[Default Sans Serif]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="718"/>
+        <location filename="../settings.cpp" line="736"/>
         <source>[Default Serif]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="720"/>
+        <location filename="../settings.cpp" line="738"/>
         <source>[Default Monospace]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="752"/>
+        <location filename="../settings.cpp" line="770"/>
         <source>Black</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="753"/>
+        <location filename="../settings.cpp" line="771"/>
         <source>Green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="754"/>
+        <location filename="../settings.cpp" line="772"/>
         <source>Silver</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="755"/>
+        <location filename="../settings.cpp" line="773"/>
         <source>Lime</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="757"/>
+        <location filename="../settings.cpp" line="775"/>
         <source>Olive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="758"/>
+        <location filename="../settings.cpp" line="776"/>
         <source>White</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="759"/>
+        <location filename="../settings.cpp" line="777"/>
         <source>Yellow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="760"/>
+        <location filename="../settings.cpp" line="778"/>
         <source>Maroon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="761"/>
+        <location filename="../settings.cpp" line="779"/>
         <source>Navy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="762"/>
+        <location filename="../settings.cpp" line="780"/>
         <source>Red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="763"/>
+        <location filename="../settings.cpp" line="781"/>
         <source>Blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="764"/>
+        <location filename="../settings.cpp" line="782"/>
         <source>Purple</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="765"/>
+        <location filename="../settings.cpp" line="783"/>
         <source>Teal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="766"/>
+        <location filename="../settings.cpp" line="784"/>
         <source>Fuchsia</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="767"/>
+        <location filename="../settings.cpp" line="785"/>
         <source>Aqua</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="819"/>
+        <location filename="../settings.cpp" line="837"/>
         <source>Line through</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="820"/>
+        <location filename="../settings.cpp" line="838"/>
         <source>Overline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="835"/>
+        <location filename="../settings.cpp" line="853"/>
         <source>Baseline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="836"/>
+        <location filename="../settings.cpp" line="854"/>
         <source>Subscript</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="837"/>
+        <location filename="../settings.cpp" line="855"/>
         <source>Superscript</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1202"/>
+        <location filename="../settings.cpp" line="1240"/>
         <source>synthetic*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1204"/>
+        <location filename="../settings.cpp" line="1242"/>
         <source>synthetic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1357"/>
+        <location filename="../settings.cpp" line="1411"/>
         <source>Comment bookmark color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.cpp" line="1361"/>
+        <location filename="../settings.cpp" line="1415"/>
         <source>Correction bookmark color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings.ui" line="1534"/>
+        <location filename="../settings.ui" line="1899"/>
         <source>Margins redefine</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2645,12 +2721,12 @@
 <context>
     <name>TocDlg</name>
     <message>
-        <location filename="../tocdlg.cpp" line="75"/>
+        <location filename="../tocdlg.cpp" line="78"/>
         <source>Title</source>
         <translation>Cím</translation>
     </message>
     <message>
-        <location filename="../tocdlg.cpp" line="75"/>
+        <location filename="../tocdlg.cpp" line="78"/>
         <source>Page</source>
         <translation>Oldal</translation>
     </message>
@@ -2698,7 +2774,7 @@
 <context>
     <name>crqtutils</name>
     <message>
-        <location filename="../crqtutil.cpp" line="184"/>
+        <location filename="../crqtutil.cpp" line="185"/>
         <source>Undetermined</source>
         <translation type="unfinished"></translation>
     </message>
