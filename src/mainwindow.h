@@ -102,6 +102,7 @@ private slots:
     void on_actionPrevPage3_triggered();
     void on_actionNextPage2_triggered();
     void on_actionClose_triggered();
+    void on_actionResizeToXteink_triggered();
     void on_actionMinimize_triggered();
     void on_actionOpen_triggered();
     void on_actionExport_triggered();

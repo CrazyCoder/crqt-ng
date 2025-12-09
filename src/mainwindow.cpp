@@ -446,6 +446,13 @@ void MainWindow::on_actionMinimize_triggered() {
     showMinimized();
 }
 
+void MainWindow::on_actionResizeToXteink_triggered() {
+    CR3View* view = currentCRView();
+    if (NULL == view)
+        return;
+    view->setDocViewSize(480, 800);
+}
+
 void MainWindow::on_actionClose_triggered() {
     close();
 }
