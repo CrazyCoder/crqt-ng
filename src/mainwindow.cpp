@@ -41,6 +41,7 @@
 #include <QMessageBox>
 #include <QHBoxLayout>
 #include <QPushButton>
+#include <lvbasedrawbuf.h>
 
 #include "app-props.h"
 #include "settings.h"
@@ -349,6 +350,22 @@ public:
     }
 };
 
+class XtcProgressCallback: public XtcExportCallback
+{
+    ExportProgressDlg* _dlg;
+public:
+    XtcProgressCallback(ExportProgressDlg* dlg)
+            : _dlg(dlg) { }
+    /// export progress, called with values 0..100
+    void onProgress(const int percent) override {
+        if (percent % 10 == 0) {
+            CRLog::debug("XtcProgressCallback::onProgress(%d)", percent);
+        }
+        _dlg->setPercent(percent);
+        QApplication::processEvents();
+    }
+};
+
 void MainWindow::on_actionExport_triggered() {
     CRLog::debug("Exporting!");
     CR3View* view = currentCRView();
@@ -360,7 +377,7 @@ void MainWindow::on_actionExport_triggered() {
     // if (fileName.length() == 0)
         // return;
     
-    QString fileName = "d:\\shared\\Xteink\\cr-conv\\test.wol";
+    QString fileName = "d:\\shared\\Xteink\\cr-conv\\test.xtc";
     // WolExportDlg* dlg = new WolExportDlg(this);
     //dlg->setModal( true );
     // dlg->setWindowTitle(tr("Export to WOL format"));
@@ -375,27 +392,34 @@ void MainWindow::on_actionExport_triggered() {
         // delete dlg;
         // repaint();
     ExportProgressDlg* msg = new ExportProgressDlg(this);
+    msg->setPercent(0);
     msg->show();
     msg->raise();
     msg->activateWindow();
-    msg->repaint();
-    repaint();
-    ExportProgressCallback progress(msg);
-    LVDocViewCallback* oldCallback = view->getDocView()->getCallback();
-    view->getDocView()->setCallback(&progress);
-    // view->getDocView()->exportWolFile(qt2cr(fileName).c_str(), bpp > 1, levels);
-    view->getDocView()->exportXtbFile(qt2cr(fileName).c_str(), 480, 800, 1, 0, true);
-    XtcExporter exporter;
+
+    XtcProgressCallback xtcProgress(msg);
+
+    auto doc_view = view->getDocView();
+    doc_view->savePosition();
+    view->setExportMode(true);  // Disable view updates during export
+    view->setDocViewSize(480, 800);
+    
+    XtcExporter exporter = doc_view->createXtcExporter();
+
     exporter.setFormat(XTC_FORMAT_XTC)
             .setGrayPolicy(GRAY_ALL_TO_BLACK)
+            .setImageDitherMode(IMAGE_DITHER_FS_1BIT)
+            .setDitheringOptions(getDefault1BitDitheringOptions())
             .setPageRange(0, 100)
-            // .setProgressCallback(progress)
-            .setMetadata(UnicodeToUtf8(view->getDocView()->getTitle()), UnicodeToUtf8(view->getDocView()->getAuthors()))
+            .dumpImages(10)
+            .setProgressCallback(&xtcProgress)
+            .setChapterDepth(1)
+            .enableChapters(true)
             .setDimensions(480, 800);
     CRLog::debug("Exporter parameters set!");
-    exporter.exportDocument(view->getDocView(), qt2cr(fileName + ".xtc").c_str());
-    // view->getDocView()->exportXtcFile(qt2cr(fileName).c_str(), XTC_FORMAT_XTC, 480, 800);
-    view->getDocView()->setCallback(oldCallback);
+    exporter.exportDocument(doc_view, qt2cr(fileName).c_str());
+    view->setExportMode(false);  // Re-enable view updates
+
     delete msg;
     // } else {
         // delete dlg;

@@ -350,6 +350,7 @@ CR3View::CR3View(QWidget* parent)
         , _doubleClick(false)
         , _active(false)
         , _editMode(false)
+        , _exportMode(false)
         , _lastBatteryState(CR_BATTERY_STATE_NO_BATTERY)
         , _lastBatteryChargingConn(CR_BATTERY_CHARGER_NO)
         , _lastBatteryChargeLevel(0)
@@ -602,6 +603,8 @@ void CR3View::wheelEvent(QWheelEvent* event) {
 }
 
 void CR3View::resizeEvent(QResizeEvent* event) {
+    if (_exportMode)
+        return;  // Ignore resize during export
     if (_active) {
         _resizeTimer->stop();
         _resizeTimer->start(100);
@@ -640,6 +643,14 @@ static bool getBatteryState(int& state, int& chargingConn, int& level) {
 void CR3View::paintEvent(QPaintEvent* event) {
     if (!_active)
         return;
+    if (_exportMode) {
+        // Draw cached frame during export
+        if (!_exportModeFrame.isNull()) {
+            QPainter painter(this);
+            painter.drawPixmap(0, 0, _exportModeFrame);
+        }
+        return;
+    }
     QPainter painter(this);
     qreal dpr = painter.device()->devicePixelRatioF();
     if (fabs(dpr - _dpr) >= 0.01)
@@ -864,6 +875,20 @@ void CR3View::setEditMode(bool flgEdit) {
     update();
 }
 
+void CR3View::setExportMode(bool enabled) {
+    if (enabled) {
+        _resizeTimer->stop();  // Stop any pending resize
+        // Capture current frame BEFORE setting _exportMode
+        // (grab() triggers paintEvent internally, which needs _exportMode == false to render)
+        _exportModeFrame = grab();
+        _exportMode = true;
+    } else {
+        _exportMode = false;
+        // Clear cached frame when leaving export mode
+        _exportModeFrame = QPixmap();
+    }
+}
+
 QString CR3View::getDocTitle() const {
     if (NULL != _docview) {
         lString32 atitle;
@@ -920,6 +945,24 @@ QSize CR3View::minimumSizeHint() const {
     return QSize(SCREEN_SIZE_MIN, SCREEN_SIZE_MIN);
 }
 
+QSize CR3View::sizeHint() const {
+    if (_docview == nullptr)
+        return QWidget::sizeHint();
+    int physW = _docview->GetWidth();
+    int physH = _docview->GetHeight();
+    if (physW <= 0 || physH <= 0)
+        return QWidget::sizeHint();
+
+    qreal dpr_member = _dpr;
+    qreal dpr_screen = screen()->devicePixelRatio();
+    qreal dpr_widget = devicePixelRatioF();
+    int hintW = qCeil(physW / dpr_member);
+    int hintH = qCeil(physH / dpr_member);
+    CRLog::debug("sizeHint: docview=%dx%d, _dpr=%.3f, screen_dpr=%.3f, widget_dpr=%.3f, hint=%dx%d",
+                 physW, physH, dpr_member, dpr_screen, dpr_widget, hintW, hintH);
+    return QSize(hintW, hintH);
+}
+
 void CR3View::zoomIn() {
     doCommand(DCMD_ZOOM_IN, 1);
     refreshPropFromView(PROP_FONT_SIZE);
@@ -931,6 +974,8 @@ void CR3View::zoomOut() {
 }
 
 void CR3View::resizeTimerTimeout() {
+    if (_exportMode)
+        return;  // Ignore resize during export
     QSize sz = size();
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
@@ -939,6 +984,45 @@ void CR3View::resizeTimerTimeout() {
     sz *= _dpr;
 #endif
     _docview->Resize(sz.width(), sz.height());
+    update();
+}
+
+void CR3View::setDocViewSize(int width, int height) {
+    _docview->Resize(width, height);
+    CRLog::debug("setDocViewSize: %dx%d (physical), _dpr=%.3f", width, height, _dpr);
+
+    // Calculate the logical size for this widget
+    int logicalW = qRound(width / _dpr);
+    int logicalH = qRound(height / _dpr);
+    CRLog::debug("setDocViewSize: logical widget size=%dx%d", logicalW, logicalH);
+
+    // Find the top-level MainWindow
+    QWidget* topLevel = window();
+    if (topLevel == nullptr) {
+        CRLog::warn("setDocViewSize: no top-level window found");
+        updateGeometry();
+        update();
+        return;
+    }
+
+    // Calculate the extra space used by MainWindow chrome (menu, toolbar, statusbar, tabbar, etc.)
+    // We do this by comparing the current MainWindow size to the current CR3View size
+    QSize currentViewSize = size();
+    QSize currentWindowSize = topLevel->size();
+    int extraW = currentWindowSize.width() - currentViewSize.width();
+    int extraH = currentWindowSize.height() - currentViewSize.height();
+    CRLog::debug("setDocViewSize: extraW=%d, extraH=%d (menu+toolbar+tabbar+statusbar etc.)",
+                 extraW, extraH);
+
+    // Calculate new window size
+    int newWindowW = logicalW + extraW;
+    int newWindowH = logicalH + extraH;
+    CRLog::debug("setDocViewSize: new window size=%dx%d", newWindowW, newWindowH);
+
+    // Resize the main window
+    topLevel->resize(newWindowW, newWindowH);
+
+    updateGeometry();
     update();
 }
 

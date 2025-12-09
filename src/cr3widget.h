@@ -120,6 +120,12 @@ public:
     bool getEditMode() {
         return _editMode;
     }
+    /// turns on/off Export mode (suppresses view updates during export)
+    void setExportMode(bool enabled);
+    /// returns true if export mode is active
+    bool isExportMode() const {
+        return _exportMode;
+    }
     QString getDocTitle() const;
 
     void saveWindowPos(QWidget* window, const char* prefix);
@@ -214,7 +220,8 @@ public slots:
     void zoomOut();
     void nextSentence();
     void prevSentence();
-
+    /// Set docview size in physical pixels and resize widget to match
+    void setDocViewSize(int width, int height);
 signals:
     //void fileNameChanged( const QString & );
 protected:
@@ -232,6 +239,7 @@ protected:
 
     virtual void refreshPropFromView(const char* propName);
     virtual QSize minimumSizeHint() const;
+    QSize sizeHint() const override;
 private slots:
     void resizeTimerTimeout();
 private:
@@ -274,6 +282,8 @@ private:
     CR3ViewCommandList _delayed_commands;
     bool _active;
     bool _editMode;
+    bool _exportMode;
+    QPixmap _exportModeFrame;  // Cached frame to display during export
     int _lastBatteryState;
     int _lastBatteryChargingConn;
     int _lastBatteryChargeLevel;
