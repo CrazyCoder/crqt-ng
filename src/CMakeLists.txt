@@ -6,6 +6,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
+option(UPDATE_TRANSLATIONS "Run lupdate to update .ts translation files from sources" OFF)
+option(CON_DEBUG "Enable console output for debug logging on Windows (disables -mwindows and WIN32)" OFF)
+
 set(SRC_LIST
   aboutdlg.ui
   aboutdlg.cpp
@@ -62,17 +65,32 @@ endif()
 
 set(QM_FILES)
 if(LANGUAGE_TS_FILES)
-  if( ${USE_QT} STREQUAL QT6 )
-    qt6_update_translations(QM_FILES ${LANGUAGE_TS_FILES} ${SRC_LIST})
-  elseif ( ${USE_QT} STREQUAL QT5 )
-    qt5_update_translations(QM_FILES ${LANGUAGE_TS_FILES} ${SRC_LIST})
+  if(UPDATE_TRANSLATIONS)
+    # Run lupdate to extract strings from sources and update .ts files
+    if( ${USE_QT} STREQUAL QT6 )
+      qt6_update_translations(QM_FILES ${LANGUAGE_TS_FILES} ${SRC_LIST})
+    elseif ( ${USE_QT} STREQUAL QT5 )
+      qt5_update_translations(QM_FILES ${LANGUAGE_TS_FILES} ${SRC_LIST})
+    endif()
+  else()
+    # Only compile existing .ts files to .qm (no source scanning)
+    if( ${USE_QT} STREQUAL QT6 )
+      qt6_add_translation(QM_FILES ${LANGUAGE_TS_FILES})
+    elseif ( ${USE_QT} STREQUAL QT5 )
+      qt5_add_translation(QM_FILES ${LANGUAGE_TS_FILES})
+    endif()
   endif()
 endif(LANGUAGE_TS_FILES)
 
 if (WIN32)
-  # -mwindows -> window application (without terminal screen)
-  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mwindows")
-  add_executable(crqt WIN32 ${SRC_LIST} ${CRQT_RCS} ${QM_FILES})
+  if (NOT CON_DEBUG)
+    # -mwindows -> window application (without terminal screen)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mwindows")
+    add_executable(crqt WIN32 ${SRC_LIST} ${CRQT_RCS} ${QM_FILES})
+  else()
+    # Console debug mode - no -mwindows flag, no WIN32 keyword
+    add_executable(crqt ${SRC_LIST} ${CRQT_RCS} ${QM_FILES})
+  endif()
 else()
   add_executable(crqt ${SRC_LIST} ${CRQT_RCS} ${QM_FILES})
 endif (WIN32)
@@ -86,14 +104,27 @@ endif("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
 if(WIN32)
 if(CMAKE_GENERATOR MATCHES "Visual Studio.*")
   message("Visual Studio generator detected")
-  set_target_properties(crqt PROPERTIES
-      LINK_FLAGS_DEBUG "/SUBSYSTEM:CONSOLE")
-  set_target_properties(crqt PROPERTIES
-      LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:CONSOLE")
-  set_target_properties(crqt PROPERTIES
-      LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
-  set_target_properties(crqt PROPERTIES
-      LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
+  if (CON_DEBUG)
+    # Console debug mode - always use CONSOLE subsystem
+    set_target_properties(crqt PROPERTIES
+        LINK_FLAGS_DEBUG "/SUBSYSTEM:CONSOLE")
+    set_target_properties(crqt PROPERTIES
+        LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:CONSOLE")
+    set_target_properties(crqt PROPERTIES
+        LINK_FLAGS_RELEASE "/SUBSYSTEM:CONSOLE")
+    set_target_properties(crqt PROPERTIES
+        LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:CONSOLE")
+  else()
+    # Normal mode - debug builds use CONSOLE, release builds use WINDOWS
+    set_target_properties(crqt PROPERTIES
+        LINK_FLAGS_DEBUG "/SUBSYSTEM:CONSOLE")
+    set_target_properties(crqt PROPERTIES
+        LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:CONSOLE")
+    set_target_properties(crqt PROPERTIES
+        LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
+    set_target_properties(crqt PROPERTIES
+        LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
+  endif()
 endif(CMAKE_GENERATOR MATCHES "Visual Studio.*")
 endif(WIN32)
 
