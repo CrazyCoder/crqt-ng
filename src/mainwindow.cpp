@@ -934,6 +934,8 @@ void MainWindow::showEvent(QShowEvent* event) {
         //RecentBooksDlg::showDlg( ui->view );
         //show();
     }
+    // Automatically resize to Xteink device dimensions on first show
+    on_actionResizeToXteink_triggered();
 }
 
 static bool firstFocus = true;
