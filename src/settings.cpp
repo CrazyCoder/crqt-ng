@@ -253,6 +253,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
 #if USE_FREETYPE == 1
     m_ui->cbAntialiasingMode->addItem(tr("None"));
     m_ui->cbAntialiasingMode->addItem(tr("Gray"));
+    // DISABLED FOR CONVERTER PROJECT
     // m_ui->cbAntialiasingMode->addItem(tr("LCD (RGB)"));
     // m_ui->cbAntialiasingMode->addItem(tr("LCD (BGR)"));
     // m_ui->cbAntialiasingMode->addItem(tr("LCD (RGB) vertical"));
