@@ -359,7 +359,7 @@ public:
     /// export progress, called with values 0..100
     void onProgress(const int percent) override {
         if (percent % 10 == 0) {
-            CRLog::debug("XtcProgressCallback::onProgress(%d)", percent);
+            CRLog::trace("XtcProgressCallback::onProgress(%d)", percent);
         }
         _dlg->setPercent(percent);
         QApplication::processEvents();
