@@ -49,10 +49,15 @@ elseif( ${USE_QT} STREQUAL QT5 )
   include(Qt5TranslationToolsMacros)
 endif()
 
-# crengine-ng
-find_package(crengine-ng 0.9.12 REQUIRED)
-
-include_directories(${CRENGINE_NG_INCLUDE_DIR})
+# crengine-ng - support both umbrella build and standalone build
+if(NOT TARGET crengine-ng::crengine-ng AND NOT TARGET crengine-ng::crengine-ng_static)
+  # Standalone build: find installed package
+  find_package(crengine-ng 0.9.12 REQUIRED)
+  include_directories(${CRENGINE_NG_INCLUDE_DIR})
+else()
+  # Umbrella build: targets already exist with PUBLIC include directories
+  message(STATUS "Using crengine-ng from umbrella build")
+endif()
 
 # Add include path for config.h
 include_directories(${CMAKE_BINARY_DIR})
