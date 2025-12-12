@@ -86,10 +86,10 @@ MainWindow::MainWindow(const QStringList& filesToOpen, QWidget* parent)
     addAction(ui->actionOpen);
     addAction(ui->actionRecentBooks);
     addAction(ui->actionTOC);
-    addAction(ui->actionToggle_Full_Screen);
+    // addAction(ui->actionToggle_Full_Screen);
     addAction(ui->actionSettings);
     addAction(ui->actionClose);
-    addAction(ui->actionToggle_Pages_Scroll);
+    // addAction(ui->actionToggle_Pages_Scroll);
     addAction(ui->actionMinimize);
     addAction(ui->actionNextPage);
     addAction(ui->actionPrevPage);
@@ -798,8 +798,9 @@ void MainWindow::contextMenu(QPoint pos) {
         }
         menu->addAction(ui->actionOpen);
         menu->addAction(ui->actionRecentBooks);
+        menu->addAction(ui->actionExport);
         menu->addAction(ui->actionTOC);
-        menu->addAction(ui->actionToggle_Full_Screen);
+        // menu->addAction(ui->actionToggle_Full_Screen);
         menu->addAction(ui->actionSettings);
         menu->addAction(ui->actionAddBookmark);
         menu->addAction(ui->actionClose);

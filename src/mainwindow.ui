@@ -176,6 +176,7 @@
     <string>Ctrl+O</string>
    </property>
   </action>
+<!--
   <action name="actionToggle_Pages_Scroll">
    <property name="text">
     <string>Toggle Pages/Scroll</string>
@@ -184,6 +185,7 @@
     <string>Ctrl+T</string>
    </property>
   </action>
+-->
   <action name="actionClose">
    <property name="icon">
     <iconset resource="crqtres.qrc">
@@ -341,6 +343,7 @@
     <string>Alt+Up</string>
    </property>
   </action>
+<!--
   <action name="actionToggle_Full_Screen">
    <property name="checkable">
     <bool>true</bool>
@@ -359,6 +362,7 @@
     <string>Alt+Return</string>
    </property>
   </action>
+-->
   <action name="actionZoom_In">
    <property name="icon">
     <iconset resource="crqtres.qrc">
