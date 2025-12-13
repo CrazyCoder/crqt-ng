@@ -42,6 +42,7 @@ set(SRC_LIST
   fontfamiliesdialog.cpp
   tabdata.cpp
   tabscollection.cpp
+  xtexportprofile.cpp
 )
 
 if(WIN32)
