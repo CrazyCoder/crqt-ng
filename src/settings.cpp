@@ -77,7 +77,8 @@ static int minspace_widths[] = { 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
 static float font_gammas[] = { 0.30f, 0.35f, 0.40f, 0.45f, 0.50f, 0.55f, 0.60f, 0.65f, 0.70f, 0.75f, 0.80f,
                                0.85f, 0.90f, 0.95f, 0.98f, 1.00f, 1.02f, 1.05f, 1.10f, 1.15f, 1.20f, 1.25f,
                                1.30f, 1.35f, 1.40f, 1.45f, 1.50f, 1.60f, 1.70f, 1.80f, 1.90f, 2.00f, 
-                               2.10f, 2.20f, 2.30f, 2.40f, 2.50f, 2.60f, 2.70f, 2.80f, 2.90f, 3.00f };
+                               2.10f, 2.20f, 2.30f, 2.40f, 2.50f, 2.60f, 2.70f, 2.80f, 2.90f, 3.00f,
+                               3.10f, 3.20f, 3.40f, 3.60f, 3.80f, 4.00f };
 #define GAMMA_VARIANTS_SZ (sizeof(font_gammas) / sizeof(float))
 static const int default_gamma_index = 15; // gamma 1.0
 
