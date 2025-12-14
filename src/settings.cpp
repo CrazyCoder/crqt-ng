@@ -282,6 +282,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
     optionToUi(PROP_SHOW_POS_PERCENT, m_ui->cbShowPositionPercent);
     optionToUi(PROP_SHOW_BATTERY, m_ui->cbShowBattery);
     optionToUi(PROP_SHOW_TIME, m_ui->cbShowClock);
+    optionToUi(PROP_STATUS_NAVBAR, m_ui->cbShowNavbar);
     optionToUi(PROP_STATUS_CHAPTER_MARKS, m_ui->cbShowChapterMarks);
     optionToUi(PROP_SHOW_TITLE, m_ui->cbShowBookName);
     optionToUi(PROP_TXT_OPTION_PREFORMATTED, m_ui->cbTxtPreFormatted);
@@ -320,7 +321,8 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
     m_ui->cbShowPositionPercent->setEnabled(b);
     m_ui->cbShowBattery->setEnabled(b);
     m_ui->cbShowClock->setEnabled(b);
-    m_ui->cbShowChapterMarks->setEnabled(b);
+    m_ui->cbShowNavbar->setEnabled(b);
+    m_ui->cbShowChapterMarks->setEnabled(b && m_props->getBoolDef(PROP_STATUS_NAVBAR, true));
     m_ui->cbShowBookName->setEnabled(b);
 
     m_ui->cbStartupAction->setCurrentIndex(m_props->getIntDef(PROP_APP_START_ACTION, 0));
@@ -995,8 +997,14 @@ void SettingsDlg::on_cbShowPageHeader_currentIndexChanged(int index) {
     m_ui->cbShowPositionPercent->setEnabled(b);
     m_ui->cbShowBattery->setEnabled(b);
     m_ui->cbShowClock->setEnabled(b);
-    m_ui->cbShowChapterMarks->setEnabled(b);
+    m_ui->cbShowNavbar->setEnabled(b);
+    m_ui->cbShowChapterMarks->setEnabled(b && m_ui->cbShowNavbar->isChecked());
     m_ui->cbShowBookName->setEnabled(b);
+}
+
+void SettingsDlg::on_cbShowNavbar_stateChanged(int s) {
+    setCheck(PROP_STATUS_NAVBAR, s);
+    m_ui->cbShowChapterMarks->setEnabled(s == Qt::Checked);
 }
 
 void SettingsDlg::on_cbShowChapterMarks_stateChanged(int s) {

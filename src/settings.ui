@@ -758,6 +758,13 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
+           <widget class="QCheckBox" name="cbShowNavbar">
+            <property name="text">
+             <string>Navigation bar</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="cbShowChapterMarks">
             <property name="text">
              <string>Chapter marks</string>
@@ -2206,6 +2213,7 @@
   <tabstop>cbMarginRight</tabstop>
   <tabstop>cbViewMode</tabstop>
   <tabstop>cbShowPageHeader</tabstop>
+  <tabstop>cbShowNavbar</tabstop>
   <tabstop>cbShowChapterMarks</tabstop>
   <tabstop>cbShowBookName</tabstop>
   <tabstop>cbShowPageNumber</tabstop>
