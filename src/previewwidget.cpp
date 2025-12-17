@@ -23,6 +23,10 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QWheelEvent>
+#include <QContextMenuEvent>
+#include <QMenu>
+#include <QClipboard>
+#include <QApplication>
 
 PreviewWidget::PreviewWidget(QWidget* parent)
     : QWidget(parent)
@@ -299,4 +303,21 @@ QImage PreviewWidget::createScaledImageWithGrid(int targetWidth, int targetHeigh
     }
 
     return result;
+}
+
+void PreviewWidget::contextMenuEvent(QContextMenuEvent* event)
+{
+    QMenu menu;  // No parent - use default system style
+    QAction* copyAction = menu.addAction(tr("Copy"));
+    copyAction->setEnabled(!m_sourceImage.isNull());
+    connect(copyAction, &QAction::triggered, this, &PreviewWidget::copyImageToClipboard);
+    menu.exec(event->globalPos());
+}
+
+void PreviewWidget::copyImageToClipboard()
+{
+    if (!m_sourceImage.isNull()) {
+        QClipboard* clipboard = QApplication::clipboard();
+        clipboard->setImage(m_sourceImage);
+    }
 }
