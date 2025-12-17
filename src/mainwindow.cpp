@@ -27,6 +27,8 @@
 #include "ui_mainwindow.h"
 
 #include <qglobal.h>
+
+#include "xtexportdlg.h"
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QStyleFactory>
@@ -378,13 +380,14 @@ void MainWindow::on_actionExport_triggered() {
         // return;
     
     QString fileName = "d:\\shared\\Xteink\\cr-conv\\test.xtc";
-    // WolExportDlg* dlg = new WolExportDlg(this);
-    //dlg->setModal( true );
-    // dlg->setWindowTitle(tr("Export to WOL format"));
-    //    dlg->setModal( true );
-    //    dlg->show();
-    //dlg->raise();
-    //dlg->activateWindow();
+
+    auto dlg = new XtExportDlg(this, view->getDocView());
+    dlg->setModal( true );
+     dlg->setWindowTitle(tr("Export to XT* format"));
+        dlg->setModal( true );
+        dlg->show();
+    dlg->raise();
+    dlg->activateWindow();
     // int result = dlg->exec();
     // if (result == QDialog::Accepted) {
         // int bpp = dlg->getBitsPerPixel();

@@ -42,6 +42,7 @@ class MainWindow: public QMainWindow, public PropsChangeCallback, DocViewStatusC
 public:
     MainWindow(const QStringList& filesToOpen, QWidget* parent = 0);
     ~MainWindow();
+    CRPropRef getSettings() { return _tabs.getSettings(); }
 private:
     Ui::MainWindowClass* ui;
     TabsCollection _tabs;

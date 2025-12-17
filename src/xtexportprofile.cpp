@@ -27,6 +27,8 @@
 
 #include <crlog.h>
 
+#include <cmath>
+
 // =============================================================================
 // XtExportProfile - INI key names
 // =============================================================================
@@ -126,9 +128,10 @@ bool XtExportProfile::save(const QString& filepath) const {
     // Dithering section
     settings.setValue(KEY_DITHER_MODE, ditherModeToString(ditherMode));
     settings.setValue(KEY_GRAY_POLICY, grayPolicyToString(grayPolicy));
-    settings.setValue(KEY_THRESHOLD, static_cast<double>(ditheringOpts.threshold));
-    settings.setValue(KEY_ERROR_DIFFUSION, static_cast<double>(ditheringOpts.errorDiffusion));
-    settings.setValue(KEY_GAMMA, static_cast<double>(ditheringOpts.gamma));
+    // Round to 2 decimal places to avoid floating-point representation artifacts (e.g., 0.7 → 0.699999988...)
+    settings.setValue(KEY_THRESHOLD, std::round(ditheringOpts.threshold * 100.0) / 100.0);
+    settings.setValue(KEY_ERROR_DIFFUSION, std::round(ditheringOpts.errorDiffusion * 100.0) / 100.0);
+    settings.setValue(KEY_GAMMA, std::round(ditheringOpts.gamma * 100.0) / 100.0);
     settings.setValue(KEY_SERPENTINE, ditheringOpts.serpentine);
 
     // Chapters section

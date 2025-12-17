@@ -43,6 +43,9 @@ set(SRC_LIST
   tabdata.cpp
   tabscollection.cpp
   xtexportprofile.cpp
+  xtexportdlg.ui
+  xtexportdlg.cpp
+  previewwidget.cpp
 )
 
 if(WIN32)

@@ -151,6 +151,7 @@ int main(int argc, char* argv[]) {
             CRLog::setLogLevel(CRLog::LL_FATAL);
 
         CRLog::info("main()");
+        // QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::RoundPreferFloor); 
         QApplication app(argc, argv);
 
         // Check if it is a portable installation
