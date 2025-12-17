@@ -32,7 +32,6 @@
 #include <QFileDialog>
 #include <QVBoxLayout>
 #include <QStandardPaths>
-#include <QToolTip>
 
 XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     : QDialog(parent)
@@ -49,8 +48,9 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     setAttribute(Qt::WA_DeleteOnClose);  // Ensure destructor runs when dialog closes
     m_ui->setupUi(this);
 
-    // Set zoom slider max from constant (overrides .ui file value)
+    // Set zoom controls max from constant (overrides .ui file values)
     m_ui->sliderZoom->setMaximum(PreviewWidget::ZOOM_LEVEL_MAX);
+    m_ui->sbZoom->setMaximum(PreviewWidget::ZOOM_LEVEL_MAX);
 
     // Initialize profile manager
     m_profileManager->initialize();
@@ -122,6 +122,8 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     // Connect zoom controls
     connect(m_ui->sliderZoom, &QSlider::valueChanged,
             this, &XtExportDlg::onZoomSliderChanged);
+    connect(m_ui->sbZoom, QOverload<int>::of(&QSpinBox::valueChanged),
+            this, &XtExportDlg::onZoomSpinBoxChanged);
     connect(m_ui->btnResetZoom, &QPushButton::clicked,
             this, &XtExportDlg::onResetZoom);
     connect(m_ui->btn200Zoom, &QPushButton::clicked,
@@ -558,27 +560,26 @@ void XtExportDlg::onPreviewPageChanged(int value)
 
 void XtExportDlg::onZoomSliderChanged(int value)
 {
+    if (m_updatingControls)
+        return;
+    m_updatingControls = true;
     m_zoomPercent = value;
     m_previewWidget->setZoom(value);
     updateZoomButtonLabel();
+    m_ui->sbZoom->setValue(value);
+    m_updatingControls = false;
+}
 
-    // Show transient tooltip centered above the slider
-    QString tooltipText = QString("%1%").arg(value);
-
-    // Calculate tooltip size using font metrics
-    QFontMetrics fm(QToolTip::font());
-    QRect textRect = fm.boundingRect(tooltipText);
-    // Add padding for tooltip frame (typically ~6px horizontal, ~4px vertical)
-    int tooltipWidth = textRect.width() + 12;
-    int tooltipHeight = textRect.height() + 8;
-
-    // Position: centered horizontally, above slider with gap
-    int gap = 20;
-    int x = (m_ui->sliderZoom->width() - tooltipWidth) / 2;
-    int y = -tooltipHeight - gap;
-
-    QPoint pos = m_ui->sliderZoom->mapToGlobal(QPoint(x, y));
-    QToolTip::showText(pos, tooltipText, m_ui->sliderZoom);
+void XtExportDlg::onZoomSpinBoxChanged(int value)
+{
+    if (m_updatingControls)
+        return;
+    m_updatingControls = true;
+    m_zoomPercent = value;
+    m_previewWidget->setZoom(value);
+    updateZoomButtonLabel();
+    m_ui->sliderZoom->setValue(value);
+    m_updatingControls = false;
 }
 
 void XtExportDlg::onResetZoom()

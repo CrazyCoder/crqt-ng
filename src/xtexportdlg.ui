@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>746</width>
-    <height>914</height>
+    <height>938</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -519,7 +519,7 @@
          </property>
          <layout class="QVBoxLayout" name="previewLayout">
           <item>
-           <layout class="QHBoxLayout" name="zoomLayout">
+           <layout class="QHBoxLayout" name="zoomLabelLayout">
             <item>
              <widget class="QPushButton" name="btnResetZoom">
               <property name="text">
@@ -528,12 +528,72 @@
              </widget>
             </item>
             <item>
+             <spacer name="zoomLabelLeftSpacer">
+              <property name="orientation">
+               <enum>Qt::Orientation::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Zoom:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="sbZoom">
+              <property name="suffix">
+               <string>%</string>
+              </property>
+              <property name="minimum">
+               <number>50</number>
+              </property>
+              <property name="maximum">
+               <number>1000</number>
+              </property>
+              <property name="value">
+               <number>100</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="zoomLabelRightSpacer">
+              <property name="orientation">
+               <enum>Qt::Orientation::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn200Zoom">
+              <property name="text">
+               <string>200%</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="zoomLayout">
+            <item>
              <widget class="QSlider" name="sliderZoom">
               <property name="minimum">
                <number>50</number>
               </property>
               <property name="maximum">
-               <number>400</number>
+               <number>1000</number>
               </property>
               <property name="singleStep">
                <number>1</number>
@@ -543,13 +603,6 @@
               </property>
               <property name="orientation">
                <enum>Qt::Orientation::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="btn200Zoom">
-              <property name="text">
-               <string>200%</string>
               </property>
              </widget>
             </item>

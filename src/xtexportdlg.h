@@ -98,6 +98,7 @@ private slots:
 
     // Zoom controls
     void onZoomSliderChanged(int value);
+    void onZoomSpinBoxChanged(int value);
     void onResetZoom();
     void onSet200Zoom();
 
