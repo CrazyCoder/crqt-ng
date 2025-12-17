@@ -330,6 +330,7 @@ void XtExportDlg::onFormatChanged(int /*index*/)
 {
     if (m_updatingControls)
         return;
+    onResetDithering();
     updateDitheringControlsState();
     updateGrayPolicyState();
     schedulePreviewUpdate();
