@@ -51,6 +51,8 @@ const char* const XtExportProfile::KEY_CHAPTER_DEPTH = "Chapters/depth";
 // Default profile filenames
 const char* const XtExportProfile::DEFAULT_XTC_FILENAME = "xtp_xtc.ini";
 const char* const XtExportProfile::DEFAULT_XTCH_FILENAME = "xtp_xtch.ini";
+const char* const XtExportProfile::DEFAULT_X3_XTC_FILENAME = "xtp_xtc3.ini";
+const char* const XtExportProfile::DEFAULT_X3_XTCH_FILENAME = "xtp_xtch3.ini";
 
 // =============================================================================
 // XtExportProfile implementation
@@ -156,7 +158,7 @@ bool XtExportProfile::isValid() const {
 
 XtExportProfile XtExportProfile::defaultXtcProfile() {
     XtExportProfile profile;
-    profile.name = "XTC 480x800 (1-bit)";
+    profile.name = "X4 (480x800) fast (1-bit)";
     profile.filename = DEFAULT_XTC_FILENAME;
     profile.format = XTC_FORMAT_XTC;
     profile.extension = "xtc";
@@ -173,7 +175,7 @@ XtExportProfile XtExportProfile::defaultXtcProfile() {
 
 XtExportProfile XtExportProfile::defaultXtchProfile() {
     XtExportProfile profile;
-    profile.name = "XTCH 480x800 (2-bit)";
+    profile.name = "X4 (480x800) quality (2-bit)";
     profile.filename = DEFAULT_XTCH_FILENAME;
     profile.format = XTC_FORMAT_XTCH;
     profile.extension = "xtc";
@@ -306,6 +308,24 @@ void XtExportProfileManager::createDefaultProfiles() {
         CRLog::info("XtExportProfileManager: Creating default XTCH profile");
         XtExportProfile xtchProfile = XtExportProfile::defaultXtchProfile();
         saveDefaultProfile(xtchProfile, XtExportProfile::DEFAULT_XTCH_FILENAME);
+    }
+    
+    if (!QFileInfo::exists(m_configDir + XtExportProfile::DEFAULT_X3_XTC_FILENAME)) {
+        CRLog::info("XtExportProfileManager: Creating default XTC X3 profile");
+        XtExportProfile xtcProfile = XtExportProfile::defaultXtcProfile();
+        xtcProfile.name = "X3 (528x792) fast (1-bit)";
+        xtcProfile.width = 528;
+        xtcProfile.height = 792;
+        saveDefaultProfile(xtcProfile, XtExportProfile::DEFAULT_X3_XTC_FILENAME);
+    }
+    
+    if (!QFileInfo::exists(m_configDir + XtExportProfile::DEFAULT_X3_XTCH_FILENAME)) {
+        CRLog::info("XtExportProfileManager: Creating default XTCH X3 profile");
+        XtExportProfile xtcProfile = XtExportProfile::defaultXtcProfile();
+        xtcProfile.name = "X3 (528x792) quality (2-bit)";
+        xtcProfile.width = 528;
+        xtcProfile.height = 792;
+        saveDefaultProfile(xtcProfile, XtExportProfile::DEFAULT_X3_XTCH_FILENAME);
     }
 }
 

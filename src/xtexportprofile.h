@@ -94,6 +94,8 @@ public:
     // Default profile filenames
     static const char* const DEFAULT_XTC_FILENAME;
     static const char* const DEFAULT_XTCH_FILENAME;
+    static const char* const DEFAULT_X3_XTC_FILENAME;
+    static const char* const DEFAULT_X3_XTCH_FILENAME;
 
 private:
     // INI key names

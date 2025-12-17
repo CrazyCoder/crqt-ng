@@ -140,9 +140,25 @@ private:
     void setupSliderSpinBoxSync();
 
     /**
-     * @brief Compute default output path
+     * @brief Compute default output path (directory + filename)
      */
     QString computeDefaultOutputPath();
+
+    /**
+     * @brief Compute the base filename for export (without directory)
+     * @return Filename with extension based on current profile
+     */
+    QString computeExportFilename();
+
+    /**
+     * @brief Resolve output path for export
+     *
+     * If the output path is a directory, appends the computed filename.
+     * Otherwise returns the path as-is.
+     *
+     * @return Full path to export file
+     */
+    QString resolveExportPath();
 
     /**
      * @brief Resolve effective dither mode from UI selection
@@ -189,6 +205,55 @@ private:
      */
     void updateZoomButtonLabel();
 
+    /**
+     * @brief Load last profile setting from crui.ini
+     */
+    void loadLastProfileSetting();
+
+    /**
+     * @brief Save last profile setting to crui.ini
+     */
+    void saveLastProfileSetting();
+
+    /**
+     * @brief Load last export directory from crui.ini
+     */
+    void loadLastDirectorySetting();
+
+    /**
+     * @brief Save last export directory to crui.ini
+     */
+    void saveLastDirectorySetting();
+
+    /**
+     * @brief Load window geometry from crui.ini
+     */
+    void loadWindowGeometry();
+
+    /**
+     * @brief Save window geometry to crui.ini
+     */
+    void saveWindowGeometry();
+
+    /**
+     * @brief Save current UI settings back to the current profile
+     */
+    void saveCurrentProfileSettings();
+
+    /**
+     * @brief Update profile object from current UI state
+     * @param profile Profile to update
+     */
+    void updateProfileFromUi(XtExportProfile* profile);
+
+    /**
+     * @brief Load document metadata (title, author) into UI fields
+     *
+     * Called during dialog initialization to populate metadata fields
+     * from the current document's properties.
+     */
+    void loadDocumentMetadata();
+
     Ui::XtExportDlg* m_ui;
     LVDocView* m_docView;
     XtExportProfileManager* m_profileManager;
@@ -198,6 +263,7 @@ private:
     int m_totalPageCount;           ///< Total page count at export resolution
     int m_zoomPercent;              ///< Current zoom level (50-200)
     bool m_updatingControls;        ///< Flag to prevent signal loops
+    QString m_lastDirectory;        ///< Last export directory
 
     // Debounce timer for preview updates (Phase 3)
     QTimer* m_previewDebounceTimer;

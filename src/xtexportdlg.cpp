@@ -30,6 +30,8 @@
 
 #include <QTimer>
 #include <QFileDialog>
+#include <QFileInfo>
+#include <QDir>
 #include <QVBoxLayout>
 #include <QStandardPaths>
 
@@ -43,6 +45,7 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     , m_totalPageCount(1)
     , m_zoomPercent(100)
     , m_updatingControls(false)
+    , m_lastDirectory()
     , m_previewDebounceTimer(nullptr)
 {
     setAttribute(Qt::WA_DeleteOnClose);  // Ensure destructor runs when dialog closes
@@ -146,13 +149,20 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
             this, &XtExportDlg::onExport);
     // Cancel is already connected via UI file to reject()
 
-    // Load first profile if available
-    if (m_profileManager->profileCount() > 0) {
-        loadProfileToUi(m_profileManager->profileByIndex(0));
-    }
+    // Load last export directory setting (before computing default output path)
+    loadLastDirectorySetting();
+
+    // Load last used profile (defaults to first profile if not saved)
+    loadLastProfileSetting();
+
+    // Populate title and author from document metadata
+    loadDocumentMetadata();
 
     // Set default output path
     m_ui->leOutputPath->setText(computeDefaultOutputPath());
+
+    // Load window geometry
+    loadWindowGeometry();
 
     // Update control states
     updateDitheringControlsState();
@@ -174,7 +184,15 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
 
 XtExportDlg::~XtExportDlg()
 {
+    // Save all settings to crui.ini
     saveZoomSetting();
+    saveLastProfileSetting();
+    saveLastDirectorySetting();
+    saveWindowGeometry();
+
+    // Save current profile settings to its INI file
+    saveCurrentProfileSettings();
+
     delete m_profileManager;
     delete m_ui;
 }
@@ -291,11 +309,112 @@ void XtExportDlg::setupSliderSpinBoxSync()
             this, &XtExportDlg::onGammaSpinBoxChanged);
 }
 
+QString XtExportDlg::computeExportFilename()
+{
+    QString baseName;
+
+    // Get source document info
+    if (m_docView) {
+        QString fileName = cr2qt(m_docView->getFileName());
+        if (!fileName.isEmpty()) {
+            // Handle archive paths like "archive.fb2.zip@/internal.fb2"
+            // Extract just the archive path (before @)
+            int atPos = fileName.indexOf('@');
+            if (atPos > 0) {
+                fileName = fileName.left(atPos);
+            }
+
+            QFileInfo docInfo(fileName);
+            baseName = docInfo.completeBaseName();
+
+            // For double-extension archives like .fb2.zip, strip inner extension too
+            QString suffix = docInfo.suffix().toLower();
+            if (suffix == "zip" || suffix == "gz" || suffix == "bz2") {
+                QFileInfo innerInfo(baseName);
+                if (!innerInfo.suffix().isEmpty()) {
+                    baseName = innerInfo.completeBaseName();
+                }
+            }
+        }
+    }
+
+    // Fallback name
+    if (baseName.isEmpty()) {
+        baseName = "export";
+    }
+
+    // Get extension from current profile
+    QString extension = "xtc";  // default
+    XtExportProfile* profile = m_profileManager->profileByIndex(m_ui->cbProfile->currentIndex());
+    if (profile && !profile->extension.isEmpty()) {
+        extension = profile->extension;
+    }
+
+    return baseName + '.' + extension;
+}
+
 QString XtExportDlg::computeDefaultOutputPath()
 {
-    // TODO (Phase 4): Get source document directory and name
-    // For now, return placeholder
-    return QString();
+    QString directory;
+
+    // Get source document directory
+    if (m_docView) {
+        QString fileName = cr2qt(m_docView->getFileName());
+        if (!fileName.isEmpty()) {
+            // Handle archive paths like "archive.fb2.zip@/internal.fb2"
+            int atPos = fileName.indexOf('@');
+            if (atPos > 0) {
+                fileName = fileName.left(atPos);
+            }
+
+            QFileInfo docInfo(fileName);
+
+            // Use last directory if set, otherwise source document directory
+            if (!m_lastDirectory.isEmpty()) {
+                directory = m_lastDirectory;
+            } else {
+                directory = docInfo.absolutePath();
+            }
+        }
+    }
+
+    // Fallback to Documents folder if no document
+    if (directory.isEmpty()) {
+        directory = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    }
+
+    // Build full path
+    QString path = directory;
+    if (!path.endsWith('/') && !path.endsWith('\\')) {
+        path += '/';
+    }
+    path += computeExportFilename();
+
+    return QDir::toNativeSeparators(path);
+}
+
+QString XtExportDlg::resolveExportPath()
+{
+    QString outputPath = m_ui->leOutputPath->text();
+
+    if (outputPath.isEmpty()) {
+        return computeDefaultOutputPath();
+    }
+
+    QFileInfo fi(outputPath);
+
+    // If it's a directory, append the filename
+    if (fi.isDir()) {
+        QString path = outputPath;
+        if (!path.endsWith('/') && !path.endsWith('\\')) {
+            path += '/';
+        }
+        path += computeExportFilename();
+        return QDir::toNativeSeparators(path);
+    }
+
+    // Otherwise return as-is (it's already a full file path)
+    return QDir::toNativeSeparators(outputPath);
 }
 
 ImageDitherMode XtExportDlg::resolveEffectiveDitherMode() const
@@ -618,13 +737,39 @@ void XtExportDlg::onPreviewZoomChangeRequested(int delta)
 void XtExportDlg::onBrowseOutput()
 {
     QString currentPath = m_ui->leOutputPath->text();
-    QString dir = currentPath.isEmpty() ? QString() : QFileInfo(currentPath).absolutePath();
+    QString startPath;
 
-    QString filter = tr("XT* Files (*.xtc *.xtch);;All Files (*)");
-    QString filename = QFileDialog::getSaveFileName(this, tr("Export to..."), dir, filter);
+    // Determine starting path
+    if (!currentPath.isEmpty()) {
+        QFileInfo fi(currentPath);
+        if (fi.isDir()) {
+            // If current path is a directory, start there with computed filename
+            startPath = currentPath;
+            if (!startPath.endsWith('/') && !startPath.endsWith('\\')) {
+                startPath += '/';
+            }
+            startPath += computeExportFilename();
+        } else {
+            // Use existing full path
+            startPath = currentPath;
+        }
+    } else {
+        // No current path, use default
+        startPath = computeDefaultOutputPath();
+    }
+
+    // Get extension from current profile for filter
+    QString extension = "xtc";
+    XtExportProfile* profile = m_profileManager->profileByIndex(m_ui->cbProfile->currentIndex());
+    if (profile && !profile->extension.isEmpty()) {
+        extension = profile->extension;
+    }
+
+    QString filter = tr("XT* Files (*.%1);;All Files (*)").arg(extension);
+    QString filename = QFileDialog::getSaveFileName(this, tr("Export to..."), startPath, filter);
 
     if (!filename.isEmpty()) {
-        m_ui->leOutputPath->setText(filename);
+        m_ui->leOutputPath->setText(QDir::toNativeSeparators(filename));
     }
 }
 
@@ -729,6 +874,11 @@ void XtExportDlg::configureExporter(XtcExporter& exporter)
     // Chapters (not used in preview, but configure anyway)
     exporter.enableChapters(m_ui->cbChaptersEnabled->isChecked());
     exporter.setChapterDepth(m_ui->cbChapterDepth->currentIndex() + 1);
+
+    // Metadata from UI fields
+    lString8 title = UnicodeToUtf8(qt2cr(m_ui->leTitle->text()));
+    lString8 author = UnicodeToUtf8(qt2cr(m_ui->leAuthor->text()));
+    exporter.setMetadata(title, author);
 }
 
 void XtExportDlg::updatePageCount(int totalPages)
@@ -808,4 +958,164 @@ void XtExportDlg::saveZoomSetting()
         CRPropRef props = mainWin->getSettings();
         props->setInt("xtexport.preview.zoom", m_ui->sliderZoom->value());
     }
+}
+
+void XtExportDlg::loadLastProfileSetting()
+{
+    QString lastProfile;
+    if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
+        CRPropRef props = mainWin->getSettings();
+        lastProfile = cr2qt(props->getStringDef("xtexport.lastprofile", ""));
+    }
+
+    // Find the saved profile index
+    int profileIndex = 0;  // default to first
+    if (!lastProfile.isEmpty()) {
+        int idx = m_profileManager->indexOfProfile(lastProfile);
+        if (idx >= 0) {
+            profileIndex = idx;
+        }
+    }
+
+    // Select the profile in dropdown and load it
+    if (m_profileManager->profileCount() > 0) {
+        m_ui->cbProfile->setCurrentIndex(profileIndex);
+        loadProfileToUi(m_profileManager->profileByIndex(profileIndex));
+    }
+}
+
+void XtExportDlg::saveLastProfileSetting()
+{
+    if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
+        CRPropRef props = mainWin->getSettings();
+        XtExportProfile* profile = m_profileManager->profileByIndex(m_ui->cbProfile->currentIndex());
+        if (profile) {
+            props->setString("xtexport.lastprofile", qt2cr(profile->filename).c_str());
+        }
+    }
+}
+
+void XtExportDlg::loadLastDirectorySetting()
+{
+    if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
+        CRPropRef props = mainWin->getSettings();
+        m_lastDirectory = cr2qt(props->getStringDef("xtexport.last_directory", ""));
+
+        // Sanitize: discard if it contains @ (invalid archive path artifact)
+        if (m_lastDirectory.contains('@')) {
+            m_lastDirectory.clear();
+        }
+    }
+}
+
+void XtExportDlg::saveLastDirectorySetting()
+{
+    if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
+        CRPropRef props = mainWin->getSettings();
+        // Extract directory from current output path
+        QString outputPath = m_ui->leOutputPath->text();
+        if (!outputPath.isEmpty()) {
+            QFileInfo fi(outputPath);
+            QString dir;
+
+            // If it's already a directory, use it directly; otherwise extract parent
+            if (fi.isDir()) {
+                dir = outputPath;
+            } else {
+                dir = fi.absolutePath();
+            }
+
+            // Don't save if it contains @ (invalid archive path artifact)
+            if (!dir.contains('@')) {
+                props->setString("xtexport.last_directory", qt2cr(dir).c_str());
+            }
+        }
+    }
+}
+
+void XtExportDlg::loadWindowGeometry()
+{
+    if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
+        CRPropRef props = mainWin->getSettings();
+        int width = props->getIntDef("xtexport.window.width", 0);
+        int height = props->getIntDef("xtexport.window.height", 0);
+
+        if (width > 0 && height > 0) {
+            resize(width, height);
+        }
+    }
+}
+
+void XtExportDlg::saveWindowGeometry()
+{
+    if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
+        CRPropRef props = mainWin->getSettings();
+        props->setInt("xtexport.window.width", width());
+        props->setInt("xtexport.window.height", height());
+    }
+}
+
+void XtExportDlg::saveCurrentProfileSettings()
+{
+    XtExportProfile* profile = m_profileManager->profileByIndex(m_ui->cbProfile->currentIndex());
+    if (profile) {
+        updateProfileFromUi(profile);
+        m_profileManager->saveProfile(profile);
+    }
+}
+
+void XtExportDlg::updateProfileFromUi(XtExportProfile* profile)
+{
+    if (!profile)
+        return;
+
+    // Format settings
+    profile->format = (m_ui->cbFormat->currentIndex() == 0) ? XTC_FORMAT_XTC : XTC_FORMAT_XTCH;
+    profile->width = m_ui->sbWidth->value();
+    profile->height = m_ui->sbHeight->value();
+    profile->bpp = (profile->format == XTC_FORMAT_XTC) ? 1 : 2;
+
+    // Gray policy
+    switch (m_ui->cbGrayPolicy->currentIndex()) {
+        case 0: profile->grayPolicy = GRAY_SPLIT_LIGHT_DARK; break;
+        case 1: profile->grayPolicy = GRAY_ALL_TO_WHITE; break;
+        case 2: profile->grayPolicy = GRAY_ALL_TO_BLACK; break;
+        default: profile->grayPolicy = GRAY_SPLIT_LIGHT_DARK; break;
+    }
+
+    // Dither mode - store format-appropriate FS mode
+    switch (m_ui->cbDitherMode->currentIndex()) {
+        case 0: profile->ditherMode = IMAGE_DITHER_NONE; break;
+        case 1: profile->ditherMode = IMAGE_DITHER_ORDERED; break;
+        case 2:
+            // Floyd-Steinberg: store format-appropriate mode
+            profile->ditherMode = (profile->format == XTC_FORMAT_XTC)
+                ? IMAGE_DITHER_FS_1BIT : IMAGE_DITHER_FS_2BIT;
+            break;
+        default: profile->ditherMode = IMAGE_DITHER_ORDERED; break;
+    }
+
+    // Dithering options
+    profile->ditheringOpts.threshold = static_cast<float>(m_ui->sbThreshold->value());
+    profile->ditheringOpts.errorDiffusion = static_cast<float>(m_ui->sbErrorDiffusion->value());
+    profile->ditheringOpts.gamma = static_cast<float>(m_ui->sbGamma->value());
+    profile->ditheringOpts.serpentine = m_ui->cbSerpentine->isChecked();
+
+    // Chapter settings
+    profile->chaptersEnabled = m_ui->cbChaptersEnabled->isChecked();
+    profile->chapterDepth = m_ui->cbChapterDepth->currentIndex() + 1;
+}
+
+void XtExportDlg::loadDocumentMetadata()
+{
+    if (!m_docView)
+        return;
+
+    // Get title and author from document properties
+    QString title = cr2qt(m_docView->getTitle());
+    QString author = cr2qt(m_docView->getAuthors());
+
+    // Populate the UI fields
+    m_ui->leTitle->setText(title);
+    m_ui->leAuthor->setText(author);
 }
