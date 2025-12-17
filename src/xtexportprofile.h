@@ -42,6 +42,7 @@ public:
     // Profile identification
     QString name;           ///< Display name shown in UI dropdown
     QString filename;       ///< INI filename (e.g., "xtp_xtc.ini")
+    int order;              ///< Sort order in UI (lower values appear first)
 
     // Format settings
     XtcExportFormat format; ///< XTC_FORMAT_XTC or XTC_FORMAT_XTCH
@@ -113,6 +114,7 @@ private:
     static const char* const KEY_SERPENTINE;
     static const char* const KEY_CHAPTERS_ENABLED;
     static const char* const KEY_CHAPTER_DEPTH;
+    static const char* const KEY_ORDER;
 
     // String <-> enum conversion helpers
     static QString formatToString(XtcExportFormat format);
