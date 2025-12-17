@@ -92,6 +92,8 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
             this, &XtExportDlg::onDitherModeChanged);
     connect(m_ui->cbSerpentine, &QCheckBox::checkStateChanged,
             this, &XtExportDlg::onSerpentineChanged);
+    connect(m_ui->btnResetDithering, &QPushButton::clicked,
+            this, &XtExportDlg::onResetDithering);
 
     // Connect page range
     connect(m_ui->sbFromPage, QOverload<int>::of(&QSpinBox::valueChanged),
@@ -106,10 +108,14 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
             this, &XtExportDlg::onChapterDepthChanged);
 
     // Connect preview navigation
+    connect(m_ui->btnFirstPage, &QPushButton::clicked,
+            this, &XtExportDlg::onFirstPage);
     connect(m_ui->btnPrevPage, &QPushButton::clicked,
             this, &XtExportDlg::onPrevPage);
     connect(m_ui->btnNextPage, &QPushButton::clicked,
             this, &XtExportDlg::onNextPage);
+    connect(m_ui->btnLastPage, &QPushButton::clicked,
+            this, &XtExportDlg::onLastPage);
     connect(m_ui->sbPreviewPage, QOverload<int>::of(&QSpinBox::valueChanged),
             this, &XtExportDlg::onPreviewPageChanged);
 
@@ -425,6 +431,51 @@ void XtExportDlg::onSerpentineChanged(Qt::CheckState /*state*/)
     schedulePreviewUpdate();
 }
 
+void XtExportDlg::onResetDithering()
+{
+    // Get default profile based on current format (XTC=0, XTCH=1)
+    int formatIndex = m_ui->cbFormat->currentIndex();
+    XtExportProfile defaultProfile = (formatIndex == 0)
+        ? XtExportProfile::defaultXtcProfile()
+        : XtExportProfile::defaultXtchProfile();
+
+    m_updatingControls = true;
+
+    // Reset gray policy
+    int grayPolicyIndex = 0;
+    switch (defaultProfile.grayPolicy) {
+        case GRAY_SPLIT_LIGHT_DARK: grayPolicyIndex = 0; break;
+        case GRAY_ALL_TO_WHITE: grayPolicyIndex = 1; break;
+        case GRAY_ALL_TO_BLACK: grayPolicyIndex = 2; break;
+    }
+    m_ui->cbGrayPolicy->setCurrentIndex(grayPolicyIndex);
+
+    // Reset dither mode
+    int ditherModeIndex = 0;
+    switch (defaultProfile.ditherMode) {
+        case IMAGE_DITHER_NONE: ditherModeIndex = 0; break;
+        case IMAGE_DITHER_ORDERED: ditherModeIndex = 1; break;
+        case IMAGE_DITHER_FS_1BIT:
+        case IMAGE_DITHER_FS_2BIT: ditherModeIndex = 2; break;
+    }
+    m_ui->cbDitherMode->setCurrentIndex(ditherModeIndex);
+
+    // Reset FS parameters
+    m_ui->sbThreshold->setValue(defaultProfile.ditheringOpts.threshold);
+    m_ui->sliderThreshold->setValue(static_cast<int>(defaultProfile.ditheringOpts.threshold * 100));
+    m_ui->sbErrorDiffusion->setValue(defaultProfile.ditheringOpts.errorDiffusion);
+    m_ui->sliderErrorDiffusion->setValue(static_cast<int>(defaultProfile.ditheringOpts.errorDiffusion * 100));
+    m_ui->sbGamma->setValue(defaultProfile.ditheringOpts.gamma);
+    m_ui->sliderGamma->setValue(static_cast<int>(defaultProfile.ditheringOpts.gamma * 100));
+    m_ui->cbSerpentine->setChecked(defaultProfile.ditheringOpts.serpentine);
+
+    m_updatingControls = false;
+
+    // Update control states and trigger preview
+    updateDitheringControlsState();
+    schedulePreviewUpdate();
+}
+
 void XtExportDlg::onFromPageChanged(int value)
 {
     if (m_updatingControls)
@@ -468,6 +519,11 @@ void XtExportDlg::onChapterDepthChanged(int /*index*/)
         return;
 }
 
+void XtExportDlg::onFirstPage()
+{
+    m_ui->sbPreviewPage->setValue(1);
+}
+
 void XtExportDlg::onPrevPage()
 {
     int page = m_ui->sbPreviewPage->value();
@@ -483,6 +539,11 @@ void XtExportDlg::onNextPage()
     if (page < maxPage) {
         m_ui->sbPreviewPage->setValue(page + 1);
     }
+}
+
+void XtExportDlg::onLastPage()
+{
+    m_ui->sbPreviewPage->setValue(m_ui->sbPreviewPage->maximum());
 }
 
 void XtExportDlg::onPreviewPageChanged(int value)

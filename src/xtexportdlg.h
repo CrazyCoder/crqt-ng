@@ -79,6 +79,7 @@ private slots:
     void onGammaSliderChanged(int value);
     void onGammaSpinBoxChanged(double value);
     void onSerpentineChanged(Qt::CheckState state);
+    void onResetDithering();
 
     // Page range
     void onFromPageChanged(int value);
@@ -89,8 +90,10 @@ private slots:
     void onChapterDepthChanged(int index);
 
     // Preview navigation
+    void onFirstPage();
     void onPrevPage();
     void onNextPage();
+    void onLastPage();
     void onPreviewPageChanged(int value);
 
     // Zoom controls

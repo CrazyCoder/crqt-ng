@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>746</width>
-    <height>903</height>
+    <height>914</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -344,6 +344,30 @@
              </property>
             </widget>
            </item>
+           <item row="6" column="0" colspan="3">
+            <layout class="QHBoxLayout" name="ditheringButtonsLayout">
+             <item>
+              <spacer name="ditheringButtonsSpacer">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnResetDithering">
+               <property name="text">
+                <string>Reset</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
           </layout>
          </widget>
         </item>
@@ -560,6 +584,9 @@
                 <height>642</height>
                </size>
               </property>
+              <property name="styleSheet">
+               <string notr="true">QFrame#previewFrame { border: 1px solid rgb(80, 80, 80); }</string>
+              </property>
               <property name="frameShape">
                <enum>QFrame::Shape::Box</enum>
               </property>
@@ -568,9 +595,6 @@
               </property>
               <property name="lineWidth">
                <number>1</number>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QFrame#previewFrame { border: 1px solid rgb(80, 80, 80); }</string>
               </property>
               <layout class="QVBoxLayout" name="previewFrameLayout">
                <property name="spacing">
@@ -635,9 +659,58 @@
              </spacer>
             </item>
             <item>
-             <widget class="QPushButton" name="btnPrevPage">
+             <widget class="QPushButton" name="btnFirstPage">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>60</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>First page</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
               <property name="text">
-               <string>&lt;</string>
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset theme="QIcon::ThemeIcon::MediaSkipBackward"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnPrevPage">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>60</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Previous page</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+              </property>
+              <property name="autoRepeat">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -663,8 +736,57 @@
             </item>
             <item>
              <widget class="QPushButton" name="btnNextPage">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>60</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Next page</string>
+              </property>
               <property name="text">
-               <string>&gt;</string>
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset theme="QIcon::ThemeIcon::GoNext"/>
+              </property>
+              <property name="autoRepeat">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btnLastPage">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>60</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Last page</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset theme="QIcon::ThemeIcon::MediaSkipForward"/>
               </property>
              </widget>
             </item>
