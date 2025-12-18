@@ -70,8 +70,6 @@ static int aa_variants[] = { font_aa_none, font_aa_gray };
 #endif
 #define AA_VARIANTS_SZ (sizeof(aa_variants) / sizeof(int))
 
-static int interline_spaces[] = { 60, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150 };
-
 static int minspace_widths[] = { 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
 
 static float font_gammas[] = { 0.30f, 0.35f, 0.40f, 0.45f, 0.50f, 0.55f, 0.60f, 0.65f, 0.70f, 0.75f, 0.80f,
@@ -423,16 +421,16 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
     //		{_("140%"), "140"},
     //PROP_INTERLINE_SPACE
     //PROP_HYPHENATION_DICT
-    QString v = QString("%1").arg(m_props->getIntDef(PROP_INTERLINE_SPACE, 100)) + "%";
-    QStringList isitems;
-    for (int i = 0; i < (int)(sizeof(interline_spaces) / sizeof(int)); i++)
-        isitems.append(QString("%1").arg(interline_spaces[i]) + "%");
-    m_ui->cbInterlineSpace->addItems(isitems);
-    int isi = m_ui->cbInterlineSpace->findText(v);
-    m_ui->cbInterlineSpace->setCurrentIndex(isi >= 0 ? isi : 6);
+    int interlineValue = m_props->getIntDef(PROP_INTERLINE_SPACE, 100);
+    // Clamp to valid range
+    if (interlineValue < 60)
+        interlineValue = 60;
+    if (interlineValue > 150)
+        interlineValue = 150;
+    m_ui->sbInterlineSpace->setValue(interlineValue);
 
     // PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT
-    v = QString("%1").arg(m_props->getIntDef(PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT, 70)) + "%";
+    QString v = QString("%1").arg(m_props->getIntDef(PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT, 70)) + "%";
     QStringList mswitems;
     for (int i = 0; i < (int)(sizeof(minspace_widths) / sizeof(int)); i++)
         mswitems.append(QString("%1").arg(minspace_widths[i]) + "%");
@@ -1275,10 +1273,10 @@ void SettingsDlg::updateFontWeights() {
     m_ui->cbFontWeightChange->setCurrentIndex(fontWeightIndex);
 }
 
-void SettingsDlg::on_cbInterlineSpace_currentIndexChanged(int index) {
+void SettingsDlg::on_sbInterlineSpace_valueChanged(int value) {
     if (!initDone)
         return;
-    m_props->setInt(PROP_INTERLINE_SPACE, interline_spaces[index]);
+    m_props->setInt(PROP_INTERLINE_SPACE, value);
     updateStyleSample();
 }
 

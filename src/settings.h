@@ -202,7 +202,7 @@ private slots:
     void on_cbTxtPreFormatted_toggled(bool checked);
     void on_cbStartupAction_currentIndexChanged(int index);
     void on_cbHyphenation_currentIndexChanged(int index);
-    void on_cbInterlineSpace_currentIndexChanged(int index);
+    void on_sbInterlineSpace_valueChanged(int value);
     void on_cbMinSpaceWidth_currentIndexChanged(int index);
     void on_cbTextFontSize_currentTextChanged(QString);
     void on_cbTextFontFace_currentTextChanged(QString);

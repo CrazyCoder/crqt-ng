@@ -1839,7 +1839,23 @@
           </widget>
          </item>
          <item row="17" column="1">
-          <widget class="QComboBox" name="cbInterlineSpace"/>
+          <widget class="QSpinBox" name="sbInterlineSpace">
+           <property name="suffix">
+            <string>%</string>
+           </property>
+           <property name="minimum">
+            <number>60</number>
+           </property>
+           <property name="maximum">
+            <number>150</number>
+           </property>
+           <property name="singleStep">
+            <number>1</number>
+           </property>
+           <property name="value">
+            <number>100</number>
+           </property>
+          </widget>
          </item>
          <item row="18" column="0">
           <widget class="QLabel" name="label_15">
@@ -2254,7 +2270,7 @@
   <tabstop>cbEnableHyph</tabstop>
   <tabstop>cbHyphenation</tabstop>
   <tabstop>cbFontShaping</tabstop>
-  <tabstop>cbInterlineSpace</tabstop>
+  <tabstop>sbInterlineSpace</tabstop>
   <tabstop>cbMinSpaceWidth</tabstop>
   <tabstop>cbFontKerning</tabstop>
   <tabstop>cbFloatingPunctuation</tabstop>
