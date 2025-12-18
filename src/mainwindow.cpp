@@ -55,7 +55,6 @@
 #include "addbookmarkdlg.h"
 #include "crqtutil.h"
 #include "wolexportdlg.h"
-#include "exportprogressdlg.h"
 #include "searchdlg.h"
 
 #ifndef ENABLE_BOOKMARKS_DIR
@@ -328,105 +327,17 @@ bool MainWindow::isExternalLink(const QString& href) {
     return res;
 }
 
-class ExportProgressCallback: public LVDocViewCallback
-{
-    ExportProgressDlg* _dlg;
-public:
-    ExportProgressCallback(ExportProgressDlg* dlg)
-            : _dlg(dlg) { }
-    /// document formatting started
-    virtual void OnFormatStart() {
-        _dlg->setPercent(0);
-    }
-    /// document formatting finished
-    virtual void OnFormatEnd() {
-        _dlg->setPercent(100);
-    }
-    /// format progress, called with values 0..100
-    virtual void OnFormatProgress(int percent) {
-        //_dlg->setPercent(percent);
-    }
-    /// export progress, called with values 0..100
-    virtual void OnExportProgress(int percent) {
-        _dlg->setPercent(percent);
-    }
-};
-
-class XtcProgressCallback: public XtcExportCallback
-{
-    ExportProgressDlg* _dlg;
-public:
-    XtcProgressCallback(ExportProgressDlg* dlg)
-            : _dlg(dlg) { }
-    /// export progress, called with values 0..100
-    void onProgress(const int percent) override {
-        if (percent % 10 == 0) {
-            CRLog::trace("XtcProgressCallback::onProgress(%d)", percent);
-        }
-        _dlg->setPercent(percent);
-        QApplication::processEvents();
-    }
-};
-
 void MainWindow::on_actionExport_triggered() {
-    CRLog::debug("Exporting!");
     CR3View* view = currentCRView();
-    if (NULL == view) {
+    if (view == nullptr) {
         CRLog::debug("NULL view in current tab!");
         return;
     }
-    // QString fileName = QFileDialog::getSaveFileName(this, tr("Export document to"), QString(), tr("WOL book (*.wol)"));
-    // if (fileName.length() == 0)
-        // return;
-    
-    QString fileName = "d:\\shared\\Xteink\\cr-conv\\test.xtc";
 
-    auto dlg = new XtExportDlg(this, view->getDocView());
-    dlg->setModal( true );
-     dlg->setWindowTitle(tr("Export to XT* format"));
-        dlg->setModal( true );
-        dlg->show();
-    dlg->raise();
-    dlg->activateWindow();
-    // int result = dlg->exec();
-    // if (result == QDialog::Accepted) {
-        // int bpp = dlg->getBitsPerPixel();
-        // int levels = dlg->getTocLevels();
-        // delete dlg;
-        // repaint();
-    ExportProgressDlg* msg = new ExportProgressDlg(this);
-    msg->setPercent(0);
-    msg->show();
-    msg->raise();
-    msg->activateWindow();
-
-    XtcProgressCallback xtcProgress(msg);
-
-    auto doc_view = view->getDocView();
-    doc_view->savePosition();
-    view->setExportMode(true);  // Disable view updates during export
-    view->setDocViewSize(480, 800);
-    
-    XtcExporter exporter = doc_view->createXtcExporter();
-
-    exporter.setFormat(XTC_FORMAT_XTC)
-            .setGrayPolicy(GRAY_ALL_TO_BLACK)
-            .setImageDitherMode(IMAGE_DITHER_FS_1BIT)
-            .setDitheringOptions(getDefault1BitDitheringOptions())
-            .setPageRange(0, 100)
-            .dumpImages(10)
-            .setProgressCallback(&xtcProgress)
-            .setChapterDepth(1)
-            .enableChapters(true)
-            .setDimensions(480, 800);
-    CRLog::debug("Exporter parameters set!");
-    exporter.exportDocument(doc_view, qt2cr(fileName).c_str());
-    view->setExportMode(false);  // Re-enable view updates
-
-    delete msg;
-    // } else {
-        // delete dlg;
-    // }
+    // Dialog has WA_DeleteOnClose attribute, so it auto-deletes when closed
+    XtExportDlg* dlg = new XtExportDlg(this, view->getDocView());
+    dlg->setWindowTitle(tr("Export to XT* format"));
+    dlg->exec();
 }
 
 void MainWindow::on_actionOpen_triggered() {
