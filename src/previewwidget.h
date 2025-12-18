@@ -101,6 +101,15 @@ public:
      */
     void clear();
 
+    /**
+     * @brief Enable or disable page navigation via mouse wheel
+     * @param enabled true to enable (default), false to disable
+     *
+     * When disabled, scroll wheel without modifier does nothing.
+     * Zoom via Ctrl+wheel is not affected.
+     */
+    void setPageNavigationEnabled(bool enabled);
+
     QSize sizeHint() const override;
     QSize minimumSizeHint() const override;
 
@@ -159,6 +168,7 @@ private:
     int m_zoomPercent;              ///< Current zoom level (50-200)
     QString m_message;              ///< Message to display (empty = show image)
     bool m_isDragging;              ///< True when dragging
+    bool m_pageNavigationEnabled;   ///< True to allow page change via wheel
 };
 
 #endif // PREVIEWWIDGET_H

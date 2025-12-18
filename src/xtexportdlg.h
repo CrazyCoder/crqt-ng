@@ -36,11 +36,35 @@ class XtExportProfileManager;
 class XtExportProfile;
 class PreviewWidget;
 class LVDocView;
+class XtExportDlg;
 
 namespace Ui
 {
     class XtExportDlg;
 }
+
+/**
+ * @brief Qt-compatible export callback for progress updates and cancellation
+ *
+ * This callback class bridges the XtcExporter's callback interface with Qt's
+ * event loop. It calls processEvents() to keep the UI responsive during export
+ * and provides cancellation support via a flag that the dialog can set.
+ */
+class QtExportCallback : public XtcExportCallback
+{
+public:
+    explicit QtExportCallback(XtExportDlg* dialog);
+
+    void onProgress(int percent) override;
+    bool isCancelled() override;
+
+    void setCancelled(bool cancelled) { m_cancelled = cancelled; }
+    bool wasCancelled() const { return m_cancelled; }
+
+private:
+    XtExportDlg* m_dialog;
+    bool m_cancelled;
+};
 
 /**
  * @brief Export dialog for XT* formats (XTC/XTCH)
@@ -53,12 +77,18 @@ class XtExportDlg : public QDialog
     Q_OBJECT
     Q_DISABLE_COPY(XtExportDlg)
 
+    friend class QtExportCallback;
+
 public:
     explicit XtExportDlg(QWidget* parent, LVDocView* docView);
     ~XtExportDlg();
 
+public slots:
+    void reject() override;
+
 protected:
     void changeEvent(QEvent* e) override;
+    void closeEvent(QCloseEvent* e) override;
 
 private slots:
     // Profile
@@ -112,6 +142,9 @@ private slots:
     // Actions
     void onExport();
     void onCancel();
+
+    // Export progress (called by QtExportCallback)
+    void updateExportProgress(int percent);
 
 private:
     /**
@@ -260,6 +293,30 @@ private:
      */
     void loadDocumentMetadata();
 
+    /**
+     * @brief Set dialog UI state for exporting mode
+     *
+     * Disables settings controls, shows progress bar, and changes
+     * button states during export operation.
+     *
+     * @param exporting true when export is in progress
+     */
+    void setExporting(bool exporting);
+
+    /**
+     * @brief Validate export settings before starting
+     * @return true if settings are valid, false otherwise (shows error message)
+     */
+    bool validateExportSettings();
+
+    /**
+     * @brief Perform the actual export operation
+     *
+     * This method is called after validation. It runs the export synchronously
+     * with progress updates via QtExportCallback.
+     */
+    void performExport();
+
     Ui::XtExportDlg* m_ui;
     LVDocView* m_docView;
     XtExportProfileManager* m_profileManager;
@@ -273,6 +330,11 @@ private:
 
     // Debounce timer for preview updates (Phase 3)
     QTimer* m_previewDebounceTimer;
+
+    // Export state (Phase 5)
+    bool m_exporting;                   ///< true during export operation
+    QtExportCallback* m_exportCallback; ///< Callback for progress and cancellation
+    QString m_exportFilePath;           ///< Full path to export file (for cleanup on cancel)
 };
 
 #endif // XTEXPORTDLG_H

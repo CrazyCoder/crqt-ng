@@ -32,8 +32,42 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QDir>
+#include <QFile>
 #include <QVBoxLayout>
 #include <QStandardPaths>
+#include <QMessageBox>
+#include <QCloseEvent>
+#include <QCoreApplication>
+
+// =============================================================================
+// QtExportCallback implementation
+// =============================================================================
+
+QtExportCallback::QtExportCallback(XtExportDlg* dialog)
+    : m_dialog(dialog)
+    , m_cancelled(false)
+{
+}
+
+void QtExportCallback::onProgress(int percent)
+{
+    if (m_dialog) {
+        m_dialog->updateExportProgress(percent);
+    }
+    // Process events to keep UI responsive
+    QCoreApplication::processEvents();
+}
+
+bool QtExportCallback::isCancelled()
+{
+    // Process events to check for cancel button clicks
+    QCoreApplication::processEvents();
+    return m_cancelled;
+}
+
+// =============================================================================
+// XtExportDlg implementation
+// =============================================================================
 
 XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     : QDialog(parent)
@@ -47,6 +81,9 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     , m_updatingControls(false)
     , m_lastDirectory()
     , m_previewDebounceTimer(nullptr)
+    , m_exporting(false)
+    , m_exportCallback(nullptr)
+    , m_exportFilePath()
 {
     setAttribute(Qt::WA_DeleteOnClose);  // Ensure destructor runs when dialog closes
     m_ui->setupUi(this);
@@ -203,6 +240,31 @@ void XtExportDlg::changeEvent(QEvent* e)
     if (e->type() == QEvent::LanguageChange) {
         m_ui->retranslateUi(this);
     }
+}
+
+void XtExportDlg::closeEvent(QCloseEvent* e)
+{
+    if (m_exporting) {
+        // Trigger cancellation instead of closing
+        if (m_exportCallback) {
+            m_exportCallback->setCancelled(true);
+        }
+        e->ignore();
+        return;
+    }
+    QDialog::closeEvent(e);
+}
+
+void XtExportDlg::reject()
+{
+    if (m_exporting) {
+        // Trigger cancellation instead of closing
+        if (m_exportCallback) {
+            m_exportCallback->setCancelled(true);
+        }
+        return;
+    }
+    QDialog::reject();
 }
 
 
@@ -785,14 +847,25 @@ void XtExportDlg::onBrowseOutput()
 
 void XtExportDlg::onExport()
 {
-    // TODO (Phase 5): Implement export
-    accept();
+    if (m_exporting)
+        return;
+
+    if (!validateExportSettings())
+        return;
+
+    performExport();
 }
 
 void XtExportDlg::onCancel()
 {
-    // TODO (Phase 5): Handle cancellation during export
-    reject();
+    if (m_exporting) {
+        // Set cancellation flag - the callback will pick this up
+        if (m_exportCallback) {
+            m_exportCallback->setCancelled(true);
+        }
+    } else {
+        reject();
+    }
 }
 
 void XtExportDlg::schedulePreviewUpdate()
@@ -1128,4 +1201,173 @@ void XtExportDlg::loadDocumentMetadata()
     // Populate the UI fields
     m_ui->leTitle->setText(title);
     m_ui->leAuthor->setText(author);
+}
+
+void XtExportDlg::updateExportProgress(int percent)
+{
+    m_ui->progressBar->setValue(percent);
+}
+
+void XtExportDlg::setExporting(bool exporting)
+{
+    m_exporting = exporting;
+
+    // Disable/enable settings groups
+    m_ui->settingsGroup->setEnabled(!exporting);
+    m_ui->outputGroup->setEnabled(!exporting);
+
+    // Preview group stays enabled but navigation is disabled
+    m_ui->btnFirstPage->setEnabled(!exporting);
+    m_ui->btnPrevPage->setEnabled(!exporting);
+    m_ui->btnNextPage->setEnabled(!exporting);
+    m_ui->btnLastPage->setEnabled(!exporting);
+    m_ui->sbPreviewPage->setEnabled(!exporting);
+    m_previewWidget->setPageNavigationEnabled(!exporting);
+
+    // Swap spacer/progress bar visibility
+    // When exporting: collapse spacer, show progress bar
+    // When idle: expand spacer, hide progress bar
+    if (exporting) {
+        m_ui->buttonsSpacer->changeSize(0, 0, QSizePolicy::Ignored, QSizePolicy::Ignored);
+        m_ui->progressBar->setValue(0);
+        m_ui->progressBar->setVisible(true);
+    } else {
+        m_ui->buttonsSpacer->changeSize(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        m_ui->progressBar->setVisible(false);
+    }
+    m_ui->buttonsLayout->invalidate();
+
+    // Button states
+    m_ui->btnExport->setEnabled(!exporting);
+    m_ui->btnClose->setText(exporting ? tr("Cancel") : tr("Close"));
+
+    // Disconnect/reconnect close button based on state
+    // During export, clicking Close should cancel; otherwise reject dialog
+    disconnect(m_ui->btnClose, &QPushButton::clicked, nullptr, nullptr);
+    if (exporting) {
+        connect(m_ui->btnClose, &QPushButton::clicked, this, &XtExportDlg::onCancel);
+    } else {
+        connect(m_ui->btnClose, &QPushButton::clicked, this, &QDialog::reject);
+    }
+}
+
+bool XtExportDlg::validateExportSettings()
+{
+    // Check document
+    if (!m_docView) {
+        QMessageBox::warning(this, tr("Export Error"),
+                             tr("No document is loaded."));
+        return false;
+    }
+
+    // Check output path
+    QString outputPath = resolveExportPath();
+    if (outputPath.isEmpty()) {
+        QMessageBox::warning(this, tr("Export Error"),
+                             tr("Please specify an output file path."));
+        m_ui->leOutputPath->setFocus();
+        return false;
+    }
+
+    // Check if output directory exists
+    QFileInfo fi(outputPath);
+    QDir outputDir = fi.absoluteDir();
+    if (!outputDir.exists()) {
+        QMessageBox::warning(this, tr("Export Error"),
+                             tr("Output directory does not exist:\n%1").arg(outputDir.absolutePath()));
+        m_ui->leOutputPath->setFocus();
+        return false;
+    }
+
+    // Check page range
+    int fromPage = m_ui->sbFromPage->value();
+    int toPage = m_ui->sbToPage->value();
+    if (fromPage > toPage) {
+        QMessageBox::warning(this, tr("Export Error"),
+                             tr("Invalid page range: 'From' page cannot be greater than 'To' page."));
+        m_ui->sbFromPage->setFocus();
+        return false;
+    }
+
+    // Check if file already exists
+    if (fi.exists()) {
+        QMessageBox::StandardButton reply = QMessageBox::question(
+            this, tr("Confirm Overwrite"),
+            tr("The file already exists:\n%1\n\nDo you want to overwrite it?").arg(outputPath),
+            QMessageBox::Yes | QMessageBox::No,
+            QMessageBox::No);
+        if (reply != QMessageBox::Yes) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+void XtExportDlg::performExport()
+{
+    // Get the resolved output path
+    m_exportFilePath = resolveExportPath();
+
+    // Update the output path field with the resolved path
+    m_ui->leOutputPath->setText(m_exportFilePath);
+
+    // Create the export callback
+    m_exportCallback = new QtExportCallback(this);
+
+    // Enter exporting state
+    setExporting(true);
+
+    // Create and configure exporter
+    XtcExporter exporter;
+    configureExporter(exporter);
+
+    // Disable preview mode (ensure we're in full export mode)
+    exporter.setPreviewPage(-1);
+
+    // Set page range (convert from 1-based UI to 0-based exporter)
+    int fromPage = m_ui->sbFromPage->value() - 1;
+    int toPage = m_ui->sbToPage->value() - 1;
+    exporter.setPageRange(fromPage, toPage);
+
+    // Set the progress callback
+    exporter.setProgressCallback(m_exportCallback);
+
+    // Perform the export
+    lString32 outputPath = qt2cr(m_exportFilePath);
+    bool success = exporter.exportDocument(m_docView, outputPath.c_str());
+
+    // Check if cancelled
+    bool wasCancelled = m_exportCallback->wasCancelled();
+
+    // Clean up callback
+    delete m_exportCallback;
+    m_exportCallback = nullptr;
+
+    // Exit exporting state
+    setExporting(false);
+
+    // Handle result
+    if (wasCancelled) {
+        // Delete partial file on cancellation
+        QFile partialFile(m_exportFilePath);
+        if (partialFile.exists()) {
+            partialFile.remove();
+        }
+        // No message needed - user knows they cancelled
+    } else if (success) {
+        // Save the directory for next time
+        saveLastDirectorySetting();
+
+        // Show success message
+        QMessageBox::information(this, tr("Export Complete"),
+                                 tr("Document exported successfully to:\n%1").arg(m_exportFilePath));
+    } else {
+        // Show error message
+        QMessageBox::critical(this, tr("Export Failed"),
+                              tr("Failed to export document to:\n%1\n\nPlease check the file path and try again.").arg(m_exportFilePath));
+    }
+
+    // Clear the export file path
+    m_exportFilePath.clear();
 }

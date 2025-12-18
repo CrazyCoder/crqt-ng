@@ -32,6 +32,7 @@ PreviewWidget::PreviewWidget(QWidget* parent)
     : QWidget(parent)
     , m_zoomPercent(100)
     , m_isDragging(false)
+    , m_pageNavigationEnabled(true)
 {
     setFixedSize(PREVIEW_WIDTH, PREVIEW_HEIGHT);
     setMouseTracking(true);
@@ -80,6 +81,11 @@ void PreviewWidget::showMessage(const QString& message)
 void PreviewWidget::clear()
 {
     showMessage(tr("No document loaded"));
+}
+
+void PreviewWidget::setPageNavigationEnabled(bool enabled)
+{
+    m_pageNavigationEnabled = enabled;
 }
 
 QSize PreviewWidget::sizeHint() const
@@ -171,8 +177,8 @@ void PreviewWidget::wheelEvent(QWheelEvent* event)
         // Scroll down (negative delta) = zoom out (negative zoom delta)
         int zoomDelta = (delta > 0) ? ZOOM_WHEEL_STEP : -ZOOM_WHEEL_STEP;
         emit zoomChangeRequested(zoomDelta);
-    } else {
-        // Plain scroll: page navigation
+    } else if (m_pageNavigationEnabled) {
+        // Plain scroll: page navigation (when enabled)
         // Scroll down (negative delta) = next page (+1)
         // Scroll up (positive delta) = previous page (-1)
         int pageDelta = (delta > 0) ? -1 : 1;
