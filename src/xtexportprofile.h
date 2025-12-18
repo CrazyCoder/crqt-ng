@@ -44,6 +44,9 @@ public:
     QString filename;       ///< INI filename (e.g., "xtp_xtc.ini")
     int order;              ///< Sort order in UI (lower values appear first)
 
+    // Profile behavior
+    bool locked;            ///< If true, format/width/height cannot be changed in UI
+
     // Format settings
     XtcExportFormat format; ///< XTC_FORMAT_XTC or XTC_FORMAT_XTCH
     QString extension;      ///< File extension for export (e.g., "xtc")
@@ -92,11 +95,18 @@ public:
      */
     static XtExportProfile defaultXtchProfile();
 
+    /**
+     * @brief Get default custom profile (unlocked, based on X4 XTC)
+     * @return Profile with default settings and locked=false
+     */
+    static XtExportProfile defaultCustomProfile();
+
     // Default profile filenames
     static const char* const DEFAULT_XTC_FILENAME;
     static const char* const DEFAULT_XTCH_FILENAME;
     static const char* const DEFAULT_X3_XTC_FILENAME;
     static const char* const DEFAULT_X3_XTCH_FILENAME;
+    static const char* const DEFAULT_CUSTOM_FILENAME;
 
 private:
     // INI key names
@@ -115,6 +125,7 @@ private:
     static const char* const KEY_CHAPTERS_ENABLED;
     static const char* const KEY_CHAPTER_DEPTH;
     static const char* const KEY_ORDER;
+    static const char* const KEY_LOCKED;
 
     // String <-> enum conversion helpers
     static QString formatToString(XtcExportFormat format);

@@ -49,12 +49,14 @@ const char* const XtExportProfile::KEY_SERPENTINE = "Dithering/serpentine";
 const char* const XtExportProfile::KEY_CHAPTERS_ENABLED = "Chapters/enabled";
 const char* const XtExportProfile::KEY_CHAPTER_DEPTH = "Chapters/depth";
 const char* const XtExportProfile::KEY_ORDER = "Profile/order";
+const char* const XtExportProfile::KEY_LOCKED = "Profile/locked";
 
 // Default profile filenames
 const char* const XtExportProfile::DEFAULT_XTC_FILENAME = "xtp_xtc.ini";
 const char* const XtExportProfile::DEFAULT_XTCH_FILENAME = "xtp_xtch.ini";
 const char* const XtExportProfile::DEFAULT_X3_XTC_FILENAME = "xtp_xtc3.ini";
 const char* const XtExportProfile::DEFAULT_X3_XTCH_FILENAME = "xtp_xtch3.ini";
+const char* const XtExportProfile::DEFAULT_CUSTOM_FILENAME = "xtp_custom.ini";
 
 // =============================================================================
 // XtExportProfile implementation
@@ -62,6 +64,7 @@ const char* const XtExportProfile::DEFAULT_X3_XTCH_FILENAME = "xtp_xtch3.ini";
 
 XtExportProfile::XtExportProfile()
     : order(100)
+    , locked(false)
     , format(XTC_FORMAT_XTC)
     , width(480)
     , height(800)
@@ -93,6 +96,7 @@ bool XtExportProfile::load(const QString& filepath) {
     // Profile section
     name = settings.value(KEY_NAME, "Unnamed Profile").toString();
     order = settings.value(KEY_ORDER, 100).toInt();
+    locked = settings.value(KEY_LOCKED, false).toBool();
     format = stringToFormat(settings.value(KEY_FORMAT, "xtc").toString());
     extension = settings.value(KEY_EXTENSION, "xtc").toString();
     width = settings.value(KEY_WIDTH, 480).toInt();
@@ -126,6 +130,7 @@ bool XtExportProfile::save(const QString& filepath) const {
     // Profile section
     settings.setValue(KEY_NAME, name);
     settings.setValue(KEY_ORDER, order);
+    settings.setValue(KEY_LOCKED, locked);
     settings.setValue(KEY_FORMAT, formatToString(format));
     settings.setValue(KEY_EXTENSION, extension);
     settings.setValue(KEY_WIDTH, width);
@@ -166,6 +171,7 @@ XtExportProfile XtExportProfile::defaultXtcProfile() {
     profile.name = "X4 (480x800) fast (1-bit)";
     profile.filename = DEFAULT_XTC_FILENAME;
     profile.order = 10;
+    profile.locked = true;
     profile.format = XTC_FORMAT_XTC;
     profile.extension = "xtc";
     profile.width = 480;
@@ -184,6 +190,7 @@ XtExportProfile XtExportProfile::defaultXtchProfile() {
     profile.name = "X4 (480x800) quality (2-bit)";
     profile.filename = DEFAULT_XTCH_FILENAME;
     profile.order = 11;
+    profile.locked = true;
     profile.format = XTC_FORMAT_XTCH;
     profile.extension = "xtc";
     profile.width = 480;
@@ -192,6 +199,25 @@ XtExportProfile XtExportProfile::defaultXtchProfile() {
     profile.ditherMode = IMAGE_DITHER_FS_2BIT;
     profile.grayPolicy = GRAY_SPLIT_LIGHT_DARK;
     profile.ditheringOpts = getDefault2BitDitheringOptions();
+    profile.chaptersEnabled = true;
+    profile.chapterDepth = 1;
+    return profile;
+}
+
+XtExportProfile XtExportProfile::defaultCustomProfile() {
+    XtExportProfile profile;
+    profile.name = "Custom";
+    profile.filename = DEFAULT_CUSTOM_FILENAME;
+    profile.order = 50; // End of list
+    profile.locked = false;
+    profile.format = XTC_FORMAT_XTC;
+    profile.extension = "xtc";
+    profile.width = 480;
+    profile.height = 800;
+    profile.bpp = 1;
+    profile.ditherMode = IMAGE_DITHER_FS_1BIT;
+    profile.grayPolicy = GRAY_SPLIT_LIGHT_DARK;
+    profile.ditheringOpts = getDefault1BitDitheringOptions();
     profile.chaptersEnabled = true;
     profile.chapterDepth = 1;
     return profile;
@@ -314,6 +340,13 @@ void XtExportProfileManager::discoverProfiles() {
 }
 
 void XtExportProfileManager::createDefaultProfiles() {
+    // Create Custom profile if it doesn't exist (unlocked, user-modifiable)
+    if (!QFileInfo::exists(m_configDir + XtExportProfile::DEFAULT_CUSTOM_FILENAME)) {
+        CRLog::info("XtExportProfileManager: Creating default Custom profile");
+        XtExportProfile customProfile = XtExportProfile::defaultCustomProfile();
+        saveDefaultProfile(customProfile, XtExportProfile::DEFAULT_CUSTOM_FILENAME);
+    }
+
     // Create default XTC profile if it doesn't exist
     if (!QFileInfo::exists(m_configDir + XtExportProfile::DEFAULT_XTC_FILENAME)) {
         CRLog::info("XtExportProfileManager: Creating default XTC profile");
@@ -327,22 +360,28 @@ void XtExportProfileManager::createDefaultProfiles() {
         XtExportProfile xtchProfile = XtExportProfile::defaultXtchProfile();
         saveDefaultProfile(xtchProfile, XtExportProfile::DEFAULT_XTCH_FILENAME);
     }
-    
+
+    // Create X3 XTC profile if it doesn't exist
     if (!QFileInfo::exists(m_configDir + XtExportProfile::DEFAULT_X3_XTC_FILENAME)) {
         CRLog::info("XtExportProfileManager: Creating default XTC X3 profile");
         XtExportProfile xtcProfile = XtExportProfile::defaultXtcProfile();
         xtcProfile.name = "X3 (528x792) fast (1-bit)";
+        xtcProfile.filename = XtExportProfile::DEFAULT_X3_XTC_FILENAME;
         xtcProfile.order = 20;
+        xtcProfile.locked = true;
         xtcProfile.width = 528;
         xtcProfile.height = 792;
         saveDefaultProfile(xtcProfile, XtExportProfile::DEFAULT_X3_XTC_FILENAME);
     }
-    
+
+    // Create X3 XTCH profile if it doesn't exist
     if (!QFileInfo::exists(m_configDir + XtExportProfile::DEFAULT_X3_XTCH_FILENAME)) {
         CRLog::info("XtExportProfileManager: Creating default XTCH X3 profile");
         XtExportProfile xtchProfile = XtExportProfile::defaultXtchProfile();
         xtchProfile.name = "X3 (528x792) quality (2-bit)";
+        xtchProfile.filename = XtExportProfile::DEFAULT_X3_XTCH_FILENAME;
         xtchProfile.order = 21;
+        xtchProfile.locked = true;
         xtchProfile.width = 528;
         xtchProfile.height = 792;
         saveDefaultProfile(xtchProfile, XtExportProfile::DEFAULT_X3_XTCH_FILENAME);

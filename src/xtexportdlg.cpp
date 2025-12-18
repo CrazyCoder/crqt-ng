@@ -263,6 +263,7 @@ void XtExportDlg::loadProfileToUi(XtExportProfile* profile)
     // Update control states
     updateDitheringControlsState();
     updateGrayPolicyState();
+    updateFormatControlsLockState(profile);
 }
 
 void XtExportDlg::updateDitheringControlsState()
@@ -286,6 +287,15 @@ void XtExportDlg::updateGrayPolicyState()
     int formatIndex = m_ui->cbFormat->currentIndex();
     bool enableGrayPolicy = (formatIndex == 0);  // XTC only
     m_ui->cbGrayPolicy->setEnabled(enableGrayPolicy);
+}
+
+void XtExportDlg::updateFormatControlsLockState(XtExportProfile* profile)
+{
+    // When profile is locked, format/width/height controls are disabled
+    bool enabled = !profile || !profile->locked;
+    m_ui->cbFormat->setEnabled(enabled);
+    m_ui->sbWidth->setEnabled(enabled);
+    m_ui->sbHeight->setEnabled(enabled);
 }
 
 void XtExportDlg::setupSliderSpinBoxSync()

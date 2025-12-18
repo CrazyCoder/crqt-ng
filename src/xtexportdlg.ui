@@ -84,12 +84,12 @@
              </property>
              <item>
               <property name="text">
-               <string>XTC</string>
+               <string>XTC (1-bit)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>XTCH</string>
+               <string>XTCH (2-bit)</string>
               </property>
              </item>
             </widget>

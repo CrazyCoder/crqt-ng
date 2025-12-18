@@ -135,6 +135,12 @@ private:
     void updateGrayPolicyState();
 
     /**
+     * @brief Update format/width/height controls enable state based on profile lock
+     * @param profile Current profile (nullptr defaults to enabled)
+     */
+    void updateFormatControlsLockState(XtExportProfile* profile);
+
+    /**
      * @brief Setup bidirectional sync between slider and spinbox
      */
     void setupSliderSpinBoxSync();
