@@ -32,6 +32,15 @@ AboutDialog::AboutDialog(QWidget* parent)
         : QDialog(parent)
         , m_ui(new Ui::AboutDialog) {
     m_ui->setupUi(this);
+
+    // cr2xt umbrella version (only shown when built from umbrella project)
+#ifdef CR2XT_VERSION_FULL
+    QString cr2xt_ver = m_ui->lblCr2xtVersion->text().replace("%ver%", QString("%1").arg(CR2XT_VERSION_FULL));
+    m_ui->lblCr2xtVersion->setText(cr2xt_ver);
+#else
+    m_ui->lblCr2xtVersion->hide();
+#endif
+
     QString crqt_ver = m_ui->lblVersion->text().replace("%ver%", QString("%1").arg(VERSION));
     m_ui->lblVersion->setText(crqt_ver);
     QString crengine_ver = m_ui->lblcrengineVersion->text().replace("%ver%", QString("%1").arg(CRE_NG_VERSION));
