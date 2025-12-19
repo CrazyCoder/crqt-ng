@@ -33,7 +33,7 @@ SampleView::SampleView(QWidget* parent)
     m_view = new CR3View(this);
     layout->addWidget(m_view, 10);
     setAttribute(Qt::WA_DeleteOnClose, true);
-    setMinimumSize(300, 300);
+    setMinimumSize(200, 300);
     updatePositionForParent();
     m_view->setActive(true);
 }

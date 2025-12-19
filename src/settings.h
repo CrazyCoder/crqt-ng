@@ -280,6 +280,7 @@ private slots:
     void on_btnFontFamiliesMan_clicked();
     void on_cbFontWeightChange_currentIndexChanged(int index);
     void on_cbAntialiasingMode_currentIndexChanged(int index);
+    void on_tabWidget_currentChanged(int index);
 };
 
 #endif // SETTINGSDLG_H

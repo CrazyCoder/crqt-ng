@@ -471,8 +471,16 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
         m_ui->cbEnableHyph->setVisible(embedded_lang);
     }
 
-    initSampleWindow();
-    updateStyleSample();
+    // Restore last selected tab (before sample window init)
+    int lastTab = m_props->getIntDef(PROP_APP_SETTINGS_TAB, 0);
+    if (lastTab >= 0 && lastTab < m_ui->tabWidget->count())
+        m_ui->tabWidget->setCurrentIndex(lastTab);
+
+    // Only initialize sample window if on Styles tab (index 2)
+    if (m_ui->tabWidget->currentIndex() == 2) {
+        initSampleWindow();
+        updateStyleSample();
+    }
 
     m_styleNames.clear();
     m_styleNames.append(tr("Default paragraph style"));
@@ -515,8 +523,11 @@ void SettingsDlg::changeEvent(QEvent* e) {
 void SettingsDlg::showEvent(QShowEvent* event) {
     QDialog::showEvent(event);
     if (m_sample) {
-        m_sample->setVisible(true);
-        m_sample->updatePositionForParent();
+        // Only show sample on Styles tab (index 2)
+        bool onStylesTab = (m_ui->tabWidget->currentIndex() == 2);
+        m_sample->setVisible(onStylesTab);
+        if (onStylesTab)
+            m_sample->updatePositionForParent();
     }
 }
 
@@ -1101,6 +1112,10 @@ void SettingsDlg::updateStyleSample() {
     setBackground(m_ui->frmCommentColor, commentColor);
     setBackground(m_ui->frmCorrectionColor, correctionColor);
 
+    // Only create/update sample window when on Styles tab (index 2)
+    if (m_ui->tabWidget->currentIndex() != 2)
+        return;
+
     if (NULL == m_sample) {
         initSampleWindow();
         m_sample->show();
@@ -1591,4 +1606,22 @@ void SettingsDlg::on_cbAntialiasingMode_currentIndexChanged(int index) {
     int aa = aa_variants[index];
     m_props->setInt(PROP_FONT_ANTIALIASING, aa);
     updateStyleSample();
+}
+
+void SettingsDlg::on_tabWidget_currentChanged(int index) {
+    if (!initDone)
+        return;
+    m_props->setInt(PROP_APP_SETTINGS_TAB, index);
+    // Show/hide sample window based on tab (Styles tab is index 2)
+    bool onStylesTab = (index == 2);
+    if (onStylesTab) {
+        if (!m_sample) {
+            initSampleWindow();
+            updateStyleSample();
+        }
+        m_sample->setVisible(true);
+        m_sample->updatePositionForParent();
+    } else if (m_sample) {
+        m_sample->setVisible(false);
+    }
 }
