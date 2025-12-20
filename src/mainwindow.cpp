@@ -29,6 +29,7 @@
 #include <qglobal.h>
 
 #include "xtexportdlg.h"
+#include "xtexportprofile.h"
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QStyleFactory>
@@ -364,7 +365,36 @@ void MainWindow::on_actionResizeToXteink_triggered() {
     CR3View* view = currentCRView();
     if (NULL == view)
         return;
-    view->setDocViewSize(480, 800);
+
+    // Default resolution
+    int width = 480;
+    int height = 800;
+
+    // Try to get resolution from last used export profile
+    CRPropRef props = getSettings();
+    QString lastProfile = cr2qt(props->getStringDef("xtexport.lastprofile", ""));
+
+    if (!lastProfile.isEmpty()) {
+        XtExportProfileManager profileManager;
+        profileManager.initialize();
+        int idx = profileManager.indexOfProfile(lastProfile);
+        if (idx >= 0) {
+            XtExportProfile* profile = profileManager.profileByIndex(idx);
+            if (profile && profile->isValid()) {
+                width = profile->width;
+                height = profile->height;
+            }
+        }
+    }
+
+    view->setDocViewSize(width, height);
+}
+
+void MainWindow::resizeDocViewToSize(int width, int height) {
+    CR3View* view = currentCRView();
+    if (NULL == view)
+        return;
+    view->setDocViewSize(width, height);
 }
 
 void MainWindow::on_actionClose_triggered() {

@@ -515,6 +515,12 @@ void XtExportDlg::onProfileChanged(int index)
     XtExportProfile* profile = m_profileManager->profileByIndex(index);
     if (profile) {
         loadProfileToUi(profile);
+
+        // Resize main window's document view to match profile resolution
+        // This prevents slow preview rendering when resolutions differ
+        if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
+            mainWin->resizeDocViewToSize(profile->width, profile->height);
+        }
     }
     schedulePreviewUpdate();
 }

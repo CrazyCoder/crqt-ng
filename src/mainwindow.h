@@ -43,6 +43,7 @@ public:
     MainWindow(const QStringList& filesToOpen, QWidget* parent = 0);
     ~MainWindow();
     CRPropRef getSettings() { return _tabs.getSettings(); }
+    void resizeDocViewToSize(int width, int height);
 private:
     Ui::MainWindowClass* ui;
     TabsCollection _tabs;
