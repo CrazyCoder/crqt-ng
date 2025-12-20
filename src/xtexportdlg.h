@@ -209,6 +209,8 @@ private:
      */
     ImageDitherMode resolveEffectiveDitherMode() const;
 
+    void resizeMainWindow();
+
     /**
      * @brief Schedule a debounced preview update
      */

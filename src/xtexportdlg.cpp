@@ -505,6 +505,15 @@ ImageDitherMode XtExportDlg::resolveEffectiveDitherMode() const
     }
 }
 
+void XtExportDlg::resizeMainWindow()
+{
+    // Resize main window's document view to match profile resolution
+    // This prevents slow preview rendering when resolutions differ
+    if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
+        mainWin->resizeDocViewToSize(m_ui->sbWidth->value(), m_ui->sbHeight->value());
+    }
+}
+
 // Slot implementations
 
 void XtExportDlg::onProfileChanged(int index)
@@ -515,12 +524,7 @@ void XtExportDlg::onProfileChanged(int index)
     XtExportProfile* profile = m_profileManager->profileByIndex(index);
     if (profile) {
         loadProfileToUi(profile);
-
-        // Resize main window's document view to match profile resolution
-        // This prevents slow preview rendering when resolutions differ
-        if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
-            mainWin->resizeDocViewToSize(profile->width, profile->height);
-        }
+        resizeMainWindow();
     }
     schedulePreviewUpdate();
 }
@@ -539,6 +543,7 @@ void XtExportDlg::onWidthChanged(int /*value*/)
 {
     if (m_updatingControls)
         return;
+    resizeMainWindow();
     schedulePreviewUpdate();
 }
 
@@ -546,6 +551,7 @@ void XtExportDlg::onHeightChanged(int /*value*/)
 {
     if (m_updatingControls)
         return;
+    resizeMainWindow();
     schedulePreviewUpdate();
 }
 
@@ -788,9 +794,9 @@ void XtExportDlg::onSet200Zoom()
 {
     // Cycle through zoom levels: find next level higher than current, or wrap to first
     // The button label update is handled by onZoomSliderChanged() -> updateZoomButtonLabel()
-    for (int i = 0; i < PreviewWidget::ZOOM_LEVELS_COUNT; ++i) {
-        if (m_zoomPercent < PreviewWidget::ZOOM_LEVELS[i]) {
-            m_ui->sliderZoom->setValue(PreviewWidget::ZOOM_LEVELS[i]);
+    for (int i : PreviewWidget::ZOOM_LEVELS) {
+        if (m_zoomPercent < i) {
+            m_ui->sliderZoom->setValue(i);
             return;
         }
     }
@@ -1031,9 +1037,9 @@ void XtExportDlg::updateZoomButtonLabel()
 {
     // Button shows the zoom level it will jump TO when clicked
     // Find next level higher than current, or wrap to first
-    for (int i = 0; i < PreviewWidget::ZOOM_LEVELS_COUNT; ++i) {
-        if (m_zoomPercent < PreviewWidget::ZOOM_LEVELS[i]) {
-            m_ui->btn200Zoom->setText(QString("%1%").arg(PreviewWidget::ZOOM_LEVELS[i]));
+    for (int i : PreviewWidget::ZOOM_LEVELS) {
+        if (m_zoomPercent < i) {
+            m_ui->btn200Zoom->setText(QString("%1%").arg(i));
             return;
         }
     }
