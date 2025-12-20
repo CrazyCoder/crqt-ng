@@ -70,7 +70,7 @@
      <x>0</x>
      <y>0</y>
      <width>480</width>
-     <height>18</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -94,9 +94,7 @@
     </property>
     <addaction name="actionResizeToXteink"/>
     <addaction name="actionFindText"/>
-    <addaction name="actionToggle_Pages_Scroll"/>
     <addaction name="actionMinimize"/>
-    <addaction name="actionToggle_Full_Screen"/>
     <addaction name="actionZoom_In"/>
     <addaction name="actionZoom_Out"/>
     <addaction name="actionRotate"/>
@@ -176,16 +174,6 @@
     <string>Ctrl+O</string>
    </property>
   </action>
-<!--
-  <action name="actionToggle_Pages_Scroll">
-   <property name="text">
-    <string>Toggle Pages/Scroll</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+T</string>
-   </property>
-  </action>
--->
   <action name="actionClose">
    <property name="icon">
     <iconset resource="crqtres.qrc">
@@ -343,26 +331,6 @@
     <string>Alt+Up</string>
    </property>
   </action>
-<!--
-  <action name="actionToggle_Full_Screen">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="crqtres.qrc">
-     <normaloff>:/icons/action/icons/window_fullscreen.png</normaloff>:/icons/action/icons/window_fullscreen.png</iconset>
-   </property>
-   <property name="text">
-    <string>Toggle Full Screen</string>
-   </property>
-   <property name="toolTip">
-    <string>Toggle Full Screen mode</string>
-   </property>
-   <property name="shortcut">
-    <string>Alt+Return</string>
-   </property>
-  </action>
--->
   <action name="actionZoom_In">
    <property name="icon">
     <iconset resource="crqtres.qrc">
@@ -567,6 +535,10 @@
    </property>
   </action>
   <action name="actionExport">
+   <property name="icon">
+    <iconset resource="crqtres.qrc">
+     <normaloff>:/icons/action/icons/export.png</normaloff>:/icons/action/icons/export.png</iconset>
+   </property>
    <property name="text">
     <string>Export</string>
    </property>

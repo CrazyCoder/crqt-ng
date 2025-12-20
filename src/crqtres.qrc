@@ -31,5 +31,6 @@
         <file>icons/nav_back.png</file>
         <file>icons/nav_forward.png</file>
         <file>icons/new_tab.png</file>
+        <file>icons/export.png</file>
     </qresource>
 </RCC>
