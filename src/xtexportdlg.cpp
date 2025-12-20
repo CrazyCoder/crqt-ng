@@ -1054,7 +1054,7 @@ void XtExportDlg::loadLastProfileSetting()
     QString lastProfile;
     if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
         CRPropRef props = mainWin->getSettings();
-        lastProfile = cr2qt(props->getStringDef("xtexport.lastprofile", ""));
+        lastProfile = cr2qt(props->getStringDef("xtexport.last.profile", ""));
     }
 
     // Find the saved profile index
@@ -1079,7 +1079,7 @@ void XtExportDlg::saveLastProfileSetting()
         CRPropRef props = mainWin->getSettings();
         XtExportProfile* profile = m_profileManager->profileByIndex(m_ui->cbProfile->currentIndex());
         if (profile) {
-            props->setString("xtexport.lastprofile", qt2cr(profile->filename).c_str());
+            props->setString("xtexport.last.profile", qt2cr(profile->filename).c_str());
         }
     }
 }
@@ -1088,7 +1088,7 @@ void XtExportDlg::loadLastDirectorySetting()
 {
     if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
         CRPropRef props = mainWin->getSettings();
-        m_lastDirectory = cr2qt(props->getStringDef("xtexport.last_directory", ""));
+        m_lastDirectory = cr2qt(props->getStringDef("xtexport.last.directory", ""));
 
         // Sanitize: discard if it contains @ (invalid archive path artifact)
         if (m_lastDirectory.contains('@')) {
@@ -1116,7 +1116,7 @@ void XtExportDlg::saveLastDirectorySetting()
 
             // Don't save if it contains @ (invalid archive path artifact)
             if (!dir.contains('@')) {
-                props->setString("xtexport.last_directory", qt2cr(dir).c_str());
+                props->setString("xtexport.last.directory", qt2cr(dir).c_str());
             }
         }
     }

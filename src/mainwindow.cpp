@@ -372,7 +372,7 @@ void MainWindow::on_actionResizeToXteink_triggered() {
 
     // Try to get resolution from last used export profile
     CRPropRef props = getSettings();
-    QString lastProfile = cr2qt(props->getStringDef("xtexport.lastprofile", ""));
+    QString lastProfile = cr2qt(props->getStringDef("xtexport.last.profile", ""));
 
     if (!lastProfile.isEmpty()) {
         XtExportProfileManager profileManager;
