@@ -84,17 +84,39 @@ bool TabsCollection::saveTabSession(const QString& filename) {
 bool TabsCollection::loadSettings(const QString& filename) {
     lString32 fn(qt2cr(filename));
     m_settingsFileName = fn;
-    LVStreamRef stream = LVOpenFileStream(fn.c_str(), LVOM_READ);
-    bool res = false;
-    if (!stream.isNull() && m_props->loadFromStream(stream.get())) {
-        CRLog::info("Loading settings from file %s", LCSTR(fn));
-        upgradeSettings();
-        res = true;
-    } else {
-        CRLog::error("Cannot load settings from file %s", LCSTR(fn));
+
+    // 1. Load app-shipped defaults (if exists)
+    // Try exe directory first (portable mode), then engine data directory (system install)
+    lString32 defaultsFile = LVCombinePaths(getExeDir(), cs32("crui-defaults.ini"));
+    LVStreamRef defaultsStream = LVOpenFileStream(defaultsFile.c_str(), LVOM_READ);
+    if (defaultsStream.isNull()) {
+        defaultsFile = LVCombinePaths(getEngineDataDir(), cs32("crui-defaults.ini"));
+        defaultsStream = LVOpenFileStream(defaultsFile.c_str(), LVOM_READ);
     }
-    //updateDefProps();
-    return res;
+    CRPropRef defaultProps = LVCreatePropsContainer();
+    if (!defaultsStream.isNull() && defaultProps->loadFromStream(defaultsStream.get())) {
+        CRLog::info("Loaded app defaults from %s", LCSTR(defaultsFile));
+    }
+
+    // 2. Load user settings
+    LVStreamRef userStream = LVOpenFileStream(fn.c_str(), LVOM_READ);
+    CRPropRef userProps = LVCreatePropsContainer();
+    bool hadUserSettings = !userStream.isNull() && userProps->loadFromStream(userStream.get());
+    if (hadUserSettings) {
+        CRLog::info("Loaded user settings from %s", LCSTR(fn));
+    } else {
+        CRLog::info("No user settings found at %s", LCSTR(fn));
+    }
+
+    // 3. Merge: start with defaults, overlay user settings
+    m_props = LVCreatePropsContainer();
+    for (int i = 0; i < defaultProps->getCount(); i++)
+        m_props->setString(defaultProps->getName(i), defaultProps->getValue(i));
+    for (int i = 0; i < userProps->getCount(); i++)
+        m_props->setString(userProps->getName(i), userProps->getValue(i));
+
+    upgradeSettings();
+    return hadUserSettings || !defaultsStream.isNull();
 }
 
 bool TabsCollection::saveSettings(const QString& filename) {
