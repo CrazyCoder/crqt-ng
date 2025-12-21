@@ -323,6 +323,18 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
     m_ui->cbShowChapterMarks->setEnabled(b && m_props->getBoolDef(PROP_STATUS_NAVBAR, true));
     m_ui->cbShowBookName->setEnabled(b);
 
+    // Header margin spinboxes
+    m_ui->sbHeaderMarginH->setValue(m_props->getIntDef(PROP_PAGE_HEADER_MARGIN_H, 5));
+    m_ui->sbHeaderMarginV->setValue(m_props->getIntDef(PROP_PAGE_HEADER_MARGIN_V, 3));
+    m_ui->sbNavbarHeight->setValue(m_props->getIntDef(PROP_PAGE_HEADER_NAVBAR_H, 5));
+    m_ui->sbHeaderMarginH->setEnabled(b);
+    m_ui->sbHeaderMarginV->setEnabled(b);
+    bool chapterMarksEnabled = b && m_props->getBoolDef(PROP_STATUS_NAVBAR, true) && m_props->getBoolDef(PROP_STATUS_CHAPTER_MARKS, true);
+    m_ui->sbNavbarHeight->setEnabled(chapterMarksEnabled);
+    m_ui->lblHeaderMarginH->setEnabled(b);
+    m_ui->lblHeaderMarginV->setEnabled(b);
+    m_ui->lblNavbarHeight->setEnabled(chapterMarksEnabled);
+
     m_ui->cbStartupAction->setCurrentIndex(m_props->getIntDef(PROP_APP_START_ACTION, 0));
 
     int lp = m_props->getIntDef(PROP_LANDSCAPE_PAGES, 2);
@@ -1009,15 +1021,28 @@ void SettingsDlg::on_cbShowPageHeader_currentIndexChanged(int index) {
     m_ui->cbShowNavbar->setEnabled(b);
     m_ui->cbShowChapterMarks->setEnabled(b && m_ui->cbShowNavbar->isChecked());
     m_ui->cbShowBookName->setEnabled(b);
+    // Header margin spinboxes
+    m_ui->sbHeaderMarginH->setEnabled(b);
+    m_ui->sbHeaderMarginV->setEnabled(b);
+    bool chapterMarksEnabled = b && m_ui->cbShowNavbar->isChecked() && m_ui->cbShowChapterMarks->isChecked();
+    m_ui->sbNavbarHeight->setEnabled(chapterMarksEnabled);
+    m_ui->lblHeaderMarginH->setEnabled(b);
+    m_ui->lblHeaderMarginV->setEnabled(b);
+    m_ui->lblNavbarHeight->setEnabled(chapterMarksEnabled);
 }
 
 void SettingsDlg::on_cbShowNavbar_stateChanged(int s) {
     setCheck(PROP_STATUS_NAVBAR, s);
     m_ui->cbShowChapterMarks->setEnabled(s == Qt::Checked);
+    bool chapterMarksEnabled = (s == Qt::Checked) && m_ui->cbShowChapterMarks->isChecked();
+    m_ui->sbNavbarHeight->setEnabled(chapterMarksEnabled);
+    m_ui->lblNavbarHeight->setEnabled(chapterMarksEnabled);
 }
 
 void SettingsDlg::on_cbShowChapterMarks_stateChanged(int s) {
     setCheck(PROP_STATUS_CHAPTER_MARKS, s);
+    m_ui->sbNavbarHeight->setEnabled(s == Qt::Checked);
+    m_ui->lblNavbarHeight->setEnabled(s == Qt::Checked);
 }
 
 void SettingsDlg::on_cbShowBookName_stateChanged(int s) {
@@ -1042,6 +1067,24 @@ void SettingsDlg::on_cbShowClock_stateChanged(int s) {
 
 void SettingsDlg::on_cbShowBattery_stateChanged(int s) {
     setCheck(PROP_SHOW_BATTERY, s);
+}
+
+void SettingsDlg::on_sbHeaderMarginH_valueChanged(int value) {
+    if (!initDone)
+        return;
+    m_props->setInt(PROP_PAGE_HEADER_MARGIN_H, value);
+}
+
+void SettingsDlg::on_sbHeaderMarginV_valueChanged(int value) {
+    if (!initDone)
+        return;
+    m_props->setInt(PROP_PAGE_HEADER_MARGIN_V, value);
+}
+
+void SettingsDlg::on_sbNavbarHeight_valueChanged(int value) {
+    if (!initDone)
+        return;
+    m_props->setInt(PROP_PAGE_HEADER_NAVBAR_H, value);
 }
 
 void SettingsDlg::on_cbShowFootNotes_stateChanged(int s) {

@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>433</width>
-    <height>715</height>
+    <height>902</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -30,7 +30,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabWindow">
       <property name="toolTip">
@@ -756,62 +756,161 @@
          <property name="title">
           <string>Header elements</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <layout class="QHBoxLayout" name="headerElementsHLayout">
           <item>
-           <widget class="QCheckBox" name="cbShowNavbar">
-            <property name="text">
-             <string>Navigation bar</string>
-            </property>
-           </widget>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QCheckBox" name="cbShowNavbar">
+              <property name="text">
+               <string>Navigation bar</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cbShowChapterMarks">
+              <property name="text">
+               <string>Chapter marks</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cbShowBookName">
+              <property name="text">
+               <string>Book name</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cbShowPageNumber">
+              <property name="text">
+               <string>Page number</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cbShowPageCount">
+              <property name="text">
+               <string>Page count</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cbShowPositionPercent">
+              <property name="text">
+               <string>Position percent</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cbShowClock">
+              <property name="text">
+               <string>Clock</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="cbShowBattery">
+              <property name="text">
+               <string>Battery status</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
-           <widget class="QCheckBox" name="cbShowChapterMarks">
-            <property name="text">
-             <string>Chapter marks</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="cbShowBookName">
-            <property name="text">
-             <string>Book name</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="cbShowPageNumber">
-            <property name="text">
-             <string>Page number</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="cbShowPageCount">
-            <property name="text">
-             <string>Page count</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="cbShowPositionPercent">
-            <property name="text">
-             <string>Position percent</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="cbShowClock">
-            <property name="text">
-             <string>Clock</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="cbShowBattery">
-            <property name="text">
-             <string>Battery status</string>
-            </property>
-           </widget>
+           <layout class="QFormLayout" name="headerMarginsFormLayout">
+            <item row="0" column="0">
+             <widget class="QLabel" name="lblHeaderMarginH">
+              <property name="toolTip">
+               <string>Left/right margin for header text and progress bar</string>
+              </property>
+              <property name="text">
+               <string>Horizontal margin</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QSpinBox" name="sbHeaderMarginH">
+              <property name="toolTip">
+               <string>Left/right margin for header text and progress bar</string>
+              </property>
+              <property name="minimum">
+               <number>0</number>
+              </property>
+              <property name="maximum">
+               <number>50</number>
+              </property>
+              <property name="value">
+               <number>5</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="lblHeaderMarginV">
+              <property name="toolTip">
+               <string>Top/bottom spacing around header content</string>
+              </property>
+              <property name="text">
+               <string>Vertical margin</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="sbHeaderMarginV">
+              <property name="toolTip">
+               <string>Top/bottom spacing around header content</string>
+              </property>
+              <property name="minimum">
+               <number>0</number>
+              </property>
+              <property name="maximum">
+               <number>20</number>
+              </property>
+              <property name="value">
+               <number>3</number>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="lblNavbarHeight">
+              <property name="toolTip">
+               <string>Height of chapter marks on the navigation bar</string>
+              </property>
+              <property name="text">
+               <string>Chapter mark height</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="sbNavbarHeight">
+              <property name="toolTip">
+               <string>Height of chapter marks on the navigation bar</string>
+              </property>
+              <property name="minimum">
+               <number>2</number>
+              </property>
+              <property name="maximum">
+               <number>10</number>
+              </property>
+              <property name="value">
+               <number>5</number>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <spacer name="headerMarginsVSpacer">
+              <property name="orientation">
+               <enum>Qt::Orientation::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -1141,6 +1240,12 @@
          </item>
          <item row="5" column="2">
           <widget class="QComboBox" name="cbImageInlineZoominScale">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>0</height>
+            </size>
+           </property>
            <item>
             <property name="text">
              <string>0</string>
@@ -1191,6 +1296,12 @@
          </item>
          <item row="6" column="2">
           <widget class="QComboBox" name="cbImageInlineZoomoutScale">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>0</height>
+            </size>
+           </property>
            <item>
             <property name="text">
              <string>0</string>
@@ -1241,6 +1352,12 @@
          </item>
          <item row="7" column="2">
           <widget class="QComboBox" name="cbImageBlockZoominScale">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>0</height>
+            </size>
+           </property>
            <item>
             <property name="text">
              <string>0</string>
@@ -1291,6 +1408,12 @@
          </item>
          <item row="8" column="2">
           <widget class="QComboBox" name="cbImageBlockZoomoutScale">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>0</height>
+            </size>
+           </property>
            <item>
             <property name="text">
              <string>0</string>
@@ -2010,8 +2133,8 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>399</width>
-              <height>617</height>
+              <width>389</width>
+              <height>772</height>
              </rect>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_9">
