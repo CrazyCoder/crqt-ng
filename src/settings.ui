@@ -30,7 +30,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabWindow">
       <property name="toolTip">
@@ -887,7 +887,7 @@
                <string>Height of chapter marks on the navigation bar</string>
               </property>
               <property name="minimum">
-               <number>2</number>
+               <number>3</number>
               </property>
               <property name="maximum">
                <number>10</number>
