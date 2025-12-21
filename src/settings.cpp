@@ -70,7 +70,7 @@ static int aa_variants[] = { font_aa_none, font_aa_gray };
 #endif
 #define AA_VARIANTS_SZ (sizeof(aa_variants) / sizeof(int))
 
-static int minspace_widths[] = { 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100 };
+
 
 static float font_gammas[] = { 0.30f, 0.35f, 0.40f, 0.45f, 0.50f, 0.55f, 0.60f, 0.65f, 0.70f, 0.75f, 0.80f,
                                0.85f, 0.90f, 0.95f, 0.98f, 1.00f, 1.02f, 1.05f, 1.10f, 1.15f, 1.20f, 1.25f,
@@ -441,19 +441,48 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
         interlineValue = 150;
     m_ui->sbInterlineSpace->setValue(interlineValue);
 
+    // PROP_FORMAT_SPACE_WIDTH_SCALE_PERCENT
+    int spaceWidthValue = m_props->getIntDef(PROP_FORMAT_SPACE_WIDTH_SCALE_PERCENT, 100);
+    // Clamp to valid range (10-500)
+    if (spaceWidthValue < 10)
+        spaceWidthValue = 10;
+    if (spaceWidthValue > 500)
+        spaceWidthValue = 500;
+    m_ui->sbSpaceWidth->setValue(spaceWidthValue);
+
     // PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT
-    QString v = QString("%1").arg(m_props->getIntDef(PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT, 70)) + "%";
-    QStringList mswitems;
-    for (int i = 0; i < (int)(sizeof(minspace_widths) / sizeof(int)); i++)
-        mswitems.append(QString("%1").arg(minspace_widths[i]) + "%");
-    m_ui->cbMinSpaceWidth->addItems(mswitems);
-    int mswi = m_ui->cbMinSpaceWidth->findText(v);
-    m_ui->cbMinSpaceWidth->setCurrentIndex(mswi >= 0 ? mswi : 2);
+    int minSpaceWidthValue = m_props->getIntDef(PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT, 70);
+    // Clamp to valid range (25-100)
+    if (minSpaceWidthValue < 25)
+        minSpaceWidthValue = 25;
+    if (minSpaceWidthValue > 100)
+        minSpaceWidthValue = 100;
+    m_ui->sbMinSpaceWidth->setValue(minSpaceWidthValue);
+
+    // PROP_FORMAT_MAX_ADDED_LETTER_SPACING_PERCENT
+    int maxLetterSpacingValue = m_props->getIntDef(PROP_FORMAT_MAX_ADDED_LETTER_SPACING_PERCENT, 0);
+    // Clamp to valid range (0-20)
+    if (maxLetterSpacingValue < 0)
+        maxLetterSpacingValue = 0;
+    if (maxLetterSpacingValue > 20)
+        maxLetterSpacingValue = 20;
+    m_ui->sbMaxLetterSpacing->setValue(maxLetterSpacingValue);
+
+    // PROP_FORMAT_UNUSED_SPACE_THRESHOLD_PERCENT
+    int unusedSpaceThresholdValue = m_props->getIntDef(PROP_FORMAT_UNUSED_SPACE_THRESHOLD_PERCENT, 5);
+    // Clamp to valid range (0-20)
+    if (unusedSpaceThresholdValue < 0)
+        unusedSpaceThresholdValue = 0;
+    if (unusedSpaceThresholdValue > 20)
+        unusedSpaceThresholdValue = 20;
+    m_ui->sbUnusedSpaceThreshold->setValue(unusedSpaceThresholdValue);
+    // Disable unused space threshold when max letter spacing is 0
+    m_ui->sbUnusedSpaceThreshold->setEnabled(maxLetterSpacingValue > 0);
 
     optionToUi(PROP_TEXTLANG_EMBEDDED_LANGS_ENABLED, m_ui->cbMultiLang);
     optionToUi(PROP_TEXTLANG_HYPHENATION_ENABLED, m_ui->cbEnableHyph);
     int hi = -1;
-    v = m_props->getStringDef(PROP_HYPHENATION_DICT, "@algorithm"); //HYPH_DICT_ID_ALGORITHM;
+    QString v = m_props->getStringDef(PROP_HYPHENATION_DICT, "@algorithm"); //HYPH_DICT_ID_ALGORITHM;
     for (int i = 0; i < HyphMan::getDictList()->length(); i++) {
         HyphDictionary* item = HyphMan::getDictList()->get(i);
         if (v == cr2qt(item->getFilename()) || v == cr2qt(item->getId()))
@@ -1338,10 +1367,33 @@ void SettingsDlg::on_sbInterlineSpace_valueChanged(int value) {
     updateStyleSample();
 }
 
-void SettingsDlg::on_cbMinSpaceWidth_currentIndexChanged(int index) {
+void SettingsDlg::on_sbSpaceWidth_valueChanged(int value) {
     if (!initDone)
         return;
-    m_props->setInt(PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT, minspace_widths[index]);
+    m_props->setInt(PROP_FORMAT_SPACE_WIDTH_SCALE_PERCENT, value);
+    updateStyleSample();
+}
+
+void SettingsDlg::on_sbMinSpaceWidth_valueChanged(int value) {
+    if (!initDone)
+        return;
+    m_props->setInt(PROP_FORMAT_MIN_SPACE_CONDENSING_PERCENT, value);
+    updateStyleSample();
+}
+
+void SettingsDlg::on_sbUnusedSpaceThreshold_valueChanged(int value) {
+    if (!initDone)
+        return;
+    m_props->setInt(PROP_FORMAT_UNUSED_SPACE_THRESHOLD_PERCENT, value);
+    updateStyleSample();
+}
+
+void SettingsDlg::on_sbMaxLetterSpacing_valueChanged(int value) {
+    if (!initDone)
+        return;
+    m_props->setInt(PROP_FORMAT_MAX_ADDED_LETTER_SPACING_PERCENT, value);
+    // Disable unused space threshold when max letter spacing is 0
+    m_ui->sbUnusedSpaceThreshold->setEnabled(value > 0);
     updateStyleSample();
 }
 

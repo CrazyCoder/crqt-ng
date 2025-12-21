@@ -203,7 +203,10 @@ private slots:
     void on_cbStartupAction_currentIndexChanged(int index);
     void on_cbHyphenation_currentIndexChanged(int index);
     void on_sbInterlineSpace_valueChanged(int value);
-    void on_cbMinSpaceWidth_currentIndexChanged(int index);
+    void on_sbSpaceWidth_valueChanged(int value);
+    void on_sbMinSpaceWidth_valueChanged(int value);
+    void on_sbUnusedSpaceThreshold_valueChanged(int value);
+    void on_sbMaxLetterSpacing_valueChanged(int value);
     void on_cbTextFontSize_currentTextChanged(QString);
     void on_cbTextFontFace_currentTextChanged(QString);
     void on_cbTitleFontSize_currentTextChanged(QString);
