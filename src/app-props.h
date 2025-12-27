@@ -49,5 +49,6 @@
 #define PROP_APP_SETTINGS_TAB                  "crui.app.settings.tab"
 #define PROP_CSS_USE_GENERATED                 "css.use.generated"
 #define PROP_CSS_CURRENT_TEMPLATE              "css.current.template"
+#define CSS_EXPANDED_SUFFIX                    "-expanded.css"
 
 #endif // APP_PROPS_H

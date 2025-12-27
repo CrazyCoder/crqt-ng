@@ -1685,7 +1685,7 @@ void SettingsDlg::on_cbMultiLang_stateChanged(int state) {
 
 void SettingsDlg::on_cbEnableHyph_stateChanged(int state) {
     setCheck(PROP_TEXTLANG_HYPHENATION_ENABLED, state);
-    // don't update preview to not change static field TextLangMan::_hyphenation_enabled too early!
+    updateStyleSample();
 }
 
 void SettingsDlg::on_btnFallbackMan_clicked() {
@@ -1780,19 +1780,20 @@ void SettingsDlg::on_cbUseGeneratedCSS_toggled(bool checked) {
 
     // If enabling expanded CSS, ensure the expanded file exists for the current template
     if (checked) {
-        QString dataDir = cr2qt(getMainDataDir());
+        QString cssDir = cr2qt(getMainDataDir()) + "/";
         QString currentTemplate = m_props->getStringDef(PROP_CSS_CURRENT_TEMPLATE, "fb2.css");
 
-        // Generate expanded filename from template name
-        QString baseName = currentTemplate;
-        if (baseName.endsWith(".css"))
-            baseName.chop(4);
-        QString expandedFile = baseName + "-expanded.css";
-        QString expandedPath = dataDir + "/" + expandedFile;
+        // Check if expanded CSS already exists using resolveCssPath
+        QString resolvedPath = CR3View::resolveCssPath(cssDir, currentTemplate, true);
+        bool expandedExists = resolvedPath.endsWith(CSS_EXPANDED_SUFFIX);
 
         // If expanded CSS file doesn't exist, generate it silently
-        if (!QFile::exists(expandedPath)) {
-            QString templatePath = dataDir + "/" + currentTemplate;
+        if (!expandedExists) {
+            QString baseName = currentTemplate;
+            if (baseName.endsWith(".css"))
+                baseName.chop(4);
+            QString expandedPath = cssDir + baseName + CSS_EXPANDED_SUFFIX;
+            QString templatePath = cssDir + currentTemplate;
             lString32 inPath = qt2cr(templatePath);
             lString32 outPath = qt2cr(expandedPath);
             CRPropRef styleProps = qt2cr(m_props);
@@ -1822,7 +1823,7 @@ void SettingsDlg::on_btnGenerateCSS_clicked() {
     // Filter out already-expanded files
     QStringList templateFiles;
     for (const QString& file : cssFiles) {
-        if (!file.endsWith("-expanded.css")) {
+        if (!file.endsWith(CSS_EXPANDED_SUFFIX)) {
             templateFiles.append(file);
         }
     }
@@ -1854,7 +1855,7 @@ void SettingsDlg::on_btnGenerateCSS_clicked() {
     QString baseName = selectedFile;
     if (baseName.endsWith(".css"))
         baseName.chop(4);
-    QString outputFile = baseName + "-expanded.css";
+    QString outputFile = baseName + CSS_EXPANDED_SUFFIX;
     QString outputPath = dataDir + "/" + outputFile;
 
     // Check if file exists
@@ -1898,7 +1899,7 @@ void SettingsDlg::on_btnExpandAllCSS_clicked() {
     // Filter out already-expanded files
     QStringList templateFiles;
     for (const QString& file : cssFiles) {
-        if (!file.endsWith("-expanded.css")) {
+        if (!file.endsWith(CSS_EXPANDED_SUFFIX)) {
             templateFiles.append(file);
         }
     }
@@ -1930,7 +1931,7 @@ void SettingsDlg::on_btnExpandAllCSS_clicked() {
         QString baseName = templateFile;
         if (baseName.endsWith(".css"))
             baseName.chop(4);
-        QString outputFile = baseName + "-expanded.css";
+        QString outputFile = baseName + CSS_EXPANDED_SUFFIX;
 
         QString templatePath = dataDir + "/" + templateFile;
         QString outputPath = dataDir + "/" + outputFile;

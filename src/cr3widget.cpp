@@ -1075,11 +1075,11 @@ QString CR3View::resolveCssPath(const QString& cssDir, const QString& templateNa
         QString baseName = templateName;
         if (baseName.endsWith(".css"))
             baseName.chop(4);
-        QString expandedPath = cssDir + baseName + "-expanded.css";
+        QString expandedPath = cssDir + baseName + CSS_EXPANDED_SUFFIX;
         if (QFileInfo(expandedPath).exists())
             return expandedPath;
         // Fallback to fb2-expanded.css
-        QString fb2ExpandedPath = cssDir + "fb2-expanded.css";
+        QString fb2ExpandedPath = cssDir + "fb2" + CSS_EXPANDED_SUFFIX;
         if (QFileInfo(fb2ExpandedPath).exists())
             return fb2ExpandedPath;
         CRLog::warn("Generated CSS file not found, falling back to template");
@@ -1705,7 +1705,7 @@ void CR3View::OnLoadFileFormatDetected(doc_format_t fileFormat) {
 
         // Resolve CSS path (handles expanded vs template, with fallbacks)
         QString cssPath = resolveCssPath(_cssDir, filename, useGenerated);
-        bool isExpanded = useGenerated && cssPath.endsWith("-expanded.css");
+        bool isExpanded = useGenerated && cssPath.endsWith(CSS_EXPANDED_SUFFIX);
 
         if (isExpanded) {
             CRLog::info("Using generated CSS file: %s", QFileInfo(cssPath).fileName().toUtf8().constData());
