@@ -84,6 +84,7 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     , m_exporting(false)
     , m_exportCallback(nullptr)
     , m_exportFilePath()
+    , m_batchMode(false)
 {
     setAttribute(Qt::WA_DeleteOnClose);  // Ensure destructor runs when dialog closes
     m_ui->setupUi(this);
@@ -180,6 +181,14 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     // Connect output path
     connect(m_ui->btnBrowse, &QPushButton::clicked,
             this, &XtExportDlg::onBrowseOutput);
+
+    // Connect mode radio buttons
+    connect(m_ui->rbSingleFile, &QRadioButton::toggled, this, [this](bool checked) {
+        if (checked) setMode(false);
+    });
+    connect(m_ui->rbBatchExport, &QRadioButton::toggled, this, [this](bool checked) {
+        if (checked) setMode(true);
+    });
 
     // Connect actions
     connect(m_ui->btnExport, &QPushButton::clicked,
@@ -1382,4 +1391,26 @@ void XtExportDlg::performExport()
 
     // Clear the export file path
     m_exportFilePath.clear();
+}
+
+void XtExportDlg::setMode(bool batchMode)
+{
+    if (m_batchMode == batchMode)
+        return;
+
+    m_batchMode = batchMode;
+    onModeChanged();
+}
+
+void XtExportDlg::onModeChanged()
+{
+    // Update Export button text
+    m_ui->btnExport->setText(m_batchMode ? tr("Export All") : tr("Export"));
+
+    // TODO Phase 2: Add UI visibility switching for batch-specific controls
+    // - Page Range visibility
+    // - Metadata vs Batch Options
+    // - Source directory
+    // - Progress bars layout
+    // - Output group title
 }

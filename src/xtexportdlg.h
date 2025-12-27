@@ -319,6 +319,18 @@ private:
      */
     void performExport();
 
+    // Batch mode
+    /**
+     * @brief Set the export mode (single file or batch)
+     * @param batchMode true for batch export, false for single file
+     */
+    void setMode(bool batchMode);
+
+    /**
+     * @brief Handle mode change - update UI visibility and button text
+     */
+    void onModeChanged();
+
     Ui::XtExportDlg* m_ui;
     LVDocView* m_docView;
     XtExportProfileManager* m_profileManager;
@@ -337,6 +349,9 @@ private:
     bool m_exporting;                   ///< true during export operation
     QtExportCallback* m_exportCallback; ///< Callback for progress and cancellation
     QString m_exportFilePath;           ///< Full path to export file (for cleanup on cancel)
+
+    // Batch mode state
+    bool m_batchMode;                   ///< true when in batch export mode
 };
 
 #endif // XTEXPORTDLG_H

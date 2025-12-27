@@ -24,6 +24,40 @@
   </property>
   <layout class="QVBoxLayout" name="mainLayout">
    <item>
+    <layout class="QHBoxLayout" name="modeLayout">
+     <item>
+      <widget class="QRadioButton" name="rbSingleFile">
+       <property name="text">
+        <string>Single File</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="rbBatchExport">
+       <property name="text">
+        <string>Batch Export</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="modeSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="panelsLayout">
      <item>
       <widget class="QGroupBox" name="settingsGroup">
