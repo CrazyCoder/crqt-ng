@@ -23,6 +23,7 @@
 #include "previewwidget.h"
 #include "xtexportprofile.h"
 #include "mainwindow.h"
+#include "cr3widget.h"
 #include "crqtutil.h"
 
 #include <lvdocview.h>
@@ -40,11 +41,13 @@
 #include <QCloseEvent>
 #include <QCoreApplication>
 #include <QRegularExpression>
+#include <QDesktopServices>
+#include <QPushButton>
+#include <QUrl>
 
 // Default file mask for batch mode - common e-book formats
 static const QString DEFAULT_FILE_MASK =
-    "*.epub;*.fb2;*.fb3;*.doc;*.docx;*.rtf;*.txt;*.html;*.htm;"
-    "*.mobi;*.azw;*.azw3;*.pdb;*.prc;*.chm;*.tcr;*.pml";
+    "*.epub;*.fb2;*fb2.zip";
 
 // =============================================================================
 // QtExportCallback implementation
@@ -92,6 +95,15 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     , m_exportCallback(nullptr)
     , m_exportFilePath()
     , m_batchMode(false)
+    , m_batchCurrentIndex(0)
+    , m_batchSuccessCount(0)
+    , m_batchSkipCount(0)
+    , m_batchErrorCount(0)
+    , m_batchOverwriteAll(false)
+    , m_batchSkipAll(false)
+    , m_originalWindowTitle()
+    , m_originalDocumentPath()
+    , m_originalPreviewPage(0)
 {
     setAttribute(Qt::WA_DeleteOnClose);  // Ensure destructor runs when dialog closes
     m_ui->setupUi(this);
@@ -214,6 +226,11 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
 
     // Populate title and author from document metadata
     loadDocumentMetadata();
+
+    // Store original document path for restoring after batch export
+    if (m_docView) {
+        m_originalDocumentPath = cr2qt(m_docView->getFileName());
+    }
 
     // Load batch mode settings (must be before computeDefaultOutputPath
     // as batch mode affects output path interpretation)
@@ -445,14 +462,7 @@ QString XtExportDlg::computeExportFilename()
         baseName = "export";
     }
 
-    // Get extension from current profile
-    QString extension = "xtc";  // default
-    XtExportProfile* profile = m_profileManager->profileByIndex(m_ui->cbProfile->currentIndex());
-    if (profile && !profile->extension.isEmpty()) {
-        extension = profile->extension;
-    }
-
-    return baseName + '.' + extension;
+    return baseName + '.' + currentProfileExtension();
 }
 
 QString XtExportDlg::computeDefaultOutputPath()
@@ -533,6 +543,15 @@ ImageDitherMode XtExportDlg::resolveEffectiveDitherMode() const
         }
         default: return IMAGE_DITHER_NONE;
     }
+}
+
+QString XtExportDlg::currentProfileExtension() const
+{
+    XtExportProfile* profile = m_profileManager->profileByIndex(m_ui->cbProfile->currentIndex());
+    if (profile && !profile->extension.isEmpty()) {
+        return profile->extension;
+    }
+    return QStringLiteral("xtc");
 }
 
 void XtExportDlg::resizeMainWindow()
@@ -851,39 +870,59 @@ void XtExportDlg::onPreviewZoomChangeRequested(int delta)
 void XtExportDlg::onBrowseOutput()
 {
     QString currentPath = m_ui->leOutputPath->text();
-    QString startPath;
 
-    // Determine starting path
-    if (!currentPath.isEmpty()) {
-        QFileInfo fi(currentPath);
-        if (fi.isDir()) {
-            // If current path is a directory, start there with computed filename
+    if (m_batchMode) {
+        // Batch mode: directory selection
+        QString startPath;
+
+        if (!currentPath.isEmpty() && QDir(currentPath).exists()) {
             startPath = currentPath;
-            if (!startPath.endsWith('/') && !startPath.endsWith('\\')) {
-                startPath += '/';
-            }
-            startPath += computeExportFilename();
+        } else if (!m_ui->leSourcePath->text().isEmpty()) {
+            startPath = m_ui->leSourcePath->text();
+        } else if (!m_lastDirectory.isEmpty()) {
+            startPath = m_lastDirectory;
         } else {
-            // Use existing full path
-            startPath = currentPath;
+            startPath = QDir::homePath();
+        }
+
+        QString directory = QFileDialog::getExistingDirectory(
+            this,
+            tr("Select Output Directory"),
+            startPath,
+            QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+
+        if (!directory.isEmpty()) {
+            m_ui->leOutputPath->setText(QDir::toNativeSeparators(directory));
         }
     } else {
-        // No current path, use default
-        startPath = computeDefaultOutputPath();
-    }
+        // Single file mode: file selection
+        QString startPath;
 
-    // Get extension from current profile for filter
-    QString extension = "xtc";
-    XtExportProfile* profile = m_profileManager->profileByIndex(m_ui->cbProfile->currentIndex());
-    if (profile && !profile->extension.isEmpty()) {
-        extension = profile->extension;
-    }
+        // Determine starting path
+        if (!currentPath.isEmpty()) {
+            QFileInfo fi(currentPath);
+            if (fi.isDir()) {
+                // If current path is a directory, start there with computed filename
+                startPath = currentPath;
+                if (!startPath.endsWith('/') && !startPath.endsWith('\\')) {
+                    startPath += '/';
+                }
+                startPath += computeExportFilename();
+            } else {
+                // Use existing full path
+                startPath = currentPath;
+            }
+        } else {
+            // No current path, use default
+            startPath = computeDefaultOutputPath();
+        }
 
-    QString filter = tr("XT* Files (*.%1);;All Files (*)").arg(extension);
-    QString filename = QFileDialog::getSaveFileName(this, tr("Export to..."), startPath, filter);
+        QString filter = tr("XT* Files (*.%1);;All Files (*)").arg(currentProfileExtension());
+        QString filename = QFileDialog::getSaveFileName(this, tr("Export to..."), startPath, filter);
 
-    if (!filename.isEmpty()) {
-        m_ui->leOutputPath->setText(QDir::toNativeSeparators(filename));
+        if (!filename.isEmpty()) {
+            m_ui->leOutputPath->setText(QDir::toNativeSeparators(filename));
+        }
     }
 }
 
@@ -916,10 +955,15 @@ void XtExportDlg::onExport()
     if (m_exporting)
         return;
 
-    if (!validateExportSettings())
-        return;
-
-    performExport();
+    if (m_batchMode) {
+        // Batch mode: validate and perform batch export
+        performBatchExport();
+    } else {
+        // Single file mode: existing behavior
+        if (!validateExportSettings())
+            return;
+        performExport();
+    }
 }
 
 void XtExportDlg::onCancel()
@@ -1272,6 +1316,7 @@ void XtExportDlg::loadDocumentMetadata()
 void XtExportDlg::updateExportProgress(int percent)
 {
     m_ui->progressBar->setValue(percent);
+    m_ui->lblCurrentPercent->setText(QString("%1%").arg(percent));
 }
 
 void XtExportDlg::setExporting(bool exporting)
@@ -1312,22 +1357,30 @@ void XtExportDlg::setExporting(bool exporting)
             m_ui->lblFilesProgress->setVisible(true);
             m_ui->progressBarFiles->setVisible(true);
             m_ui->progressBarFiles->setValue(0);
+            m_ui->lblFilesCount->setVisible(true);
+            m_ui->lblFilesCount->setText("0/0");
 
             m_ui->lblCurrentProgress->setVisible(true);
             m_ui->progressBar->setVisible(true);
             m_ui->progressBar->setValue(0);
+            m_ui->lblCurrentPercent->setVisible(true);
+            m_ui->lblCurrentPercent->setText("0%");
         } else {
             // Single file mode: show only current progress bar (replacing output row)
             m_ui->lblCurrentProgress->setVisible(true);
             m_ui->progressBar->setVisible(true);
             m_ui->progressBar->setValue(0);
+            m_ui->lblCurrentPercent->setVisible(true);
+            m_ui->lblCurrentPercent->setText("0%");
         }
     } else {
-        // Hide all progress bars
+        // Hide all progress bars and labels
         m_ui->lblFilesProgress->setVisible(false);
         m_ui->progressBarFiles->setVisible(false);
+        m_ui->lblFilesCount->setVisible(false);
         m_ui->lblCurrentProgress->setVisible(false);
         m_ui->progressBar->setVisible(false);
+        m_ui->lblCurrentPercent->setVisible(false);
 
         // Restore path controls based on mode
         m_ui->lblOutput->setVisible(true);
@@ -1515,8 +1568,30 @@ void XtExportDlg::onModeChanged()
     m_ui->leOutputPath->setPlaceholderText(
         m_batchMode ? tr("Output directory path...") : tr("Output file path..."));
 
-    // Preview remains visible in both modes (shows settings preview)
-    // Preview navigation remains functional for previewing export settings
+    // Convert output path between file and directory based on mode
+    QString currentOutput = m_ui->leOutputPath->text();
+    if (!currentOutput.isEmpty()) {
+        QFileInfo fi(currentOutput);
+        if (m_batchMode) {
+            // Switching to batch mode: convert file path to directory
+            if (!fi.isDir()) {
+                // Extract directory from file path
+                QString dir = fi.absolutePath();
+                m_ui->leOutputPath->setText(QDir::toNativeSeparators(dir));
+            }
+        } else {
+            // Switching to single file mode: convert directory to file path
+            if (fi.isDir()) {
+                // Append computed filename to directory
+                QString path = currentOutput;
+                if (!path.endsWith('/') && !path.endsWith('\\')) {
+                    path += '/';
+                }
+                path += computeExportFilename();
+                m_ui->leOutputPath->setText(QDir::toNativeSeparators(path));
+            }
+        }
+    }
 }
 
 void XtExportDlg::loadBatchSettings()
@@ -1626,7 +1701,7 @@ void XtExportDlg::computeDefaultBatchPaths()
 }
 
 // =============================================================================
-// Directory scanning for batch mode (Phase 4)
+// Directory scanning for batch mode
 // =============================================================================
 
 QStringList XtExportDlg::parseFileMask() const
@@ -1713,13 +1788,7 @@ QString XtExportDlg::computeBatchOutputPath(const QString& sourceFile)
 
     QFileInfo fi(sourceFile);
     QString baseName = fi.completeBaseName();
-
-    // Get extension from profile
-    QString extension = "xtc";
-    XtExportProfile* profile = m_profileManager->profileByIndex(m_ui->cbProfile->currentIndex());
-    if (profile && !profile->extension.isEmpty()) {
-        extension = profile->extension;
-    }
+    QString extension = currentProfileExtension();
 
     QString outputPath;
 
@@ -1760,4 +1829,348 @@ QString XtExportDlg::resolveFilenameCollision(const QString& basePath)
 
     m_usedOutputPaths.insert(newPath);
     return newPath;
+}
+
+// =============================================================================
+// Batch export execution
+// =============================================================================
+
+bool XtExportDlg::validateBatchSettings()
+{
+    // Check source directory
+    QString sourceDir = m_ui->leSourcePath->text();
+    if (sourceDir.isEmpty()) {
+        QMessageBox::warning(this, tr("Batch Export"),
+            tr("Please select a source directory."));
+        m_ui->leSourcePath->setFocus();
+        return false;
+    }
+
+    if (!QDir(sourceDir).exists()) {
+        QMessageBox::warning(this, tr("Batch Export"),
+            tr("Source directory does not exist:\n%1").arg(sourceDir));
+        m_ui->leSourcePath->setFocus();
+        return false;
+    }
+
+    // Check output directory
+    QString outputDir = m_ui->leOutputPath->text();
+    if (outputDir.isEmpty()) {
+        QMessageBox::warning(this, tr("Batch Export"),
+            tr("Please select an output directory."));
+        m_ui->leOutputPath->setFocus();
+        return false;
+    }
+
+    return true;
+}
+
+bool XtExportDlg::checkOverwriteFile(const QString& outputPath)
+{
+    if (!QFile::exists(outputPath)) {
+        return true;  // No conflict
+    }
+
+    // Check runtime flags first (from "All" buttons in dialog)
+    if (m_batchOverwriteAll)
+        return true;
+    if (m_batchSkipAll)
+        return false;
+
+    int overwriteMode = m_ui->cbOverwriteMode->currentIndex();
+
+    switch (overwriteMode) {
+        case 0:  // Overwrite all
+            return true;
+        case 2:  // Skip existing
+            return false;
+        case 1:  // Ask for each file
+            return showOverwriteDialog(outputPath);
+        default:
+            return true;
+    }
+}
+
+bool XtExportDlg::showOverwriteDialog(const QString& outputPath)
+{
+    QMessageBox msgBox(this);
+    msgBox.setWindowTitle(tr("File Already Exists"));
+    msgBox.setText(tr("The file already exists:\n%1\n\nWhat would you like to do?").arg(outputPath));
+
+    QPushButton* btnOverwrite = msgBox.addButton(tr("Overwrite"), QMessageBox::AcceptRole);
+    QPushButton* btnSkip = msgBox.addButton(tr("Skip"), QMessageBox::RejectRole);
+    QPushButton* btnOverwriteAll = msgBox.addButton(tr("Overwrite All"), QMessageBox::AcceptRole);
+    QPushButton* btnSkipAll = msgBox.addButton(tr("Skip All"), QMessageBox::RejectRole);
+    QPushButton* btnCancel = msgBox.addButton(tr("Cancel"), QMessageBox::DestructiveRole);
+
+    msgBox.setDefaultButton(btnSkip);
+    msgBox.exec();
+
+    QAbstractButton* clicked = msgBox.clickedButton();
+
+    if (clicked == btnOverwrite) {
+        return true;
+    } else if (clicked == btnSkip) {
+        return false;
+    } else if (clicked == btnOverwriteAll) {
+        m_batchOverwriteAll = true;
+        return true;
+    } else if (clicked == btnSkipAll) {
+        m_batchSkipAll = true;
+        return false;
+    } else if (clicked == btnCancel) {
+        // Set cancellation flag
+        if (m_exportCallback) {
+            m_exportCallback->setCancelled(true);
+        }
+        return false;
+    }
+
+    return false;
+}
+
+bool XtExportDlg::loadDocumentForBatch(const QString& filePath)
+{
+    // Access MainWindow to get the CR3View
+    auto* mainWin = qobject_cast<MainWindow*>(parent());
+    if (!mainWin)
+        return false;
+
+    CR3View* crView = mainWin->currentCRView();
+    if (!crView)
+        return false;
+
+    // Load document
+    bool success = crView->loadDocument(filePath);
+
+    if (success) {
+        // Update our m_docView pointer to the new document's view
+        m_docView = crView->getDocView();
+    }
+
+    // Process events to ensure UI updates
+    QCoreApplication::processEvents();
+
+    return success;
+}
+
+bool XtExportDlg::exportSingleFile(const QString& outputPath)
+{
+    if (!m_docView)
+        return false;
+
+    // Create and configure exporter
+    XtcExporter exporter;
+    configureExporter(exporter);
+
+    // Full document export (no preview mode)
+    exporter.setPreviewPage(-1);
+
+    // In batch mode, export all pages (0 to max)
+    exporter.setPageRange(0, INT_MAX);
+
+    // Set callback for progress updates
+    exporter.setProgressCallback(m_exportCallback);
+
+    // Export
+    lString32 output = qt2cr(outputPath);
+    return exporter.exportDocument(m_docView, output.c_str());
+}
+
+void XtExportDlg::reloadOriginalDocument()
+{
+    if (m_originalDocumentPath.isEmpty())
+        return;
+
+    auto* mainWin = qobject_cast<MainWindow*>(parent());
+    if (!mainWin)
+        return;
+
+    CR3View* crView = mainWin->currentCRView();
+    if (!crView)
+        return;
+
+    crView->loadDocument(m_originalDocumentPath);
+
+    // Update our m_docView pointer
+    m_docView = crView->getDocView();
+}
+
+void XtExportDlg::showBatchSummary()
+{
+    QString outputDir = m_ui->leOutputPath->text();
+    bool wasCancelled = m_exportCallback && m_exportCallback->wasCancelled();
+
+    QMessageBox msgBox(this);
+    msgBox.setWindowTitle(tr("Batch Export Complete"));
+
+    QString summary;
+    if (wasCancelled) {
+        summary = tr("Export cancelled.\n\n");
+    }
+
+    summary += tr("Processed: %1 files\n"
+                  "Successful: %2\n"
+                  "Skipped: %3\n"
+                  "Failed: %4\n\n"
+                  "Output directory:\n%5")
+        .arg(m_batchCurrentIndex + 1)  // Files processed (including current partial)
+        .arg(m_batchSuccessCount)
+        .arg(m_batchSkipCount)
+        .arg(m_batchErrorCount)
+        .arg(outputDir);
+
+    msgBox.setText(summary);
+
+    QPushButton* btnOpenFolder = msgBox.addButton(tr("Open Folder"), QMessageBox::ActionRole);
+    QPushButton* btnOk = msgBox.addButton(QMessageBox::Ok);
+
+    msgBox.setDefaultButton(btnOk);
+    msgBox.exec();
+
+    if (msgBox.clickedButton() == btnOpenFolder) {
+        QDesktopServices::openUrl(QUrl::fromLocalFile(outputDir));
+    }
+}
+
+void XtExportDlg::performBatchExport()
+{
+    // Validate settings first
+    if (!validateBatchSettings())
+        return;
+
+    // Scan source directory
+    scanSourceDirectory();
+    if (m_batchFiles.isEmpty()) {
+        return;
+    }
+
+    // Validate/create output directory
+    QString outputDir = m_ui->leOutputPath->text();
+    QDir dir(outputDir);
+    if (!dir.exists()) {
+        if (!dir.mkpath(".")) {
+            QMessageBox::critical(this, tr("Batch Export"),
+                tr("Could not create output directory:\n%1").arg(outputDir));
+            return;
+        }
+    }
+
+    // Initialize state
+    m_batchCurrentIndex = 0;
+    m_batchSuccessCount = 0;
+    m_batchSkipCount = 0;
+    m_batchErrorCount = 0;
+    m_batchOverwriteAll = false;
+    m_batchSkipAll = false;
+    m_usedOutputPaths.clear();
+
+    // Store original title and preview page
+    m_originalWindowTitle = windowTitle();
+    m_originalPreviewPage = m_currentPreviewPage;
+
+    // Create callback
+    m_exportCallback = new QtExportCallback(this);
+
+    // Enter exporting state
+    setExporting(true);
+
+    // Initialize files progress bar
+    m_ui->progressBarFiles->setMaximum(m_batchFiles.size());
+    m_ui->progressBarFiles->setValue(0);
+    m_ui->lblFilesCount->setText(QString("0/%1").arg(m_batchFiles.size()));
+
+    // Export loop
+    for (int i = 0; i < m_batchFiles.size(); ++i) {
+        if (m_exportCallback->wasCancelled()) {
+            break;
+        }
+
+        m_batchCurrentIndex = i;
+        QString sourceFile = m_batchFiles[i];
+        QFileInfo fi(sourceFile);
+
+        // Update window title
+        setWindowTitle(QString("%1 - %2 (%3/%4)")
+            .arg(m_originalWindowTitle)
+            .arg(fi.fileName())
+            .arg(i + 1)
+            .arg(m_batchFiles.size()));
+
+        // Update files progress
+        m_ui->progressBarFiles->setValue(i);
+        m_ui->lblFilesCount->setText(QString("%1/%2").arg(i).arg(m_batchFiles.size()));
+
+        // Compute output path
+        QString outputPath = computeBatchOutputPath(sourceFile);
+
+        // Check overwrite
+        if (!checkOverwriteFile(outputPath)) {
+            if (m_exportCallback->wasCancelled()) {
+                break;  // Cancel was clicked in overwrite dialog
+            }
+            m_batchSkipCount++;
+            continue;
+        }
+
+        // Reset current progress
+        m_ui->progressBar->setValue(0);
+
+        // Load document
+        if (!loadDocumentForBatch(sourceFile)) {
+            m_batchErrorCount++;
+            continue;
+        }
+
+        // Update preview with new document (always show first page in batch mode)
+        m_currentPreviewPage = 0;
+        m_updatingControls = true;
+        m_ui->sbPreviewPage->setValue(1);  // SpinBox is 1-based
+        m_updatingControls = false;
+        renderPreview();
+
+        // Export the document
+        bool success = exportSingleFile(outputPath);
+
+        if (m_exportCallback->wasCancelled()) {
+            // Delete partial file
+            QFile::remove(outputPath);
+            break;
+        }
+
+        if (success) {
+            m_batchSuccessCount++;
+        } else {
+            m_batchErrorCount++;
+            // Delete partial file on error
+            QFile::remove(outputPath);
+        }
+    }
+
+    // Finalize files progress
+    m_ui->progressBarFiles->setValue(m_batchFiles.size());
+    m_ui->lblFilesCount->setText(QString("%1/%1").arg(m_batchFiles.size()));
+
+    // Restore original title
+    setWindowTitle(m_originalWindowTitle);
+
+    // Show summary before cleanup (callback is still available)
+    showBatchSummary();
+
+    // Clean up
+    delete m_exportCallback;
+    m_exportCallback = nullptr;
+
+    // Exit exporting state
+    setExporting(false);
+
+    // Reload original document and restore preview state
+    reloadOriginalDocument();
+
+    // Restore original preview page
+    m_currentPreviewPage = m_originalPreviewPage;
+    m_updatingControls = true;
+    m_ui->sbPreviewPage->setValue(m_currentPreviewPage + 1);  // SpinBox is 1-based
+    m_updatingControls = false;
+    renderPreview();
 }

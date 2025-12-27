@@ -44,6 +44,7 @@ public:
     ~MainWindow();
     CRPropRef getSettings() { return _tabs.getSettings(); }
     void resizeDocViewToSize(int width, int height);
+    CR3View* currentCRView() const;
 private:
     Ui::MainWindowClass* ui;
     TabsCollection _tabs;
@@ -53,7 +54,6 @@ private:
     TabData createNewDocTabWidget();
     void addNewDocTab();
     void closeDocTab(int index);
-    CR3View* currentCRView() const;
     void syncTabWidget(const QString& currentDocument = QString());
     QString openFileDialogImpl();
     bool isExternalLink(const QString& href);

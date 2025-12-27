@@ -215,6 +215,12 @@ private:
      */
     ImageDitherMode resolveEffectiveDitherMode() const;
 
+    /**
+     * @brief Get file extension from current profile
+     * @return Extension string (e.g., "xtc", "xtch"), defaults to "xtc"
+     */
+    QString currentProfileExtension() const;
+
     void resizeMainWindow();
 
     /**
@@ -404,6 +410,60 @@ private:
      */
     QString resolveFilenameCollision(const QString& basePath);
 
+    // Batch export execution (Phase 5)
+
+    /**
+     * @brief Validate batch export settings before starting
+     * @return true if settings are valid, false otherwise (shows error message)
+     */
+    bool validateBatchSettings();
+
+    /**
+     * @brief Perform batch export of all matching files
+     *
+     * Scans source directory, loads each document, exports it,
+     * and shows summary dialog when complete.
+     */
+    void performBatchExport();
+
+    /**
+     * @brief Check if a file should be overwritten based on overwrite mode
+     * @param outputPath Path to the output file
+     * @return true if file should be overwritten/created, false to skip
+     */
+    bool checkOverwriteFile(const QString& outputPath);
+
+    /**
+     * @brief Show overwrite confirmation dialog with multiple options
+     * @param outputPath Path to the existing file
+     * @return true to overwrite, false to skip
+     */
+    bool showOverwriteDialog(const QString& outputPath);
+
+    /**
+     * @brief Load a document for batch export
+     * @param filePath Path to the document file
+     * @return true if document was loaded successfully
+     */
+    bool loadDocumentForBatch(const QString& filePath);
+
+    /**
+     * @brief Export a single file (used by batch export)
+     * @param outputPath Path to the output file
+     * @return true if export was successful
+     */
+    bool exportSingleFile(const QString& outputPath);
+
+    /**
+     * @brief Reload the original document after batch export
+     */
+    void reloadOriginalDocument();
+
+    /**
+     * @brief Show batch export summary dialog
+     */
+    void showBatchSummary();
+
     Ui::XtExportDlg* m_ui;
     LVDocView* m_docView;
     XtExportProfileManager* m_profileManager;
@@ -427,6 +487,17 @@ private:
     bool m_batchMode;                   ///< true when in batch export mode
     QStringList m_batchFiles;           ///< List of files to export in batch mode
     QSet<QString> m_usedOutputPaths;    ///< Track used output paths for collision resolution
+
+    // Batch export execution state (Phase 5)
+    int m_batchCurrentIndex;            ///< Index of currently exporting file
+    int m_batchSuccessCount;            ///< Number of successful exports
+    int m_batchSkipCount;               ///< Number of skipped files
+    int m_batchErrorCount;              ///< Number of failed exports
+    bool m_batchOverwriteAll;           ///< Runtime flag: overwrite all remaining files
+    bool m_batchSkipAll;                ///< Runtime flag: skip all remaining existing files
+    QString m_originalWindowTitle;      ///< Store original window title during batch
+    QString m_originalDocumentPath;     ///< Store original document path for reload after batch
+    int m_originalPreviewPage;          ///< Store original preview page for restore after batch
 };
 
 #endif // XTEXPORTDLG_H
