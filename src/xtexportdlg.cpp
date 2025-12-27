@@ -39,6 +39,11 @@
 #include <QCloseEvent>
 #include <QCoreApplication>
 
+// Default file mask for batch mode - common e-book formats
+static const QString DEFAULT_FILE_MASK =
+    "*.epub;*.fb2;*.fb3;*.doc;*.docx;*.rtf;*.txt;*.html;*.htm;"
+    "*.mobi;*.azw;*.azw3;*.pdb;*.prc;*.chm;*.tcr;*.pml";
+
 // =============================================================================
 // QtExportCallback implementation
 // =============================================================================
@@ -190,6 +195,10 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
         if (checked) setMode(true);
     });
 
+    // Connect batch mode controls
+    connect(m_ui->btnBrowseSource, &QPushButton::clicked,
+            this, &XtExportDlg::onBrowseSource);
+
     // Connect actions
     connect(m_ui->btnExport, &QPushButton::clicked,
             this, &XtExportDlg::onExport);
@@ -204,8 +213,17 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     // Populate title and author from document metadata
     loadDocumentMetadata();
 
-    // Set default output path
-    m_ui->leOutputPath->setText(computeDefaultOutputPath());
+    // Load batch mode settings (must be before computeDefaultOutputPath
+    // as batch mode affects output path interpretation)
+    loadBatchSettings();
+
+    // Compute default batch paths if needed
+    computeDefaultBatchPaths();
+
+    // Set default output path (only in single file mode, batch mode already handled)
+    if (!m_batchMode) {
+        m_ui->leOutputPath->setText(computeDefaultOutputPath());
+    }
 
     // Load window geometry
     loadWindowGeometry();
@@ -235,6 +253,7 @@ XtExportDlg::~XtExportDlg()
     saveLastProfileSetting();
     saveLastDirectorySetting();
     saveWindowGeometry();
+    saveBatchSettings();
 
     // Save current profile settings to its INI file
     saveCurrentProfileSettings();
@@ -866,6 +885,30 @@ void XtExportDlg::onBrowseOutput()
     }
 }
 
+void XtExportDlg::onBrowseSource()
+{
+    QString currentPath = m_ui->leSourcePath->text();
+    QString startPath;
+
+    if (!currentPath.isEmpty() && QDir(currentPath).exists()) {
+        startPath = currentPath;
+    } else if (!m_lastDirectory.isEmpty()) {
+        startPath = m_lastDirectory;
+    } else {
+        startPath = QDir::homePath();
+    }
+
+    QString directory = QFileDialog::getExistingDirectory(
+        this,
+        tr("Select Source Directory"),
+        startPath,
+        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+
+    if (!directory.isEmpty()) {
+        m_ui->leSourcePath->setText(QDir::toNativeSeparators(directory));
+    }
+}
+
 void XtExportDlg::onExport()
 {
     if (m_exporting)
@@ -1235,7 +1278,7 @@ void XtExportDlg::setExporting(bool exporting)
 
     // Disable/enable settings groups
     m_ui->settingsGroup->setEnabled(!exporting);
-    m_ui->outputGroup->setEnabled(!exporting);
+    m_ui->pathsGroup->setEnabled(!exporting);
 
     // Preview group stays enabled but navigation is disabled
     m_ui->btnFirstPage->setEnabled(!exporting);
@@ -1407,10 +1450,136 @@ void XtExportDlg::onModeChanged()
     // Update Export button text
     m_ui->btnExport->setText(m_batchMode ? tr("Export All") : tr("Export"));
 
-    // TODO Phase 2: Add UI visibility switching for batch-specific controls
-    // - Page Range visibility
-    // - Metadata vs Batch Options
-    // - Source directory
-    // - Progress bars layout
-    // - Output group title
+    // Single file mode: show page range, metadata, preview
+    // Batch mode: show batch options, source directory, hide preview navigation details
+
+    // Page Range - single file only
+    m_ui->pageRangeGroup->setVisible(!m_batchMode);
+
+    // Metadata - single file only
+    m_ui->metadataGroup->setVisible(!m_batchMode);
+
+    // Batch Options - batch mode only
+    m_ui->batchOptionsGroup->setVisible(m_batchMode);
+
+    // Source Directory - batch mode only (individual widgets)
+    m_ui->lblSource->setVisible(m_batchMode);
+    m_ui->leSourcePath->setVisible(m_batchMode);
+    m_ui->btnBrowseSource->setVisible(m_batchMode);
+
+    // Output label text
+    m_ui->lblOutput->setText(m_batchMode ? tr("Output:") : tr("Output:"));
+
+    // Output path placeholder
+    m_ui->leOutputPath->setPlaceholderText(
+        m_batchMode ? tr("Output directory path...") : tr("Output file path..."));
+
+    // Preview remains visible in both modes (shows settings preview)
+    // Preview navigation remains functional for previewing export settings
+}
+
+void XtExportDlg::loadBatchSettings()
+{
+    auto* mainWin = qobject_cast<MainWindow*>(parent());
+    if (!mainWin)
+        return;
+
+    CRPropRef props = mainWin->getSettings();
+
+    // Load batch mode flag
+    m_batchMode = props->getBoolDef("xtexport.batch.mode", false);
+
+    // Load source and output directories
+    QString sourceDir = cr2qt(props->getStringDef("xtexport.batch.source.directory", ""));
+    QString outputDir = cr2qt(props->getStringDef("xtexport.batch.output.directory", ""));
+
+    // Load file mask (use default if empty)
+    QString fileMask = cr2qt(props->getStringDef("xtexport.batch.file.mask", ""));
+    if (fileMask.isEmpty()) {
+        fileMask = DEFAULT_FILE_MASK;
+    }
+
+    // Load other batch options
+    bool preserveStructure = props->getBoolDef("xtexport.batch.preserve.structure", true);
+    int overwriteMode = props->getIntDef("xtexport.batch.overwrite.mode", 0);
+
+    // Apply to UI controls
+    m_ui->leFileMask->setText(fileMask);
+    m_ui->cbPreserveStructure->setChecked(preserveStructure);
+    m_ui->cbOverwriteMode->setCurrentIndex(overwriteMode);
+
+    // Apply source directory
+    if (!sourceDir.isEmpty()) {
+        m_ui->leSourcePath->setText(sourceDir);
+    }
+
+    // Apply output directory for batch mode (don't override single file output)
+    // The output path will be computed based on mode in computeDefaultBatchPaths()
+    if (m_batchMode && !outputDir.isEmpty()) {
+        m_ui->leOutputPath->setText(outputDir);
+    }
+
+    // Apply mode to radio buttons
+    m_ui->rbBatchExport->setChecked(m_batchMode);
+    m_ui->rbSingleFile->setChecked(!m_batchMode);
+
+    // Trigger UI update for mode
+    onModeChanged();
+}
+
+void XtExportDlg::saveBatchSettings()
+{
+    auto* mainWin = qobject_cast<MainWindow*>(parent());
+    if (!mainWin)
+        return;
+
+    CRPropRef props = mainWin->getSettings();
+
+    // Save batch mode flag
+    props->setBool("xtexport.batch.mode", m_batchMode);
+
+    // Save source directory
+    props->setString("xtexport.batch.source.directory",
+                     qt2cr(m_ui->leSourcePath->text()).c_str());
+
+    // Save output directory (only in batch mode)
+    if (m_batchMode) {
+        props->setString("xtexport.batch.output.directory",
+                         qt2cr(m_ui->leOutputPath->text()).c_str());
+    }
+
+    // Save file mask
+    props->setString("xtexport.batch.file.mask",
+                     qt2cr(m_ui->leFileMask->text()).c_str());
+
+    // Save other batch options
+    props->setBool("xtexport.batch.preserve.structure",
+                   m_ui->cbPreserveStructure->isChecked());
+    props->setInt("xtexport.batch.overwrite.mode",
+                  m_ui->cbOverwriteMode->currentIndex());
+}
+
+void XtExportDlg::computeDefaultBatchPaths()
+{
+    // If source directory is empty, use current document's directory
+    if (m_ui->leSourcePath->text().isEmpty() && m_docView) {
+        QString docPath = cr2qt(m_docView->getFileName());
+        if (!docPath.isEmpty()) {
+            // Handle archive paths like "archive.fb2.zip@/internal.fb2"
+            int atPos = docPath.indexOf('@');
+            if (atPos > 0) {
+                docPath = docPath.left(atPos);
+            }
+            QFileInfo fi(docPath);
+            m_ui->leSourcePath->setText(QDir::toNativeSeparators(fi.absolutePath()));
+        }
+    }
+
+    // If output directory is empty in batch mode, use source directory
+    if (m_batchMode && m_ui->leOutputPath->text().isEmpty()) {
+        QString sourceDir = m_ui->leSourcePath->text();
+        if (!sourceDir.isEmpty()) {
+            m_ui->leOutputPath->setText(sourceDir);
+        }
+    }
 }

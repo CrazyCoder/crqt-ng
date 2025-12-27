@@ -139,6 +139,9 @@ private slots:
     // Output path
     void onBrowseOutput();
 
+    // Batch mode
+    void onBrowseSource();
+
     // Actions
     void onExport();
     void onCancel();
@@ -330,6 +333,25 @@ private:
      * @brief Handle mode change - update UI visibility and button text
      */
     void onModeChanged();
+
+    // Batch mode settings persistence
+    /**
+     * @brief Load batch mode settings from crui.ini
+     */
+    void loadBatchSettings();
+
+    /**
+     * @brief Save batch mode settings to crui.ini
+     */
+    void saveBatchSettings();
+
+    /**
+     * @brief Compute default paths for batch mode from current document
+     *
+     * If source directory is empty, uses current document's directory.
+     * If output directory is empty in batch mode, uses source directory.
+     */
+    void computeDefaultBatchPaths();
 
     Ui::XtExportDlg* m_ui;
     LVDocView* m_docView;
