@@ -1070,6 +1070,27 @@ bool CR3View::loadCSS(QString fn) {
     return false;
 }
 
+QString CR3View::resolveCssPath(const QString& cssDir, const QString& templateName, bool useExpanded) {
+    if (useExpanded) {
+        QString baseName = templateName;
+        if (baseName.endsWith(".css"))
+            baseName.chop(4);
+        QString expandedPath = cssDir + baseName + "-expanded.css";
+        if (QFileInfo(expandedPath).exists())
+            return expandedPath;
+        // Fallback to fb2-expanded.css
+        QString fb2ExpandedPath = cssDir + "fb2-expanded.css";
+        if (QFileInfo(fb2ExpandedPath).exists())
+            return fb2ExpandedPath;
+        CRLog::warn("Generated CSS file not found, falling back to template");
+    }
+    // Return template path (or fallback to fb2.css if template doesn't exist)
+    QString templatePath = cssDir + templateName;
+    if (QFileInfo(templatePath).exists())
+        return templatePath;
+    return cssDir + "fb2.css";
+}
+
 void CR3View::onCssFileChanged(const QString& path) {
     CRLog::info("Expanded CSS file changed: %s, reloading document...", path.toUtf8().constData());
 
@@ -1682,40 +1703,23 @@ void CR3View::OnLoadFileFormatDetected(doc_format_t fileFormat) {
             }
         };
 
-        if (useGenerated) {
-            // Try loading expanded CSS file first
-            QString baseName = filename;
-            if (baseName.endsWith(".css"))
-                baseName.chop(4);
-            QString expandedFilename = baseName + "-expanded.css";
-            QString expandedPath = _cssDir + expandedFilename;
-            if (QFileInfo(expandedPath).exists()) {
-                CRLog::info("Using generated CSS file: %s", expandedFilename.toUtf8().constData());
-                loadCSS(expandedPath);
-                setupCssWatcher(expandedPath);
-                return;
+        // Resolve CSS path (handles expanded vs template, with fallbacks)
+        QString cssPath = resolveCssPath(_cssDir, filename, useGenerated);
+        bool isExpanded = useGenerated && cssPath.endsWith("-expanded.css");
+
+        if (isExpanded) {
+            CRLog::info("Using generated CSS file: %s", QFileInfo(cssPath).fileName().toUtf8().constData());
+            setupCssWatcher(cssPath);
+        } else {
+            // Not using generated CSS - stop watching if previously watching
+            if (_cssFileWatcher && !_watchedCssFile.isEmpty()) {
+                _cssFileWatcher->removePath(_watchedCssFile);
+                _watchedCssFile.clear();
             }
-            // Try fb2-expanded.css as fallback
-            QString fb2ExpandedPath = _cssDir + "fb2-expanded.css";
-            if (QFileInfo(fb2ExpandedPath).exists()) {
-                CRLog::info("Using generated CSS file: fb2-expanded.css (fallback)");
-                loadCSS(fb2ExpandedPath);
-                setupCssWatcher(fb2ExpandedPath);
-                return;
-            }
-            CRLog::warn("Generated CSS file not found, falling back to template");
         }
 
-        // Not using generated CSS - stop watching if previously watching
-        if (_cssFileWatcher && !_watchedCssFile.isEmpty()) {
-            _cssFileWatcher->removePath(_watchedCssFile);
-            _watchedCssFile.clear();
-        }
-
-        if (QFileInfo(_cssDir + filename).exists()) {
-            loadCSS(_cssDir + filename);
-        } else if (QFileInfo(_cssDir + "fb2.css").exists()) {
-            loadCSS(_cssDir + "fb2.css");
+        if (QFileInfo(cssPath).exists()) {
+            loadCSS(cssPath);
         }
     }
 }

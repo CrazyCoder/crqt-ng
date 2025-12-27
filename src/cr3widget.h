@@ -111,6 +111,10 @@ public:
     bool loadCSS(QString filename);
     /// reload currently opened document (e.g. after CSS change)
     void reloadCurrentDocument();
+    /// get CSS directory path
+    QString getCssDir() const { return _cssDir; }
+    /// resolve CSS path (template vs expanded) based on settings
+    static QString resolveCssPath(const QString& cssDir, const QString& templateName, bool useExpanded);
     /// set bookmarks dir
     void setBookmarksDir(const QString& dirname);
     /// apply some set of options

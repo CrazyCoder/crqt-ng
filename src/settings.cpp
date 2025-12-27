@@ -1201,6 +1201,18 @@ void SettingsDlg::initSampleWindow() {
         mainLang = U"en";
     }
     sampledocview->propApply(lString8(PROP_TEXTLANG_MAIN_LANG), mainLang);
+
+    // Load CSS to match the main document view styling
+    QString cssDir;
+    if (m_docview && !m_docview->getCssDir().isEmpty()) {
+        cssDir = m_docview->getCssDir();
+    } else {
+        cssDir = cr2qt(getMainDataDir()) + "/";
+    }
+    QString templateName = m_props->getStringDef(PROP_CSS_CURRENT_TEMPLATE, "fb2.css");
+    bool useExpanded = m_props->getBoolDef(PROP_CSS_USE_GENERATED, false);
+    QString cssPath = CR3View::resolveCssPath(cssDir, templateName, useExpanded);
+    creview->loadCSS(cssPath);
 }
 
 void SettingsDlg::updateStyleSample() {
