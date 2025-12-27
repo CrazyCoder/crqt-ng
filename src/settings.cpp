@@ -634,6 +634,8 @@ void SettingsDlg::initStyleControls(const char* styleName) {
     static const char* indentStyles[] = {
         "", // inherited
         "text-indent: 0em",
+        "text-indent: 0.5em",
+        "text-indent: 1em",
         "text-indent: 1.2em",
         "text-indent: 2em",
         "text-indent: -1.2em",
@@ -642,7 +644,7 @@ void SettingsDlg::initStyleControls(const char* styleName) {
     };
 
     QString indentStyleNames[] = {
-        tr("-"), tr("No indent"), tr("Small Indent"), tr("Big Indent"), tr("Small Outdent"), tr("Big Outdent"),
+        tr("-"), tr("No indent"), tr("Tiny Indent"), tr("Small Indent"), tr("Normal Indent"), tr("Big Indent"), tr("Small Outdent"), tr("Big Outdent"),
     };
 
     m_styleItemIndent.init(prefix + "text-indent", NULL, indentStyles, indentStyleNames, hideInherited, m_props,
@@ -1763,6 +1765,29 @@ void SettingsDlg::updateStyleControlsEnabled() {
 void SettingsDlg::on_cbUseGeneratedCSS_toggled(bool checked) {
     if (!initDone)
         return;
+
+    // If enabling expanded CSS, ensure the expanded file exists for the current template
+    if (checked) {
+        QString dataDir = cr2qt(getMainDataDir());
+        QString currentTemplate = m_props->getStringDef(PROP_CSS_CURRENT_TEMPLATE, "fb2.css");
+
+        // Generate expanded filename from template name
+        QString baseName = currentTemplate;
+        if (baseName.endsWith(".css"))
+            baseName.chop(4);
+        QString expandedFile = baseName + "-expanded.css";
+        QString expandedPath = dataDir + "/" + expandedFile;
+
+        // If expanded CSS file doesn't exist, generate it silently
+        if (!QFile::exists(expandedPath)) {
+            QString templatePath = dataDir + "/" + currentTemplate;
+            lString32 inPath = qt2cr(templatePath);
+            lString32 outPath = qt2cr(expandedPath);
+            CRPropRef styleProps = qt2cr(m_props);
+            saveExpandedCSS(inPath.c_str(), outPath.c_str(), styleProps);
+        }
+    }
+
     setCheck(PROP_CSS_USE_GENERATED, checked ? Qt::Checked : Qt::Unchecked);
     updateStyleControlsEnabled();
     // Reload document to apply CSS change immediately
