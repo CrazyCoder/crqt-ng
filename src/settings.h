@@ -133,7 +133,7 @@ class SettingsDlg: public QDialog
     Q_OBJECT
     Q_DISABLE_COPY(SettingsDlg)
 public:
-    explicit SettingsDlg(QWidget* parent, PropsRef props);
+    explicit SettingsDlg(QWidget* parent, PropsRef props, CR3View* docview = nullptr);
     virtual ~SettingsDlg();
     PropsRef options() const {
         return m_props;
@@ -166,6 +166,7 @@ protected:
     void setBackground(QWidget* wnd, QColor cl);
     void initSampleWindow();
     void updateStyleSample();
+    void updateStyleControlsEnabled();
 private:
     SampleView* m_sample;
     Ui::SettingsDlg* m_ui;
@@ -287,6 +288,9 @@ private slots:
     void on_cbFontWeightChange_currentIndexChanged(int index);
     void on_cbAntialiasingMode_currentIndexChanged(int index);
     void on_tabWidget_currentChanged(int index);
+    void on_cbUseGeneratedCSS_toggled(bool checked);
+    void on_btnGenerateCSS_clicked();
+    void on_btnExpandAllCSS_clicked();
 };
 
 #endif // SETTINGSDLG_H

@@ -53,6 +53,7 @@
 #include <QUrl>
 #include <QDir>
 #include <QFileInfo>
+#include <QFileSystemWatcher>
 #include <QDesktopServices>
 #include <QProcess>
 #include <QTimer>
@@ -358,7 +359,8 @@ CR3View::CR3View(QWidget* parent)
         , _canGoForward(false)
         , _onTextSelectAutoClipboardCopy(false)
         , _onTextSelectAutoCmdExec(false)
-        , _wheelIntegralDegrees(0) {
+        , _wheelIntegralDegrees(0)
+        , _cssFileWatcher(nullptr) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     _dpr = screen()->devicePixelRatio();
 #elif QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
@@ -460,6 +462,7 @@ CR3View::~CR3View() {
     if (_wordSelector)
         delete _wordSelector;
 #endif
+    delete _cssFileWatcher;
     _docview->savePosition();
     delete _docview;
     delete _data;
@@ -1067,6 +1070,28 @@ bool CR3View::loadCSS(QString fn) {
     return false;
 }
 
+void CR3View::onCssFileChanged(const QString& path) {
+    CRLog::info("Expanded CSS file changed: %s, reloading document...", path.toUtf8().constData());
+
+    // Some editors delete and recreate the file when saving, which removes the watch.
+    // Re-add the file to the watcher if it still exists.
+    if (_cssFileWatcher && !_cssFileWatcher->files().contains(path)) {
+        if (QFileInfo(path).exists()) {
+            _cssFileWatcher->addPath(path);
+            CRLog::debug("Re-added CSS file to watcher after modification");
+        }
+    }
+
+    reloadCurrentDocument();
+}
+
+void CR3View::reloadCurrentDocument() {
+    lString32 docPath = _docview->getFileName();
+    if (!docPath.empty()) {
+        loadDocument(cr2qt(docPath));
+    }
+}
+
 void CR3View::setSharedSettings(CRPropRef props) {
     _data->_props = props;
     _docview->propsUpdateDefaults(_data->_props);
@@ -1630,6 +1655,63 @@ void CR3View::OnLoadFileFormatDetected(doc_format_t fileFormat) {
                     ;
         }
         CRLog::debug("CSS file to load: %s", filename.toUtf8().constData());
+
+        // Store the current CSS template filename for use by Settings dialog
+        _data->_props->setString(PROP_CSS_CURRENT_TEMPLATE, filename.toUtf8().constData());
+
+        // Check if we should use generated (expanded) CSS file
+        bool useGenerated = _data->_props->getBoolDef(PROP_CSS_USE_GENERATED, false);
+
+        // Helper to set up file watcher for expanded CSS files
+        auto setupCssWatcher = [this](const QString& cssPath) {
+            // Stop watching previous file
+            if (_cssFileWatcher) {
+                if (!_watchedCssFile.isEmpty()) {
+                    _cssFileWatcher->removePath(_watchedCssFile);
+                }
+            } else {
+                _cssFileWatcher = new QFileSystemWatcher(this);
+                connect(_cssFileWatcher, &QFileSystemWatcher::fileChanged, this, &CR3View::onCssFileChanged);
+            }
+            // Start watching new file
+            _watchedCssFile = cssPath;
+            if (_cssFileWatcher->addPath(cssPath)) {
+                CRLog::info("Watching CSS file for changes: %s", cssPath.toUtf8().constData());
+            } else {
+                CRLog::warn("Failed to watch CSS file: %s", cssPath.toUtf8().constData());
+            }
+        };
+
+        if (useGenerated) {
+            // Try loading expanded CSS file first
+            QString baseName = filename;
+            if (baseName.endsWith(".css"))
+                baseName.chop(4);
+            QString expandedFilename = baseName + "-expanded.css";
+            QString expandedPath = _cssDir + expandedFilename;
+            if (QFileInfo(expandedPath).exists()) {
+                CRLog::info("Using generated CSS file: %s", expandedFilename.toUtf8().constData());
+                loadCSS(expandedPath);
+                setupCssWatcher(expandedPath);
+                return;
+            }
+            // Try fb2-expanded.css as fallback
+            QString fb2ExpandedPath = _cssDir + "fb2-expanded.css";
+            if (QFileInfo(fb2ExpandedPath).exists()) {
+                CRLog::info("Using generated CSS file: fb2-expanded.css (fallback)");
+                loadCSS(fb2ExpandedPath);
+                setupCssWatcher(fb2ExpandedPath);
+                return;
+            }
+            CRLog::warn("Generated CSS file not found, falling back to template");
+        }
+
+        // Not using generated CSS - stop watching if previously watching
+        if (_cssFileWatcher && !_watchedCssFile.isEmpty()) {
+            _cssFileWatcher->removePath(_watchedCssFile);
+            _watchedCssFile.clear();
+        }
+
         if (QFileInfo(_cssDir + filename).exists()) {
             loadCSS(_cssDir + filename);
         } else if (QFileInfo(_cssDir + "fb2.css").exists()) {

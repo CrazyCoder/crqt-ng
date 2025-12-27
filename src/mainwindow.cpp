@@ -573,7 +573,7 @@ void MainWindow::on_actionSettings_triggered() {
         CRLog::debug("NULL view in current tab!");
         return;
     }
-    SettingsDlg dlg(this, currView->getOptions());
+    SettingsDlg dlg(this, currView->getOptions(), currView);
     if (dlg.exec() == QDialog::Accepted) {
         for (TabsCollection::iterator it = _tabs.begin(); it != _tabs.end(); ++it) {
             CR3View* view = (*it).view();

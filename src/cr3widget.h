@@ -28,6 +28,7 @@
 #include "crqtutil.h"
 #include "cr3widget_commands.h"
 
+class QFileSystemWatcher;
 class LVDocView;
 class LVTocItem;
 class CRBookmark;
@@ -108,6 +109,8 @@ public:
 
     /// load fb2.css file
     bool loadCSS(QString filename);
+    /// reload currently opened document (e.g. after CSS change)
+    void reloadCurrentDocument();
     /// set bookmarks dir
     void setBookmarksDir(const QString& dirname);
     /// apply some set of options
@@ -242,6 +245,7 @@ protected:
     QSize sizeHint() const override;
 private slots:
     void resizeTimerTimeout();
+    void onCssFileChanged(const QString& path);
 private:
     void updateDefProps();
     void clearSelection();
@@ -295,6 +299,9 @@ private:
     // Store a copy of the command that should run when text is selected.
     QStringList _selectionCommand;
     int _wheelIntegralDegrees;
+    // For auto-reloading expanded CSS files on change
+    QFileSystemWatcher* _cssFileWatcher;
+    QString _watchedCssFile;
 };
 
 #endif // CR3WIDGET_H

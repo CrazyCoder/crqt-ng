@@ -41,8 +41,12 @@
 #endif
 #include <QDir>
 #include <QLocale>
+#include <QMessageBox>
+#include <QFileDialog>
+#include <QInputDialog>
 
 #include <lvrend.h> // for BLOCK_RENDERING_FLAGS_XXX presets
+#include <lvdocview.h> // for generateExpandedCSS, saveExpandedCSS
 
 static int def_margins[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20, 25, 30, 40, 50, 60 };
 #define MAX_MARGIN_INDEX (sizeof(def_margins) / sizeof(int))
@@ -180,10 +184,11 @@ static const char* styleNames[] = {
 };
 // clang-format on
 
-SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
+SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props, CR3View* docview)
         : QDialog(parent)
         , m_sample(NULL)
-        , m_ui(new Ui::SettingsDlg) {
+        , m_ui(new Ui::SettingsDlg)
+        , m_docview(docview) {
     initDone = false;
     m_props = props;
 
@@ -541,6 +546,11 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props)
     m_ui->cbStyleName->addItems(m_styleNames);
     m_ui->cbStyleName->setCurrentIndex(0);
     initStyleControls("def");
+
+    // Initialize "Use expanded CSS" checkbox (default to unchecked/false)
+    bool useGenCSS = m_props->getBoolDef(PROP_CSS_USE_GENERATED, false);
+    m_ui->cbUseGeneratedCSS->setCheckState(useGenCSS ? Qt::Checked : Qt::Unchecked);
+    updateStyleControlsEnabled();
 
     initDone = true;
 
@@ -1165,9 +1175,30 @@ void SettingsDlg::initSampleWindow() {
     LVDocView* sampledocview = creview->getDocView();
     sampledocview->setShowCover(false);
     sampledocview->setViewMode(DVM_SCROLL, 1);
-    QString testPhrase = tr("The quick brown fox jumps over the lazy dog. ");
-    sampledocview->createDefaultDocument(lString32::empty_str,
-                                         qt2cr(testPhrase + testPhrase + testPhrase + testPhrase + testPhrase));
+
+    // Try to get text from current document page, fall back to placeholder
+    QString sampleText;
+    if (m_docview && !m_docview->getDocView()->getFileName().empty()) {
+        lString32 pageText = m_docview->getDocView()->getPageText(true);
+        if (!pageText.empty()) {
+            sampleText = cr2qt(pageText);
+        }
+    }
+    if (sampleText.isEmpty()) {
+        QString testPhrase = tr("The quick brown fox jumps over the lazy dog. ");
+        sampleText = testPhrase + testPhrase + testPhrase + testPhrase + testPhrase;
+    }
+    sampledocview->createDefaultDocument(lString32::empty_str, qt2cr(sampleText));
+
+    // Set main language for hyphenation to match the main document view
+    lString32 mainLang;
+    if (m_docview && !m_docview->getDocView()->getFileName().empty()) {
+        mainLang = m_docview->getDocView()->getLanguage();
+    }
+    if (mainLang.empty()) {
+        mainLang = U"en";
+    }
+    sampledocview->propApply(lString8(PROP_TEXTLANG_MAIN_LANG), mainLang);
 }
 
 void SettingsDlg::updateStyleSample() {
@@ -1718,5 +1749,175 @@ void SettingsDlg::on_tabWidget_currentChanged(int index) {
         m_sample->updatePositionForParent();
     } else if (m_sample) {
         m_sample->setVisible(false);
+    }
+}
+
+void SettingsDlg::updateStyleControlsEnabled() {
+    bool useGenerated = m_props->getBoolDef(PROP_CSS_USE_GENERATED, false);
+    // Disable style controls when using expanded CSS (the Expand button remains enabled)
+    // Disabling scrollArea automatically disables all child widgets (the cbDef* combo boxes)
+    m_ui->cbStyleName->setEnabled(!useGenerated);
+    m_ui->scrollArea->setEnabled(!useGenerated);
+}
+
+void SettingsDlg::on_cbUseGeneratedCSS_toggled(bool checked) {
+    if (!initDone)
+        return;
+    setCheck(PROP_CSS_USE_GENERATED, checked ? Qt::Checked : Qt::Unchecked);
+    updateStyleControlsEnabled();
+    // Reload document to apply CSS change immediately
+    if (m_docview) {
+        m_docview->applyOptions(m_props, true);
+        m_docview->reloadCurrentDocument();
+    }
+}
+
+void SettingsDlg::on_btnGenerateCSS_clicked() {
+    // Get default CSS directory from application data path
+    QString dataDir = cr2qt(getMainDataDir());
+
+    // Get list of available CSS template files
+    QStringList cssFilters;
+    cssFilters << "*.css";
+    QDir cssDir(dataDir);
+    QStringList cssFiles = cssDir.entryList(cssFilters, QDir::Files);
+
+    // Filter out already-expanded files
+    QStringList templateFiles;
+    for (const QString& file : cssFiles) {
+        if (!file.endsWith("-expanded.css")) {
+            templateFiles.append(file);
+        }
+    }
+
+    if (templateFiles.isEmpty()) {
+        QMessageBox::warning(this, tr("Expand CSS"),
+            tr("No CSS template files found in data directory."));
+        return;
+    }
+
+    // Find default selection: current document's CSS style, fallback to fb2.css
+    QString currentTemplate = m_props->getStringDef(PROP_CSS_CURRENT_TEMPLATE, "fb2.css");
+    int defaultIndex = templateFiles.indexOf(currentTemplate);
+    if (defaultIndex < 0) {
+        defaultIndex = templateFiles.indexOf("fb2.css");
+        if (defaultIndex < 0)
+            defaultIndex = 0;
+    }
+
+    // Let user select which template to expand
+    bool ok;
+    QString selectedFile = QInputDialog::getItem(this, tr("Expand CSS"),
+        tr("Select CSS template to expand:"), templateFiles, defaultIndex, false, &ok);
+
+    if (!ok || selectedFile.isEmpty())
+        return;
+
+    // Generate output filename
+    QString baseName = selectedFile;
+    if (baseName.endsWith(".css"))
+        baseName.chop(4);
+    QString outputFile = baseName + "-expanded.css";
+    QString outputPath = dataDir + "/" + outputFile;
+
+    // Check if file exists
+    if (QFile::exists(outputPath)) {
+        QMessageBox::StandardButton reply = QMessageBox::question(this, tr("Expand CSS"),
+            tr("File '%1' already exists. Overwrite?").arg(outputFile),
+            QMessageBox::Yes | QMessageBox::No);
+        if (reply != QMessageBox::Yes)
+            return;
+    }
+
+    // Generate expanded CSS
+    QString templatePath = dataDir + "/" + selectedFile;
+    lString32 inPath = qt2cr(templatePath);
+    lString32 outPath = qt2cr(outputPath);
+
+    // Get style properties from current settings
+    CRPropRef styleProps = qt2cr(m_props);
+
+    bool success = saveExpandedCSS(inPath.c_str(), outPath.c_str(), styleProps);
+
+    if (success) {
+        QMessageBox::information(this, tr("Expand CSS"),
+            tr("Successfully created '%1'").arg(outputFile));
+    } else {
+        QMessageBox::critical(this, tr("Expand CSS"),
+            tr("Failed to expand CSS file. Check that the template exists and output path is writable."));
+    }
+}
+
+void SettingsDlg::on_btnExpandAllCSS_clicked() {
+    // Get default CSS directory from application data path
+    QString dataDir = cr2qt(getMainDataDir());
+
+    // Get list of available CSS template files
+    QStringList cssFilters;
+    cssFilters << "*.css";
+    QDir cssDir(dataDir);
+    QStringList cssFiles = cssDir.entryList(cssFilters, QDir::Files);
+
+    // Filter out already-expanded files
+    QStringList templateFiles;
+    for (const QString& file : cssFiles) {
+        if (!file.endsWith("-expanded.css")) {
+            templateFiles.append(file);
+        }
+    }
+
+    if (templateFiles.isEmpty()) {
+        QMessageBox::warning(this, tr("Expand All CSS"),
+            tr("No CSS template files found in data directory."));
+        return;
+    }
+
+    // Ask confirmation once for all files
+    QMessageBox::StandardButton reply = QMessageBox::question(this, tr("Expand All CSS"),
+        tr("This will create/overwrite expanded CSS files for %1 templates:\n%2\n\nContinue?")
+            .arg(templateFiles.size())
+            .arg(templateFiles.join(", ")),
+        QMessageBox::Yes | QMessageBox::No);
+    if (reply != QMessageBox::Yes)
+        return;
+
+    // Get style properties from current settings
+    CRPropRef styleProps = qt2cr(m_props);
+
+    int successCount = 0;
+    int failCount = 0;
+    QStringList failedFiles;
+
+    // Expand all templates
+    for (const QString& templateFile : templateFiles) {
+        QString baseName = templateFile;
+        if (baseName.endsWith(".css"))
+            baseName.chop(4);
+        QString outputFile = baseName + "-expanded.css";
+
+        QString templatePath = dataDir + "/" + templateFile;
+        QString outputPath = dataDir + "/" + outputFile;
+
+        lString32 inPath = qt2cr(templatePath);
+        lString32 outPath = qt2cr(outputPath);
+
+        if (saveExpandedCSS(inPath.c_str(), outPath.c_str(), styleProps)) {
+            successCount++;
+        } else {
+            failCount++;
+            failedFiles.append(templateFile);
+        }
+    }
+
+    // Show result
+    if (failCount == 0) {
+        QMessageBox::information(this, tr("Expand All CSS"),
+            tr("Successfully created %1 expanded CSS files.").arg(successCount));
+    } else {
+        QMessageBox::warning(this, tr("Expand All CSS"),
+            tr("Created %1 files, failed %2 files:\n%3")
+                .arg(successCount)
+                .arg(failCount)
+                .arg(failedFiles.join(", ")));
     }
 }

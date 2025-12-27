@@ -2409,6 +2409,62 @@
            </widget>
           </widget>
          </item>
+         <item>
+          <widget class="QGroupBox" name="groupBoxGeneratedCSS">
+           <property name="title">
+            <string>Expanded CSS</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_GeneratedCSS">
+            <item>
+             <widget class="QCheckBox" name="cbUseGeneratedCSS">
+              <property name="toolTip">
+               <string>When enabled, use pre-expanded CSS file instead of INI-based style substitution. Style controls above will be disabled.</string>
+              </property>
+              <property name="text">
+               <string>Use expanded CSS file</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_GenerateCSS">
+              <item>
+               <widget class="QPushButton" name="btnGenerateCSS">
+                <property name="toolTip">
+                 <string>Create expanded CSS file with all style variables substituted from current settings</string>
+                </property>
+                <property name="text">
+                 <string>Expand CSS...</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnExpandAllCSS">
+                <property name="toolTip">
+                 <string>Create expanded CSS files for all formats (fb2, epub, txt, etc.)</string>
+                </property>
+                <property name="text">
+                 <string>Expand All CSS</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_GenerateCSS">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>

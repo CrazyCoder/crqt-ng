@@ -47,5 +47,7 @@
 #define PROP_APP_LOG_AUTOFLUSH                 "crengine.log.autoflush"
 #define PROP_APP_TABS_FIXED_SIZE               "crui.app.tabs.fixedsize"
 #define PROP_APP_SETTINGS_TAB                  "crui.app.settings.tab"
+#define PROP_CSS_USE_GENERATED                 "css.use.generated"
+#define PROP_CSS_CURRENT_TEMPLATE              "css.current.template"
 
 #endif // APP_PROPS_H
