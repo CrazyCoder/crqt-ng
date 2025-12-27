@@ -47,7 +47,7 @@
 
 // Default file mask for batch mode - common e-book formats
 static const QString DEFAULT_FILE_MASK =
-    "*.epub;*.fb2;*fb2.zip";
+    "*.epub;*.fb2;*.fb2.zip";
 
 // =============================================================================
 // QtExportCallback implementation
