@@ -1278,7 +1278,6 @@ void XtExportDlg::setExporting(bool exporting)
 
     // Disable/enable settings groups
     m_ui->settingsGroup->setEnabled(!exporting);
-    m_ui->pathsGroup->setEnabled(!exporting);
 
     // Preview group stays enabled but navigation is disabled
     m_ui->btnFirstPage->setEnabled(!exporting);
@@ -1288,18 +1287,58 @@ void XtExportDlg::setExporting(bool exporting)
     m_ui->sbPreviewPage->setEnabled(!exporting);
     m_previewWidget->setPageNavigationEnabled(!exporting);
 
-    // Swap spacer/progress bar visibility
-    // When exporting: collapse spacer, show progress bar
-    // When idle: expand spacer, hide progress bar
+    // Mode toggle disabled during export
+    m_ui->rbSingleFile->setEnabled(!exporting);
+    m_ui->rbBatchExport->setEnabled(!exporting);
+
+    // Progress bar visibility - replaces path controls during export
+    // Single file mode: output row -> single progress bar (Current)
+    // Batch mode: source row -> Files progress, output row -> Current progress
     if (exporting) {
-        m_ui->buttonsSpacer->changeSize(0, 0, QSizePolicy::Ignored, QSizePolicy::Ignored);
-        m_ui->progressBar->setValue(0);
-        m_ui->progressBar->setVisible(true);
+        // Hide path controls
+        m_ui->lblOutput->setVisible(false);
+        m_ui->leOutputPath->setVisible(false);
+        m_ui->btnBrowse->setVisible(false);
+
+        if (m_batchMode) {
+            // Hide source row (already hidden in single mode)
+            m_ui->lblSource->setVisible(false);
+            m_ui->leSourcePath->setVisible(false);
+            m_ui->btnBrowseSource->setVisible(false);
+
+            // Show both progress rows for batch mode
+            m_ui->lblFilesProgress->setVisible(true);
+            m_ui->progressBarFiles->setVisible(true);
+            m_ui->progressBarFiles->setValue(0);
+
+            m_ui->lblCurrentProgress->setVisible(true);
+            m_ui->progressBar->setVisible(true);
+            m_ui->progressBar->setValue(0);
+        } else {
+            // Single file mode: show only current progress bar (replacing output row)
+            m_ui->lblCurrentProgress->setVisible(true);
+            m_ui->progressBar->setVisible(true);
+            m_ui->progressBar->setValue(0);
+        }
     } else {
-        m_ui->buttonsSpacer->changeSize(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        // Hide all progress bars
+        m_ui->lblFilesProgress->setVisible(false);
+        m_ui->progressBarFiles->setVisible(false);
+        m_ui->lblCurrentProgress->setVisible(false);
         m_ui->progressBar->setVisible(false);
+
+        // Restore path controls based on mode
+        m_ui->lblOutput->setVisible(true);
+        m_ui->leOutputPath->setVisible(true);
+        m_ui->btnBrowse->setVisible(true);
+
+        if (m_batchMode) {
+            // Show source row in batch mode
+            m_ui->lblSource->setVisible(true);
+            m_ui->leSourcePath->setVisible(true);
+            m_ui->btnBrowseSource->setVisible(true);
+        }
     }
-    m_ui->buttonsLayout->invalidate();
 
     // Button states
     m_ui->btnExport->setEnabled(!exporting);
