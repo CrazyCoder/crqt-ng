@@ -32,12 +32,14 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QDir>
+#include <QDirIterator>
 #include <QFile>
 #include <QVBoxLayout>
 #include <QStandardPaths>
 #include <QMessageBox>
 #include <QCloseEvent>
 #include <QCoreApplication>
+#include <QRegularExpression>
 
 // Default file mask for batch mode - common e-book formats
 static const QString DEFAULT_FILE_MASK =
@@ -1621,4 +1623,141 @@ void XtExportDlg::computeDefaultBatchPaths()
             m_ui->leOutputPath->setText(sourceDir);
         }
     }
+}
+
+// =============================================================================
+// Directory scanning for batch mode (Phase 4)
+// =============================================================================
+
+QStringList XtExportDlg::parseFileMask() const
+{
+    QString mask = m_ui->leFileMask->text().trimmed();
+    if (mask.isEmpty()) {
+        mask = DEFAULT_FILE_MASK;
+    }
+
+    // Split by semicolon, trim whitespace from each pattern
+    QStringList patterns = mask.split(';', Qt::SkipEmptyParts);
+    for (QString& pattern : patterns) {
+        pattern = pattern.trimmed();
+    }
+
+    return patterns;
+}
+
+bool XtExportDlg::matchesFileMask(const QString& fileName, const QStringList& patterns) const
+{
+    for (const QString& pattern : patterns) {
+        QRegularExpression regex(
+            QRegularExpression::wildcardToRegularExpression(pattern),
+            QRegularExpression::CaseInsensitiveOption);
+        if (regex.match(fileName).hasMatch()) {
+            return true;
+        }
+    }
+    return false;
+}
+
+QStringList XtExportDlg::findMatchingFiles(const QString& directory)
+{
+    QStringList files;
+    QStringList patterns = parseFileMask();
+
+    QDirIterator it(directory, QDir::Files, QDirIterator::Subdirectories);
+
+    while (it.hasNext()) {
+        QString filePath = it.next();
+        QFileInfo fi(filePath);
+
+        if (matchesFileMask(fi.fileName(), patterns)) {
+            files.append(filePath);
+        }
+    }
+
+    // Sort for consistent ordering
+    files.sort(Qt::CaseInsensitive);
+    return files;
+}
+
+void XtExportDlg::scanSourceDirectory()
+{
+    QString sourceDir = m_ui->leSourcePath->text();
+
+    if (sourceDir.isEmpty()) {
+        QMessageBox::warning(this, tr("Batch Export"),
+            tr("Please select a source directory."));
+        return;
+    }
+
+    QDir dir(sourceDir);
+    if (!dir.exists()) {
+        QMessageBox::warning(this, tr("Batch Export"),
+            tr("Source directory does not exist:\n%1").arg(sourceDir));
+        return;
+    }
+
+    m_batchFiles = findMatchingFiles(sourceDir);
+
+    if (m_batchFiles.isEmpty()) {
+        QMessageBox::warning(this, tr("Batch Export"),
+            tr("No matching documents found in:\n%1\n\nFile mask: %2")
+                .arg(sourceDir)
+                .arg(m_ui->leFileMask->text()));
+    }
+}
+
+QString XtExportDlg::computeBatchOutputPath(const QString& sourceFile)
+{
+    QString sourceDir = m_ui->leSourcePath->text();
+    QString outputDir = m_ui->leOutputPath->text();
+
+    QFileInfo fi(sourceFile);
+    QString baseName = fi.completeBaseName();
+
+    // Get extension from profile
+    QString extension = "xtc";
+    XtExportProfile* profile = m_profileManager->profileByIndex(m_ui->cbProfile->currentIndex());
+    if (profile && !profile->extension.isEmpty()) {
+        extension = profile->extension;
+    }
+
+    QString outputPath;
+
+    if (m_ui->cbPreserveStructure->isChecked()) {
+        // Preserve relative path structure
+        QString relativePath = QDir(sourceDir).relativeFilePath(fi.absolutePath());
+        QDir outDir(outputDir);
+        outputPath = outDir.filePath(relativePath);
+        QDir().mkpath(outputPath);  // Create subdirs as needed
+        outputPath = QDir(outputPath).filePath(baseName + "." + extension);
+    } else {
+        // Flat mode - check for collisions
+        outputPath = QDir(outputDir).filePath(baseName + "." + extension);
+        outputPath = resolveFilenameCollision(outputPath);
+    }
+
+    return outputPath;
+}
+
+QString XtExportDlg::resolveFilenameCollision(const QString& basePath)
+{
+    if (!QFile::exists(basePath) && !m_usedOutputPaths.contains(basePath)) {
+        m_usedOutputPaths.insert(basePath);
+        return basePath;
+    }
+
+    QFileInfo fi(basePath);
+    QString dir = fi.absolutePath();
+    QString name = fi.completeBaseName();
+    QString ext = fi.suffix();
+
+    int counter = 1;
+    QString newPath;
+    do {
+        newPath = QDir(dir).filePath(QString("%1_%2.%3").arg(name).arg(counter).arg(ext));
+        counter++;
+    } while (QFile::exists(newPath) || m_usedOutputPaths.contains(newPath));
+
+    m_usedOutputPaths.insert(newPath);
+    return newPath;
 }

@@ -28,6 +28,9 @@
 #include <QtGui/QDialog>
 #endif
 
+#include <QSet>
+#include <QStringList>
+
 #include <lvbasedrawbuf.h>
 #include <xtcexport.h>
 
@@ -353,6 +356,54 @@ private:
      */
     void computeDefaultBatchPaths();
 
+    // Directory scanning for batch mode
+
+    /**
+     * @brief Parse file mask string into list of wildcard patterns
+     * @return List of trimmed wildcard patterns (e.g., "*.epub", "*.fb2")
+     */
+    QStringList parseFileMask() const;
+
+    /**
+     * @brief Check if filename matches any pattern in the list
+     * @param fileName Filename to check (not full path)
+     * @param patterns List of wildcard patterns
+     * @return true if filename matches at least one pattern
+     */
+    bool matchesFileMask(const QString& fileName, const QStringList& patterns) const;
+
+    /**
+     * @brief Find all files matching the file mask in a directory
+     * @param directory Directory to scan recursively
+     * @return Sorted list of full file paths
+     */
+    QStringList findMatchingFiles(const QString& directory);
+
+    /**
+     * @brief Scan source directory and populate m_batchFiles
+     *
+     * Shows warning messages if directory is empty/missing or no files found.
+     */
+    void scanSourceDirectory();
+
+    /**
+     * @brief Compute output path for a batch file
+     * @param sourceFile Full path to source file
+     * @return Full path to output file (with subdirs created if needed)
+     */
+    QString computeBatchOutputPath(const QString& sourceFile);
+
+    /**
+     * @brief Resolve filename collision in flat mode
+     *
+     * If the base path already exists or was used in this batch,
+     * appends _1, _2, etc. until a unique path is found.
+     *
+     * @param basePath Desired output path
+     * @return Unique output path (may be same as input if no collision)
+     */
+    QString resolveFilenameCollision(const QString& basePath);
+
     Ui::XtExportDlg* m_ui;
     LVDocView* m_docView;
     XtExportProfileManager* m_profileManager;
@@ -374,6 +425,8 @@ private:
 
     // Batch mode state
     bool m_batchMode;                   ///< true when in batch export mode
+    QStringList m_batchFiles;           ///< List of files to export in batch mode
+    QSet<QString> m_usedOutputPaths;    ///< Track used output paths for collision resolution
 };
 
 #endif // XTEXPORTDLG_H
