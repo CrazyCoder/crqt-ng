@@ -1075,11 +1075,13 @@ QString CR3View::resolveCssPath(const QString& cssDir, const QString& templateNa
         QString baseName = templateName;
         if (baseName.endsWith(".css"))
             baseName.chop(4);
-        QString expandedPath = cssDir + baseName + CSS_EXPANDED_SUFFIX;
+        // Look for expanded CSS in user config directory (where they are written)
+        QString configDir = cr2qt(getConfigDir());
+        QString expandedPath = configDir + baseName + CSS_EXPANDED_SUFFIX;
         if (QFileInfo(expandedPath).exists())
             return expandedPath;
-        // Fallback to fb2-expanded.css
-        QString fb2ExpandedPath = cssDir + "fb2" + CSS_EXPANDED_SUFFIX;
+        // Fallback to fb2-expanded.css in config dir
+        QString fb2ExpandedPath = configDir + "fb2" + CSS_EXPANDED_SUFFIX;
         if (QFileInfo(fb2ExpandedPath).exists())
             return fb2ExpandedPath;
         CRLog::warn("Generated CSS file not found, falling back to template");

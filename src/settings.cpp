@@ -1774,30 +1774,46 @@ void SettingsDlg::updateStyleControlsEnabled() {
     m_ui->scrollArea->setEnabled(!useGenerated);
 }
 
+QString SettingsDlg::expandCssTemplate(const QString& templateName) {
+    // Read templates from app data directory
+    QString dataDir = cr2qt(getMainDataDir());
+    // Write expanded files to user config directory (same location as crui.ini)
+    QString configDir = cr2qt(getConfigDir());
+
+    QString baseName = templateName;
+    if (baseName.endsWith(".css"))
+        baseName.chop(4);
+
+    QString templatePath = dataDir + "/" + templateName;
+    QString outputFile = baseName + CSS_EXPANDED_SUFFIX;
+    QString outputPath = configDir + outputFile;
+
+    lString32 inPath = qt2cr(templatePath);
+    lString32 outPath = qt2cr(outputPath);
+    CRPropRef styleProps = qt2cr(m_props);
+
+    if (saveExpandedCSS(inPath.c_str(), outPath.c_str(), styleProps)) {
+        return outputPath;
+    }
+    return QString();
+}
+
 void SettingsDlg::on_cbUseGeneratedCSS_toggled(bool checked) {
     if (!initDone)
         return;
 
     // If enabling expanded CSS, ensure the expanded file exists for the current template
     if (checked) {
-        QString cssDir = cr2qt(getMainDataDir()) + "/";
+        QString dataDir = cr2qt(getMainDataDir()) + "/";
         QString currentTemplate = m_props->getStringDef(PROP_CSS_CURRENT_TEMPLATE, "fb2.css");
 
         // Check if expanded CSS already exists using resolveCssPath
-        QString resolvedPath = CR3View::resolveCssPath(cssDir, currentTemplate, true);
+        QString resolvedPath = CR3View::resolveCssPath(dataDir, currentTemplate, true);
         bool expandedExists = resolvedPath.endsWith(CSS_EXPANDED_SUFFIX);
 
         // If expanded CSS file doesn't exist, generate it silently
         if (!expandedExists) {
-            QString baseName = currentTemplate;
-            if (baseName.endsWith(".css"))
-                baseName.chop(4);
-            QString expandedPath = cssDir + baseName + CSS_EXPANDED_SUFFIX;
-            QString templatePath = cssDir + currentTemplate;
-            lString32 inPath = qt2cr(templatePath);
-            lString32 outPath = qt2cr(expandedPath);
-            CRPropRef styleProps = qt2cr(m_props);
-            saveExpandedCSS(inPath.c_str(), outPath.c_str(), styleProps);
+            expandCssTemplate(currentTemplate);
         }
     }
 
@@ -1811,8 +1827,9 @@ void SettingsDlg::on_cbUseGeneratedCSS_toggled(bool checked) {
 }
 
 void SettingsDlg::on_btnGenerateCSS_clicked() {
-    // Get default CSS directory from application data path
+    // Get CSS templates from application data path
     QString dataDir = cr2qt(getMainDataDir());
+    QString configDir = cr2qt(getConfigDir());
 
     // Get list of available CSS template files
     QStringList cssFilters;
@@ -1851,35 +1868,28 @@ void SettingsDlg::on_btnGenerateCSS_clicked() {
     if (!ok || selectedFile.isEmpty())
         return;
 
-    // Generate output filename
+    // Generate output filename (will be written to config dir)
     QString baseName = selectedFile;
     if (baseName.endsWith(".css"))
         baseName.chop(4);
     QString outputFile = baseName + CSS_EXPANDED_SUFFIX;
-    QString outputPath = dataDir + "/" + outputFile;
+    QString outputPath = configDir + outputFile;
 
-    // Check if file exists
+    // Check if file exists in config directory
     if (QFile::exists(outputPath)) {
         QMessageBox::StandardButton reply = QMessageBox::question(this, tr("Expand CSS"),
-            tr("File '%1' already exists. Overwrite?").arg(outputFile),
+            tr("File '%1' already exists. Overwrite?").arg(outputPath),
             QMessageBox::Yes | QMessageBox::No);
         if (reply != QMessageBox::Yes)
             return;
     }
 
-    // Generate expanded CSS
-    QString templatePath = dataDir + "/" + selectedFile;
-    lString32 inPath = qt2cr(templatePath);
-    lString32 outPath = qt2cr(outputPath);
+    // Generate expanded CSS using helper
+    QString result = expandCssTemplate(selectedFile);
 
-    // Get style properties from current settings
-    CRPropRef styleProps = qt2cr(m_props);
-
-    bool success = saveExpandedCSS(inPath.c_str(), outPath.c_str(), styleProps);
-
-    if (success) {
+    if (!result.isEmpty()) {
         QMessageBox::information(this, tr("Expand CSS"),
-            tr("Successfully created '%1'").arg(outputFile));
+            tr("Successfully created '%1'").arg(result));
     } else {
         QMessageBox::critical(this, tr("Expand CSS"),
             tr("Failed to expand CSS file. Check that the template exists and output path is writable."));
@@ -1887,8 +1897,9 @@ void SettingsDlg::on_btnGenerateCSS_clicked() {
 }
 
 void SettingsDlg::on_btnExpandAllCSS_clicked() {
-    // Get default CSS directory from application data path
+    // Get CSS templates from application data path
     QString dataDir = cr2qt(getMainDataDir());
+    QString configDir = cr2qt(getConfigDir());
 
     // Get list of available CSS template files
     QStringList cssFilters;
@@ -1912,34 +1923,21 @@ void SettingsDlg::on_btnExpandAllCSS_clicked() {
 
     // Ask confirmation once for all files
     QMessageBox::StandardButton reply = QMessageBox::question(this, tr("Expand All CSS"),
-        tr("This will create/overwrite expanded CSS files for %1 templates:\n%2\n\nContinue?")
+        tr("This will create/overwrite expanded CSS files for %1 templates in:\n%2\n\nContinue?")
             .arg(templateFiles.size())
-            .arg(templateFiles.join(", ")),
+            .arg(configDir),
         QMessageBox::Yes | QMessageBox::No);
     if (reply != QMessageBox::Yes)
         return;
-
-    // Get style properties from current settings
-    CRPropRef styleProps = qt2cr(m_props);
 
     int successCount = 0;
     int failCount = 0;
     QStringList failedFiles;
 
-    // Expand all templates
+    // Expand all templates using helper
     for (const QString& templateFile : templateFiles) {
-        QString baseName = templateFile;
-        if (baseName.endsWith(".css"))
-            baseName.chop(4);
-        QString outputFile = baseName + CSS_EXPANDED_SUFFIX;
-
-        QString templatePath = dataDir + "/" + templateFile;
-        QString outputPath = dataDir + "/" + outputFile;
-
-        lString32 inPath = qt2cr(templatePath);
-        lString32 outPath = qt2cr(outputPath);
-
-        if (saveExpandedCSS(inPath.c_str(), outPath.c_str(), styleProps)) {
+        QString result = expandCssTemplate(templateFile);
+        if (!result.isEmpty()) {
             successCount++;
         } else {
             failCount++;

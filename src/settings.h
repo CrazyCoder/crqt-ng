@@ -167,6 +167,11 @@ protected:
     void initSampleWindow();
     void updateStyleSample();
     void updateStyleControlsEnabled();
+
+    /// Expand a CSS template file and write to user config directory
+    /// @param templateName Template file name (e.g. "fb2.css")
+    /// @return Path to expanded file on success, empty string on failure
+    QString expandCssTemplate(const QString& templateName);
 private:
     SampleView* m_sample;
     Ui::SettingsDlg* m_ui;
