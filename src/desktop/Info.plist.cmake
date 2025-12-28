@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
-<plist version="0.1">
+<plist version="1.0">
 <dict>
 	<key>CFBundleName</key>
-	<string>crqt-ng</string>
+	<string>cr2xt</string>
 	<key>CFBundleDisplayName</key>
-	<string>crqt-ng</string>
+	<string>cr2xt</string>
 	<key>CFBundleVersion</key>
 	<string>@VERSION@</string>
 	<key>CFBundleShortVersionString</key>
@@ -13,18 +13,20 @@
 	<key>CFBundleIconFile</key>
 	<string>crqt.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>io.gitlab.coolreader-ng.crqt</string>
+	<string>com.github.crazycoder.cr2xt</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
-	<string>crdr</string>
+	<string>cr2x</string>
 	<key>CFBundleExecutable</key>
 	<string>crqt</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSHighResolutionCapable</key>
-	<string>True</string>
+	<true/>
+	<key>LSMinimumSystemVersion</key>
+	<string>11.0</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>(c) 2023,2024 coolreader-ng</string>
+	<string>Copyright © 2023-2025 cr2xt contributors</string>
 </dict>
 </plist>

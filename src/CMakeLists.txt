@@ -99,6 +99,18 @@ else()
   add_executable(crqt ${SRC_LIST} ${CRQT_RCS} ${QM_FILES})
 endif (WIN32)
 
+# macOS RPATH configuration
+# BUILD_RPATH: allows running from IDE/build directory during development
+# INSTALL_RPATH: for cmake --install (framework at Library/Frameworks/)
+#   - dist script relocates to Contents/Frameworks/ and rewrites paths
+if(MACOS)
+  set_target_properties(crqt PROPERTIES
+    MACOSX_RPATH ON
+    BUILD_RPATH "${CMAKE_BINARY_DIR}/crengine-ng/crengine"
+    INSTALL_RPATH "@executable_path/../../Library/Frameworks"
+  )
+endif()
+
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
   if (CMAKE_HOST_UNIX)
     configure_file(valgrind_check.sh.cmake ${CMAKE_CURRENT_BINARY_DIR}/valgrind_check.sh)
@@ -154,8 +166,8 @@ if (MACOS)
   configure_file(desktop/Info.plist.cmake ${CMAKE_CURRENT_BINARY_DIR}/Info.plist)
   install( FILES ${CMAKE_CURRENT_BINARY_DIR}/Info.plist DESTINATION Contents )
   install( FILES desktop/PkgInfo DESTINATION Contents )
-  # install crengine-ng data files
-  install( DIRECTORY ${CRENGINE_NG_DATA_DIR}/ DESTINATION Contents/Resources FILES_MATCHING PATTERN "*.css" )
+  # install crengine-ng data files (css files go directly to Resources, not in css/ subdirectory)
+  install( DIRECTORY ${CRENGINE_NG_DATA_DIR}/css/ DESTINATION Contents/Resources FILES_MATCHING PATTERN "*.css" )
   install( DIRECTORY ${CRENGINE_NG_DATA_DIR}/hyph/ DESTINATION Contents/Resources/hyph FILES_MATCHING PATTERN "*.pattern" )
 elseif (UNIX)
   install( TARGETS crqt RUNTIME DESTINATION bin )
