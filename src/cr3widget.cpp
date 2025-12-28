@@ -452,9 +452,22 @@ void CR3View::updateDefProps() {
     QStyle* s = QApplication::style();
     QString currStyle = s->objectName();
     CRLog::debug("Current system style is %s", currStyle.toUtf8().data());
-    QString style = cr2qt(_data->_props->getStringDef(PROP_APP_WINDOW_STYLE, currStyle.toUtf8().data()));
-    if (!styles.contains(style, Qt::CaseInsensitive))
-        _data->_props->setString(PROP_APP_WINDOW_STYLE, qt2cr(currStyle));
+#ifdef Q_OS_MACOS
+    // Default to Fusion style on macOS for consistent cross-platform appearance
+    QString defaultStyle = styles.contains("Fusion", Qt::CaseInsensitive) ? "Fusion" : currStyle;
+#else
+    QString defaultStyle = currStyle;
+#endif
+    QString style = cr2qt(_data->_props->getStringDef(PROP_APP_WINDOW_STYLE, defaultStyle.toUtf8().data()));
+    if (!styles.contains(style, Qt::CaseInsensitive)) {
+        style = defaultStyle;
+        _data->_props->setString(PROP_APP_WINDOW_STYLE, qt2cr(defaultStyle));
+    }
+    // Apply the style at startup
+    if (style.compare(currStyle, Qt::CaseInsensitive) != 0) {
+        CRLog::info("Applying window style: %s", style.toUtf8().data());
+        QApplication::setStyle(style);
+    }
 }
 
 CR3View::~CR3View() {

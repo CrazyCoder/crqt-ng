@@ -398,8 +398,14 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props, CR3View* docview)
     QStyle* s = QApplication::style();
     QString currStyle = s->objectName();
     CRLog::debug("Current system style is %s", currStyle.toUtf8().data());
-    if (!styles.contains(style, Qt::CaseInsensitive))
+    if (!styles.contains(style, Qt::CaseInsensitive)) {
+#ifdef Q_OS_MACOS
+        // Default to Fusion style on macOS for consistent cross-platform appearance
+        style = styles.contains("Fusion", Qt::CaseInsensitive) ? "Fusion" : currStyle;
+#else
         style = currStyle;
+#endif
+    }
     int index = styles.indexOf(style, Qt::CaseInsensitive);
     if (index >= 0)
         m_ui->cbLookAndFeel->setCurrentIndex(index);

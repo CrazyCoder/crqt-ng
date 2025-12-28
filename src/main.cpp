@@ -23,7 +23,6 @@
 // coolreader-ng UI / Qt
 // main.cpp - entry point
 
-#include <QStyleFactory>
 #include <qglobal.h>
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QApplication>
@@ -154,9 +153,6 @@ int main(int argc, char* argv[]) {
         CRLog::info("main()");
         // QGuiApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::RoundPreferFloor); 
         QApplication app(argc, argv);
-#if MACOS == 1
-        QApplication::setStyle(QStyleFactory::create("Fusion"));
-#endif
         // Check if it is a portable installation
         // Check portable mark file ignoring case
         const lString32 portableMarkName = cs32("portable.mark");
