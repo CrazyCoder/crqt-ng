@@ -254,7 +254,15 @@ lString32 getMainDataDir() {
         QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/");
         s_mainDataDir = qt2cr(exeDir);
 #else
-        s_mainDataDir = lString32(CRUI_DATA_DIR);
+        // Check for AppImage environment (APPDIR is set by AppImage runtime)
+        QString appDir = qEnvironmentVariable("APPDIR", QString());
+        if (!appDir.isEmpty()) {
+            // Use crengine-ng data dir which contains CSS, fonts, backgrounds, textures, i18n
+            QString dataDir = QDir::toNativeSeparators(appDir + "/usr/share/crengine-ng/");
+            s_mainDataDir = qt2cr(dataDir);
+        } else {
+            s_mainDataDir = lString32(CRUI_DATA_DIR);
+        }
 #endif
     }
     return s_mainDataDir;
@@ -270,7 +278,14 @@ lString32 getEngineDataDir() {
         QString exeDir = QDir::toNativeSeparators(qApp->applicationDirPath() + "/");
         s_engineDataDir = qt2cr(exeDir);
 #else
-        s_engineDataDir = lString32(CRE_NG_DATADIR);
+        // Check for AppImage environment (APPDIR is set by AppImage runtime)
+        QString appDir = qEnvironmentVariable("APPDIR", QString());
+        if (!appDir.isEmpty()) {
+            QString dataDir = QDir::toNativeSeparators(appDir + "/usr/share/crengine-ng/");
+            s_engineDataDir = qt2cr(dataDir);
+        } else {
+            s_engineDataDir = lString32(CRE_NG_DATADIR);
+        }
 #endif
     }
     return s_engineDataDir;
