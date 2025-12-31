@@ -34,7 +34,7 @@
      <property name="sizeConstraint">
       <enum>QLayout::SizeConstraint::SetMinimumSize</enum>
      </property>
-     <item alignment="Qt::AlignmentFlag::AlignTop">
+     <item>
       <widget class="QGroupBox" name="settingsGroup">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -432,6 +432,19 @@
          </widget>
         </item>
         <item>
+         <spacer name="settingsVerticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
          <widget class="QGroupBox" name="metadataGroup">
           <property name="title">
            <string>Metadata</string>
@@ -459,19 +472,6 @@
            </item>
           </layout>
          </widget>
-        </item>
-        <item>
-         <spacer name="settingsVerticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
         </item>
        </layout>
       </widget>
