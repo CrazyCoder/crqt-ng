@@ -193,16 +193,6 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props, CR3View* docview)
 
     m_ui->setupUi(this);
 
-    // Make scroll area viewports use Base background (white on most styles)
-    m_ui->scrollAreaWindow->setBackgroundRole(QPalette::Base);
-    m_ui->scrollAreaWindow->viewport()->setBackgroundRole(QPalette::Base);
-    m_ui->scrollAreaPage->setBackgroundRole(QPalette::Base);
-    m_ui->scrollAreaPage->viewport()->setBackgroundRole(QPalette::Base);
-    m_ui->scrollAreaStyles->setBackgroundRole(QPalette::Base);
-    m_ui->scrollAreaStyles->viewport()->setBackgroundRole(QPalette::Base);
-    m_ui->scrollArea->setBackgroundRole(QPalette::Base);
-    m_ui->scrollArea->viewport()->setBackgroundRole(QPalette::Base);
-
     m_oldHyph = cr2qt(HyphMan::getSelectedDictionary()->getId());
 
     lString32Collection baseDirs;
