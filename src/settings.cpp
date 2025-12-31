@@ -44,7 +44,6 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QInputDialog>
-
 #include <lvrend.h> // for BLOCK_RENDERING_FLAGS_XXX presets
 #include <lvdocview.h> // for generateExpandedCSS, saveExpandedCSS
 
@@ -193,6 +192,16 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props, CR3View* docview)
     m_props = props;
 
     m_ui->setupUi(this);
+
+    // Make scroll area viewports use Base background (white on most styles)
+    m_ui->scrollAreaWindow->setBackgroundRole(QPalette::Base);
+    m_ui->scrollAreaWindow->viewport()->setBackgroundRole(QPalette::Base);
+    m_ui->scrollAreaPage->setBackgroundRole(QPalette::Base);
+    m_ui->scrollAreaPage->viewport()->setBackgroundRole(QPalette::Base);
+    m_ui->scrollAreaStyles->setBackgroundRole(QPalette::Base);
+    m_ui->scrollAreaStyles->viewport()->setBackgroundRole(QPalette::Base);
+    m_ui->scrollArea->setBackgroundRole(QPalette::Base);
+    m_ui->scrollArea->viewport()->setBackgroundRole(QPalette::Base);
 
     m_oldHyph = cr2qt(HyphMan::getSelectedDictionary()->getId());
 
@@ -565,12 +574,17 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props, CR3View* docview)
     m_ui->cbUseGeneratedCSS->setCheckState(useGenCSS ? Qt::Checked : Qt::Unchecked);
     updateStyleControlsEnabled();
 
+    // Restore dialog size if previously saved
+    m_docview->restoreWindowPos(this, "settings.");
+
     initDone = true;
 
     //m_ui->cbPageSkin->addItem(QString("[None]"), QVariant());
 }
 
 SettingsDlg::~SettingsDlg() {
+    // Save dialog size for next time
+    m_docview->saveWindowPos(this, "settings.");
     delete m_ui;
 }
 
