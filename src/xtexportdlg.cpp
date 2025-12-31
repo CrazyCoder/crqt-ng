@@ -108,6 +108,10 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     setAttribute(Qt::WA_DeleteOnClose);  // Ensure destructor runs when dialog closes
     m_ui->setupUi(this);
 
+    // Setup navigation button icons with fallback to Unicode symbols
+    // Theme icons may not be available on Linux AppImage without bundled icon themes
+    setupNavigationIcons();
+
     // Set zoom controls max from constant (overrides .ui file values)
     m_ui->sliderZoom->setMaximum(PreviewWidget::ZOOM_LEVEL_MAX);
     m_ui->sbZoom->setMaximum(PreviewWidget::ZOOM_LEVEL_MAX);
@@ -314,6 +318,28 @@ void XtExportDlg::reject()
     QDialog::reject();
 }
 
+void XtExportDlg::setupNavigationIcons()
+{
+    // Check if theme icons loaded (they may be missing on Linux AppImage)
+    // Fall back to Unicode symbols if icons are null/empty
+    struct ButtonFallback {
+        QPushButton* button;
+        const char* unicodeFallback;
+    };
+
+    ButtonFallback buttons[] = {
+        {m_ui->btnFirstPage, "\u23EE"},  // Black left-pointing double triangle with vertical bar
+        {m_ui->btnPrevPage, "\u25C0"},   // Black left-pointing triangle
+        {m_ui->btnNextPage, "\u25B6"},   // Black right-pointing triangle
+        {m_ui->btnLastPage, "\u23ED"}    // Black right-pointing double triangle with vertical bar
+    };
+
+    for (const auto& b : buttons) {
+        if (b.button->icon().isNull()) {
+            b.button->setText(QString::fromUtf8(b.unicodeFallback));
+        }
+    }
+}
 
 void XtExportDlg::initProfiles()
 {

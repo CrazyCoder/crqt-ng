@@ -154,6 +154,14 @@ private slots:
 
 private:
     /**
+     * @brief Setup navigation button icons with Unicode fallback
+     *
+     * Checks if theme icons were loaded successfully.
+     * If icons are missing (common on Linux AppImage), falls back to Unicode symbols.
+     */
+    void setupNavigationIcons();
+
+    /**
      * @brief Initialize profile dropdown from ProfileManager
      */
     void initProfiles();
