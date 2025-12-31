@@ -406,7 +406,14 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props, CR3View* docview)
         style = currStyle;
 #endif
     }
-    int index = styles.indexOf(style, Qt::CaseInsensitive);
+    // Case-insensitive search (QStringList::indexOf doesn't support Qt::CaseInsensitive)
+    int index = -1;
+    for (int i = 0; i < styles.size(); i++) {
+        if (styles[i].compare(style, Qt::CaseInsensitive) == 0) {
+            index = i;
+            break;
+        }
+    }
     if (index >= 0)
         m_ui->cbLookAndFeel->setCurrentIndex(index);
 
