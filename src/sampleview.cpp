@@ -26,7 +26,8 @@
 #include "cr3widget.h"
 
 SampleView::SampleView(QWidget* parent)
-        : QWidget(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint) {
+        : QWidget(parent, Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint |
+                          Qt::WindowDoesNotAcceptFocus) {
     setWindowTitle(tr("Style Preview"));
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
