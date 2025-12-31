@@ -1256,12 +1256,7 @@ void XtExportDlg::loadWindowGeometry()
 {
     if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
         CRPropRef props = mainWin->getSettings();
-        int width = props->getIntDef("xtexport.window.width", 0);
-        int height = props->getIntDef("xtexport.window.height", 0);
-
-        if (width > 0 && height > 0) {
-            resize(width, height);
-        }
+        restoreWindowPosition(this, props, "xtexport.");
     }
 }
 
@@ -1269,8 +1264,7 @@ void XtExportDlg::saveWindowGeometry()
 {
     if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
         CRPropRef props = mainWin->getSettings();
-        props->setInt("xtexport.window.width", width());
-        props->setInt("xtexport.window.height", height());
+        saveWindowPosition(this, props, "xtexport.");
     }
 }
 
@@ -1364,58 +1358,59 @@ void XtExportDlg::setExporting(bool exporting)
     m_ui->rbSingleFile->setEnabled(!exporting);
     m_ui->rbBatchExport->setEnabled(!exporting);
 
+    // Batch options and page range disabled during export
+    m_ui->batchOptionsGroup->setEnabled(!exporting);
+    m_ui->pageRangeGroup->setEnabled(!exporting);
+
     // Progress bar visibility - replaces path controls during export
     // Single file mode: output row -> single progress bar (Current)
     // Batch mode: source row -> Files progress, output row -> Current progress
     if (exporting) {
         // Hide path controls
-        m_ui->lblOutput->setVisible(false);
         m_ui->leOutputPath->setVisible(false);
         m_ui->btnBrowse->setVisible(false);
 
         if (m_batchMode) {
             // Hide source row (already hidden in single mode)
-            m_ui->lblSource->setVisible(false);
             m_ui->leSourcePath->setVisible(false);
             m_ui->btnBrowseSource->setVisible(false);
 
+            // Update group title for batch progress display
+            m_ui->pathsGroup->setTitle(tr("Files / Current"));
+
             // Show both progress rows for batch mode
-            m_ui->lblFilesProgress->setVisible(true);
             m_ui->progressBarFiles->setVisible(true);
             m_ui->progressBarFiles->setValue(0);
             m_ui->lblFilesCount->setVisible(true);
             m_ui->lblFilesCount->setText("0/0");
 
-            m_ui->lblCurrentProgress->setVisible(true);
             m_ui->progressBar->setVisible(true);
             m_ui->progressBar->setValue(0);
             m_ui->lblCurrentPercent->setVisible(true);
             m_ui->lblCurrentPercent->setText("0%");
         } else {
             // Single file mode: show only current progress bar (replacing output row)
-            m_ui->lblCurrentProgress->setVisible(true);
             m_ui->progressBar->setVisible(true);
             m_ui->progressBar->setValue(0);
             m_ui->lblCurrentPercent->setVisible(true);
             m_ui->lblCurrentPercent->setText("0%");
         }
     } else {
-        // Hide all progress bars and labels
-        m_ui->lblFilesProgress->setVisible(false);
+        // Hide all progress bars
         m_ui->progressBarFiles->setVisible(false);
         m_ui->lblFilesCount->setVisible(false);
-        m_ui->lblCurrentProgress->setVisible(false);
         m_ui->progressBar->setVisible(false);
         m_ui->lblCurrentPercent->setVisible(false);
 
         // Restore path controls based on mode
-        m_ui->lblOutput->setVisible(true);
         m_ui->leOutputPath->setVisible(true);
         m_ui->btnBrowse->setVisible(true);
 
+        // Restore group title based on mode
+        m_ui->pathsGroup->setTitle(m_batchMode ? tr("Source / Output") : tr("Output"));
+
         if (m_batchMode) {
             // Show source row in batch mode
-            m_ui->lblSource->setVisible(true);
             m_ui->leSourcePath->setVisible(true);
             m_ui->btnBrowseSource->setVisible(true);
         }
@@ -1576,19 +1571,18 @@ void XtExportDlg::onModeChanged()
     // Page Range - single file only
     m_ui->pageRangeGroup->setVisible(!m_batchMode);
 
-    // Metadata - single file only
+    // Metadata - single file only (in left column, hidden in batch mode to avoid confusion)
     m_ui->metadataGroup->setVisible(!m_batchMode);
 
     // Batch Options - batch mode only
     m_ui->batchOptionsGroup->setVisible(m_batchMode);
 
     // Source Directory - batch mode only (individual widgets)
-    m_ui->lblSource->setVisible(m_batchMode);
     m_ui->leSourcePath->setVisible(m_batchMode);
     m_ui->btnBrowseSource->setVisible(m_batchMode);
 
-    // Output label text
-    m_ui->lblOutput->setText(m_batchMode ? tr("Output:") : tr("Output:"));
+    // Update pathsGroup title based on mode
+    m_ui->pathsGroup->setTitle(m_batchMode ? tr("Source / Output") : tr("Output"));
 
     // Output path placeholder
     m_ui->leOutputPath->setPlaceholderText(
