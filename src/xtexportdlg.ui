@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>980</width>
-    <height>800</height>
+    <height>750</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -476,7 +476,7 @@
        </layout>
       </widget>
      </item>
-     <item alignment="Qt::AlignmentFlag::AlignTop">
+     <item>
       <widget class="QGroupBox" name="previewGroup">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
