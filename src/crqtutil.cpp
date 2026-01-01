@@ -193,8 +193,9 @@ QString crpercent(int p) {
 
 /// save window position to properties
 void saveWindowPosition(QWidget* window, CRPropRef props, const char* prefix) {
-    QPoint pos = window->pos();
-    QSize size = window->size();
+    // Use geometry() to get the client area position (excluding frame/title bar)
+    // This avoids macOS issues where pos()/frameGeometry() causes window position drift
+    QRect geom = window->geometry();
     bool minimized = window->isMinimized();
     bool maximized = window->isMaximized();
     bool fs = window->isFullScreen();
@@ -203,8 +204,9 @@ void saveWindowPosition(QWidget* window, CRPropRef props, const char* prefix) {
     p->setBool("window.maximized", maximized);
     p->setBool("window.fullscreen", fs);
     if (!minimized && !maximized && !fs) {
-        p->setPoint("window.pos", lvPoint(pos.x(), pos.y()));
-        p->setPoint("window.size", lvPoint(size.width(), size.height()));
+        // Save client area geometry (position and size, excluding frame)
+        p->setPoint("window.pos", lvPoint(geom.x(), geom.y()));
+        p->setPoint("window.size", lvPoint(geom.width(), geom.height()));
     }
 }
 
@@ -218,10 +220,10 @@ void restoreWindowPosition(QWidget* window, CRPropRef props, const char* prefix,
 
     if (posRead && sizeRead) {
         if (size.x > 100 && size.y > 100) {
-            window->resize(size.x, size.y);
-            window->move(pos.x, pos.y);
+            // Use setGeometry() for consistent positioning on macOS
+            // The saved position is the client area position (from geometry())
+            window->setGeometry(pos.x, pos.y, size.x, size.y);
         }
-        //window->setGeometry( pos.x, pos.y, size.x, size.y );
     }
     if (allowFullscreen) {
         bool minimized = p->getBoolDef("window.minimized", false);
