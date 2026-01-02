@@ -229,6 +229,17 @@ private:
      */
     QString currentProfileExtension() const;
 
+    /**
+     * @brief Extract base filename, stripping archive extensions
+     *
+     * Handles double-extension archives like .fb2.zip, .epub.gz, etc.
+     * For "book.fb2.zip" returns "book", for "book.fb2" returns "book".
+     *
+     * @param filePath Full path or filename to process
+     * @return Base name without archive extensions
+     */
+    static QString extractBaseName(const QString& filePath);
+
     void resizeMainWindow();
 
     /**

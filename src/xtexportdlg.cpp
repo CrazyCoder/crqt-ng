@@ -462,33 +462,42 @@ QString XtExportDlg::computeExportFilename()
     if (m_docView) {
         QString fileName = cr2qt(m_docView->getFileName());
         if (!fileName.isEmpty()) {
-            // Handle archive paths like "archive.fb2.zip@/internal.fb2"
-            // Extract just the archive path (before @)
-            int atPos = fileName.indexOf('@');
-            if (atPos > 0) {
-                fileName = fileName.left(atPos);
-            }
-
-            QFileInfo docInfo(fileName);
-            baseName = docInfo.completeBaseName();
-
-            // For double-extension archives like .fb2.zip, strip inner extension too
-            QString suffix = docInfo.suffix().toLower();
-            if (suffix == "zip" || suffix == "gz" || suffix == "bz2") {
-                QFileInfo innerInfo(baseName);
-                if (!innerInfo.suffix().isEmpty()) {
-                    baseName = innerInfo.completeBaseName();
-                }
-            }
+            baseName = extractBaseName(fileName);
         }
     }
 
-    // Fallback name
+    // Fallback name (extractBaseName already handles empty case)
     if (baseName.isEmpty()) {
         baseName = "export";
     }
 
     return baseName + '.' + currentProfileExtension();
+}
+
+QString XtExportDlg::extractBaseName(const QString& filePath)
+{
+    QString path = filePath;
+
+    // Handle archive paths like "archive.fb2.zip@/internal.fb2"
+    // Extract just the archive path (before @)
+    int atPos = path.indexOf('@');
+    if (atPos > 0) {
+        path = path.left(atPos);
+    }
+
+    QFileInfo fi(path);
+    QString baseName = fi.completeBaseName();
+
+    // For double-extension archives like .fb2.zip, strip inner extension too
+    QString suffix = fi.suffix().toLower();
+    if (suffix == "zip" || suffix == "gz" || suffix == "bz2") {
+        QFileInfo innerInfo(baseName);
+        if (!innerInfo.suffix().isEmpty()) {
+            baseName = innerInfo.completeBaseName();
+        }
+    }
+
+    return baseName.isEmpty() ? "export" : baseName;
 }
 
 QString XtExportDlg::computeDefaultOutputPath()
@@ -1807,7 +1816,7 @@ QString XtExportDlg::computeBatchOutputPath(const QString& sourceFile)
     QString outputDir = m_ui->leOutputPath->text();
 
     QFileInfo fi(sourceFile);
-    QString baseName = fi.completeBaseName();
+    QString baseName = extractBaseName(sourceFile);  // Handles archives like .fb2.zip
     QString extension = currentProfileExtension();
 
     QString outputPath;
