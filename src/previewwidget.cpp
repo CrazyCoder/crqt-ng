@@ -23,6 +23,7 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include <QWheelEvent>
+#include <QKeyEvent>
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QClipboard>
@@ -36,6 +37,7 @@ PreviewWidget::PreviewWidget(QWidget* parent)
 {
     setFixedSize(PREVIEW_WIDTH, PREVIEW_HEIGHT);
     setMouseTracking(true);
+    setFocusPolicy(Qt::StrongFocus);  // Focusable via click and Tab key
     m_message = tr("No document loaded");
 }
 
@@ -186,6 +188,68 @@ void PreviewWidget::wheelEvent(QWheelEvent* event)
     }
 
     event->accept();
+}
+
+void PreviewWidget::keyPressEvent(QKeyEvent* event)
+{
+    // Zoom controls (always available, even when page navigation is disabled)
+    // Qt::ControlModifier maps to Cmd on macOS automatically
+    bool ctrlPressed = event->modifiers() & Qt::ControlModifier;
+
+    if (ctrlPressed) {
+        switch (event->key()) {
+            case Qt::Key_Plus:
+            case Qt::Key_Equal:  // = key (same key as + without Shift on US keyboards)
+                emit zoomChangeRequested(ZOOM_KEY_STEP);
+                event->accept();
+                return;
+            case Qt::Key_Minus:
+                emit zoomChangeRequested(-ZOOM_KEY_STEP);
+                event->accept();
+                return;
+            default:
+                break;
+        }
+    }
+
+    // Reset zoom with 0 key (no modifier)
+    if (event->key() == Qt::Key_0 && !ctrlPressed) {
+        emit zoomResetRequested();
+        event->accept();
+        return;
+    }
+
+    // Page navigation (when enabled)
+    if (!m_pageNavigationEnabled) {
+        QWidget::keyPressEvent(event);
+        return;
+    }
+
+    switch (event->key()) {
+        case Qt::Key_Right:
+        case Qt::Key_Down:
+        case Qt::Key_PageDown:
+            emit pageChangeRequested(1);  // Next page
+            event->accept();
+            break;
+        case Qt::Key_Left:
+        case Qt::Key_Up:
+        case Qt::Key_PageUp:
+            emit pageChangeRequested(-1);  // Previous page
+            event->accept();
+            break;
+        case Qt::Key_Home:
+            emit firstPageRequested();
+            event->accept();
+            break;
+        case Qt::Key_End:
+            emit lastPageRequested();
+            event->accept();
+            break;
+        default:
+            QWidget::keyPressEvent(event);
+            break;
+    }
 }
 
 bool PreviewWidget::isPanningEnabled() const

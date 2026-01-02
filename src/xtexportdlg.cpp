@@ -193,9 +193,13 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     connect(m_ui->btn200Zoom, &QPushButton::clicked,
             this, &XtExportDlg::onSet200Zoom);
 
-    // Connect preview widget mouse events
+    // Connect preview widget mouse/keyboard events
     connect(m_previewWidget, &PreviewWidget::pageChangeRequested,
             this, &XtExportDlg::onPreviewPageChangeRequested);
+    connect(m_previewWidget, &PreviewWidget::firstPageRequested,
+            this, &XtExportDlg::onFirstPage);
+    connect(m_previewWidget, &PreviewWidget::lastPageRequested,
+            this, &XtExportDlg::onLastPage);
     connect(m_previewWidget, &PreviewWidget::zoomChangeRequested,
             this, &XtExportDlg::onPreviewZoomChangeRequested);
     connect(m_previewWidget, &PreviewWidget::zoomResetRequested,

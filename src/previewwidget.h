@@ -45,12 +45,25 @@ public:
     /// Zoom step for mouse wheel (percentage points)
     static constexpr int ZOOM_WHEEL_STEP = 25;
 
+    /// Zoom step for keyboard shortcuts (percentage points)
+    static constexpr int ZOOM_KEY_STEP = 10;
+
 signals:
     /**
      * @brief Emitted when user scrolls without modifier to change page
      * @param delta Page delta: +1 for next page (scroll down), -1 for previous (scroll up)
      */
     void pageChangeRequested(int delta);
+
+    /**
+     * @brief Emitted when user presses Home key to go to first page
+     */
+    void firstPageRequested();
+
+    /**
+     * @brief Emitted when user presses End key to go to last page
+     */
+    void lastPageRequested();
 
     /**
      * @brief Emitted when user scrolls with Ctrl/Cmd modifier to change zoom
@@ -120,6 +133,7 @@ protected:
     void mouseReleaseEvent(QMouseEvent* event) override;
     void mouseDoubleClickEvent(QMouseEvent* event) override;
     void wheelEvent(QWheelEvent* event) override;
+    void keyPressEvent(QKeyEvent* event) override;
     void contextMenuEvent(QContextMenuEvent* event) override;
 
 private slots:
