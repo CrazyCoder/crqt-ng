@@ -342,6 +342,16 @@ private:
     void setExporting(bool exporting);
 
     /**
+     * @brief Set the dialog state for async file scanning
+     *
+     * Shows progress UI (indeterminate progress bar), disables controls,
+     * and enables cancellation.
+     *
+     * @param scanning true when scanning is in progress
+     */
+    void setScanning(bool scanning);
+
+    /**
      * @brief Validate export settings before starting
      * @return true if settings are valid, false otherwise (shows error message)
      */
@@ -404,17 +414,22 @@ private:
 
     /**
      * @brief Find all files matching the file mask in a directory
+     *
+     * This method processes the directory incrementally, calling processEvents()
+     * periodically to keep the UI responsive and check for cancellation.
+     *
      * @param directory Directory to scan recursively
-     * @return Sorted list of full file paths
+     * @return true if scan completed, false if cancelled
      */
-    QStringList findMatchingFiles(const QString& directory);
+    bool findMatchingFiles(const QString& directory);
 
     /**
      * @brief Scan source directory and populate m_batchFiles
      *
      * Shows warning messages if directory is empty/missing or no files found.
+     * @return true if scan completed successfully, false if cancelled or no files found
      */
-    void scanSourceDirectory();
+    bool scanSourceDirectory();
 
     /**
      * @brief Compute output path for a batch file
@@ -511,6 +526,10 @@ private:
     bool m_batchMode;                   ///< true when in batch export mode
     QStringList m_batchFiles;           ///< List of files to export in batch mode
     QSet<QString> m_usedOutputPaths;    ///< Track used output paths for collision resolution
+
+    // Scanning state (for async file collection)
+    bool m_scanning;                    ///< true during async file scanning
+    bool m_scanCancelled;               ///< true if scan was cancelled by user
 
     // Batch export execution state (Phase 5)
     int m_batchCurrentIndex;            ///< Index of currently exporting file

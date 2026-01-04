@@ -95,6 +95,8 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     , m_exportCallback(nullptr)
     , m_exportFilePath()
     , m_batchMode(false)
+    , m_scanning(false)
+    , m_scanCancelled(false)
     , m_batchCurrentIndex(0)
     , m_batchSuccessCount(0)
     , m_batchSkipCount(0)
@@ -466,8 +468,8 @@ void XtExportDlg::updatePreviewContainerSizes()
     m_ui->previewFrame->setMinimumSize(previewSize.width() + 2, previewSize.height() + 2);
 
     // Set previewGroup minimum width: must fit both the preview frame and navigation controls
-    // Navigation needs ~320px (4 buttons @ 50px + spinbox + label + spacing)
-    constexpr int minControlsWidth = 320;
+    // Navigation needs ~300px (4 buttons + spinbox + label + spacing)
+    constexpr int minControlsWidth = 300;
     int groupMinWidth = qMax(previewSize.width() + 22, minControlsWidth);
     m_ui->previewGroup->setMinimumWidth(groupMinWidth);
 }
@@ -1480,6 +1482,60 @@ void XtExportDlg::setExporting(bool exporting)
     }
 }
 
+void XtExportDlg::setScanning(bool scanning)
+{
+    m_scanning = scanning;
+
+    // Only manage path/progress UI visibility - other controls handled by setExporting()
+    if (scanning) {
+        // Hide all path controls in the group
+        m_ui->leSourcePath->setVisible(false);
+        m_ui->btnBrowseSource->setVisible(false);
+        m_ui->leOutputPath->setVisible(false);
+        m_ui->btnBrowse->setVisible(false);
+
+        // Show files progress bar with indeterminate state (0 max = busy indicator)
+        m_ui->progressBarFiles->setVisible(true);
+        m_ui->progressBarFiles->setMinimum(0);
+        m_ui->progressBarFiles->setMaximum(0);  // Indeterminate/busy mode
+        m_ui->lblFilesCount->setVisible(true);
+        m_ui->lblFilesCount->setMinimumWidth(60);  // Wider to fit large scan counts
+        m_ui->lblFilesCount->setText("0");
+
+        // Update group title to indicate scanning
+        m_ui->pathsGroup->setTitle(tr("Scanning..."));
+
+        // Change Close button to Cancel for scan cancellation
+        m_ui->btnExport->setEnabled(false);
+        m_ui->btnClose->setText(tr("Cancel"));
+        disconnect(m_ui->btnClose, &QPushButton::clicked, nullptr, nullptr);
+        connect(m_ui->btnClose, &QPushButton::clicked, this, [this]() {
+            m_scanCancelled = true;
+        });
+    } else {
+        // Hide progress bar
+        m_ui->progressBarFiles->setVisible(false);
+        m_ui->progressBarFiles->setMaximum(100);  // Reset to determinate mode
+        m_ui->lblFilesCount->setVisible(false);
+        m_ui->lblFilesCount->setMinimumWidth(36);  // Restore original width for export alignment
+
+        // Restore path controls for batch mode
+        m_ui->leSourcePath->setVisible(true);
+        m_ui->btnBrowseSource->setVisible(true);
+        m_ui->leOutputPath->setVisible(true);
+        m_ui->btnBrowse->setVisible(true);
+
+        // Restore group title
+        m_ui->pathsGroup->setTitle(tr("Source / Output"));
+
+        // Restore button states
+        m_ui->btnExport->setEnabled(true);
+        m_ui->btnClose->setText(tr("Close"));
+        disconnect(m_ui->btnClose, &QPushButton::clicked, nullptr, nullptr);
+        connect(m_ui->btnClose, &QPushButton::clicked, this, &QDialog::reject);
+    }
+}
+
 bool XtExportDlg::validateExportSettings()
 {
     // Check document
@@ -1803,52 +1859,100 @@ bool XtExportDlg::matchesFileMask(const QString& fileName, const QStringList& pa
     return false;
 }
 
-QStringList XtExportDlg::findMatchingFiles(const QString& directory)
+bool XtExportDlg::findMatchingFiles(const QString& directory)
 {
-    QStringList files;
+    m_batchFiles.clear();
     QStringList patterns = parseFileMask();
 
-    QDirIterator it(directory, QDir::Files, QDirIterator::Subdirectories);
+    // Use breadth-first traversal with frequent UI updates
+    QStringList pendingDirs;
+    pendingDirs.append(directory);
 
-    while (it.hasNext()) {
-        QString filePath = it.next();
-        QFileInfo fi(filePath);
+    int entriesProcessed = 0;
+    const int UPDATE_INTERVAL = 100;  // Update UI every N entries
 
-        if (matchesFileMask(fi.fileName(), patterns)) {
-            files.append(filePath);
+    while (!pendingDirs.isEmpty()) {
+        QString currentDir = pendingDirs.takeFirst();
+
+        // Use QDirIterator for lazy enumeration (doesn't load all entries at once)
+        QDirIterator it(currentDir, QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot);
+
+        while (it.hasNext()) {
+            it.next();
+            QFileInfo fi = it.fileInfo();
+
+            if (fi.isDir()) {
+                // Queue subdirectory for later processing
+                pendingDirs.append(fi.absoluteFilePath());
+            } else if (fi.isFile() && matchesFileMask(fi.fileName(), patterns)) {
+                m_batchFiles.append(fi.absoluteFilePath());
+            }
+
+            entriesProcessed++;
+
+            // Update UI frequently to stay responsive
+            if (entriesProcessed % UPDATE_INTERVAL == 0) {
+                // Show entries scanned (always increases, gives feedback even before finding matches)
+                m_ui->lblFilesCount->setText(QString::number(entriesProcessed));
+                QCoreApplication::processEvents();
+
+                if (m_scanCancelled) {
+                    m_batchFiles.clear();
+                    return false;
+                }
+            }
         }
     }
 
+    // Final update: show number of matching files found
+    m_ui->lblFilesCount->setText(QString::number(m_batchFiles.size()));
+
     // Sort for consistent ordering
-    files.sort(Qt::CaseInsensitive);
-    return files;
+    m_batchFiles.sort(Qt::CaseInsensitive);
+    return true;
 }
 
-void XtExportDlg::scanSourceDirectory()
+bool XtExportDlg::scanSourceDirectory()
 {
     QString sourceDir = m_ui->leSourcePath->text();
 
     if (sourceDir.isEmpty()) {
         QMessageBox::warning(this, tr("Batch Export"),
             tr("Please select a source directory."));
-        return;
+        return false;
     }
 
     QDir dir(sourceDir);
     if (!dir.exists()) {
         QMessageBox::warning(this, tr("Batch Export"),
             tr("Source directory does not exist:\n%1").arg(sourceDir));
-        return;
+        return false;
     }
 
-    m_batchFiles = findMatchingFiles(sourceDir);
+    // Enter scanning state
+    m_scanCancelled = false;
+    setScanning(true);
+
+    // Perform the scan (populates m_batchFiles)
+    bool completed = findMatchingFiles(sourceDir);
+
+    // Exit scanning state
+    setScanning(false);
+
+    if (!completed) {
+        // Scan was cancelled
+        return false;
+    }
 
     if (m_batchFiles.isEmpty()) {
         QMessageBox::warning(this, tr("Batch Export"),
             tr("No matching documents found in:\n%1\n\nFile mask: %2")
                 .arg(sourceDir)
                 .arg(m_ui->leFileMask->text()));
+        return false;
     }
+
+    return true;
 }
 
 QString XtExportDlg::computeBatchOutputPath(const QString& sourceFile)
@@ -2109,9 +2213,8 @@ void XtExportDlg::performBatchExport()
     if (!validateBatchSettings())
         return;
 
-    // Scan source directory
-    scanSourceDirectory();
-    if (m_batchFiles.isEmpty()) {
+    // Scan source directory (includes cancellation check)
+    if (!scanSourceDirectory()) {
         return;
     }
 
