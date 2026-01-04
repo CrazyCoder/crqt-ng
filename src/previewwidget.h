@@ -77,10 +77,6 @@ signals:
     void zoomResetRequested();
 
 public:
-    /// Fixed preview area dimensions (scaled down from max 540x960 by factor of 1.5)
-    static const int PREVIEW_WIDTH = 360;
-    static const int PREVIEW_HEIGHT = 640;
-
     /// Zoom levels for toggle button
     static constexpr int ZOOM_LEVELS[] = {200, 500, 1000};
     static constexpr int ZOOM_LEVELS_COUNT = sizeof(ZOOM_LEVELS) / sizeof(int);
@@ -88,6 +84,13 @@ public:
     static constexpr int ZOOM_LEVEL_GRID = 600;
 
     explicit PreviewWidget(QWidget* parent = nullptr);
+
+    /**
+     * @brief Set document dimensions for size calculation
+     * @param width Document width in pixels
+     * @param height Document height in pixels
+     */
+    void setDocumentSize(int width, int height);
 
     /**
      * @brief Set the image to display with zoom level
@@ -125,6 +128,12 @@ public:
 
     QSize sizeHint() const override;
     QSize minimumSizeHint() const override;
+
+    /**
+     * @brief Get DPI-aware widget size
+     * @return Widget size in logical pixels that corresponds to MAX_DOC physical pixels
+     */
+    QSize dpiAwareSize() const;
 
 protected:
     void paintEvent(QPaintEvent* event) override;
@@ -177,6 +186,7 @@ private:
     QPixmap m_scaledPixmap;         ///< Image after zoom applied
     QSize m_logicalSize;            ///< Logical size of scaled pixmap (for centering/panning)
     QSize m_lastImageSize;          ///< Last image size for pan preservation
+    QSize m_docSize;                ///< Current document size in pixels
     QPoint m_panOffset;             ///< Current pan position in pixels
     QPoint m_dragStart;             ///< For mouse drag tracking
     int m_zoomPercent;              ///< Current zoom level (50-200)

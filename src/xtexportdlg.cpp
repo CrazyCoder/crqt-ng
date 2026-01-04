@@ -121,9 +121,17 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
 
     // Create and insert preview widget into placeholder
     m_previewWidget = new PreviewWidget(this);
-    QVBoxLayout* previewContainerLayout = new QVBoxLayout(m_ui->previewPlaceholder);
+    auto* previewContainerLayout = new QVBoxLayout(m_ui->previewPlaceholder);
     previewContainerLayout->setContentsMargins(0, 0, 0, 0);
     previewContainerLayout->addWidget(m_previewWidget);
+
+    // Set vertical stretch on the previewWidgetLayout item (index 2) in previewLayout
+    // so it expands to fill available vertical space
+    // Layout items: 0=zoomLabelLayout, 1=zoomLayout, 2=previewWidgetLayout, 3=navigationLayout
+    m_ui->previewLayout->setStretch(2, 1);
+
+    // Preview container sizes will be set by updatePreviewContainerSizes()
+    // after profiles are loaded and dimensions are known
 
     // Setup debounce timer for preview updates
     m_previewDebounceTimer = new QTimer(this);
@@ -403,6 +411,9 @@ void XtExportDlg::loadProfileToUi(XtExportProfile* profile)
     updateDitheringControlsState();
     updateGrayPolicyState();
     updateFormatControlsLockState(profile);
+
+    // Update preview container sizes based on new dimensions
+    updatePreviewContainerSizes();
 }
 
 void XtExportDlg::updateDitheringControlsState()
@@ -435,6 +446,30 @@ void XtExportDlg::updateFormatControlsLockState(XtExportProfile* profile)
     m_ui->cbFormat->setEnabled(enabled);
     m_ui->sbWidth->setEnabled(enabled);
     m_ui->sbHeight->setEnabled(enabled);
+}
+
+void XtExportDlg::updatePreviewContainerSizes()
+{
+    // Update preview widget with current document dimensions
+    int width = m_ui->sbWidth->value();
+    int height = m_ui->sbHeight->value();
+    m_previewWidget->setDocumentSize(width, height);
+
+    // Get DPI-aware minimum size for the preview widget
+    QSize previewSize = m_previewWidget->dpiAwareSize();
+
+    // Set minimum sizes (widgets can expand beyond this)
+    m_previewWidget->setMinimumSize(previewSize);
+    m_ui->previewPlaceholder->setMinimumSize(previewSize);
+
+    // Frame adds 2px for border (1px each side)
+    m_ui->previewFrame->setMinimumSize(previewSize.width() + 2, previewSize.height() + 2);
+
+    // Set previewGroup minimum width: must fit both the preview frame and navigation controls
+    // Navigation needs ~320px (4 buttons @ 50px + spinbox + label + spacing)
+    constexpr int minControlsWidth = 320;
+    int groupMinWidth = qMax(previewSize.width() + 22, minControlsWidth);
+    m_ui->previewGroup->setMinimumWidth(groupMinWidth);
 }
 
 void XtExportDlg::setupSliderSpinBoxSync()
@@ -631,6 +666,7 @@ void XtExportDlg::onWidthChanged(int /*value*/)
 {
     if (m_updatingControls)
         return;
+    updatePreviewContainerSizes();
     resizeMainWindow();
     schedulePreviewUpdate();
 }
@@ -639,6 +675,7 @@ void XtExportDlg::onHeightChanged(int /*value*/)
 {
     if (m_updatingControls)
         return;
+    updatePreviewContainerSizes();
     resizeMainWindow();
     schedulePreviewUpdate();
 }

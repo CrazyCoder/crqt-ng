@@ -31,14 +31,22 @@
 
 PreviewWidget::PreviewWidget(QWidget* parent)
     : QWidget(parent)
+    , m_docSize(540, 960)  // Default document size
     , m_zoomPercent(100)
     , m_isDragging(false)
     , m_pageNavigationEnabled(true)
 {
-    setFixedSize(PREVIEW_WIDTH, PREVIEW_HEIGHT);
+    // Size will be set by caller via setDocumentSize() after DPR is known
+    setMinimumSize(m_docSize.width() / 4, m_docSize.height() / 4);
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     setMouseTracking(true);
     setFocusPolicy(Qt::StrongFocus);  // Focusable via click and Tab key
     m_message = tr("No document loaded");
+}
+
+void PreviewWidget::setDocumentSize(int width, int height)
+{
+    m_docSize = QSize(qMax(1, width), qMax(1, height));
 }
 
 void PreviewWidget::setImage(const QImage& image, int zoomPercent)
@@ -90,14 +98,21 @@ void PreviewWidget::setPageNavigationEnabled(bool enabled)
     m_pageNavigationEnabled = enabled;
 }
 
+QSize PreviewWidget::dpiAwareSize() const
+{
+    qreal dpr = devicePixelRatioF();
+    // Return logical size that will result in m_docSize physical pixels
+    return QSize(qRound(m_docSize.width() / dpr), qRound(m_docSize.height() / dpr));
+}
+
 QSize PreviewWidget::sizeHint() const
 {
-    return QSize(PREVIEW_WIDTH, PREVIEW_HEIGHT);
+    return dpiAwareSize();
 }
 
 QSize PreviewWidget::minimumSizeHint() const
 {
-    return QSize(PREVIEW_WIDTH, PREVIEW_HEIGHT);
+    return dpiAwareSize();
 }
 
 void PreviewWidget::paintEvent(QPaintEvent* /*event*/)

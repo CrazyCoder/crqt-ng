@@ -188,6 +188,11 @@ private:
     void updateFormatControlsLockState(XtExportProfile* profile);
 
     /**
+     * @brief Update preview widget and container sizes based on current dimensions
+     */
+    void updatePreviewContainerSizes();
+
+    /**
      * @brief Setup bidirectional sync between slider and spinbox
      */
     void setupSliderSpinBoxSync();

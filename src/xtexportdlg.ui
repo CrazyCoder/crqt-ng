@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>980</width>
+    <width>998</width>
     <height>750</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>980</width>
+    <width>0</width>
     <height>0</height>
    </size>
   </property>
@@ -444,57 +444,16 @@
           </property>
          </spacer>
         </item>
-        <item>
-         <widget class="QGroupBox" name="metadataGroup">
-          <property name="title">
-           <string>Metadata</string>
-          </property>
-          <layout class="QFormLayout" name="metadataLayout">
-           <item row="0" column="0">
-            <widget class="QLabel" name="lblTitle">
-             <property name="text">
-              <string>Title:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="leTitle"/>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="lblAuthor">
-             <property name="text">
-              <string>Author:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLineEdit" name="leAuthor"/>
-           </item>
-          </layout>
-         </widget>
-        </item>
        </layout>
       </widget>
      </item>
      <item>
       <widget class="QGroupBox" name="previewGroup">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-         <horstretch>0</horstretch>
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>1</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>380</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>380</width>
-         <height>16777215</height>
-        </size>
        </property>
        <property name="title">
         <string>Preview</string>
@@ -607,17 +566,11 @@
           </item>
           <item>
            <widget class="QFrame" name="previewFrame">
-            <property name="minimumSize">
-             <size>
-              <width>362</width>
-              <height>642</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>362</width>
-              <height>642</height>
-             </size>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>1</horstretch>
+              <verstretch>1</verstretch>
+             </sizepolicy>
             </property>
             <property name="styleSheet">
              <string notr="true">QFrame#previewFrame { border: 1px solid rgb(80, 80, 80); }</string>
@@ -649,11 +602,11 @@
              </property>
              <item>
               <widget class="QWidget" name="previewPlaceholder" native="true">
-               <property name="minimumSize">
-                <size>
-                 <width>360</width>
-                 <height>640</height>
-                </size>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>1</horstretch>
+                 <verstretch>1</verstretch>
+                </sizepolicy>
                </property>
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(200, 200, 200);</string>
@@ -846,27 +799,14 @@
           </item>
          </layout>
         </item>
-        <item>
-         <spacer name="previewVerticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>5</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
        </layout>
       </widget>
      </item>
      <item>
       <widget class="QGroupBox" name="exportOptionsGroup">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-         <horstretch>1</horstretch>
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
@@ -874,6 +814,12 @@
         <size>
          <width>280</width>
          <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>280</width>
+         <height>16777215</height>
         </size>
        </property>
        <property name="title">
@@ -959,6 +905,35 @@
               <number>1</number>
              </property>
             </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="metadataGroup">
+          <property name="title">
+           <string>Metadata</string>
+          </property>
+          <layout class="QFormLayout" name="metadataLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="lblTitle">
+             <property name="text">
+              <string>Title:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="leTitle"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lblAuthor">
+             <property name="text">
+              <string>Author:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="leAuthor"/>
            </item>
           </layout>
          </widget>
