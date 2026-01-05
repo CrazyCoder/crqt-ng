@@ -35,6 +35,8 @@ PreviewWidget::PreviewWidget(QWidget* parent)
     , m_zoomPercent(100)
     , m_isDragging(false)
     , m_pageNavigationEnabled(true)
+    , m_pageScrollAccumulator(0)
+    , m_zoomScrollAccumulator(0)
 {
     // Size will be set by caller via setDocumentSize() after DPR is known
     setMinimumSize(m_docSize.width() / 4, m_docSize.height() / 4);
@@ -177,29 +179,68 @@ void PreviewWidget::mouseDoubleClickEvent(QMouseEvent* event)
     }
 }
 
+int PreviewWidget::processScrollEvent(QWheelEvent* event, int& accumulator, int threshold)
+{
+    int delta = event->angleDelta().y();
+    if (delta == 0)
+        return 0;
+
+    // Use phase() to distinguish device types:
+    // - NoScrollPhase: discrete device (mouse wheel) - one step per event
+    // - Other phases: continuous device (trackpad gesture) - accumulate
+    if (event->phase() == Qt::NoScrollPhase) {
+        // Mouse wheel: always exactly one step per click, ignore delta magnitude
+        accumulator = 0;
+        return (delta > 0) ? 1 : -1;
+    }
+
+    // Trackpad gesture: accumulate small deltas until threshold
+    accumulator += delta;
+    int steps = 0;
+
+    while (accumulator >= threshold) {
+        steps++;
+        accumulator -= threshold;
+    }
+    while (accumulator <= -threshold) {
+        steps--;
+        accumulator += threshold;
+    }
+
+    // Reset on gesture end to prevent carryover between gestures
+    if (event->phase() == Qt::ScrollEnd)
+        accumulator = 0;
+
+    return steps;
+}
+
 void PreviewWidget::wheelEvent(QWheelEvent* event)
 {
-    // Get scroll delta (positive = scroll up, negative = scroll down)
-    // Use angleDelta().y() for vertical scroll
-    int delta = event->angleDelta().y();
-    if (delta == 0) {
+    if (event->angleDelta().y() == 0) {
         event->ignore();
         return;
     }
 
-    // Qt::ControlModifier maps to Cmd on macOS automatically
-    if (event->modifiers() & Qt::ControlModifier) {
+    constexpr int SCROLL_THRESHOLD = 120;
+
+    // Zoom modifier: Ctrl on Windows/Linux, Option (Alt) on macOS
+    // (Cmd+scroll is captured by macOS system for accessibility zoom)
+#ifdef Q_OS_MACOS
+    bool zoomModifier = event->modifiers() & Qt::AltModifier;
+#else
+    bool zoomModifier = event->modifiers() & Qt::ControlModifier;
+#endif
+
+    if (zoomModifier) {
         // Ctrl/Cmd + scroll: zoom control
-        // Scroll up (positive delta) = zoom in (positive zoom delta)
-        // Scroll down (negative delta) = zoom out (negative zoom delta)
-        int zoomDelta = (delta > 0) ? ZOOM_WHEEL_STEP : -ZOOM_WHEEL_STEP;
-        emit zoomChangeRequested(zoomDelta);
+        int steps = processScrollEvent(event, m_zoomScrollAccumulator, SCROLL_THRESHOLD);
+        if (steps != 0)
+            emit zoomChangeRequested(steps * ZOOM_WHEEL_STEP);
     } else if (m_pageNavigationEnabled) {
-        // Plain scroll: page navigation (when enabled)
-        // Scroll down (negative delta) = next page (+1)
-        // Scroll up (positive delta) = previous page (-1)
-        int pageDelta = (delta > 0) ? -1 : 1;
-        emit pageChangeRequested(pageDelta);
+        // Plain scroll: page navigation
+        int steps = processScrollEvent(event, m_pageScrollAccumulator, SCROLL_THRESHOLD);
+        if (steps != 0)
+            emit pageChangeRequested(-steps);  // Positive scroll = previous page
     }
 
     event->accept();
@@ -208,10 +249,10 @@ void PreviewWidget::wheelEvent(QWheelEvent* event)
 void PreviewWidget::keyPressEvent(QKeyEvent* event)
 {
     // Zoom controls (always available, even when page navigation is disabled)
-    // Qt::ControlModifier maps to Cmd on macOS automatically
-    bool ctrlPressed = event->modifiers() & Qt::ControlModifier;
+    // Keyboard uses Cmd on macOS (works fine, unlike Cmd+scroll which is system-captured)
+    bool zoomModifier = event->modifiers() & Qt::ControlModifier;
 
-    if (ctrlPressed) {
+    if (zoomModifier) {
         switch (event->key()) {
             case Qt::Key_Plus:
             case Qt::Key_Equal:  // = key (same key as + without Shift on US keyboards)
@@ -228,7 +269,7 @@ void PreviewWidget::keyPressEvent(QKeyEvent* event)
     }
 
     // Reset zoom with 0 key (no modifier)
-    if (event->key() == Qt::Key_0 && !ctrlPressed) {
+    if (event->key() == Qt::Key_0 && !zoomModifier) {
         emit zoomResetRequested();
         event->accept();
         return;

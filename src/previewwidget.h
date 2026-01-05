@@ -182,6 +182,15 @@ private:
      */
     QImage createScaledImageWithGrid(int targetWidth, int targetHeight);
 
+    /**
+     * @brief Process scroll event with device-aware accumulation
+     * @param event Wheel event to process
+     * @param accumulator Reference to accumulator for this scroll type
+     * @param threshold Accumulation threshold for trackpad gestures
+     * @return Number of discrete steps (positive or negative), 0 if threshold not reached
+     */
+    int processScrollEvent(QWheelEvent* event, int& accumulator, int threshold);
+
     QImage m_sourceImage;           ///< Original image
     QPixmap m_scaledPixmap;         ///< Image after zoom applied
     QSize m_logicalSize;            ///< Logical size of scaled pixmap (for centering/panning)
@@ -193,6 +202,8 @@ private:
     QString m_message;              ///< Message to display (empty = show image)
     bool m_isDragging;              ///< True when dragging
     bool m_pageNavigationEnabled;   ///< True to allow page change via wheel
+    int m_pageScrollAccumulator;    ///< Accumulated scroll delta for page navigation (trackpad)
+    int m_zoomScrollAccumulator;    ///< Accumulated scroll delta for zoom (trackpad)
 };
 
 #endif // PREVIEWWIDGET_H
