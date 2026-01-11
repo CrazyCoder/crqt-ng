@@ -42,6 +42,12 @@ class PreviewWidget : public QWidget
     Q_OBJECT
 
 public:
+    /// Minimum widget width for small screen compatibility
+    static constexpr int MIN_WIDTH = 200;
+
+    /// Minimum widget height for small screen compatibility
+    static constexpr int MIN_HEIGHT = 300;
+
     /// Zoom step for mouse wheel (percentage points)
     static constexpr int ZOOM_WHEEL_STEP = 25;
 

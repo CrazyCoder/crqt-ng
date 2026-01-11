@@ -460,14 +460,11 @@ void XtExportDlg::updatePreviewContainerSizes()
     // Use small fixed minimum sizes to allow dialog to fit on small screens (e.g., 1366x768)
     // The preview widget supports pan/zoom for navigating content larger than display area
     // sizeHint() still returns the ideal DPI-aware size for layout calculations
-    constexpr int minPreviewWidth = 200;
-    constexpr int minPreviewHeight = 300;
-
-    m_previewWidget->setMinimumSize(minPreviewWidth, minPreviewHeight);
-    m_ui->previewPlaceholder->setMinimumSize(minPreviewWidth, minPreviewHeight);
+    m_previewWidget->setMinimumSize(PreviewWidget::MIN_WIDTH, PreviewWidget::MIN_HEIGHT);
+    m_ui->previewPlaceholder->setMinimumSize(PreviewWidget::MIN_WIDTH, PreviewWidget::MIN_HEIGHT);
 
     // Frame adds 2px for border (1px each side)
-    m_ui->previewFrame->setMinimumSize(minPreviewWidth + 2, minPreviewHeight + 2);
+    m_ui->previewFrame->setMinimumSize(PreviewWidget::MIN_WIDTH + 2, PreviewWidget::MIN_HEIGHT + 2);
 
     // Set previewGroup minimum width: must fit navigation controls
     // Navigation needs ~300px (4 buttons + spinbox + label + spacing)
