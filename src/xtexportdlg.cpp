@@ -43,6 +43,7 @@
 #include <QRegularExpression>
 #include <QDesktopServices>
 #include <QPushButton>
+#include <QScreen>
 #include <QUrl>
 
 // Default file mask for batch mode - common e-book formats
@@ -955,6 +956,14 @@ void XtExportDlg::onPreviewPreferredSizeRequested()
     // Resize the dialog by the delta to accommodate the preferred preview size
     if (sizeDelta.width() != 0 || sizeDelta.height() != 0) {
         QSize newDialogSize = size() + sizeDelta;
+
+        // Clamp to usable screen dimensions
+        if (QScreen* screen = this->screen()) {
+            QRect availableGeometry = screen->availableGeometry();
+            newDialogSize.setWidth(qMin(newDialogSize.width(), availableGeometry.width()));
+            newDialogSize.setHeight(qMin(newDialogSize.height(), availableGeometry.height()));
+        }
+
         resize(newDialogSize);
     }
 }
