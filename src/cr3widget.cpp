@@ -1330,6 +1330,14 @@ void CR3View::checkFontLanguageCompatibility() {
         CRLog::debug("Can't fetch book's language to check font compatibility!");
         return;
     }
+    // Skip font compatibility check for undetermined language (ISO 639-2/3 "und")
+    // This avoids showing spurious warnings when the book has no language metadata
+    lString8 langLower = langCode_u8;
+    langLower.lowercase();
+    if (langLower == "und" || langLower == "undetermined") {
+        CRLog::debug("Skipping font compatibility check for undetermined language: \"%s\"", langCode_u8.c_str());
+        return;
+    }
     if (fontFace_u8.length() > 0) {
         QString langDescr = getHumanReadableLocaleName(langCode);
         if (!langDescr.isEmpty()) {
