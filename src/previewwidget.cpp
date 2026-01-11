@@ -24,6 +24,7 @@
 #include <QMouseEvent>
 #include <QWheelEvent>
 #include <QKeyEvent>
+#include <QResizeEvent>
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QClipboard>
@@ -326,10 +327,42 @@ QPoint PreviewWidget::calculateCenteredPosition() const
 
 void PreviewWidget::clampPanOffset()
 {
-    int maxPanX = qMax(0, (m_logicalSize.width() - width()) / 2);
-    int maxPanY = qMax(0, (m_logicalSize.height() - height()) / 2);
-    m_panOffset.setX(qBound(-maxPanX, m_panOffset.x(), maxPanX));
-    m_panOffset.setY(qBound(-maxPanY, m_panOffset.y(), maxPanY));
+    if (m_logicalSize.isEmpty())
+        return;
+
+    // Calculate overflow in each direction
+    int overflowX = m_logicalSize.width() - width();
+    int overflowY = m_logicalSize.height() - height();
+
+    if (overflowX <= 0) {
+        // Image fits horizontally - no panning allowed
+        m_panOffset.setX(0);
+    } else {
+        // Calculate how far we can pan in each direction
+        // Centered position is negative when image is larger than widget
+        // Pan offset moves image: positive = image moves right (shows left side)
+        //                         negative = image moves left (shows right side)
+        int maxPanLeft = overflowX / 2;          // Can pan left (positive offset)
+        int maxPanRight = overflowX - maxPanLeft; // Can pan right (negative offset)
+        m_panOffset.setX(qBound(-maxPanRight, m_panOffset.x(), maxPanLeft));
+    }
+
+    if (overflowY <= 0) {
+        // Image fits vertically - no panning allowed
+        m_panOffset.setY(0);
+    } else {
+        int maxPanUp = overflowY / 2;
+        int maxPanDown = overflowY - maxPanUp;
+        m_panOffset.setY(qBound(-maxPanDown, m_panOffset.y(), maxPanUp));
+    }
+}
+
+void PreviewWidget::resizeEvent(QResizeEvent* event)
+{
+    QWidget::resizeEvent(event);
+    // Re-clamp pan offset when widget size changes
+    clampPanOffset();
+    updateCursor();
 }
 
 void PreviewWidget::updateScaledPixmap()
