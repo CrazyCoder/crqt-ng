@@ -138,6 +138,7 @@ private slots:
     // Preview widget wheel events
     void onPreviewPageChangeRequested(int delta);
     void onPreviewZoomChangeRequested(int delta);
+    void onPreviewPreferredSizeRequested();
 
     // Output path
     void onBrowseOutput();

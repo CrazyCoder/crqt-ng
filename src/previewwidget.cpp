@@ -176,6 +176,7 @@ void PreviewWidget::mouseDoubleClickEvent(QMouseEvent* event)
         // Reset pan offset to center
         m_panOffset = QPoint(0, 0);
         emit zoomResetRequested();
+        emit preferredSizeRequested();
         event->accept();
     } else {
         QWidget::mouseDoubleClickEvent(event);

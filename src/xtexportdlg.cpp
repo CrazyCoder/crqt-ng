@@ -214,6 +214,8 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
             this, &XtExportDlg::onPreviewZoomChangeRequested);
     connect(m_previewWidget, &PreviewWidget::zoomResetRequested,
             this, &XtExportDlg::onResetZoom);
+    connect(m_previewWidget, &PreviewWidget::preferredSizeRequested,
+            this, &XtExportDlg::onPreviewPreferredSizeRequested);
 
     // Connect output path
     connect(m_ui->btnBrowse, &QPushButton::clicked,
@@ -941,6 +943,20 @@ void XtExportDlg::onPreviewZoomChangeRequested(int delta)
     int newZoom = m_ui->sliderZoom->value() + delta;
     newZoom = qBound(m_ui->sliderZoom->minimum(), newZoom, m_ui->sliderZoom->maximum());
     m_ui->sliderZoom->setValue(newZoom);
+}
+
+void XtExportDlg::onPreviewPreferredSizeRequested()
+{
+    // Calculate the size difference between current preview size and preferred size
+    QSize preferredSize = m_previewWidget->sizeHint();
+    QSize currentSize = m_previewWidget->size();
+    QSize sizeDelta = preferredSize - currentSize;
+
+    // Resize the dialog by the delta to accommodate the preferred preview size
+    if (sizeDelta.width() != 0 || sizeDelta.height() != 0) {
+        QSize newDialogSize = size() + sizeDelta;
+        resize(newDialogSize);
+    }
 }
 
 void XtExportDlg::onBrowseOutput()

@@ -82,6 +82,15 @@ signals:
      */
     void zoomResetRequested();
 
+    /**
+     * @brief Emitted when user double-clicks to request resizing to preferred size
+     *
+     * This signal is emitted together with zoomResetRequested() when the user
+     * double-clicks the preview. The parent dialog should resize to accommodate
+     * the preview widget at its preferred size (document size at 100% zoom).
+     */
+    void preferredSizeRequested();
+
 public:
     /// Zoom levels for toggle button
     static constexpr int ZOOM_LEVELS[] = {200, 500, 1000};
