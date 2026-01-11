@@ -457,21 +457,22 @@ void XtExportDlg::updatePreviewContainerSizes()
     int height = m_ui->sbHeight->value();
     m_previewWidget->setDocumentSize(width, height);
 
-    // Get DPI-aware minimum size for the preview widget
-    QSize previewSize = m_previewWidget->dpiAwareSize();
+    // Use small fixed minimum sizes to allow dialog to fit on small screens (e.g., 1366x768)
+    // The preview widget supports pan/zoom for navigating content larger than display area
+    // sizeHint() still returns the ideal DPI-aware size for layout calculations
+    constexpr int minPreviewWidth = 200;
+    constexpr int minPreviewHeight = 300;
 
-    // Set minimum sizes (widgets can expand beyond this)
-    m_previewWidget->setMinimumSize(previewSize);
-    m_ui->previewPlaceholder->setMinimumSize(previewSize);
+    m_previewWidget->setMinimumSize(minPreviewWidth, minPreviewHeight);
+    m_ui->previewPlaceholder->setMinimumSize(minPreviewWidth, minPreviewHeight);
 
     // Frame adds 2px for border (1px each side)
-    m_ui->previewFrame->setMinimumSize(previewSize.width() + 2, previewSize.height() + 2);
+    m_ui->previewFrame->setMinimumSize(minPreviewWidth + 2, minPreviewHeight + 2);
 
-    // Set previewGroup minimum width: must fit both the preview frame and navigation controls
+    // Set previewGroup minimum width: must fit navigation controls
     // Navigation needs ~300px (4 buttons + spinbox + label + spacing)
     constexpr int minControlsWidth = 300;
-    int groupMinWidth = qMax(previewSize.width() + 22, minControlsWidth);
-    m_ui->previewGroup->setMinimumWidth(groupMinWidth);
+    m_ui->previewGroup->setMinimumWidth(minControlsWidth);
 }
 
 void XtExportDlg::setupSliderSpinBoxSync()

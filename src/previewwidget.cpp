@@ -114,7 +114,9 @@ QSize PreviewWidget::sizeHint() const
 
 QSize PreviewWidget::minimumSizeHint() const
 {
-    return dpiAwareSize();
+    // Return a small fixed minimum to allow dialog to fit on small screens
+    // The preview is scrollable/pannable so users can navigate larger content
+    return QSize(200, 300);
 }
 
 void PreviewWidget::paintEvent(QPaintEvent* /*event*/)
