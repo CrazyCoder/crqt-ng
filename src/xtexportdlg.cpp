@@ -44,6 +44,7 @@
 #include <QDesktopServices>
 #include <QPushButton>
 #include <QScreen>
+#include <QGuiApplication>
 #include <QUrl>
 
 // Default file mask for batch mode - common e-book formats
@@ -267,6 +268,10 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
 
     // Load window geometry
     loadWindowGeometry();
+
+    // Clamp to screen bounds (handles first-time launch when dialog's
+    // default size might exceed available screen dimensions)
+    clampToScreenBounds();
 
     // Update control states
     updateDitheringControlsState();
@@ -955,16 +960,8 @@ void XtExportDlg::onPreviewPreferredSizeRequested()
 
     // Resize the dialog by the delta to accommodate the preferred preview size
     if (sizeDelta.width() != 0 || sizeDelta.height() != 0) {
-        QSize newDialogSize = size() + sizeDelta;
-
-        // Clamp to usable screen dimensions
-        if (QScreen* screen = this->screen()) {
-            QRect availableGeometry = screen->availableGeometry();
-            newDialogSize.setWidth(qMin(newDialogSize.width(), availableGeometry.width()));
-            newDialogSize.setHeight(qMin(newDialogSize.height(), availableGeometry.height()));
-        }
-
-        resize(newDialogSize);
+        resize(size() + sizeDelta);
+        clampToScreenBounds();
     }
 }
 
@@ -1340,6 +1337,29 @@ void XtExportDlg::saveWindowGeometry()
     if (auto* mainWin = qobject_cast<MainWindow*>(parent())) {
         CRPropRef props = mainWin->getSettings();
         saveWindowPosition(this, props, "xtexport.");
+    }
+}
+
+void XtExportDlg::clampToScreenBounds()
+{
+    QScreen* screen = this->screen();
+    if (!screen) {
+        screen = QGuiApplication::primaryScreen();
+    }
+    if (!screen) {
+        return;
+    }
+
+    QRect availableGeom = screen->availableGeometry();
+    QSize currentSize = size();
+
+    // Check if dialog exceeds screen bounds
+    if (currentSize.width() > availableGeom.width() ||
+        currentSize.height() > availableGeom.height()) {
+        // Clamp to available screen size
+        int newWidth = qMin(currentSize.width(), availableGeom.width());
+        int newHeight = qMin(currentSize.height(), availableGeom.height());
+        resize(newWidth, newHeight);
     }
 }
 

@@ -314,6 +314,15 @@ private:
     void saveWindowGeometry();
 
     /**
+     * @brief Clamp dialog size to fit within available screen bounds
+     *
+     * Called after loadWindowGeometry() to handle first-time launch
+     * when no saved geometry exists and the dialog's default size
+     * might exceed the screen dimensions.
+     */
+    void clampToScreenBounds();
+
+    /**
      * @brief Save current UI settings back to the current profile
      */
     void saveCurrentProfileSettings();
