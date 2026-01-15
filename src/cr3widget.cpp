@@ -1352,12 +1352,8 @@ void CR3View::checkFontLanguageCompatibility() {
                     break;
                 case font_lang_compat_none:
                 case font_lang_compat_partial:
-                    QMessageBox::warning(
-                            this, tr("Warning"),
-                            tr("Font \"%1\" isn't compatible with language \"%2\". Instead will be used fallback font.")
-                                    .arg(fontFace_u8.c_str())
-                                    .arg(langDescr),
-                            QMessageBox::Ok);
+                    CRLog::warn("Font \"%s\" isn't compatible with language \"%s\". Instead will be used fallback font.",
+                                fontFace_u8.c_str(), langDescr.toUtf8().constData());
                     break;
                 case font_lang_compat_full:
                     // good, do nothing
