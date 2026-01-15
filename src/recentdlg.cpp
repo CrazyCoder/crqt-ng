@@ -178,7 +178,7 @@ void RecentBooksDlg::on_actionClearAll_triggered() {
                               QMessageBox::Yes | QMessageBox::No, QMessageBox::No) == QMessageBox::Yes) {
         int firstItem = m_docview->getDocView()->isDocumentOpened() ? 1 : 0;
         LVPtrVector<CRFileHistRecord>& files = m_docview->getDocView()->getHistory()->getRecords();
-        for (int r = files.length(); r >= firstItem; r--) {
+        for (int r = files.length() - 1; r >= firstItem; r--) {
             files.remove(r);
             m_ui->tableWidget->removeRow(r - firstItem);
         }
