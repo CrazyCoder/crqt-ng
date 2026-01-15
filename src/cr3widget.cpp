@@ -352,6 +352,7 @@ CR3View::CR3View(QWidget* parent)
         , _active(false)
         , _editMode(false)
         , _exportMode(false)
+        , _historyEnabled(true)
         , _lastBatteryState(CR_BATTERY_STATE_NO_BATTERY)
         , _lastBatteryChargingConn(CR_BATTERY_CHARGER_NO)
         , _lastBatteryChargeLevel(0)
@@ -1449,7 +1450,8 @@ void CR3View::processDelayedCommands() {
 }
 
 bool CR3View::LoadDocumentImpl(const QString& fileName, bool silent) {
-    _docview->savePosition();
+    if (_historyEnabled)
+        _docview->savePosition();
     clearSelection();
     lString32 fn = qt2cr(fileName);
     bool res = _docview->LoadDocument(fn.c_str());

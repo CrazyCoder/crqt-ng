@@ -2157,8 +2157,15 @@ bool XtExportDlg::loadDocumentForBatch(const QString& filePath)
     if (!crView)
         return false;
 
+    // Disable history tracking for batch mode to avoid polluting history
+    bool wasHistoryEnabled = crView->isHistoryEnabled();
+    crView->setHistoryEnabled(false);
+
     // Load document
     bool success = crView->loadDocument(filePath);
+
+    // Restore history tracking state
+    crView->setHistoryEnabled(wasHistoryEnabled);
 
     if (success) {
         // Update our m_docView pointer to the new document's view

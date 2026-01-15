@@ -133,6 +133,14 @@ public:
     bool isExportMode() const {
         return _exportMode;
     }
+    /// enables/disables adding documents to history when loading
+    void setHistoryEnabled(bool enabled) {
+        _historyEnabled = enabled;
+    }
+    /// returns true if history tracking is enabled
+    bool isHistoryEnabled() const {
+        return _historyEnabled;
+    }
     QString getDocTitle() const;
 
     void saveWindowPos(QWidget* window, const char* prefix);
@@ -291,6 +299,7 @@ private:
     bool _active;
     bool _editMode;
     bool _exportMode;
+    bool _historyEnabled;
     QPixmap _exportModeFrame;  // Cached frame to display during export
     int _lastBatteryState;
     int _lastBatteryChargingConn;
