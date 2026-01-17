@@ -861,11 +861,18 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>20</width>
               <height>20</height>
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="cbInverse">
+            <property name="text">
+             <string>Inverse</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>

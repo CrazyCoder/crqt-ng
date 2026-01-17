@@ -108,6 +108,10 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     , m_originalWindowTitle()
     , m_originalDocumentPath()
     , m_originalPreviewPage(0)
+    , m_inverseEnabled(false)
+    , m_colorsInverted(false)
+    , m_originalTextColor(0)
+    , m_originalBackgroundColor(0xFFFFFF)
 {
     setAttribute(Qt::WA_DeleteOnClose);  // Ensure destructor runs when dialog closes
     m_ui->setupUi(this);
@@ -182,6 +186,10 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
             this, &XtExportDlg::onChaptersEnabledChanged);
     connect(m_ui->cbChapterDepth, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, &XtExportDlg::onChapterDepthChanged);
+
+    // Connect inverse mode
+    connect(m_ui->cbInverse, &QCheckBox::checkStateChanged,
+            this, &XtExportDlg::onInverseChanged);
 
     // Connect preview navigation
     connect(m_ui->btnFirstPage, &QPushButton::clicked,
@@ -258,6 +266,9 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     // as batch mode affects output path interpretation)
     loadBatchSettings();
 
+    // Load inverse setting
+    loadInverseSetting();
+
     // Compute default batch paths if needed
     computeDefaultBatchPaths();
 
@@ -293,12 +304,16 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
 
 XtExportDlg::~XtExportDlg()
 {
+    // Restore original document colors if inverted
+    restoreOriginalColors();
+
     // Save all settings to crui.ini
     saveZoomSetting();
     saveLastProfileSetting();
     saveLastDirectorySetting();
     saveWindowGeometry();
     saveBatchSettings();
+    saveInverseSetting();
 
     // Save current profile settings to its INI file
     saveCurrentProfileSettings();
@@ -1842,6 +1857,89 @@ void XtExportDlg::saveBatchSettings()
                    m_ui->cbPreserveStructure->isChecked());
     props->setInt("xtexport.batch.overwrite.mode",
                   m_ui->cbOverwriteMode->currentIndex());
+}
+
+// =============================================================================
+// Inverse mode - color inversion
+// =============================================================================
+
+void XtExportDlg::onInverseChanged(Qt::CheckState state)
+{
+    if (m_updatingControls)
+        return;
+
+    bool enabled = (state == Qt::Checked);
+    if (enabled == m_inverseEnabled)
+        return;
+
+    m_inverseEnabled = enabled;
+
+    if (enabled) {
+        applyInverseColors();
+    } else {
+        restoreOriginalColors();
+    }
+
+    // Update preview to reflect color change
+    schedulePreviewUpdate();
+}
+
+void XtExportDlg::loadInverseSetting()
+{
+    auto* mainWin = qobject_cast<MainWindow*>(parent());
+    if (!mainWin)
+        return;
+
+    CRPropRef props = mainWin->getSettings();
+    m_inverseEnabled = props->getBoolDef("xtexport.inverse", false);
+
+    // Apply to UI
+    m_updatingControls = true;
+    m_ui->cbInverse->setChecked(m_inverseEnabled);
+    m_updatingControls = false;
+
+    // Apply colors if enabled
+    if (m_inverseEnabled) {
+        applyInverseColors();
+    }
+}
+
+void XtExportDlg::saveInverseSetting()
+{
+    auto* mainWin = qobject_cast<MainWindow*>(parent());
+    if (!mainWin)
+        return;
+
+    CRPropRef props = mainWin->getSettings();
+    props->setBool("xtexport.inverse", m_inverseEnabled);
+}
+
+void XtExportDlg::applyInverseColors()
+{
+    if (!m_docView || m_colorsInverted)
+        return;
+
+    // Store original colors
+    m_originalTextColor = m_docView->getTextColor();
+    m_originalBackgroundColor = m_docView->getBackgroundColor();
+
+    // Swap colors
+    m_docView->setTextColor(m_originalBackgroundColor);
+    m_docView->setBackgroundColor(m_originalTextColor);
+
+    m_colorsInverted = true;
+}
+
+void XtExportDlg::restoreOriginalColors()
+{
+    if (!m_docView || !m_colorsInverted)
+        return;
+
+    // Restore original colors
+    m_docView->setTextColor(m_originalTextColor);
+    m_docView->setBackgroundColor(m_originalBackgroundColor);
+
+    m_colorsInverted = false;
 }
 
 void XtExportDlg::computeDefaultBatchPaths()

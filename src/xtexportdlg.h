@@ -122,6 +122,9 @@ private slots:
     void onChaptersEnabledChanged(Qt::CheckState state);
     void onChapterDepthChanged(int index);
 
+    // Inverse mode
+    void onInverseChanged(Qt::CheckState state);
+
     // Preview navigation
     void onFirstPage();
     void onPrevPage();
@@ -398,6 +401,33 @@ private:
      */
     void saveBatchSettings();
 
+    // Inverse mode settings and color management
+
+    /**
+     * @brief Load inverse setting from crui.ini
+     */
+    void loadInverseSetting();
+
+    /**
+     * @brief Save inverse setting to crui.ini
+     */
+    void saveInverseSetting();
+
+    /**
+     * @brief Apply inverse colors to document if inverse mode is enabled
+     *
+     * Swaps text and background colors in the document view.
+     * Stores original colors for restoration.
+     */
+    void applyInverseColors();
+
+    /**
+     * @brief Restore original document colors
+     *
+     * Called when dialog closes or inverse mode is disabled.
+     */
+    void restoreOriginalColors();
+
     /**
      * @brief Compute default paths for batch mode from current document
      *
@@ -551,6 +581,12 @@ private:
     QString m_originalWindowTitle;      ///< Store original window title during batch
     QString m_originalDocumentPath;     ///< Store original document path for reload after batch
     int m_originalPreviewPage;          ///< Store original preview page for restore after batch
+
+    // Inverse mode state
+    bool m_inverseEnabled;              ///< true when inverse mode checkbox is checked
+    bool m_colorsInverted;              ///< true when colors are currently inverted
+    lUInt32 m_originalTextColor;        ///< Original text color before inversion
+    lUInt32 m_originalBackgroundColor;  ///< Original background color before inversion
 };
 
 #endif // XTEXPORTDLG_H
