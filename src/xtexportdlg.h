@@ -122,8 +122,8 @@ private slots:
     void onChaptersEnabledChanged(Qt::CheckState state);
     void onChapterDepthChanged(int index);
 
-    // Inverse mode
-    void onInverseChanged(Qt::CheckState state);
+    // Invert mode
+    void onInvertChanged(Qt::CheckState state);
 
     // Preview navigation
     void onFirstPage();
@@ -401,17 +401,17 @@ private:
      */
     void saveBatchSettings();
 
-    // Inverse mode settings and color management
+    // Invert mode settings and color management
 
     /**
      * @brief Load inverse setting from crui.ini
      */
-    void loadInverseSetting();
+    void loadInvertSetting();
 
     /**
      * @brief Save inverse setting to crui.ini
      */
-    void saveInverseSetting();
+    void saveInvertSetting();
 
     /**
      * @brief Apply inverse colors to document if inverse mode is enabled
@@ -419,7 +419,7 @@ private:
      * Swaps text and background colors in the document view.
      * Stores original colors for restoration.
      */
-    void applyInverseColors();
+    void applyInvertColors();
 
     /**
      * @brief Restore original document colors
@@ -582,7 +582,7 @@ private:
     QString m_originalDocumentPath;     ///< Store original document path for reload after batch
     int m_originalPreviewPage;          ///< Store original preview page for restore after batch
 
-    // Inverse mode state
+    // Invert mode state
     bool m_inverseEnabled;              ///< true when inverse mode checkbox is checked
     bool m_colorsInverted;              ///< true when colors are currently inverted
     lUInt32 m_originalTextColor;        ///< Original text color before inversion

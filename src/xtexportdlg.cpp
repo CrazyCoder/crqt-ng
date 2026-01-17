@@ -188,8 +188,8 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
             this, &XtExportDlg::onChapterDepthChanged);
 
     // Connect inverse mode
-    connect(m_ui->cbInverse, &QCheckBox::checkStateChanged,
-            this, &XtExportDlg::onInverseChanged);
+    connect(m_ui->cbInvert, &QCheckBox::checkStateChanged,
+            this, &XtExportDlg::onInvertChanged);
 
     // Connect preview navigation
     connect(m_ui->btnFirstPage, &QPushButton::clicked,
@@ -267,7 +267,7 @@ XtExportDlg::XtExportDlg(QWidget* parent, LVDocView* docView)
     loadBatchSettings();
 
     // Load inverse setting
-    loadInverseSetting();
+    loadInvertSetting();
 
     // Compute default batch paths if needed
     computeDefaultBatchPaths();
@@ -313,7 +313,7 @@ XtExportDlg::~XtExportDlg()
     saveLastDirectorySetting();
     saveWindowGeometry();
     saveBatchSettings();
-    saveInverseSetting();
+    saveInvertSetting();
 
     // Save current profile settings to its INI file
     saveCurrentProfileSettings();
@@ -1860,10 +1860,10 @@ void XtExportDlg::saveBatchSettings()
 }
 
 // =============================================================================
-// Inverse mode - color inversion
+// Invert mode - color inversion
 // =============================================================================
 
-void XtExportDlg::onInverseChanged(Qt::CheckState state)
+void XtExportDlg::onInvertChanged(Qt::CheckState state)
 {
     if (m_updatingControls)
         return;
@@ -1875,7 +1875,7 @@ void XtExportDlg::onInverseChanged(Qt::CheckState state)
     m_inverseEnabled = enabled;
 
     if (enabled) {
-        applyInverseColors();
+        applyInvertColors();
     } else {
         restoreOriginalColors();
     }
@@ -1884,37 +1884,37 @@ void XtExportDlg::onInverseChanged(Qt::CheckState state)
     schedulePreviewUpdate();
 }
 
-void XtExportDlg::loadInverseSetting()
+void XtExportDlg::loadInvertSetting()
 {
     auto* mainWin = qobject_cast<MainWindow*>(parent());
     if (!mainWin)
         return;
 
     CRPropRef props = mainWin->getSettings();
-    m_inverseEnabled = props->getBoolDef("xtexport.inverse", false);
+    m_inverseEnabled = props->getBoolDef("xtexport.invert", false);
 
     // Apply to UI
     m_updatingControls = true;
-    m_ui->cbInverse->setChecked(m_inverseEnabled);
+    m_ui->cbInvert->setChecked(m_inverseEnabled);
     m_updatingControls = false;
 
     // Apply colors if enabled
     if (m_inverseEnabled) {
-        applyInverseColors();
+        applyInvertColors();
     }
 }
 
-void XtExportDlg::saveInverseSetting()
+void XtExportDlg::saveInvertSetting()
 {
     auto* mainWin = qobject_cast<MainWindow*>(parent());
     if (!mainWin)
         return;
 
     CRPropRef props = mainWin->getSettings();
-    props->setBool("xtexport.inverse", m_inverseEnabled);
+    props->setBool("xtexport.invert", m_inverseEnabled);
 }
 
-void XtExportDlg::applyInverseColors()
+void XtExportDlg::applyInvertColors()
 {
     if (!m_docView || m_colorsInverted)
         return;
