@@ -6,7 +6,8 @@
  *   Copyright (C) 2019,2020 Konstantin Potapov <pkbo@users.sourceforge.net>
  *   Copyright (C) 2020,2021 Andy Mender <andymenderunix@gmail.com>        *
  *   Copyright (C) 2023 Ren Tatsumoto <tatsu@autistici.org>                *
- *   Copyright (C) 2018-2024 Aleksey Chernov <valexlin@gmail.com>          *
+ *   Copyright (C) 2026 Harvey Duong <hduongd@gmail.com>                   *
+ *   Copyright (C) 2018-2024,2026 Aleksey Chernov <valexlin@gmail.com>     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License           *
@@ -362,13 +363,7 @@ CR3View::CR3View(QWidget* parent)
         , _onTextSelectAutoCmdExec(false)
         , _wheelIntegralDegrees(0)
         , _cssFileWatcher(nullptr) {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    _dpr = screen()->devicePixelRatio();
-#elif QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-    _dpr = QGuiApplication::primaryScreen()->devicePixelRatio();
-#else
     _dpr = 1.0;
-#endif
 #if WORD_SELECTOR_ENABLED == 1
     _wordSelector = NULL;
 #endif
@@ -668,10 +663,21 @@ void CR3View::paintEvent(QPaintEvent* event) {
         }
         return;
     }
+    // When running in a Wayland session, `QWidget::devicePixelRatio()`
+    //  may return an incorrect value before the window contents are drawn
+    //  when using non-integer screen scaling.
+    //  This problem does not occur when using X11.
+    // As a universal solution, update the `dpr` value directly in the paintEvent() function
+    //  using the `QPaintDevice::devicePixelRatioF()` function.
     QPainter painter(this);
     qreal dpr = painter.device()->devicePixelRatioF();
-    if (fabs(dpr - _dpr) >= 0.01)
-        CRLog::error("Device pixel ratio is changed! (prev=%.1f, now=%.1f)", _dpr, dpr);
+    if (fabs(dpr - _dpr) >= 0.01) {
+        // Cache new dpr value
+        _dpr = dpr;
+        QSize sz = size();
+        sz *= _dpr;
+        _docview->Resize(sz.width(), sz.height());
+    }
     int newBatteryState;
     int newChargingConn;
     int newChargeLevel;
@@ -995,9 +1001,6 @@ void CR3View::resizeTimerTimeout() {
         return;  // Ignore resize during export
     QSize sz = size();
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-    _dpr = screen()->devicePixelRatio();
-#endif
     sz *= _dpr;
 #endif
     _docview->Resize(sz.width(), sz.height());
@@ -1435,9 +1438,6 @@ void CR3View::processDelayedCommands() {
             case Resize: {
                 QSize sz = cmd.data().toSize();
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
-                _dpr = screen()->devicePixelRatio();
-#endif
                 sz *= _dpr;
 #endif
                 _docview->Resize(sz.width(), sz.height());
