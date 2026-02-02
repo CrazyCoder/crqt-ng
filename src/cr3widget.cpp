@@ -672,11 +672,14 @@ void CR3View::paintEvent(QPaintEvent* event) {
     QPainter painter(this);
     qreal dpr = painter.device()->devicePixelRatioF();
     if (fabs(dpr - _dpr) >= 0.01) {
-        // Cache new dpr value
+        // DPR changed (e.g., window moved to different monitor, or first paint with actual DPR)
+        // Cache new dpr value and trigger proper resize through timer
+        CRLog::debug("DPR changed: %.3f -> %.3f, triggering resize", _dpr, dpr);
         _dpr = dpr;
-        QSize sz = size();
-        sz *= _dpr;
-        _docview->Resize(sz.width(), sz.height());
+        // Use timer to properly resize docview with correct widget dimensions
+        _resizeTimer->stop();
+        _resizeTimer->start(0);  // Immediate trigger
+        return;  // Skip this paint, will repaint after resize
     }
     int newBatteryState;
     int newChargingConn;
@@ -800,7 +803,6 @@ void CR3View::paintEvent(QPaintEvent* event) {
         }
         painter.drawImage(0, 0, img);
     }
-    _dpr = dpr;
     if (_editMode) {
         // draw caret
         lvRect cursorRc;
@@ -976,13 +978,11 @@ QSize CR3View::sizeHint() const {
     if (physW <= 0 || physH <= 0)
         return QWidget::sizeHint();
 
-    qreal dpr_member = _dpr;
-    qreal dpr_screen = screen()->devicePixelRatio();
-    qreal dpr_widget = devicePixelRatioF();
-    int hintW = qCeil(physW / dpr_member);
-    int hintH = qCeil(physH / dpr_member);
-    CRLog::debug("sizeHint: docview=%dx%d, _dpr=%.3f, screen_dpr=%.3f, widget_dpr=%.3f, hint=%dx%d",
-                 physW, physH, dpr_member, dpr_screen, dpr_widget, hintW, hintH);
+    // Use screen DPR - more reliable than widget DPR before first paint
+    qreal dpr = screen() ? screen()->devicePixelRatio() : 1.0;
+    int hintW = qCeil(physW / dpr);
+    int hintH = qCeil(physH / dpr);
+    CRLog::debug("sizeHint: docview=%dx%d, dpr=%.3f, hint=%dx%d", physW, physH, dpr, hintW, hintH);
     return QSize(hintW, hintH);
 }
 
@@ -1001,6 +1001,11 @@ void CR3View::resizeTimerTimeout() {
         return;  // Ignore resize during export
     QSize sz = size();
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+    // Use screen DPR - more reliable before first paint
+    qreal dpr = screen() ? screen()->devicePixelRatio() : 1.0;
+    if (fabs(dpr - _dpr) >= 0.01) {
+        _dpr = dpr;
+    }
     sz *= _dpr;
 #endif
     _docview->Resize(sz.width(), sz.height());
@@ -1009,11 +1014,23 @@ void CR3View::resizeTimerTimeout() {
 
 void CR3View::setDocViewSize(int width, int height) {
     _docview->Resize(width, height);
-    CRLog::debug("setDocViewSize: %dx%d (physical), _dpr=%.3f", width, height, _dpr);
+
+    // Get DPR from multiple sources for debugging and robustness
+    qreal dpr_widget = devicePixelRatioF();
+    qreal dpr_screen = screen() ? screen()->devicePixelRatio() : 1.0;
+    // Use screen DPR as it's more reliable before first paint
+    qreal dpr = dpr_screen;
+    CRLog::debug("setDocViewSize: dpr_widget=%.3f, dpr_screen=%.3f, using=%.3f, cached _dpr=%.3f",
+                 dpr_widget, dpr_screen, dpr, _dpr);
+    if (fabs(dpr - _dpr) >= 0.01) {
+        CRLog::debug("setDocViewSize: updating _dpr from %.3f to %.3f", _dpr, dpr);
+        _dpr = dpr;
+    }
+    CRLog::debug("setDocViewSize: %dx%d (physical), dpr=%.3f", width, height, dpr);
 
     // Calculate the logical size for this widget
-    int logicalW = qRound(width / _dpr);
-    int logicalH = qRound(height / _dpr);
+    int logicalW = qRound(width / dpr);
+    int logicalH = qRound(height / dpr);
     CRLog::debug("setDocViewSize: logical widget size=%dx%d", logicalW, logicalH);
 
     // Find the top-level MainWindow
@@ -1438,6 +1455,11 @@ void CR3View::processDelayedCommands() {
             case Resize: {
                 QSize sz = cmd.data().toSize();
 #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
+                // Use screen DPR - more reliable before first paint
+                qreal dpr = screen() ? screen()->devicePixelRatio() : 1.0;
+                if (fabs(dpr - _dpr) >= 0.01) {
+                    _dpr = dpr;
+                }
                 sz *= _dpr;
 #endif
                 _docview->Resize(sz.width(), sz.height());
