@@ -301,6 +301,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props, CR3View* docview)
     optionToUiIndex(PROP_IMG_SCALING_ZOOMIN_BLOCK_SCALE, m_ui->cbImageBlockZoominScale);
     optionToUiIndex(PROP_IMG_SCALING_ZOOMOUT_BLOCK_MODE, m_ui->cbImageBlockZoomoutMode);
     optionToUiIndex(PROP_IMG_SCALING_ZOOMOUT_BLOCK_SCALE, m_ui->cbImageBlockZoomoutScale);
+    optionToUi(PROP_IMG_AUTO_ROTATE, m_ui->cbImageAutoRotate);
 
     QString gamma = m_props->getStringDef(PROP_FONT_GAMMA, "");
     if (gamma == "")
@@ -1638,6 +1639,10 @@ void SettingsDlg::on_cbImageBlockZoomoutMode_currentIndexChanged(int index) {
 
 void SettingsDlg::on_cbImageBlockZoomoutScale_currentIndexChanged(int index) {
     m_props->setInt(PROP_IMG_SCALING_ZOOMOUT_BLOCK_SCALE, index);
+}
+
+void SettingsDlg::on_cbImageAutoRotate_stateChanged(int s) {
+    setCheck(PROP_IMG_AUTO_ROTATE, s);
 }
 
 void SettingsDlg::on_cbFontShaping_currentIndexChanged(int index) {

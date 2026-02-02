@@ -283,6 +283,7 @@ private slots:
     void on_cbImageBlockZoominScale_currentIndexChanged(int index);
     void on_cbImageBlockZoomoutMode_currentIndexChanged(int index);
     void on_cbImageBlockZoomoutScale_currentIndexChanged(int index);
+    void on_cbImageAutoRotate_stateChanged(int s);
     void on_cbFontShaping_currentIndexChanged(int index);
     void on_cbRendFlags_currentIndexChanged(int index);
     void on_cbDOMLevel_currentIndexChanged(int index);

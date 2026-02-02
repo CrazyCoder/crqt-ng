@@ -1488,6 +1488,13 @@
                </item>
               </widget>
              </item>
+             <item row="9" column="0" colspan="3">
+              <widget class="QCheckBox" name="cbImageAutoRotate">
+               <property name="text">
+                <string>Auto-rotate images to fit better</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
            <item>
