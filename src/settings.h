@@ -225,7 +225,7 @@ private slots:
     void on_cbMarginBottom_currentIndexChanged(int index);
     void on_cbMarginLeft_currentIndexChanged(int index);
     void on_cbMarginRight_currentIndexChanged(int index);
-    void on_cbShowFootNotes_stateChanged(int s);
+    void on_cbFootnotesMode_currentIndexChanged(int index);
     void on_cbShowPageNumber_stateChanged(int s);
     void on_cbShowPageCount_stateChanged(int s);
     void on_cbShowPositionPercent_stateChanged(int s);

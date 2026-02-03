@@ -278,7 +278,9 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props, CR3View* docview)
     optionToUiLine(PROP_APP_SELECTION_COMMAND, m_ui->cbSelectionCommand);
     m_ui->cbSelectionCommand->setEnabled(m_props->getBoolDef(PROP_APP_SELECTION_AUTO_CMDEXEC, false));
 
-    optionToUi(PROP_FOOTNOTES, m_ui->cbShowFootNotes);
+    // Footnotes mode: 0=hidden, 1=page_bottom (default), 2=inline
+    int footnotesMode = m_props->getIntDef(PROP_FOOTNOTES_MODE, 1);
+    m_ui->cbFootnotesMode->setCurrentIndex(footnotesMode);
     optionToUi(PROP_SHOW_PAGE_NUMBER, m_ui->cbShowPageNumber);
     optionToUi(PROP_SHOW_PAGE_COUNT, m_ui->cbShowPageCount);
     optionToUi(PROP_SHOW_POS_PERCENT, m_ui->cbShowPositionPercent);
@@ -1146,8 +1148,10 @@ void SettingsDlg::on_sbNavbarHeight_valueChanged(int value) {
     m_props->setInt(PROP_PAGE_HEADER_NAVBAR_H, value);
 }
 
-void SettingsDlg::on_cbShowFootNotes_stateChanged(int s) {
-    setCheck(PROP_FOOTNOTES, s);
+void SettingsDlg::on_cbFootnotesMode_currentIndexChanged(int index) {
+    if (!initDone)
+        return;
+    m_props->setInt(PROP_FOOTNOTES_MODE, index);
 }
 
 void SettingsDlg::on_cbMarginTop_currentIndexChanged(int index) {
