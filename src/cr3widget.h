@@ -147,6 +147,8 @@ public:
 
     void saveWindowPos(QWidget* window, const char* prefix);
     void restoreWindowPos(QWidget* window, const char* prefix, bool allowExtraStates = false);
+    void saveSetting(const char* key, int value);
+    int loadSetting(const char* key, int defaultValue);
 
     void setPropsChangeCallback(PropsChangeCallback* propsCallback) {
         _propsCallback = propsCallback;

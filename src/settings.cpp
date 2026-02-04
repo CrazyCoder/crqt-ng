@@ -533,7 +533,7 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props, CR3View* docview)
     }
 
     // Restore last selected tab (before sample window init)
-    int lastTab = m_props->getIntDef(PROP_APP_SETTINGS_TAB, 0);
+    int lastTab = m_docview->loadSetting(PROP_APP_SETTINGS_TAB, 0);
     if (lastTab >= 0 && lastTab < m_ui->tabWidget->count())
         m_ui->tabWidget->setCurrentIndex(lastTab);
 
@@ -559,8 +559,11 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props, CR3View* docview)
     m_styleNames.append(tr("Annotation"));
     m_ui->cbStyleName->clear();
     m_ui->cbStyleName->addItems(m_styleNames);
-    m_ui->cbStyleName->setCurrentIndex(0);
-    initStyleControls("def");
+    int lastStyleElement = m_docview->loadSetting(PROP_APP_SETTINGS_STYLE_ELEMENT, 0);
+    if (lastStyleElement < 0 || lastStyleElement >= m_ui->cbStyleName->count())
+        lastStyleElement = 0;
+    m_ui->cbStyleName->setCurrentIndex(lastStyleElement);
+    initStyleControls(styleNames[lastStyleElement]);
 
     // Initialize "Use expanded CSS" checkbox (default to unchecked/false)
     bool useGenCSS = m_props->getBoolDef(PROP_CSS_USE_GENERATED, false);
@@ -576,6 +579,10 @@ SettingsDlg::SettingsDlg(QWidget* parent, PropsRef props, CR3View* docview)
 }
 
 SettingsDlg::~SettingsDlg() {
+    // Save UI state (persists regardless of OK/Cancel)
+    m_docview->saveSetting(PROP_APP_SETTINGS_TAB, m_ui->tabWidget->currentIndex());
+    m_docview->saveSetting(PROP_APP_SETTINGS_STYLE_ELEMENT, m_ui->cbStyleName->currentIndex());
+
     // Save dialog size for next time
     m_docview->saveWindowPos(this, "settings.");
     delete m_ui;
@@ -1777,7 +1784,6 @@ void SettingsDlg::on_cbAntialiasingMode_currentIndexChanged(int index) {
 void SettingsDlg::on_tabWidget_currentChanged(int index) {
     if (!initDone)
         return;
-    m_props->setInt(PROP_APP_SETTINGS_TAB, index);
     // Show/hide sample window based on tab (Styles tab is index 2)
     bool onStylesTab = (index == 2);
     if (onStylesTab) {

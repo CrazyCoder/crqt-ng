@@ -1213,6 +1213,14 @@ void CR3View::restoreWindowPos(QWidget* window, const char* prefix, bool allowEx
     ::restoreWindowPosition(window, _data->_props, prefix, allowExtraStates);
 }
 
+void CR3View::saveSetting(const char* key, int value) {
+    _data->_props->setInt(key, value);
+}
+
+int CR3View::loadSetting(const char* key, int defaultValue) {
+    return _data->_props->getIntDef(key, defaultValue);
+}
+
 /// get current option values
 PropsRef CR3View::getOptions() {
     return Props::clone(cr2qt(_data->_props));
