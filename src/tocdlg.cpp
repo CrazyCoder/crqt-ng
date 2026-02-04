@@ -34,9 +34,9 @@ public:
     LVTocItem* getItem() {
         return _item;
     }
-    TocItem(LVTocItem* item, int currPage, int& nearestPage, TocItem*& nearestItem)
+    TocItem(LVTocItem* item, int currPage, int basePage, int& nearestPage, TocItem*& nearestItem)
             : QTreeWidgetItem(QStringList() << (item ? cr2qt(item->getName()) : "No TOC items")
-                                            << (item ? cr2qt(lString32::itoa(item->getPage() + 1)) : ""))
+                                            << (item ? cr2qt(lString32::itoa(item->getPage() + basePage)) : ""))
             , _item(item) {
         if (item) {
             int page = item->getPage();
@@ -47,7 +47,7 @@ public:
 
             setData(0, Qt::UserRole, QVariant(cr2qt(item->getPath())));
             for (int i = 0; i < item->getChildCount(); i++) {
-                addChild(new TocItem(item->getChild(i), currPage, nearestPage, nearestItem));
+                addChild(new TocItem(item->getChild(i), currPage, basePage, nearestPage, nearestItem));
             }
         }
     }
@@ -80,12 +80,13 @@ TocDlg::TocDlg(QWidget* parent, CR3View* docView)
     m_ui->treeWidget->header()->setResizeModeMethod(0, QHeaderView::Stretch);
     m_ui->treeWidget->header()->setResizeModeMethod(1, QHeaderView::ResizeToContents);
 
+    int basePage = docView->getBasePage();
     int nearestPage = -1;
     int currPage = docView->getCurPage();
     TocItem* nearestItem = NULL;
     LVTocItem* root = m_docview->getToc();
     for (int i = 0; i < root->getChildCount(); i++) {
-        m_ui->treeWidget->addTopLevelItem(new TocItem(root->getChild(i), currPage, nearestPage, nearestItem));
+        m_ui->treeWidget->addTopLevelItem(new TocItem(root->getChild(i), currPage, basePage, nearestPage, nearestItem));
     }
     if (nearestItem) {
         m_ui->treeWidget->setCurrentItem(nearestItem);

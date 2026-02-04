@@ -98,6 +98,8 @@ public:
 
     /// returns current page
     int getCurPage();
+    /// returns base page number (0 if cover exists, 1 otherwise)
+    int getBasePage();
 
     /// set shared properties (can be used by multiple LVDocView instances)
     void setSharedSettings(CRPropRef props);

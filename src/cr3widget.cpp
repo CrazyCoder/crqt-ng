@@ -31,6 +31,8 @@
 #include "app-props.h"
 #include "addbookmarkdlg.h"
 
+#include <lvpagesplitter.h>
+
 #include <qglobal.h>
 #if QT_VERSION >= 0x050000
 #include <QResizeEvent>
@@ -534,6 +536,11 @@ void CR3View::goToXPointer(const QString& xPointer, bool saveToHistory) {
 /// returns current page
 int CR3View::getCurPage() {
     return _docview->getCurPage();
+}
+
+/// returns base page number (0 if cover exists, 1 otherwise)
+int CR3View::getBasePage() {
+    return ::getBasePage(_docview->getPageList());
 }
 
 void CR3View::setDocumentText(const QString& text) {
