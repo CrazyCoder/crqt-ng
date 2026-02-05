@@ -1092,6 +1092,11 @@
                  <string>Inline</string>
                 </property>
                </item>
+               <item>
+                <property name="text">
+                 <string>Inline Block</string>
+                </property>
+               </item>
               </widget>
              </item>
              <item row="1" column="0">
